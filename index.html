@@ -1,26 +1,1509 @@
-<html lang="zh-CN"><head>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <!-- 
+    =============================================================================
+    动态效果展示网页 - 完整优化版
+    =============================================================================
+    项目描述：现代响应式网页，集成丰富的动态交互效果和优雅的视觉设计
+    技术栈：HTML5 + Tailwind CSS + FontAwesome + 原生JavaScript
+    特色功能：
+    - 响应式导航栏（含滚动效果）
+    - 平滑滚动和淡入动画
+    - 动态进度条
+    - 评价轮播滑块
+    - 联系表单验证
+    - 返回顶部按钮
+    =============================================================================
+    -->
+    
+    <!-- 基础配置 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>csc</title>
-    <!-- 引入外部资源 -->
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="专业动态网页设计，提供现代交互体验和响应式设计服务">
+    <meta name="keywords" content="动态网页,响应式设计,交互体验,现代网页">
+    <meta name="author" content="DynamicUI Team">
+    
+    <!-- 页面标题 -->
+    <title>DynamicUI - 动态交互现代体验</title>
+    
+    <!-- 浏览器兼容性 -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- 预加载关键资源 -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- 
+    =============================================================================
+    外部样式库引入
+    =============================================================================
+    -->
+    <!-- Tailwind CSS CDN - 实用优先的CSS框架 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome图标库 - 提供丰富的矢量图标 -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts - Inter字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- 
+    =============================================================================
+    Tailwind CSS自定义配置
+    =============================================================================
+    -->
+    <script>
+        // 自定义Tailwind配置，扩展主题颜色和字体
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // 主色调：蓝色系，用于主要操作和强调
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6', // 主色
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        // 次要色调：绿色系，用于成功状态
+                        secondary: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981', // 次色
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        // 强调色：紫色系，用于特殊强调
+                        accent: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6', // 强调色
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        // 深色模式
+                        dark: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b', // 深色背景
+                            900: '#0f172a',
+                        },
+                        // 浅色模式
+                        light: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    fontFamily: {
+                        // 主要字体：Inter，现代无衬线字体
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    // 自定义动画持续时间
+                    transitionDuration: {
+                        '2000': '2000ms',
+                    },
+                    // 自定义阴影
+                    boxShadow: {
+                        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+                        'medium': '0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        'strong': '0 10px 50px -12px rgba(0, 0, 0, 0.25), 0 25px 25px -12px rgba(0, 0, 0, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 
+    =============================================================================
+    自定义CSS样式
+    =============================================================================
+    -->
+    <style type="text/tailwindcss">
+        /* 自定义工具类 - 扩展Tailwind功能 */
+        @layer utilities {
+            /* 内容可见性优化 - 提升性能 */
+            .content-auto {
+                content-visibility: auto;
+            }
+            
+            /* 文字阴影效果 */
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            /* 文字阴影增强 */
+            .text-shadow-lg {
+                text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+            }
+            
+            /* 自定义过渡效果 - 使用cubic-bezier缓动函数 */
+            .transition-custom {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            /* 慢速过渡 */
+            .transition-slow {
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            /* 悬停提升效果 */
+            .hover-lift {
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            /* 悬停状态样式 */
+            .hover-lift:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            
+            /* 渐变文字 */
+            .text-gradient {
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+        }
+    </style>
+    
+    <!-- 
+    =============================================================================
+    全局样式定义
+    =============================================================================
+    -->
+    <style>
+        /* 
+        全局重置和基础样式
+        确保跨浏览器一致性和最佳性能
+        */
+        
+        /* 平滑滚动行为 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 优化字体渲染 */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+        
+        /* 进度条动画定义 */
+        @keyframes progress {
+            from { 
+                width: 0; 
+                opacity: 0;
+            }
+            to { 
+                width: var(--progress-width); 
+                opacity: 1;
+            }
+        }
+        
+        /* 进度条样式 */
+        .progress-bar {
+            animation: progress 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        /* 淡入动画定义 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 淡入动画样式 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 导航栏过渡效果 */
+        .navbar {
+            transition: background-color 0.3s ease, 
+                        padding 0.3s ease, 
+                        box-shadow 0.3s ease,
+                        backdrop-filter 0.3s ease;
+        }
+        
+        /* 毛玻璃效果 */
+        .backdrop-blur {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        /* 滚动条样式优化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+    </style>
 </head>
-<body>
-    <!-- 页面内容将在这里添加 -->
-    <header>
-        <h1>欢迎来到我的网站</h1>
-    </header>
+
+<!-- 
+=============================================================================
+页面主体结构
+=============================================================================
+-->
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
     
-    <main>
-        <p>if you want to do something new,you'd better follow me</p>
-    </main>
-    
-    <footer>
-        <p>
-</p>
+    <!-- 
+    =============================================================================
+    导航栏组件
+    功能：响应式导航，滚动效果，移动端菜单
+    =============================================================================
+    -->
+    <nav id="navbar" class="navbar fixed w-full top-0 z-50 bg-transparent py-4 px-4 md:px-6">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- 品牌Logo -->
+            <a href="#home" class="text-2xl font-bold text-white text-shadow flex items-center group">
+                <i class="fa fa-bolt mr-2 text-primary transition-transform duration-300 group-hover:rotate-12"></i>
+                <span class="bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
+                    DynamicUI
+                </span>
+            </a>
+            
+            <!-- 桌面端导航菜单 -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="text-white hover:text-primary transition-custom font-medium relative group">
+                    首页
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#features" class="text-white hover:text-primary transition-custom font-medium relative group">
+                    核心特性
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#services" class="text-white hover:text-primary transition-custom font-medium relative group">
+                    专业服务
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#testimonials" class="text-white hover:text-primary transition-custom font-medium relative group">
+                    客户见证
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a href="#contact" class="text-white hover:text-primary transition-custom font-medium relative group">
+                    联系我们
+                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full"></span>
+                </a>
+            </div>
+            
+            <!-- 移动端菜单按钮 -->
+            <button id="menuBtn" class="md:hidden text-white text-2xl p-2 hover:bg-white/10 rounded-lg transition-custom">
+                <i class="fa fa-bars transition-transform duration-300"></i>
+            </button>
+        </div>
+        
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="md:hidden fixed inset-0 top-16 bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="#home" class="text-gray-800 hover:text-primary transition-custom py-2 border-b border-gray-100 mobile-link">首页</a>
+                <a href="#features" class="text-gray-800 hover:text-primary transition-custom py-2 border-b border-gray-100 mobile-link">核心特性</a>
+                <a href="#services" class="text-gray-800 hover:text-primary transition-custom py-2 border-b border-gray-100 mobile-link">专业服务</a>
+                <a href="#testimonials" class="text-gray-800 hover:text-primary transition-custom py-2 border-b border-gray-100 mobile-link">客户见证</a>
+                <a href="#contact" class="text-gray-800 hover:text-primary transition-custom py-2 mobile-link">联系我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 
+    =============================================================================
+    英雄区域 (Hero Section)
+    功能：全屏展示，背景图片，动态文字动画
+    =============================================================================
+    -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
+        
+        <!-- 背景图片层 -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://picsum.photos/id/1048/1920/1080" 
+                 alt="现代城市建筑背景 - 展现科技与未来感" 
+                 class="w-full h-full object-cover">
+            <!-- 渐变遮罩层 - 确保文字可读性 -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60"></div>
+        </div>
+        
+        <!-- 动态粒子背景效果 -->
+        <div id="particles-js" class="absolute inset-0 z-0"></div>
+        
+        <!-- 主要内容区域 -->
+        <div class="container mx-auto px-4 z-10 text-center relative">
+            <!-- 主标题 - 使用打字机动画效果 -->
+            <h1 class="text-[clamp(2.5rem,8vw,5rem)] font-extrabold text-white leading-tight mb-6">
+                <span id="heroTitle" class="inline-block opacity-0 transform translate-y-8">
+                    动态交互
+                    <br>
+                    <span class="text-primary">现代体验</span>
+                </span>
+            </h1>
+            
+            <!-- 副标题 -->
+            <p class="text-[clamp(1rem,3vw,1.5rem)] text-white/90 max-w-3xl mx-auto mb-10 leading-relaxed">
+                <span id="heroDesc" class="inline-block opacity-0 transform translate-y-8">
+                    探索前沿的网页交互设计，让用户体验提升到全新高度。
+                    我们专注于创造既美观又实用的动态网页解决方案。
+                </span>
+            </p>
+            
+            <!-- 行动按钮组 -->
+            <div id="heroBtns" class="flex flex-col sm:flex-row justify-center gap-4 opacity-0 transform translate-y-8">
+                <a href="#features" 
+                   class="group bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-8 rounded-full transition-custom hover-lift inline-flex items-center">
+                    <span>了解更多</span>
+                    <i class="fa fa-arrow-right ml-2 transform transition-transform duration-300 group-hover:translate-x-1"></i>
+                </a>
+                <a href="#contact" 
+                   class="group bg-transparent border-2 border-white hover:border-primary hover:text-primary text-white font-semibold py-4 px-8 rounded-full transition-custom hover-lift inline-flex items-center">
+                   <span>联系我们</span>
+                   <i class="fa fa-phone ml-2 transform transition-transform duration-300 group-hover:rotate-12"></i>
+                </a>
+            </div>
+        </div>
+        
+        <!-- 滚动指示器 - 引导用户向下浏览 -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+            <a href="#features" class="flex flex-col items-center group">
+                <span class="mb-2 text-sm font-medium opacity-80 group-hover:opacity-100 transition-opacity">向下探索</span>
+                <i class="fa fa-chevron-down text-xl group-hover:translate-y-1 transition-transform"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- 
+    =============================================================================
+    核心特性区域
+    功能：展示主要功能特点，包含进度条动画
+    =============================================================================
+    -->
+    <section id="features" class="py-20 lg:py-32 bg-white">
+        <div class="container mx-auto px-4">
+            <!-- 区域标题 -->
+            <div class="text-center mb-16 lg:mb-20 fade-in">
+                <h2 class="text-[clamp(1.8rem,5vw,3.5rem)] font-bold mb-6">
+                    <span class="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                        核心交互特性
+                    </span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+                    我们的网页设计融合了最新的交互技术，提供流畅直观的用户体验
+                </p>
+            </div>
+            
+            <!-- 特性卡片网格布局 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                
+                <!-- 特性卡片 1: 平滑过渡动画 -->
+                <div class="bg-gray-50 p-8 lg:p-10 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover-lift fade-in group">
+                    <!-- 图标容器 -->
+                    <div class="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                        <i class="fa fa-magic text-3xl text-primary group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    
+                    <!-- 卡片内容 -->
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">平滑过渡动画</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        元素之间的无缝过渡，让界面切换更加自然流畅，提升用户体验。
+                        采用硬件加速技术，确保动画性能最优化。
+                    </p>
+                    
+                    <!-- 进度条组件 -->
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-semibold text-gray-700">流畅度指数</span>
+                            <span class="text-sm font-bold text-primary">98%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                            <div class="bg-primary h-2.5 rounded-full progress-bar" style="--progress-width: 98%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 特性卡片 2: 响应式设计 -->
+                <div class="bg-gray-50 p-8 lg:p-10 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover-lift fade-in group">
+                    <div class="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-secondary/20 transition-colors">
+                        <i class="fa fa-mobile text-3xl text-secondary group-hover:rotate-12 transition-transform"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">响应式设计</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        完美适配各种设备屏幕，从手机到桌面电脑都能提供一致的优质体验。
+                        采用移动优先设计原则。
+                    </p>
+                    
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-semibold text-gray-700">适配度指数</span>
+                            <span class="text-sm font-bold text-secondary">95%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                            <div class="bg-secondary h-2.5 rounded-full progress-bar" style="--progress-width: 95%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 特性卡片 3: 即时反馈 -->
+                <div class="bg-gray-50 p-8 lg:p-10 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover-lift fade-in group">
+                    <div class="w-16 h-16 bg-accent/10 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-accent/20 transition-colors">
+                        <i class="fa fa-bolt text-3xl text-accent group-hover:animate-pulse"></i>
+                    </div>
+                    
+                    <h3 class="text-2xl font-bold mb-4 text-gray-800">即时反馈</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        用户操作后立即提供视觉反馈，让交互更加直观，增强用户信心。
+                        微交互设计让每一次点击都有意义。
+                    </p>
+                    
+                    <div class="mt-auto">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-semibold text-gray-700">响应速度</span>
+                            <span class="text-sm font-bold text-accent">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+                            <div class="bg-accent h-2.5 rounded-full progress-bar" style="--progress-width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    =============================================================================
+    专业服务区域
+    功能：展示服务内容，左右布局设计
+    =============================================================================
+    -->
+    <section id="services" class="py-20 lg:py-32 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <!-- 区域标题 -->
+            <div class="text-center mb-16 lg:mb-20 fade-in">
+                <h2 class="text-[clamp(1.8rem,5vw,3.5rem)] font-bold mb-6">
+                    <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                        专业服务
+                    </span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+                    提供全方位的动态网页设计与开发服务，从概念到实现的全流程支持
+                </p>
+            </div>
+            
+            <!-- 服务展示布局 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                
+                <!-- 左侧图片展示 -->
+                <div class="relative fade-in">
+                    <div class="relative">
+                        <img src="https://picsum.photos/id/0/600/800" 
+                             alt="网页设计服务展示 - 现代简洁的工作环境" 
+                             class="w-full h-auto rounded-2xl shadow-lg">
+                        
+                        <!-- 浮动装饰元素 -->
+                        <div class="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-2xl shadow-xl hidden md:block animate-pulse">
+                            <div class="text-3xl font-bold">10+</div>
+                            <div class="text-sm opacity-90">年行业经验</div>
+                        </div>
+                        
+                        <!-- 悬停效果层 -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                </div>
+                
+                <!-- 右侧服务列表 -->
+                <div class="space-y-6">
+                    
+                    <!-- 服务项 1: 动态网站开发 -->
+                    <div class="flex bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover-lift fade-in group">
+                        <div class="mr-6 text-primary text-3xl">
+                            <i class="fa fa-code group-hover:animate-bounce"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-3 text-gray-800">动态网站开发</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                使用最新技术栈开发具有丰富交互效果的现代网站，提升用户体验。
+                                支持React、Vue等前端框架集成。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 服务项 2: 交互UI设计 -->
+                    <div class="flex bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover-lift fade-in group">
+                        <div class="mr-6 text-secondary text-3xl">
+                            <i class="fa fa-paint-brush group-hover:animate-spin"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-3 text-gray-800">交互UI设计</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                设计直观易用且富有吸引力的用户界面，结合动态效果增强用户体验。
+                                遵循现代设计规范和最佳实践。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 服务项 3: 响应式优化 -->
+                    <div class="flex bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover-lift fade-in group">
+                        <div class="mr-6 text-accent text-3xl">
+                            <i class="fa fa-mobile group-hover:animate-pulse"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-3 text-gray-800">响应式优化</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                确保网站在所有设备上都能完美展示和交互，提供一致的用户体验。
+                                采用移动优先的响应式设计策略。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 服务项 4: 性能优化 -->
+                    <div class="flex bg-white p-6 lg:p-8 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 hover-lift fade-in group">
+                        <div class="mr-6 text-primary text-3xl">
+                            <i class="fa fa-rocket group-hover:animate-bounce"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl lg:text-2xl font-bold mb-3 text-gray-800">性能优化</h3>
+                            <p class="text-gray-600 leading-relaxed">
+                                优化动态效果和交互性能，确保流畅体验的同时不影响加载速度。
+                                采用懒加载、代码分割等现代优化技术。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    =============================================================================
+    客户评价区域
+    功能：轮播滑块，展示客户反馈
+    =============================================================================
+    -->
+    <section id="testimonials" class="py-20 lg:py-32 bg-white">
+        <div class="container mx-auto px-4">
+            <!-- 区域标题 -->
+            <div class="text-center mb-16 lg:mb-20 fade-in">
+                <h2 class="text-[clamp(1.8rem,5vw,3.5rem)] font-bold mb-6">
+                    <span class="bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent">
+                        客户见证
+                    </span>
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
+                    听听我们的客户怎么说，真实案例见证专业实力
+                </p>
+            </div>
+            
+            <!-- 评价轮播容器 -->
+            <div class="relative max-w-6xl mx-auto">
+                <!-- 评价滑块轨道 -->
+                <div id="testimonialSlider" class="overflow-hidden rounded-2xl">
+                    <div id="testimonialTrack" class="flex transition-transform duration-500 ease-out">
+                        
+                        <!-- 评价卡片 1 -->
+                        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                            <div class="bg-gray-50 p-8 rounded-2xl shadow-sm h-full hover:shadow-lg transition-all duration-300 hover-lift">
+                                <!-- 星级评分 -->
+                                <div class="text-yellow-400 mb-6 flex space-x-1">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                
+                                <!-- 评价内容 -->
+                                <p class="text-gray-600 mb-8 italic text-lg leading-relaxed">
+                                    "网站的动态效果令人惊艳，用户体验非常流畅。我们的客户反馈说网站既美观又易用，
+                                    大大提升了我们的品牌形象和业务转化率。"
+                                </p>
+                                
+                                <!-- 客户信息 -->
+                                <div class="flex items-center">
+                                    <img src="https://picsum.photos/id/1005/100/100" 
+                                         alt="张明 - 科技公司CEO" 
+                                         class="w-14 h-14 rounded-full object-cover mr-4 ring-2 ring-primary/20">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-lg">张明</h4>
+                                        <p class="text-gray-500 text-sm">某科技公司CEO</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 评价卡片 2 -->
+                        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                            <div class="bg-gray-50 p-8 rounded-2xl shadow-sm h-full hover:shadow-lg transition-all duration-300 hover-lift">
+                                <div class="text-yellow-400 mb-6 flex space-x-1">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                
+                                <p class="text-gray-600 mb-8 italic text-lg leading-relaxed">
+                                    "交互设计非常出色，各种动态效果恰到好处，既不花哨又能提升用户体验。
+                                    团队的技术实力和审美都很专业，沟通也很顺畅。"
+                                </p>
+                                
+                                <div class="flex items-center">
+                                    <img src="https://picsum.photos/id/1011/100/100" 
+                                         alt="李娜 - 电商平台产品经理" 
+                                         class="w-14 h-14 rounded-full object-cover mr-4 ring-2 ring-secondary/20">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-lg">李娜</h4>
+                                        <p class="text-gray-500 text-sm">某电商平台产品经理</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 评价卡片 3 -->
+                        <div class="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4">
+                            <div class="bg-gray-50 p-8 rounded-2xl shadow-sm h-full hover:shadow-lg transition-all duration-300 hover-lift">
+                                <div class="text-yellow-400 mb-6 flex space-x-1">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                
+                                <p class="text-gray-600 mb-8 italic text-lg leading-relaxed">
+                                    "响应速度很快，动态效果在各种设备上都能完美运行。
+                                    我们的转化率提升了30%，这与优秀的网页体验密不可分。"
+                                </p>
+                                
+                                <div class="flex items-center">
+                                    <img src="https://picsum.photos/id/1012/100/100" 
+                                         alt="王强 - 教育机构市场总监" 
+                                         class="w-14 h-14 rounded-full object-cover mr-4 ring-2 ring-accent/20">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800 text-lg">王强</h4>
+                                        <p class="text-gray-500 text-sm">某教育机构市场总监</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 滑块控制按钮 - 上一页 -->
+                <button id="prevBtn" 
+                        class="absolute top-1/2 left-0 transform -translate-y-1/2 -translate-x-1/2 
+                               bg-white rounded-full w-12 h-12 flex items-center justify-center 
+                               shadow-md hover:bg-primary hover:text-white transition-all duration-300 
+                               hover:scale-110 hover:shadow-lg md:-left-6">
+                    <i class="fa fa-chevron-left"></i>
+                </button>
+                
+                <!-- 滑块控制按钮 - 下一页 -->
+                <button id="nextBtn" 
+                        class="absolute top-1/2 right-0 transform -translate-y-1/2 translate-x-1/2 
+                               bg-white rounded-full w-12 h-12 flex items-center justify-center 
+                               shadow-md hover:bg-primary hover:text-white transition-all duration-300 
+                               hover:scale-110 hover:shadow-lg md:-right-6">
+                    <i class="fa fa-chevron-right"></i>
+                </button>
+                
+                <!-- 滑块指示器 -->
+                <div class="flex justify-center mt-12 space-x-3">
+                    <button class="w-3 h-3 rounded-full bg-primary indicator-dot active transition-all duration-300" 
+                            data-index="0"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 indicator-dot hover:bg-gray-400 transition-all duration-300" 
+                            data-index="1"></button>
+                    <button class="w-3 h-3 rounded-full bg-gray-300 indicator-dot hover:bg-gray-400 transition-all duration-300" 
+                            data-index="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    =============================================================================
+    联系区域
+    功能：双栏布局，左侧信息，右侧表单
+    =============================================================================
+    -->
+    <section id="contact" class="py-20 lg:py-32 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    
+                    <!-- 左侧联系信息 -->
+                    <div class="bg-gradient-to-br from-primary to-primary/80 p-12 lg:p-16 text-white fade-in">
+                        <h2 class="text-[clamp(1.5rem,4vw,2.5rem)] font-bold mb-8">
+                            让我们一起创造<br>卓越体验
+                        </h2>
+                        <p class="text-white/90 mb-12 text-lg leading-relaxed">
+                            无论您有任何问题或需求，我们都将尽快回复您。
+                            期待与您合作，共同打造令人惊艳的数字体验。
+                        </p>
+                        
+                        <!-- 联系信息列表 -->
+                        <div class="space-y-8">
+                            <!-- 地址信息 -->
+                            <div class="flex items-start group">
+                                <div class="mr-4 mt-1 text-2xl">
+                                    <i class="fa fa-map-marker group-hover:animate-bounce"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">办公地址</h3>
+                                    <p class="text-white/90">北京市朝阳区科技园区88号<br>创新大厦15层</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 电话信息 -->
+                            <div class="flex items-start group">
+                                <div class="mr-4 mt-1 text-2xl">
+                                    <i class="fa fa-phone group-hover:animate-pulse"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">联系电话</h3>
+                                    <p class="text-white/90">+86 10 8888 7777</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 邮箱信息 -->
+                            <div class="flex items-start group">
+                                <div class="mr-4 mt-1 text-2xl">
+                                    <i class="fa fa-envelope group-hover:animate-pulse"></i>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-lg mb-1">邮箱地址</h3>
+                                    <p class="text-white/90">contact@dynamicui.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 社交媒体链接 -->
+                        <div class="mt-16">
+                            <h3 class="font-bold text-lg mb-6">关注我们</h3>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
+                                    <i class="fa fa-weixin"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
+                                    <i class="fa fa-weibo"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                                <a href="#" class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧联系表单 -->
+                    <div class="p-12 lg:p-16 fade-in">
+                        <h3 class="text-3xl font-bold mb-8 text-gray-800">发送消息</h3>
+                        
+                        <form id="contactForm" class="space-y-6">
+                            <!-- 姓名输入 -->
+                            <div>
+                                <label for="name" class="block text-gray-700 font-semibold mb-3">
+                                    姓名 <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" 
+                                       id="name" 
+                                       name="name"
+                                       required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                                       placeholder="请输入您的姓名">
+                            </div>
+                            
+                            <!-- 邮箱输入 -->
+                            <div>
+                                <label for="email" class="block text-gray-700 font-semibold mb-3">
+                                    邮箱 <span class="text-red-500">*</span>
+                                </label>
+                                <input type="email" 
+                                       id="email" 
+                                       name="email"
+                                       required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                                       placeholder="请输入您的邮箱地址">
+                            </div>
+                            
+                            <!-- 主题输入 -->
+                            <div>
+                                <label for="subject" class="block text-gray-700 font-semibold mb-3">
+                                    主题
+                                </label>
+                                <input type="text" 
+                                       id="subject" 
+                                       name="subject"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300"
+                                       placeholder="请简要描述您的需求">
+                            </div>
+                            
+                            <!-- 消息内容 -->
+                            <div>
+                                <label for="message" class="block text-gray-700 font-semibold mb-3">
+                                    消息内容 <span class="text-red-500">*</span>
+                                </label>
+                                <textarea id="message" 
+                                          name="message"
+                                          rows="5"
+                                          required
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 resize-none"
+                                          placeholder="请详细描述您的需求或问题..."></textarea>
+                            </div>
+                            
+                            <!-- 提交按钮 -->
+                            <button type="submit" 
+                                    class="w-full bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">
+                                <span class="flex items-center justify-center">
+                                    发送消息
+                                    <i class="fa fa-paper-plane ml-2"></i>
+                                </span>
+                            </button>
+                            
+                            <!-- 表单状态提示 -->
+                            <div id="formStatus" class="hidden text-center py-2 rounded-lg"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 
+    =============================================================================
+    页脚区域
+    功能：多栏布局，包含链接、订阅、版权信息
+    =============================================================================
+    -->
+    <footer class="bg-gray-900 text-white py-16 lg:py-20">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                
+                <!-- 品牌信息 -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-6 flex items-center group">
+                        <i class="fa fa-bolt mr-3 text-primary group-hover:animate-pulse"></i>
+                        <span>DynamicUI</span>
+                    </h3>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        专注于动态网页设计与开发，打造卓越的用户体验。
+                        我们用创意和技术为您的品牌赋能。
+                    </p>
+                    
+                    <!-- 社交媒体链接 -->
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 hover:scale-110">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 hover:scale-110">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 hover:scale-110">
+                            <i class="fa fa-github"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary transition-all duration-300 hover:scale-110">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 快速链接 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">快速链接</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-primary transition-colors">核心特性</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-primary transition-colors">专业服务</a></li>
+                        <li><a href="#testimonials" class="text-gray-400 hover:text-primary transition-colors">客户见证</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">联系我们</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 服务列表 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">服务范围</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">动态网站开发</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">交互UI设计</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">响应式优化</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">性能优化</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">网站维护</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 订阅区域 -->
+                <div>
+                    <h4 class="text-lg font-bold mb-6">订阅通讯</h4>
+                    <p class="text-gray-400 mb-4">
+                        订阅我们的通讯，获取最新动态和优惠信息。
+                    </p>
+                    <form class="flex">
+                        <input type="email" 
+                               placeholder="您的邮箱地址" 
+                               class="px-4 py-2 rounded-l-lg w-full focus:outline-none text-gray-800"
+                               required>
+                        <button type="submit" 
+                                class="bg-primary hover:bg-primary/90 px-4 py-2 rounded-r-lg transition-all duration-300">
+                            <i class="fa fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- 版权信息 -->
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-500">
+                    &copy; 2024 DynamicUI. 保留所有权利。 
+                    <span class="mx-2">|</span>
+                    <a href="#" class="hover:text-primary transition-colors">隐私政策</a>
+                    <span class="mx-2">|</span>
+                    <a href="#" class="hover:text-primary transition-colors">服务条款</a>
+                </p>
+            </div>
+        </div>
     </footer>
-    
-    <script src="js/script.js"></script>
 
+    <!-- 
+    =============================================================================
+    返回顶部按钮
+    功能：平滑滚动回顶部
+    =============================================================================
+    -->
+    <button id="backToTop" 
+            class="fixed bottom-8 right-8 bg-primary text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg 
+                   opacity-0 invisible transition-all duration-300 hover:bg-primary/90 hover:scale-110 hover:shadow-xl
+                   focus:outline-none focus:ring-2 focus:ring-primary/50">
+        <i class="fa fa-chevron-up text-xl"></i>
+    </button>
 
-</body></html>
+    <!-- 
+    =============================================================================
+    JavaScript功能实现
+    功能：所有交互逻辑的完整实现
+    =============================================================================
+    -->
+    <script>
+        /**
+         * =============================================================================
+         * 页面初始化 - 等待DOM加载完成
+         * =============================================================================
+         */
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            /**
+             * =============================================================================
+             * 导航栏滚动效果
+             * 功能：根据滚动位置改变导航栏样式
+             * =============================================================================
+             */
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+            
+            // 滚动事件监听器
+            window.addEventListener('scroll', handleScroll);
+            
+            function handleScroll() {
+                const scrollY = window.scrollY;
+                
+                if (scrollY > 50) {
+                    // 滚动后的样式
+                    navbar.classList.add('bg-white', 'shadow-lg', 'py-2', 'backdrop-blur');
+                    navbar.classList.remove('bg-transparent', 'py-4');
+                    
+                    // 更新导航链接样式
+                    const navLinks = navbar.querySelectorAll('a:not(.mobile-link)');
+                    navLinks.forEach(link => {
+                        link.classList.remove('text-white');
+                        link.classList.add('text-gray-800');
+                    });
+                    
+                    // 显示返回顶部按钮
+                    backToTop.classList.remove('opacity-0', 'invisible');
+                    backToTop.classList.add('opacity-100', 'visible');
+                    
+                } else {
+                    // 初始样式
+                    navbar.classList.remove('bg-white', 'shadow-lg', 'py-2', 'backdrop-blur');
+                    navbar.classList.add('bg-transparent', 'py-4');
+                    
+                    // 恢复导航链接样式
+                    const navLinks = navbar.querySelectorAll('a:not(.mobile-link)');
+                    navLinks.forEach(link => {
+                        link.classList.add('text-white');
+                        link.classList.remove('text-gray-800');
+                    });
+                    
+                    // 隐藏返回顶部按钮
+                    backToTop.classList.add('opacity-0', 'invisible');
+                    backToTop.classList.remove('opacity-100', 'visible');
+                }
+            }
+
+            /**
+             * =============================================================================
+             * 移动端菜单功能
+             * 功能：汉堡菜单的打开/关闭
+             * =============================================================================
+             */
+            const menuBtn = document.getElementById('menuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            // 菜单按钮点击事件
+            menuBtn.addEventListener('click', toggleMobileMenu);
+            
+            // 移动端链接点击事件（关闭菜单）
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+            
+            // 点击外部区域关闭菜单
+            document.addEventListener('click', function(e) {
+                if (!navbar.contains(e.target)) {
+                    closeMobileMenu();
+                }
+            });
+            
+            function toggleMobileMenu() {
+                const isOpen = !mobileMenu.classList.contains('translate-x-full');
+                
+                if (isOpen) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            }
+            
+            function openMobileMenu() {
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                
+                // 更新图标
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+            
+            function closeMobileMenu() {
+                mobileMenu.classList.remove('translate-x-0');
+                mobileMenu.classList.add('translate-x-full');
+                
+                // 恢复图标
+                const icon = menuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+
+            /**
+             * =============================================================================
+             * 英雄区域动画
+             * 功能：页面加载时的文字淡入动画
+             * =============================================================================
+             */
+            
+            // 使用setTimeout创建延迟动画效果
+            setTimeout(() => {
+                const heroTitle = document.getElementById('heroTitle');
+                heroTitle.classList.add('transition-all', 'duration-1000', 'ease-out', 'opacity-100', 'translate-y-0');
+            }, 300);
+            
+            setTimeout(() => {
+                const heroDesc = document.getElementById('heroDesc');
+                heroDesc.classList.add('transition-all', 'duration-1000', 'ease-out', 'opacity-100', 'translate-y-0');
+            }, 600);
+            
+            setTimeout(() => {
+                const heroBtns = document.getElementById('heroBtns');
+                heroBtns.classList.add('transition-all', 'duration-1000', 'ease-out', 'opacity-100', 'translate-y-0');
+            }, 900);
+
+            /**
+             * =============================================================================
+             * 滚动显示动画
+             * 功能：元素进入视口时的淡入效果
+             * =============================================================================
+             */
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            // 创建IntersectionObserver实例
+            const fadeInObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        fadeInObserver.unobserve(entry.target);
+                    }
+                });
+            }, { 
+                threshold: 0.1, // 元素10%可见时触发
+                rootMargin: '0px 0px -50px 0px' // 提前50px触发
+            });
+            
+            // 观察所有需要淡入的元素
+            fadeElements.forEach(element => {
+                fadeInObserver.observe(element);
+            });
+
+            /**
+             * =============================================================================
+             * 评价轮播功能
+             * 功能：客户评价的自动和手动轮播
+             * =============================================================================
+             */
+            const track = document.getElementById('testimonialTrack');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const dots = document.querySelectorAll('.indicator-dot');
+            
+            let currentIndex = 0;
+            let slideWidth = 100; // 百分比宽度
+            let isAutoPlaying = true;
+            let autoPlayInterval;
+            
+            // 初始化轮播
+            initSlider();
+            
+            function initSlider() {
+                updateSlideWidth();
+                window.addEventListener('resize', updateSlideWidth);
+                
+                // 绑定按钮事件
+                prevBtn.addEventListener('click', prevSlide);
+                nextBtn.addEventListener('click', nextSlide);
+                
+                // 绑定指示器事件
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => goToSlide(index));
+                });
+                
+                // 开始自动播放
+                startAutoPlay();
+                
+                // 鼠标悬停暂停
+                const slider = document.getElementById('testimonialSlider');
+                slider.addEventListener('mouseenter', stopAutoPlay);
+                slider.addEventListener('mouseleave', startAutoPlay);
+            }
+            
+            function updateSlideWidth() {
+                if (window.innerWidth >= 1024) { // 桌面端显示3个
+                    slideWidth = 100 / 3;
+                } else if (window.innerWidth >= 768) { // 平板显示2个
+                    slideWidth = 50;
+                } else { // 手机显示1个
+                    slideWidth = 100;
+                }
+                moveSlider();
+            }
+            
+            function moveSlider() {
+                track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+                updateIndicators();
+            }
+            
+            function prevSlide() {
+                const maxSlides = getMaxSlides();
+                currentIndex = Math.max(0, currentIndex - 1);
+                moveSlider();
+            }
+            
+            function nextSlide() {
+                const maxSlides = getMaxSlides();
+                currentIndex = Math.min(maxSlides, currentIndex + 1);
+                moveSlider();
+            }
+            
+            function goToSlide(index) {
+                currentIndex = index;
+                moveSlider();
+            }
+            
+            function getMaxSlides() {
+                const totalSlides = 3; // 总评价数
+                return Math.max(0, totalSlides - Math.floor(100 / slideWidth));
+            }
+            
+            function updateIndicators() {
+                dots.forEach((dot, index) => {
+                    if (index === currentIndex) {
+                        dot.classList.add('bg-primary', 'scale-125');
+                        dot.classList.remove('bg-gray-300');
+                    } else {
+                        dot.classList.remove('bg-primary', 'scale-125');
+                        dot.classList.add('bg-gray-300');
+                    }
+                });
+            }
+            
+            function startAutoPlay() {
+                if (isAutoPlaying) return;
+                isAutoPlaying = true;
+                autoPlayInterval = setInterval(() => {
+                    const maxSlides = getMaxSlides();
+                    if (currentIndex >= maxSlides) {
+                        currentIndex = 0;
+                    } else {
+                        currentIndex++;
+                    }
+                    moveSlider();
+                }, 4000);
+            }
+            
+            function stopAutoPlay() {
+                if (!isAutoPlaying) return;
+                isAutoPlaying = false;
+                clearInterval(autoPlayInterval);
+            }
+
+            /**
+             * =============================================================================
+             * 联系表单处理
+             * 功能：表单验证和提交
+             * =============================================================================
+             */
+            const contactForm = document.getElementById('contactForm');
+            const formStatus = document.getElementById('formStatus');
+            
+            contactForm.addEventListener('submit', handleFormSubmit);
+            
+            function handleFormSubmit(e) {
+                e.preventDefault();
+                
+                // 获取表单数据
+                const formData = new FormData(contactForm);
+                const name = formData.get('name').trim();
+                const email = formData.get('email').trim();
+                const subject = formData.get('subject').trim();
+                const message = formData.get('message').trim();
+                
+                // 表单验证
+                if (!validateForm(name, email, message)) {
+                    return;
+                }
+                
+                // 显示提交状态
+                showFormStatus('正在发送消息...', 'info');
+                
+                // 模拟异步提交
+                setTimeout(() => {
+                    // 这里可以替换为实际的API调用
+                    console.log('表单提交数据:', { name, email, subject, message });
+                    
+                    // 显示成功消息
+                    showFormStatus('消息发送成功！我们将尽快回复您。', 'success');
+                    
+                    // 重置表单
+                    contactForm.reset();
+                    
+                    // 3秒后隐藏状态消息
+                    setTimeout(() => {
+                        hideFormStatus();
+                    }, 3000);
+                    
+                }, 1500);
+            }
+            
+            function validateForm(name, email, message) {
+                // 姓名验证
+                if (!name) {
+                    showFormStatus('请输入您的姓名', 'error');
+                    return false;
+                }
+                
+                // 邮箱验证
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email) {
+                    showFormStatus('请输入您的邮箱地址', 'error');
+                    return false;
+                } else if (!emailRegex.test(email)) {
+                    showFormStatus('请输入有效的邮箱地址', 'error');
+                    return false;
+                }
+                
+                // 消息验证
+                if (!message) {
+                    showFormStatus('请输入您的消息内容', 'error');
+                    return false;
+                } else if (message.length < 10) {
+                    showFormStatus('消息内容至少需要10个字符', 'error');
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            function showFormStatus(message, type) {
+                formStatus.textContent = message;
+                formStatus.className = `text-center py-3 px-4 rounded-lg mb-4 transition-all duration-300`;
+                
+                switch (type) {
+                    case 'success':
+                        formStatus.classList.add('bg-green-100', 'text-green-800', 'border', 'border-green-200');
+                        break;
+                    case 'error':
+                        formStatus.classList.add('bg-red-100', 'text-red-800', 'border', 'border-red-200');
+                        break;
+                    case 'info':
+                        formStatus.classList.add('bg-blue-100', 'text-blue-800', 'border', 'border-blue-200');
+                        break;
+                }
+                
+                formStatus.classList.remove('hidden');
+            }
+            
+            function hideFormStatus() {
+                formStatus.classList.add('hidden');
+            }
+
+            /**
+             * =============================================================================
+             * 返回顶部功能
+             * 功能：平滑滚动到页面顶部
+             * =============================================================================
+             */
+            backToTop.addEventListener('click', scrollToTop);
+            
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+
+            /**
+             * =============================================================================
+             * 平滑滚动到锚点
+             * 功能：处理页面内导航的平滑滚动
+             * =============================================================================
+             */
+            const anchorLinks = document.querySelectorAll('a[href^="#"]');
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        
+                        // 计算偏移量（考虑固定导航栏）
+                        const offsetTop = targetElement.offsetTop - 80;
+                        
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                        
+                        // 关闭移动端菜单
+                        closeMobileMenu();
+                    }
+                });
+            });
+
+            /**
+             * =============================================================================
+             * 性能优化
+             * 功能：图片懒加载和事件节流
+             * =============================================================================
+             */
+            
+            // 图片懒加载（如果添加更多图片）
+            if ('IntersectionObserver' in window) {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('img[data-src]').forEach(img => {
+                    imageObserver.observe(img);
+                });
+            }
+            
+            // 滚动事件节流
+            let ticking = false;
+            function throttledScroll() {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        handleScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }
+            
+            // 替换原始的滚动监听器
+            window.removeEventListener('scroll', handleScroll);
+            window.addEventListener('scroll', throttledScroll);
+
+            /**
+             * =============================================================================
+             * 初始化完成提示
+             * =============================================================================
+             */
+            console.log('🚀 DynamicUI 网页已完全加载，所有功能已激活！');
+            console.log('📱 响应式设计已启用');
+            console.log('✨ 动画效果已加载');
+            console.log('📧 联系表单已就绪');
+        });
+    </script>
+</body>
+</html>
