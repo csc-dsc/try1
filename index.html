@@ -1,17 +1,146 @@
-<!-- 这是个网页 -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 设置字符编码为 UTF-8 -->
     <meta charset="UTF-8">
-    <!-- 适配移动端显示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我叫陈书成</title>
+    <title>我的个人主页</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
 </head>
 <body>
-    <!-- 网页内容 -->
-    <p>这是我的网页</p>
-    <br>
-    <p>刚开始学习，还有很多不懂的地方，我会虚心向各位大佬学习的</p>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">🏠 我的主页</a>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#about">关于</a>
+                <a href="#blog">博客</a>
+                <a href="#links">友链</a>
+                <button id="theme-toggle" class="theme-btn" aria-label="切换主题">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </button>
+            </div>
+            <button class="mobile-menu-btn" aria-label="菜单">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 移动端菜单 -->
+    <div class="mobile-menu">
+        <a href="#home">首页</a>
+        <a href="#about">关于</a>
+        <a href="#blog">博客</a>
+        <a href="#links">友链</a>
+    </div>
+
+    <main class="container">
+        <!-- 个人介绍区 -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <div class="avatar-container">
+                    <img src="images/avatar.jpg" alt="你的头像" class="avatar" id="avatar-img">
+                </div>
+                <h1>欢迎来到我的小窝</h1>
+                <p class="subtitle">很高兴与你相遇 🌟</p>
+                <p class="quote">"恋池鱼，思故渊"</p>
+                <div class="social-links">
+                    <!-- 在这里添加你的社交媒体链接 -->
+                    <!-- 示例格式：<a href="你的链接" target="_blank" class="social-btn">平台名</a> -->
+                    <a href="https://github.com/csc-dsc" target="_blank" class="social-btn github">GitHub</a>
+                    <a href="https://bilibili.com/你的ID" target="_blank" class="social-btn bilibili">B站</a>
+                    <a href="mailto:你的邮箱@example.com" class="social-btn email">邮箱</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 关于我 -->
+        <section id="about" class="section">
+            <h2>关于我</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>这里写一段关于你自己的介绍...</p>
+                    <p>可以包括你的兴趣、专业、工作等。</p>
+                    <p>也可以分享一些个人感悟或座右铭。</p>
+                </div>
+                <div class="skills">
+                    <h3>技能标签</h3>
+                    <div class="tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Web开发</span>
+                        <span class="tag">设计</span>
+                        <span class="tag">其他技能</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 博客/作品展示 -->
+        <section id="blog" class="section">
+            <h2>最新文章/作品</h2>
+            <div class="blog-grid">
+                <!-- 在这里添加你的博客文章或作品 -->
+                <!-- 每个article代表一篇文章 -->
+                <article class="blog-card">
+                    <h3>文章标题1</h3>
+                    <p class="date">2024-01-01</p>
+                    <p>这里是文章摘要...</p>
+                    <a href="#" class="read-more">阅读更多 →</a>
+                </article>
+                
+                <article class="blog-card">
+                    <h3>文章标题2</h3>
+                    <p class="date">2024-01-02</p>
+                    <p>这里是文章摘要...</p>
+                    <a href="#" class="read-more">阅读更多 →</a>
+                </article>
+                
+                <article class="blog-card">
+                    <h3>文章标题3</h3>
+                    <p class="date">2024-01-03</p>
+                    <p>这里是文章摘要...</p>
+                    <a href="#" class="read-more">阅读更多 →</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 友链 -->
+        <section id="links" class="section">
+            <h2>朋友们</h2>
+            <div class="friends-grid">
+                <!-- 在这里添加友链 -->
+                <!-- 每个friend-card代表一个朋友 -->
+                <div class="friend-card">
+                    <h3>朋友名称</h3>
+                    <p>朋友的简介或网站描述...</p>
+                    <a href="朋友的网站链接" target="_blank" class="friend-link">访问网站 →</a>
+                </div>
+                
+                <div class="friend-card">
+                    <h3>另一个朋友</h3>
+                    <p>朋友的简介或网站描述...</p>
+                    <a href="朋友的网站链接" target="_blank" class="friend-link">访问网站 →</a>
+                </div>
+                
+                <!-- 可以继续添加更多友链 -->
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>© <span id="current-year">2024</span> 你的名字. 保留所有权利.</p>
+            <p>由 ❤️ 驱动 | 主题切换功能已启用</p>
+            <button id="back-to-top" class="back-to-top">↑ 回到顶部</button>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
 </body>
 </html>
