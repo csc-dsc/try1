@@ -264,15 +264,131 @@ body {
     color: white;
 }
 
-/* 个人网站按钮样式 */
-.social-btn.personal-site {
-    background: linear-gradient(45deg, #8b5cf6, #6366f1);
+/* 飞书按钮样式 */
+.social-btn.feishu {
+    background: linear-gradient(45deg, #00b2ff, #0066ff);
     color: white;
 }
 
-.social-btn.weibo {
-    background: linear-gradient(45deg, #e6162d, #ff8140);
+/* CSDN博客按钮样式 */
+.social-btn.csdn-blog {
+    background: linear-gradient(45deg, #f00, #c00, #900, #c00, #f00);
+    background-size: 400% 400%;
     color: white;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    animation: csdnGradient 3s ease infinite, csdnPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* CSDN图标样式 */
+.csdn-icon {
+    font-size: 1.2em;
+    filter: drop-shadow(0 0 2px white);
+    animation: csdnIconFloat 3s ease-in-out infinite;
+}
+
+/* 渐变背景动画 */
+@keyframes csdnGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 脉冲动画 */
+@keyframes csdnPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.3),
+                    0 0 40px rgba(255, 0, 0, 0.2);
+        transform: translateY(0);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 0, 0, 0.5),
+                    0 0 60px rgba(255, 0, 0, 0.3);
+        transform: translateY(-2px);
+    }
+}
+
+/* 图标浮动动画 */
+@keyframes csdnIconFloat {
+    0%, 100% {
+        transform: translateY(0) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-3px) rotate(5deg);
+    }
+    50% {
+        transform: translateY(0) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-2px) rotate(-5deg);
+    }
+}
+
+/* 波纹效果 */
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* 悬停效果 */
+.social-btn.csdn-blog:hover {
+    animation: none;
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 0 40px rgba(255, 0, 0, 0.6),
+                0 0 80px rgba(255, 0, 0, 0.4);
+    border-color: white;
+}
+
+/* 点击效果 */
+.social-btn.csdn-blog:active {
+    transform: translateY(-1px) scale(0.98);
+    animation: csdnClick 0.2s ease;
+}
+
+@keyframes csdnClick {
+    0% {
+        transform: translateY(-4px) scale(1.05);
+    }
+    100% {
+        transform: translateY(-1px) scale(0.98);
+    }
+}
+
+/* 暗色主题下的调整 */
+[data-theme="dark"] .social-btn.csdn-blog {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .social-btn.csdn-blog:hover {
+    box-shadow: 0 0 50px rgba(255, 0, 0, 0.7),
+                0 0 100px rgba(255, 0, 0, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .social-btn.csdn-blog {
+        animation: csdnGradient 4s ease infinite, csdnPulse 3s ease-in-out infinite;
+    }
+    
+    .csdn-icon {
+        font-size: 1.1em;
+    }
 }
 
 .social-btn.bilibili {
