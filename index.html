@@ -1,138 +1,156 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的个人主页</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🚀&lt;/text&gt;&lt;/svg&gt;">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="陈书成的个人主页，收录个人博客、博客园和常用站点入口。">
+  <title>陈书成 | Personal Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🏠 我的主页</a>
-            <div class="nav-links">
-                <a href="#home">首页</a>
-                <a href="#about">关于</a>
-                <a href="#blog">博客</a>
-                <a href="#links">友链</a>
-                <button id="theme-toggle" class="theme-btn" aria-label="切换主题">
-                    <span class="sun-icon" style="display: inline;">☀️</span>
-                    <span class="moon-icon" style="display: none;">🌙</span>
-                </button>
-            </div>
-            <button class="mobile-menu-btn" aria-label="菜单">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+  <div class="bg-orb bg-orb-a"></div>
+  <div class="bg-orb bg-orb-b"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home">CSC</a>
+    <nav class="nav" id="nav">
+      <a href="#about">关于</a>
+      <a href="#blogs">博客</a>
+      <a href="#links">链接</a>
+      <a href="miku-theme.html">旧作</a>
     </nav>
+    <button class="icon-btn" id="theme-toggle" aria-label="切换主题">◐</button>
+    <button class="icon-btn menu-btn" id="menu-toggle" aria-label="展开菜单">☰</button>
+  </header>
 
-    <!-- 移动端菜单 -->
-    <div class="mobile-menu">
-        <a href="#home">首页</a>
-        <a href="#about">关于</a>
-        <a href="#blog">博客</a>
-        <a href="#links">友链</a>
-    </div>
-
-    <main class="container">
-        <!-- 个人介绍区 -->
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <div class="avatar-container">
-                    <img src="image/avatar.jpg" alt="你的头像" class="avatar" id="avatar-img">
-                </div>
-                <h1>欢迎来到我的小窝</h1>
-                <p class="subtitle">很高兴与你相遇 🌟</p>
-                <p class="quote">"恋池鱼，思故渊"</p>
-                <div class="social-links">
-                    <a href="https://github.com/csc-dsc" target="_blank" class="social-btn github">GitHub</a>
-                    <a href="https://pcn0uzhoxu7z.feishu.cn/invite/member/5E-Q52QQX_Y" target="_blank" class="social-btn feishu">我的飞书</a>
-                    <a href="https://blog.csdn.net/csc4188" target="_blank" class="social-btn csdn-blog">
-                        <span class="csdn-icon">📝</span>
-                        博客(CSDN)
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 关于我 -->
-        <section id="about" class="section">
-            <h2>关于我</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>entp，略懂社交，喜欢新鲜知识，乐于尝试新事物</p>
-                    <p>兴趣爱好多样（真的很多）羽毛球，篮球，足球，健身，跳舞，长跑，象棋，围棋，双截棍，魔方，蝴蝶刀，骑行，轮滑。另外本人是二次元，老番看得多（不过主混V圈）。</p>
-                    <p>相信自己，便无人可敌。</p>
-                </div>
-                <div class="skills">
-                    <h3>技术栈</h3>
-                    <div class="tags">
-                        <span class="tag">Re工程</span>
-                        <span class="tag">密码学（还在研究</span>
-                        <span class="tag">Web开发如HTML/CSS/JS</span>
-                        <span class="tag">php前后端</span>
-                        <span class="tag">c++游戏开发</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 博客/作品展示 -->
-        <section id="blog" class="section">
-            <h2>最新文章/作品</h2>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <h3>文章标题1</h3>
-                    <p class="date">2024-01-01</p>
-                    <p>这里是文章摘要...</p>
-                    <a href="#" class="read-more">阅读更多 →</a>
-                </article>
-                <article class="blog-card">
-                    <h3>文章标题2</h3>
-                    <p class="date">2024-01-02</p>
-                    <p>这里是文章摘要...</p>
-                    <a href="#" class="read-more">阅读更多 →</a>
-                </article>
-                <article class="blog-card">
-                    <h3>文章标题3</h3>
-                    <p class="date">2024-01-03</p>
-                    <p>这里是文章摘要...</p>
-                    <a href="#" class="read-more">阅读更多 →</a>
-                </article>
-            </div>
-        </section>
-
-        <!-- 友链 -->
-        <section id="links" class="section">
-            <h2>朋友们</h2>
-            <div class="friends-grid">
-                <div class="friend-card">
-                    <h3>朋友名称</h3>
-                    <p>朋友的简介或网站描述...</p>
-                    <a href="#" target="_blank" class="friend-link">访问网站 →</a>
-                </div>
-                <div class="friend-card">
-                    <h3>另一个朋友</h3>
-                    <p>朋友的简介或网站描述...</p>
-                    <a href="#" target="_blank" class="friend-link">访问网站 →</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-content">
-            <p>© <span id="current-year">2026</span> 你的名字. 保留所有权利.</p>
-            <p>由 ❤️ 驱动 | 主题切换功能已启用</p>
-            <button id="back-to-top" class="back-to-top" style="opacity: 0; display: none;">↑ 回到顶部</button>
+  <main class="shell">
+    <section class="hero reveal" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">Personal Home</p>
+        <h1>陈书成</h1>
+        <p class="lead">个人主页、博客入口、作品展示和常用链接都放这里。</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="https://god-re.gt.tc/" target="_blank" rel="noreferrer">新博客</a>
+          <a class="btn" href="https://www.cnblogs.com/dsc-/p" target="_blank" rel="noreferrer">博客园</a>
+          <a class="btn" href="https://blog.csdn.net/csc4188" target="_blank" rel="noreferrer">CSDN博客</a>
         </div>
-    </footer>
+      </div>
 
-    <script src="index.js"></script>
+      <aside class="profile-card">
+        <div class="avatar-container">
+          <img src="image/avatar.jpg" alt="陈书成" class="avatar">
+        </div>
+        <div class="meta">
+          <strong>个人站点中枢</strong>
+          <span>更新、文章、友链统一入口</span>
+        </div>
+        <div class="stats">
+          <div><b>3</b><span>核心站点</span></div>
+          <div><b>7+</b><span>精选文章</span></div>
+          <div><b>1</b><span>主主页</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section reveal" id="about">
+      <div class="section-head">
+        <p class="eyebrow">About</p>
+        <h2>关于我</h2>
+      </div>
+      <div class="grid two">
+        <article class="card">
+          <p>喜欢把站点做得清爽、能用、不卡。</p>
+          <p>主要内容是个人博客、技术笔记和一些页面实验。</p>
+        </article>
+        <article class="card">
+          <p>参考过的风格：<a href="https://www.zimo.click/" target="_blank" rel="noreferrer">zimo.click</a> 和博客园首页。</p>
+          <p>我把它们的「最近更新」「文章卡片」「清晰导航」整理成了这个主页。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="blogs">
+      <div class="section-head">
+        <p class="eyebrow">Blogs</p>
+        <h2>博客入口</h2>
+      </div>
+      <div class="grid three">
+        <a class="card link-card" href="https://god-re.gt.tc/" target="_blank" rel="noreferrer">
+          <span class="tag">NEW</span>
+          <strong>新博客</strong>
+          <p>https://god-re.gt.tc/</p>
+        </a>
+        <a class="card link-card" href="https://www.cnblogs.com/dsc-/p" target="_blank" rel="noreferrer">
+          <span class="tag">CNBLOGS</span>
+          <strong>博客园随笔</strong>
+          <p>https://www.cnblogs.com/dsc-/p</p>
+        </a>
+        <a class="card link-card" href="https://www.zimo.click/" target="_blank" rel="noreferrer">
+          <span class="tag">REFERENCE</span>
+          <strong>Zimo's Blogs</strong>
+          <p>参考它的版式和文章组织</p>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <div class="section-head">
+        <p class="eyebrow">Recent</p>
+        <h2>最近更新</h2>
+      </div>
+      <div class="grid three">
+        <a class="card post-card" href="https://www.cnblogs.com/dsc-/p/19787224" target="_blank" rel="noreferrer">
+          <strong>写网页</strong>
+          <span>博客园 · 2026-04-02</span>
+        </a>
+        <a class="card post-card" href="https://www.cnblogs.com/dsc-/p/19787155" target="_blank" rel="noreferrer">
+          <strong>随笔和文章的区别</strong>
+          <span>博客园 · 2026-03-28</span>
+        </a>
+        <a class="card post-card" href="https://www.cnblogs.com/dsc-/p/19786992" target="_blank" rel="noreferrer">
+          <strong>第一次用博客园</strong>
+          <span>博客园 · 2026-03-28</span>
+        </a>
+        <a class="card post-card" href="https://www.zimo.click/2026/04/22/FastJson/" target="_blank" rel="noreferrer">
+          <strong>FastJson</strong>
+          <span>Zimo · 2026-04-22</span>
+        </a>
+        <a class="card post-card" href="https://www.zimo.click/2026/04/08/%E5%86%85%E5%AD%98%E9%A9%AC/" target="_blank" rel="noreferrer">
+          <strong>Java内存马</strong>
+          <span>Zimo · 2026-04-08</span>
+        </a>
+        <a class="card post-card" href="https://www.zimo.click/2026/04/04/ClassLoader/" target="_blank" rel="noreferrer">
+          <strong>ClassLoader</strong>
+          <span>Zimo · 2026-04-04</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section reveal" id="links">
+      <div class="section-head">
+        <p class="eyebrow">Links</p>
+        <h2>常用链接</h2>
+      </div>
+      <div class="grid two">
+        <a class="card link-card" href="https://github.com/csc-dsc" target="_blank" rel="noreferrer">
+          <strong>GitHub</strong>
+          <p>仓库和主页入口</p>
+        </a>
+        <a class="card link-card" href="miku-theme.html">
+          <strong>初音主题页</strong>
+          <p>保留旧作展示</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> 陈书成</p>
+  </footer>
+
+  <script src="index.js"></script>
 </body>
 </html>
