@@ -171,12 +171,17 @@ h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 2rem); }
   gap: 1rem;
 }
 
+.avatar-container {
+  width: 260px;
+  height: 260px;
+  margin: 0 auto 1.5rem;
+}
+
 .avatar {
   width: 100%;
-  aspect-ratio: 1;
-  display: block;
-  border-radius: 1rem;
+  height: 100%;
   object-fit: cover;
+  border-radius: 1rem;
   border: 1px solid var(--line);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
 }
