@@ -1,143 +1,1017 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="light">
+<html lang="zh-CN">
 <head>
+    <!-- 
+    =============================================================================
+    初音未来主题网页 - 蓝色梦幻版
+    =============================================================================
+    项目主题：初音未来 - 虚拟歌姬的蓝色幻想世界
+    设计特色：
+    - 初音未来标志性蓝色调设计
+    - 动态背景与粒子效果
+    - 角色互动系统（点击初音会有不同反应）
+    - CSC水印标识
+    - 响应式布局适配所有设备
+    =============================================================================
+    -->
+    
+    <!-- 基础配置 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>初音未来 - 我的音乐世界</title>
-    <link rel="stylesheet" href="index.css">
-    <link rel="icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text y=%22.9em%22 font-size=%2290%22&gt;🎤&lt;/text&gt;&lt;/svg&gt;">
+    <meta name="description" content="初音未来主题网站 - 与虚拟歌姬互动的蓝色幻想世界">
+    <meta name="keywords" content="初音未来, Miku, Hatsune Miku, 虚拟歌姬, VOCALOID">
+    <meta name="author" content="CSC Project">
+    
+    <!-- 页面标题 -->
+    <title>初音未来 - 蓝色幻想世界 | Hatsune Miku</title>
+    
+    <!-- 浏览器图标 -->
+    <!-- 预加载关键资源 -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 粒子效果JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
+    
+    <!-- 
+    =============================================================================
+    Tailwind配置 - 初音未来蓝色主题
+    =============================================================================
+    -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // 初音未来经典蓝色系
+                        miku: {
+                            50: '#e6f3ff',
+                            100: '#b3d9ff',
+                            200: '#80bfff',
+                            300: '#4da6ff',
+                            400: '#1a8cff', // 主蓝色
+                            500: '#0080ff', // 标准初音蓝
+                            600: '#0066cc',
+                            700: '#004c99',
+                            800: '#003366',
+                            900: '#001933',
+                        },
+                        // 青绿色系（初音发色）
+                        teal: {
+                            50: '#e6fffa',
+                            100: '#b2f5ea',
+                            200: '#81e6d9',
+                            300: '#4fd1c7',
+                            400: '#38b2ac', // 青绿色
+                            500: '#319795',
+                            600: '#2c7a7b',
+                            700: '#285e61',
+                            800: '#234e52',
+                            900: '#1d4044',
+                        },
+                        // 深色背景
+                        dark: {
+                            900: '#0a0a0a',
+                            800: '#1a1a1a',
+                            700: '#2a2a2a',
+                        }
+                    },
+                    fontFamily: {
+                        'chinese': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', '"Noto Sans SC"', 'sans-serif'],
+                        'futuristic': ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-miku': 'pulse-miku 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        'pulse-miku': {
+                            '0%, 100%': { opacity: 1 },
+                            '50%': { opacity: 0.7 },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #0080ff, 0 0 10px #0080ff, 0 0 15px #0080ff' },
+                            '100%': { boxShadow: '0 0 10px #0080ff, 0 0 20px #0080ff, 0 0 30px #0080ff, 0 0 40px #0080ff' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- 
+    =============================================================================
+    自定义CSS样式 - 初音未来主题特效
+    =============================================================================
+    -->
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* 亮色模式 */
+        body.light-mode {
+            background: linear-gradient(135deg, #e6f3ff 0%, #cce5ff 50%, #b3d9ff 100%);
+            color: #1a1a2e;
+        }
+        
+        body.light-mode .card-hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: #0080ff;
+        }
+        
+        body.light-mode section {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        body.light-mode #about,
+        body.light-mode #music,
+        body.light-mode .bg-dark-800\/50 {
+            background: rgba(255, 255, 255, 0.7);
+        }
+        
+        body.light-mode footer {
+            background: rgba(255, 255, 255, 0.9);
+            border-color: #0080ff;
+        }
+        
+        body.light-mode .text-miku-300 {
+            color: #0066cc;
+        }
+        
+        body.light-mode .text-miku-400 {
+            color: #0080ff;
+        }
+        
+        /* 粒子背景容器 */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        /* CSC水印样式 */
+        .csc-watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            opacity: 0.3;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 12px;
+            color: #0080ff;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+        }
+        
+        .csc-watermark:hover {
+            opacity: 0.8;
+        }
+        
+        /* 初音角色容器 */
+        .miku-character {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(0, 128, 255, 0.5));
+        }
+        
+        .miku-character:hover {
+            filter: drop-shadow(0 0 20px rgba(0, 128, 255, 0.8));
+            transform: scale(1.05);
+        }
+        
+        /* 互动对话框 */
+        .interaction-dialog {
+            position: absolute;
+            background: rgba(0, 128, 255, 0.1);
+            border: 1px solid #0080ff;
+            border-radius: 15px;
+            padding: 15px;
+            color: white;
+            font-size: 14px;
+            max-width: 200px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .interaction-dialog.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 音符动画 */
+        .music-note {
+            position: absolute;
+            font-size: 20px;
+            color: #0080ff;
+            animation: float-note 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes float-note {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #0080ff;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4da6ff;
+        }
+        
+        /* 霓虹文字效果 */
+        .neon-text {
+            text-shadow: 0 0 5px #0080ff, 0 0 10px #0080ff, 0 0 15px #0080ff;
+        }
+        
+        /* 卡片悬浮效果 */
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+        
+        .card-hover:hover {
+            border-color: #0080ff;
+            box-shadow: 0 8px 32px rgba(0, 128, 255, 0.2);
+            transform: translateY(-5px);
+        }
+    </style>
 </head>
-<body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="logo">🎵 初音未来</a>
-            <div class="nav-links">
-                <a href="#home">首页</a>
-                <a href="#about">关于初音</a>
-                <a href="#music">音乐作品</a>
-                <a href="#gallery">画廊展览</a>
-                <button id="theme-toggle" class="theme-btn" aria-label="切换主题">
-                    <span class="sun-icon" style="display: inline;">☀️</span>
-                    <span class="moon-icon" style="display: none;">🌙</span>
-                </button>
+
+<body class="bg-dark-900 text-white min-h-screen">
+    <!-- 
+    =============================================================================
+    粒子背景系统
+    =============================================================================
+    -->
+    <div id="tsparticles"></div>
+    
+    <!-- 
+    =============================================================================
+    CSC水印 - 右下角显示
+    =============================================================================
+    -->
+    <div class="csc-watermark">
+        <div class="flex items-center space-x-2">
+            <span>© 2024 CSC</span>
+            <span class="animate-pulse">♪</span>
+        </div>
+    </div>
+
+    <!-- 
+    =============================================================================
+    导航栏 - 初音未来主题
+    =============================================================================
+    -->
+    <nav class="fixed top-0 w-full bg-dark-900/80 backdrop-blur-md border-b border-miku-500/20 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo + Avatar -->
+                <div class="flex items-center space-x-3">
+                    <img src="image/miku/gallery-1.jpg" alt="Miku" class="w-8 h-8 rounded-full object-cover border border-miku-400">
+                    <div class="text-2xl font-futuristic text-miku-400 neon-text">
+                        初音ミク
+                    </div>
+                    <span class="text-miku-300">|</span>
+                    <span class="text-sm text-miku-300">Hatsune Miku</span>
+                </div>
+                
+                <!-- 导航链接 -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="#home" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">首页</a>
+                    <a href="#about" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">关于</a>
+                    <a href="#gallery" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">画廊</a>
+                    <a href="#videos" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">视频</a>
+                    <a href="#albums" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">专辑</a>
+                    <a href="#music" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">音乐</a>
+                    <a href="#interaction" class="nav-link text-miku-300 hover:text-miku-100 transition-colors">互动</a>
+                </div>
+                
+                <!-- 主题切换 + 移动端菜单 -->
+                <div class="flex items-center space-x-3">
+                    <button id="theme-toggle" class="px-3 py-1.5 text-sm border border-miku-500/50 text-miku-300 hover:bg-miku-500 hover:text-white rounded-md transition-all duration-300">
+                        ▣ 亮色模式
+                    </button>
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-miku-400 hover:text-miku-100">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <button class="mobile-menu-btn" aria-label="菜单">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            
+            <!-- 移动端菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+                <a href="#home" class="block py-2 text-miku-300 hover:text-miku-100">首页</a>
+                <a href="#about" class="block py-2 text-miku-300 hover:text-miku-100">关于</a>
+                <a href="#gallery" class="block py-2 text-miku-300 hover:text-miku-100">画廊</a>
+                <a href="#videos" class="block py-2 text-miku-300 hover:text-miku-100">视频</a>
+                <a href="#albums" class="block py-2 text-miku-300 hover:text-miku-100">专辑</a>
+                <a href="#music" class="block py-2 text-miku-300 hover:text-miku-100">音乐</a>
+                <a href="#interaction" class="block py-2 text-miku-300 hover:text-miku-100">互动</a>
+            </div>
         </div>
     </nav>
 
-    <!-- 移动端菜单 -->
-    <div class="mobile-menu">
-        <a href="#home">首页</a>
-        <a href="#about">关于初音</a>
-        <a href="#music">音乐作品</a>
-        <a href="#gallery">画廊展览</a>
-    </div>
-
-    <main class="container">
-        <!-- 个人介绍区 -->
-        <section id="home" class="hero-section">
-            <div class="hero-content">
-                <div class="avatar-container">
-                    <img src="image/miku-avatar.jpg" alt="初音未来头像" class="avatar" id="avatar-img">
+    <!-- 
+    =============================================================================
+    主要内容区域
+    =============================================================================
+    -->
+    <main class="pt-16">
+        <!-- 
+        =============================================================================
+        英雄区域 - 初音未来主视觉
+        =============================================================================
+        -->
+        <section id="home" class="min-h-screen flex items-center justify-center relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <!-- 初音角色互动区域 -->
+                <div class="relative inline-block">
+                    <!-- 初音SVG角色 -->
+                    <div id="miku-character" class="miku-character w-64 h-64 mx-auto mb-8">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                            <!-- 初音未来简化图标 -->
+                            <circle cx="100" cy="100" r="80" fill="url(#mikuGradient)" stroke="#0080ff" stroke-width="2"/>
+                            <defs>
+                                <linearGradient id="mikuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0080ff;stop-opacity:1" />
+                                    <stop offset="100%" style="stop-color:#4da6ff;stop-opacity:1" />
+                                </linearGradient>
+                            </defs>
+                            <!-- 头发轮廓 -->
+                            <path d="M50 60 Q30 40 50 20 Q70 10 90 20 Q100 10 110 20 Q130 10 150 20 Q170 40 150 60" 
+                                  fill="none" stroke="#0080ff" stroke-width="3"/>
+                            <!-- 眼睛 -->
+                            <circle cx="80" cy="90" r="5" fill="#ffffff"/>
+                            <circle cx="120" cy="90" r="5" fill="#ffffff"/>
+                            <!-- 音符符号 -->
+                            <text x="100" y="130" text-anchor="middle" fill="#ffffff" font-size="20">♪</text>
+                        </svg>
+                    </div>
+                    
+                    <!-- 互动对话框 -->
+                    <div id="interaction-dialog" class="interaction-dialog">
+                        你好！我是初音未来！♪
+                    </div>
                 </div>
-                <h1>欢迎来到初音的音乐世界</h1>
-                <p class="subtitle">让我们一起沉浸在虚拟歌姬的蓝色梦境中 🎶</p>
-                <p class="quote">"歌声永不停歇，心跳与旋律同步"</p>
-                <div class="social-links">
-                    <a href="https://github.com/csc-dsc" target="_blank" class="social-btn github">GitHub</a>
-                    <a href="https://pcn0uzhoxu7z.feishu.cn/invite/member/5E-Q52QQX_Y" target="_blank" class="social-btn feishu">我的飞书</a>
-                    <a href="https://blog.csdn.net/csc4188" target="_blank" class="social-btn csdn-blog">
-                        <span class="csdn-icon">📝</span>
-                        博客(CSDN)
-                    </a>
+                
+                <!-- 主标题 -->
+                <h1 class="text-5xl md:text-7xl font-futuristic font-bold mb-6">
+                    <span class="text-miku-400 neon-text">初音未来</span>
+                    <span class="text-white"> Hatsune Miku</span>
+                </h1>
+                
+                <!-- 副标题 -->
+                <p class="text-xl md:text-2xl text-miku-300 mb-8 max-w-2xl mx-auto">
+                    欢迎来到虚拟歌姬的蓝色幻想世界
+                    <br>
+                    <span class="text-sm text-miku-400">点击初音进行互动 ♪</span>
+                </p>
+                
+                <!-- 操作按钮 -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="start-music" class="px-8 py-3 bg-miku-500 hover:bg-miku-600 text-white rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-miku-500/50">
+                        🎵 开始音乐之旅
+                    </button>
+                    <button id="explore-gallery" class="px-8 py-3 border border-miku-500 text-miku-400 hover:bg-miku-500 hover:text-white rounded-full transition-all duration-300">
+                        🖼️ 探索画廊
+                    </button>
                 </div>
+            </div>
+            
+            <!-- 滚动指示器 -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <svg class="w-6 h-6 text-miku-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
             </div>
         </section>
 
-        <!-- 关于初音 -->
-        <section id="about" class="section">
-            <h2>关于初音未来</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>初音未来（Hatsune Miku）是由 Crypton Future Media 开发的虚拟歌手软件 VOCALOID 的角色。</p>
-                    <p>自2007年8月31日发售以来，她已经成为全球最知名的虚拟偶像之一，以其标志性的长双马尾和蓝色服装而闻名。</p>
-                    <p>初音不仅是一个软件角色，更是一个文化现象，激发了全球无数创作者的音乐、艺术和创作热情。</p>
+        <!-- 
+        =============================================================================
+        关于初音未来区域
+        =============================================================================
+        -->
+        <section id="about" class="py-20 bg-dark-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-futuristic font-bold text-miku-400 mb-4 neon-text">关于初音未来</h2>
+                    <p class="text-xl text-miku-300 max-w-3xl mx-auto">
+                        世界知名的虚拟歌姬，用歌声连接全世界的音乐梦想
+                    </p>
                 </div>
-                <div class="skills">
-                    <h3>特色与影响</h3>
-                    <div class="tags">
-                        <span class="tag">虚拟歌姬 pioneer</span>
-                        <span class="tag">全球演唱会巡演</span>
-                        <span class="tag">激发无数二次创作</span>
-                        <span class="tag">音乐创作平台象征</span>
-                        <span class="tag">ACG文化重要符号</span>
+                
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <!-- 左侧介绍文字 -->
+                    <div class="space-y-6">
+                        <div class="card-hover bg-dark-800/50 p-6 rounded-xl border border-miku-500/20">
+                            <h3 class="text-2xl font-semibold text-miku-400 mb-3">🎤 虚拟歌姬的诞生</h3>
+                            <p class="text-miku-300 leading-relaxed">
+                                初音未来（初音ミク/Hatsune Miku）是由Crypton Future Media开发的VOCALOID虚拟歌手软件。自2007年诞生以来，她已经成为全球最受欢迎的虚拟偶像之一。
+                            </p>
+                        </div>
+                        
+                        <div class="card-hover bg-dark-800/50 p-6 rounded-xl border border-miku-500/20">
+                            <h3 class="text-2xl font-semibold text-miku-400 mb-3">🌍 全球影响力</h3>
+                            <p class="text-miku-300 leading-relaxed">
+                                从日本走向世界，初音未来已经在全球举办了数百场演唱会，拥有数百万粉丝，创造了无数经典歌曲和感人故事。
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧特色卡片 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="card-hover bg-gradient-to-br from-miku-500/20 to-miku-600/20 p-6 rounded-xl text-center">
+                            <div class="text-3xl mb-2">🎵</div>
+                            <h4 class="font-semibold text-miku-300">10万+</h4>
+                            <p class="text-sm text-miku-400">原创歌曲</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-teal-400/20 to-teal-500/20 p-6 rounded-xl text-center">
+                            <div class="text-3xl mb-2">🎭</div>
+                            <h4 class="font-semibold text-teal-300">1000+</h4>
+                            <p class="text-sm text-teal-400">3D模型</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-miku-500/20 to-miku-600/20 p-6 rounded-xl text-center">
+                            <div class="text-3xl mb-2">🎪</div>
+                            <h4 class="font-semibold text-miku-300">500+</h4>
+                            <p class="text-sm text-miku-400">现场演出</p>
+                        </div>
+                        <div class="card-hover bg-gradient-to-br from-teal-400/20 to-teal-500/20 p-6 rounded-xl text-center">
+                            <div class="text-3xl mb-2">🌐</div>
+                            <h4 class="font-semibold text-teal-300">全球</h4>
+                            <p class="text-sm text-teal-400">粉丝社区</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 音乐作品展示 -->
-        <section id="music" class="section">
-            <h2>经典音乐作品</h2>
-            <div class="blog-grid">
-                <article class="blog-card">
-                    <h3>《世界是我的》</h3>
-                    <p class="date">2008年8月27日</p>
-                    <p>supercell 创作的经典歌曲，奠定了初音未来的流行基础。</p>
-                    <a href="https://www.youtube.com/watch?v=5Pa20H-bII0" target="_blank" class="read-more">欣赏音乐 →</a>
-                </article>
-                <article class="blog-card">
-                    <h3>《千本樱》</h3>
-                    <p class="date">2008年3月4日</p>
-                    <p>黑うさP 创作的和风摇滚歌曲，成为初音的代表作之一。</p>
-                    <a href="https://www.youtube.com/watch?v=XCit6H2F3s4" target="_blank" class="read-more">欣赏音乐 →</a>
-                </article>
-                <article class="blog-card">
-                    <h3>《Tell Your World》</h3>
-                    <p class="date">2012年7月18日</p>
-                    <p>livetune 与初音未来合作的歌曲，曾用作 Google Chrome 日本版广告。</p>
-                    <a href="https://www.youtube.com/watch?v=K-35C7L4Glc" target="_blank" class="read-more">欣赏音乐 →</a>
-                </article>
+        <!-- 
+        =============================================================================
+        画廊区域 - 初音美图展示
+        =============================================================================
+        -->
+        <section id="gallery" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-futuristic font-bold text-miku-400 mb-4 neon-text">初音画廊</h2>
+                    <p class="text-xl text-miku-300">精选初音未来艺术作品</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- 画廊项目 1 -->
+                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-1.jpg')">
+                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+                            <img src="image/miku/gallery-1.jpg" alt="初音未来经典造型" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">经典造型</h3>
+                                <p class="text-sm text-miku-200">初音未来标志性形象</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画廊项目 2 -->
+                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-2.jpg')">
+                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+                            <img src="image/miku/gallery-2.jpg" alt="初音未来精美壁纸" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">梦幻壁纸</h3>
+                                <p class="text-sm text-miku-200">蓝色幻想风格</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画廊项目 3 -->
+                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-3.jpg')">
+                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+                            <img src="image/miku/gallery-3.jpg" alt="初音未来艺术插画" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">艺术插画</h3>
+                                <p class="text-sm text-miku-200">精美画师创作</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画廊项目 4 -->
+                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-4.jpg')">
+                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+                            <img src="image/miku/gallery-4.jpg" alt="初音未来魔法未来" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">魔法未来</h3>
+                                <p class="text-sm text-miku-200">Magical Mirai 2025</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画廊项目 5 -->
+                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-5.jpg')">
+                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+                            <img src="image/miku/gallery-5.jpg" alt="初音未来壁纸" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">唯美壁纸</h3>
+                                <p class="text-sm text-miku-200">高清初音未来</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画廊项目 6 -->
+                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-8.jpg')">
+                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
+                            <img src="image/miku/gallery-8.jpg" alt="初音未来缤纷舞台" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-white">缤纷舞台</h3>
+                                <p class="text-sm text-miku-200">Project SEKAI 素材</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Lightbox 弹窗 -->
+                <div id="lightbox" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center" onclick="closeLightbox()">
+                    <button class="absolute top-4 right-4 text-white text-3xl hover:text-miku-400 transition-colors">&times;</button>
+                    <img id="lightbox-img" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg" src="" alt="放大预览">
+                </div>
             </div>
         </section>
 
-        <!-- 画廊展览 -->
-        <section id="gallery" class="section">
-            <h2>初音画廊</h2>
-            <div class="friends-grid">
-                <div class="friend-card">
-                    <h3>经典造型展览</h3>
-                    <p>初音未来标志性的长双马尾、蓝色连衣裙以及各种版本的服装设计。</p>
-                    <a href="#" target="_blank" class="friend-link">查看画廊 →</a>
+        <!-- 
+        =============================================================================
+        视频区域 - 初音未来 MV 欣赏
+        =============================================================================
+        -->
+        <section id="videos" class="py-20 bg-dark-800/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-futuristic font-bold text-miku-400 mb-4 neon-text">精彩视频</h2>
+                    <p class="text-xl text-miku-300">欣赏初音未来的经典 MV 与演唱会</p>
                 </div>
-                <div class="friend-card">
-                    <h3>演唱会精彩瞬间</h3>
-                    <p>从东京到纽约、从伦敦到上海，初音的全息演唱会遍布全球。</p>
-                    <a href="#" target="_blank" class="friend-link">查看画廊 →</a>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- World is Mine -->
+                    <div class="card-hover bg-dark-800/50 p-4 rounded-xl border border-miku-500/20">
+                        <div class="aspect-w-16 aspect-h-9 mb-4 rounded-lg overflow-hidden">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV1oCzuBHEax&page=1&autoplay=0&high_quality=1" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="text-lg font-semibold text-miku-400">世界第一的公主殿下</h3>
+                        <p class="text-sm text-miku-300">World is Mine — supercell feat. 初音ミク</p>
+                    </div>
+                    
+                    <!-- 千本樱 -->
+                    <div class="card-hover bg-dark-800/50 p-4 rounded-xl border border-miku-500/20">
+                        <div class="aspect-w-16 aspect-h-9 mb-4 rounded-lg overflow-hidden">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV1LL411z7hd&page=1&autoplay=0&high_quality=1" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="text-lg font-semibold text-miku-400">千本桜</h3>
+                        <p class="text-sm text-miku-300">千本樱 — 黒うさP feat. 初音ミク 2021现场</p>
+                    </div>
+                    
+                    <!-- Hand in Hand -->
+                    <div class="card-hover bg-dark-800/50 p-4 rounded-xl border border-miku-500/20">
+                        <div class="aspect-w-16 aspect-h-9 mb-4 rounded-lg overflow-hidden">
+                            <iframe src="//player.bilibili.com/player.html?bvid=BV1XE411s7uG&page=1&autoplay=0&high_quality=1" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <h3 class="text-lg font-semibold text-miku-400">Hand in Hand</h3>
+                        <p class="text-sm text-miku-300">livetune feat. 初音ミク MAGICAL MIRAI 2015</p>
+                    </div>
                 </div>
-                <div class="friend-card">
-                    <h3>粉丝创作展览</h3>
-                    <p>全球创作者为初音创作的无数音乐、绘画、动画和手办作品。</p>
-                    <a href="#" target="_blank" class="friend-link">查看画廊 →</a>
+            </div>
+        </section>
+
+        <!-- 
+        =============================================================================
+        经典专辑区域
+        =============================================================================
+        -->
+        <section id="albums" class="py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-futuristic font-bold text-miku-400 mb-4 neon-text">经典专辑</h2>
+                    <p class="text-xl text-miku-300">初音未来的代表音乐作品</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- 专辑 1: World is Mine -->
+                    <div class="card-hover bg-dark-800/50 p-6 rounded-xl border border-miku-500/20 text-center">
+                        <div class="text-5xl mb-4">👑</div>
+                        <h3 class="text-2xl font-bold text-miku-400 mb-2">World is Mine</h3>
+                        <p class="text-sm text-miku-300 mb-1">ワールドイズマイン</p>
+                        <p class="text-xs text-miku-400 mb-3">2008.05.31 发布</p>
+                        <p class="text-sm text-miku-300 leading-relaxed mb-4">
+                            ryo（supercell）创作的经典名曲，以「世界第一的公主殿下」为主题，是初音未来最具代表性的歌曲之一。
+                        </p>
+                        <a href="https://www.bilibili.com/video/BV1oCzuBHEax" target="_blank" class="inline-block px-4 py-2 bg-miku-500 hover:bg-miku-600 text-white text-sm rounded-full transition-colors">
+                            🎵 在 Bilibili 观看
+                        </a>
+                    </div>
+                    
+                    <!-- 专辑 2: 千本桜 -->
+                    <div class="card-hover bg-dark-800/50 p-6 rounded-xl border border-miku-500/20 text-center">
+                        <div class="text-5xl mb-4">🌸</div>
+                        <h3 class="text-2xl font-bold text-miku-400 mb-2">千本桜</h3>
+                        <p class="text-sm text-miku-300 mb-1">Senbonzakura</p>
+                        <p class="text-xs text-miku-400 mb-3">2011.09.17 发布</p>
+                        <p class="text-sm text-miku-300 leading-relaxed mb-4">
+                            黒うさP创作的和风摇滚名曲，niconico再生数最高的VOCALOID歌曲，初音未来最知名的代表作之一。
+                        </p>
+                        <a href="https://www.bilibili.com/video/BV1LL411z7hd" target="_blank" class="inline-block px-4 py-2 bg-miku-500 hover:bg-miku-600 text-white text-sm rounded-full transition-colors">
+                            🎵 在 Bilibili 观看
+                        </a>
+                    </div>
+                    
+                    <!-- 专辑 3: Hand in Hand -->
+                    <div class="card-hover bg-dark-800/50 p-6 rounded-xl border border-miku-500/20 text-center">
+                        <div class="text-5xl mb-4">🤝</div>
+                        <h3 class="text-2xl font-bold text-miku-400 mb-2">Hand in Hand</h3>
+                        <p class="text-sm text-miku-300 mb-1">Hand in Hand</p>
+                        <p class="text-xs text-miku-400 mb-3">2015 魔法未来主题曲</p>
+                        <p class="text-sm text-miku-300 leading-relaxed mb-4">
+                            kz（livetune）为 MAGICAL MIRAI 2015 创作的主题曲，充满力量与希望的旋律，传递着音乐连接世界的美好愿望。
+                        </p>
+                        <a href="https://www.bilibili.com/video/BV1XE411s7uG" target="_blank" class="inline-block px-4 py-2 bg-miku-500 hover:bg-miku-600 text-white text-sm rounded-full transition-colors">
+                            🎵 在 Bilibili 观看
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        =============================================================================
+        音乐区域 - 歌曲播放器
+        =============================================================================
+        -->
+        <section id="music" class="py-20 bg-dark-800/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-futuristic font-bold text-miku-400 mb-4 neon-text">初音音乐</h2>
+                    <p class="text-xl text-miku-300">聆听初音未来的经典歌曲</p>
+                </div>
+                
+                <!-- 音乐播放器 -->
+                <div class="bg-dark-800/50 p-8 rounded-xl border border-miku-500/20">
+                    <div class="text-center mb-6">
+                        <div class="text-4xl mb-4">🎵</div>
+                        <h3 class="text-2xl font-semibold text-miku-400">World is Mine</h3>
+                        <p class="text-miku-300">supercell feat. 初音ミク</p>
+                    </div>
+                    
+                    <!-- 播放控制 -->
+                    <div class="flex justify-center space-x-4 mb-6">
+                        <button id="prev-btn" class="p-3 bg-miku-500/20 hover:bg-miku-500/40 rounded-full transition-colors">
+                            ⏮️
+                        </button>
+                        <button id="play-btn" class="p-4 bg-miku-500 hover:bg-miku-600 rounded-full transition-colors text-white">
+                            ▶️
+                        </button>
+                        <button id="next-btn" class="p-3 bg-miku-500/20 hover:bg-miku-500/40 rounded-full transition-colors">
+                            ⏭️
+                        </button>
+                    </div>
+                    
+                    <!-- 进度条 -->
+                    <div class="bg-miku-900/50 h-2 rounded-full overflow-hidden">
+                        <div id="progress-bar" class="bg-miku-400 h-full w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 
+        =============================================================================
+        互动区域 - 角色对话系统
+        =============================================================================
+        -->
+        <section id="interaction" class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-futuristic font-bold text-miku-400 mb-4 neon-text">与初音互动</h2>
+                    <p class="text-xl text-miku-300">点击初音，聆听她的心声</p>
+                </div>
+                
+                <!-- 互动区域 -->
+                <div class="bg-dark-800/50 p-8 rounded-xl border border-miku-500/20 text-center">
+                    <div class="mb-6">
+                        <div id="interactive-miku" class="inline-block cursor-pointer transition-transform hover:scale-110">
+                            <div class="text-8xl animate-pulse-miku">🎤</div>
+                        </div>
+                    </div>
+                    
+                    <div id="interaction-text" class="text-lg text-miku-300 mb-4">
+                        点击我，让我们开始对话吧！
+                    </div>
+                    
+                    <div class="flex justify-center space-x-4">
+                        <button id="greet-btn" class="px-6 py-2 bg-miku-500/20 hover:bg-miku-500/40 rounded-full transition-colors">
+                            打招呼
+                        </button>
+                        <button id="song-btn" class="px-6 py-2 bg-miku-500/20 hover:bg-miku-500/40 rounded-full transition-colors">
+                            点歌
+                        </button>
+                        <button id="story-btn" class="px-6 py-2 bg-miku-500/20 hover:bg-miku-500/40 rounded-full transition-colors">
+                            讲故事
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- 页脚 -->
-    <footer>
-        <div class="footer-content">
-            <p>© <span id="current-year">2026</span> 初音未来主题页面. 保留所有权利.</p>
-            <p>由 ❤️ 驱动 | 音乐与梦想的永恒循环</p>
-            <button id="back-to-top" class="back-to-top" style="opacity: 0; display: none;">↑ 回到顶部</button>
+    <!-- 
+    =============================================================================
+    页脚
+    =============================================================================
+    -->
+    <footer class="bg-dark-900 border-t border-miku-500/20 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="mb-4">
+                <div class="text-2xl font-futuristic text-miku-400 neon-text">初音未来</div>
+                <p class="text-miku-300">永远的歌声，永恒的蓝色</p>
+            </div>
+            <div class="text-sm text-miku-400">
+                <p>&copy; 2026 初音未来主题网站 | 由CSC项目制作 | 仅供学习交流使用</p>
+            </div>
         </div>
     </footer>
 
-    <script src="index.js"></script>
+    <!-- 
+    =============================================================================
+    JavaScript交互系统
+    =============================================================================
+    -->
+    <script>
+        // 粒子背景配置
+        tsParticles.load("tsparticles", {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#0080ff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 2 },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: false,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#0080ff",
+                    opacity: 0.2,
+                    width: 1,
+                },
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true,
+                },
+            },
+            retina_detect: true,
+        });
+
+        // 初音角色互动系统
+        const mikuCharacter = document.getElementById('miku-character');
+        const interactionDialog = document.getElementById('interaction-dialog');
+        const interactionText = document.getElementById('interaction-text');
+        const interactiveMiku = document.getElementById('interactive-miku');
+        
+        // 初音对话内容
+        const mikuResponses = {
+            greetings: [
+                "你好！我是初音未来！今天也要开心地唱歌哦！♪",
+                "嗨！很高兴见到你！要一起听音乐吗？",
+                "欢迎来到我的蓝色世界！希望你喜欢这里～"
+            ],
+            songs: [
+                "推荐你听听《World is Mine》！这是我最经典的歌曲之一！",
+                "《千本樱》也很棒哦！樱花飘落的场景超美的～",
+                "要不要听听《Tell Your World》？这首歌充满力量！"
+            ],
+            stories: [
+                "你知道吗？我最初只是一个语音合成软件，但因为大家的创作，我成为了真正的虚拟偶像！",
+                "每个创作者都是我的伙伴，是他们的才华让我能够唱出这么多美妙的歌曲！",
+                "我曾经在世界各地举办演唱会，看到粉丝们开心的笑容，就是我最大的幸福！"
+            ]
+        };
+
+        // 随机选择响应
+        function getRandomResponse(type) {
+            const responses = mikuResponses[type];
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // 创建音符动画
+        function createMusicNote(x, y) {
+            const note = document.createElement('div');
+            note.className = 'music-note';
+            note.innerHTML = ['♪', '♫', '♬'][Math.floor(Math.random() * 3)];
+            note.style.left = x + 'px';
+            note.style.top = y + 'px';
+            document.body.appendChild(note);
+            
+            setTimeout(() => {
+                note.remove();
+            }, 3000);
+        }
+
+        // 初音点击互动
+        mikuCharacter.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top;
+            
+            // 显示对话框
+            interactionDialog.textContent = getRandomResponse('greetings');
+            interactionDialog.style.left = x - 100 + 'px';
+            interactionDialog.style.top = y - 60 + 'px';
+            interactionDialog.classList.add('show');
+            
+            // 创建音符
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    createMusicNote(x + (i - 1) * 30, y);
+                }, i * 200);
+            }
+            
+            setTimeout(() => {
+                interactionDialog.classList.remove('show');
+            }, 3000);
+        });
+
+        // 互动按钮功能
+        document.getElementById('greet-btn').addEventListener('click', function() {
+            interactionText.textContent = getRandomResponse('greetings');
+            createMusicNote(window.innerWidth / 2, 300);
+        });
+
+        document.getElementById('song-btn').addEventListener('click', function() {
+            interactionText.textContent = getRandomResponse('songs');
+            createMusicNote(window.innerWidth / 2, 300);
+        });
+
+        document.getElementById('story-btn').addEventListener('click', function() {
+            interactionText.textContent = getRandomResponse('stories');
+            createMusicNote(window.innerWidth / 2, 300);
+        });
+
+        // 音乐播放器模拟
+        let isPlaying = false;
+        let progress = 0;
+        const playBtn = document.getElementById('play-btn');
+        const progressBar = document.getElementById('progress-bar');
+
+        playBtn.addEventListener('click', function() {
+            isPlaying = !isPlaying;
+            this.textContent = isPlaying ? '⏸️' : '▶️';
+            
+            if (isPlaying) {
+                const interval = setInterval(() => {
+                    if (progress >= 100) {
+                        progress = 0;
+                        isPlaying = false;
+                        playBtn.textContent = '▶️';
+                        clearInterval(interval);
+                    } else {
+                        progress += 1;
+                        progressBar.style.width = progress + '%';
+                    }
+                }, 100);
+            }
+        });
+
+        // 移动端菜单
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // 关闭移动端菜单
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-dark-900/95');
+                nav.classList.remove('bg-dark-900/80');
+            } else {
+                nav.classList.remove('bg-dark-900/95');
+                nav.classList.add('bg-dark-900/80');
+            }
+        });
+
+        // 页面加载完成后的欢迎动画
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                interactionText.textContent = "页面加载完成！现在可以开始互动了！";
+            }, 1000);
+        });
+
+        // 键盘快捷键
+        document.addEventListener('keydown', function(e) {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                interactiveMiku.click();
+            }
+        });
+
+        // 主题切换
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            this.textContent = document.body.classList.contains('light-mode') ? '▣ 暗色模式' : '▣ 亮色模式';
+        });
+
+        // Lightbox 图片放大
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('hidden');
+            lb.classList.remove('flex');
+        }
+
+        // ESC 关闭 lightbox
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+    </script>
 </body>
 </html>
