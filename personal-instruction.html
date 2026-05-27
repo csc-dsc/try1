@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于我 | GOD·神</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="pond-page">
+  <canvas id="pondCanvas"></canvas>
+
+  <div class="pond-title">—— 轻触荷叶，了解更多 ——</div>
+
+  <div class="leaf" id="leaf0" style="top: 12%; left: 8%;">
+    <div class="leaf-visual"></div>
+    <span class="leaf-label">关于我</span>
+  </div>
+
+  <div class="leaf" id="leaf1" style="top: 40%; right: 6%;">
+    <div class="leaf-visual"></div>
+    <span class="leaf-label">兴趣</span>
+  </div>
+
+  <div class="leaf" id="leaf2" style="bottom: 18%; left: 25%;">
+    <div class="leaf-visual"></div>
+    <span class="leaf-label">技术栈</span>
+  </div>
+
+  <div class="lotus-burst" id="lotusBurst">
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+    <div class="lotus-petal"></div>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="content-card">
+      <button class="close-btn" id="closeBtn">&#x2715;</button>
+      <h2 id="cardTitle"></h2>
+      <div id="cardBody"></div>
+    </div>
+  </div>
+
+  <footer class="pond-footer">
+    <a href="index.html">&#x2190; 返回首页</a>
+  </footer>
+
+  <script>
+    const leafData = [
+      {
+        title: "\u5173\u4E8E\u6211",
+        body: '<p class="section-subtitle">ENTP \u00B7 \u63A2\u7D22\u8005</p><p>\u7565\u61C2\u793E\u4EA4\uFF0C\u559C\u6B22\u65B0\u9C9C\u77E5\u8BC6\uFF0C\u4E50\u4E8E\u5C1D\u8BD5\u65B0\u4E8B\u7269\u3002</p><blockquote>\u76F8\u4FE1\u81EA\u5DF1\uFF0C\u4FBF\u65E0\u4EBA\u53EF\u654C</blockquote>'
+      },
+      {
+        title: "\u5174\u8DA3\u7231\u597D",
+        body: '<div class="hobby-grid"><span>\u7FBD\u6BDB\u7403</span><span>\u7BEE\u7403</span><span>\u8DB3\u7403</span><span>\u5065\u8EAB</span><span>\u8DF3\u821E</span><span>\u957F\u8DD1</span><span>\u8C61\u68CB</span><span>\u56F4\u68CB</span><span>\u53CC\u622A\u68CD</span><span>\u9B54\u65B9</span><span>\u8774\u8776\u5200</span><span>\u9A91\u884C</span><span>\u8F6E\u6ED1</span></div><p class="hobby-note">\u4E8C\u6B21\u5143 \u00B7 \u8001\u756A \u00B7 V\u5708</p>'
+      },
+      {
+        title: "\u6280\u672F\u6808",
+        body: '<ul class="tech-list"><li><strong>RE\u5DE5\u7A0B</strong> \u2014 \u9006\u5411\u5206\u6790\u4E0E\u8C03\u8BD5</li><li><strong>\u5BC6\u7801\u5B66</strong> \u2014 \u4ECD\u5728\u7814\u7A76\u4E2D</li><li><strong>Web\u5F00\u53D1</strong> \u2014 HTML / CSS / JavaScript</li><li><strong>PHP</strong> \u2014 \u524D\u540E\u7AEF\u5F00\u53D1</li><li><strong>C++</strong> \u2014 \u6E38\u620F\u5F00\u53D1</li></ul>'
+      }
+    ];
+
+    const canvas = document.getElementById("pondCanvas");
+    const ctx = canvas.getContext("2d");
+    let W, H, mouse = { x: -999, y: -999 }, ripples = [];
+
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    function addRipple(x, y) {
+      ripples.push({ x, y, r: 2, a: 0.5, max: 80 + Math.random() * 40 });
+    }
+
+    let time = 0;
+
+    function draw() {
+      time += 0.008;
+      ctx.clearRect(0, 0, W, H);
+
+      let grad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.7);
+      grad.addColorStop(0, "#0d3d4a");
+      grad.addColorStop(0.6, "#082838");
+      grad.addColorStop(1, "#041620");
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      for (let y = 0; y < H; y += 5) {
+        let off = Math.sin(y * 0.008 + time * 0.6) * 0.4;
+        ctx.globalAlpha = 0.02 + off * 0.015;
+        ctx.fillStyle = "#aaddff";
+        ctx.fillRect(0, y, W, 1);
+      }
+      ctx.globalAlpha = 1;
+
+      if (mouse.x > 0) {
+        let dist = Math.hypot(mouse.x - W / 2, mouse.y - H / 2);
+        for (let i = -1; i <= 1; i++) {
+          for (let j = -1; j <= 1; j++) {
+            if (i === 0 && j === 0) continue;
+            let dx = mouse.x + i * W * 0.6;
+            let dy = mouse.y + j * H * 0.6;
+            let d = Math.hypot(dx - W / 2, dy - H / 2);
+            if (d < W * 0.5) {
+              let alpha = (1 - d / (W * 0.5)) * 0.025;
+              ctx.globalAlpha = alpha;
+              ctx.fillStyle = "#88ddcc";
+              ctx.beginPath();
+              ctx.arc(dx + Math.sin(time * 0.5 + i) * 20, dy + Math.cos(time * 0.3 + j) * 20, 30 + Math.sin(time + i + j) * 10, 0, Math.PI * 2);
+              ctx.fill();
+            }
+          }
+        }
+        ctx.globalAlpha = 1;
+      }
+
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        let rp = ripples[i];
+        let progress = rp.r / rp.max;
+        ctx.beginPath();
+        ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(150, 220, 255, ${rp.a * 0.35})`;
+        ctx.lineWidth = 1.8;
+        ctx.stroke();
+        if (rp.r > 8) {
+          ctx.beginPath();
+          ctx.arc(rp.x, rp.y, rp.r * 0.65, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(150, 220, 255, ${rp.a * 0.18})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+        rp.r += 0.7 + (1 - progress) * 0.6;
+        rp.a -= 0.006 + (1 - progress) * 0.004;
+        if (rp.a <= 0 || rp.r > rp.max) ripples.splice(i, 1);
+      }
+
+      requestAnimationFrame(draw);
+    }
+    draw();
+
+    canvas.addEventListener("mousemove", e => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+      addRipple(e.clientX, e.clientY);
+    });
+
+    canvas.addEventListener("touchmove", e => {
+      let t = e.touches[0];
+      mouse.x = t.clientX;
+      mouse.y = t.clientY;
+      addRipple(t.clientX, t.clientY);
+    }, { passive: true });
+
+    const leaves = document.querySelectorAll(".leaf");
+    let leafAngles = [0, 0, 0];
+    let leafBob = [0, 0, 0];
+
+    leaves.forEach((leaf, i) => {
+      const v = leaf.querySelector(".leaf-visual");
+      leafBob[i] = Math.random() * Math.PI * 2;
+
+      function updateLeaf() {
+        if (!leaf.classList.contains("active")) {
+          let dx = mouse.x - (leaf.offsetLeft + 65);
+          let dy = mouse.y - (leaf.offsetTop + 57);
+          let tiltX = Math.max(-8, Math.min(8, dy * 0.015));
+          let tiltY = Math.max(-8, Math.min(8, -dx * 0.015));
+          leafBob[i] += 0.02;
+          let bobY = Math.sin(leafBob[i]) * 2;
+          v.style.transform = `perspective(400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(${bobY}px)`;
+        }
+        requestAnimationFrame(updateLeaf);
+      }
+      updateLeaf();
+    });
+
+    const overlay = document.getElementById("overlay");
+    const cardTitle = document.getElementById("cardTitle");
+    const cardBody = document.getElementById("cardBody");
+    const closeBtn = document.getElementById("closeBtn");
+    const lotusBurst = document.getElementById("lotusBurst");
+
+    function showContent(index) {
+      leaves.forEach(l => l.classList.remove("active"));
+      leaves[index].classList.add("active");
+
+      let leafEl = leaves[index];
+      let lx = leafEl.offsetLeft + 65;
+      let ly = leafEl.offsetTop + 57;
+      lotusBurst.style.left = lx + "px";
+      lotusBurst.style.top = ly + "px";
+      lotusBurst.classList.remove("active");
+      void lotusBurst.offsetWidth;
+      lotusBurst.classList.add("active");
+
+      cardTitle.textContent = leafData[index].title;
+      cardBody.innerHTML = leafData[index].body;
+      overlay.classList.add("open");
+    }
+
+    leaves.forEach((leaf, i) => {
+      leaf.addEventListener("click", () => showContent(i));
+      leaf.addEventListener("touchend", (e) => {
+        e.preventDefault();
+        showContent(i);
+      });
+    });
+
+    closeBtn.addEventListener("click", () => {
+      overlay.classList.remove("open");
+      leaves.forEach(l => l.classList.remove("active"));
+    });
+
+    overlay.addEventListener("click", (e) => {
+      if (e.target === overlay) {
+        overlay.classList.remove("open");
+        leaves.forEach(l => l.classList.remove("active"));
+      }
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") {
+        overlay.classList.remove("open");
+        leaves.forEach(l => l.classList.remove("active"));
+      }
+    });
+  </script>
+</body>
+</html>
