@@ -35,6 +35,11 @@
     <!-- 粒子效果JS -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.9.3/tsparticles.bundle.min.js"></script>
     
+    <!-- Live2D 初音模型渲染 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/6.5.8/browser/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d@master/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.6.0/dist/cubism2.min.js"></script>
+    
     <!-- 
     =============================================================================
     Tailwind配置 - 初音未来蓝色主题
@@ -363,26 +368,9 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <!-- 初音角色互动区域 -->
                 <div class="relative inline-block">
-                    <!-- 初音SVG角色 -->
-                    <div id="miku-character" class="miku-character w-64 h-64 mx-auto mb-8">
-                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                            <!-- 初音未来简化图标 -->
-                            <circle cx="100" cy="100" r="80" fill="url(#mikuGradient)" stroke="#0080ff" stroke-width="2"/>
-                            <defs>
-                                <linearGradient id="mikuGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#0080ff;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#4da6ff;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <!-- 头发轮廓 -->
-                            <path d="M50 60 Q30 40 50 20 Q70 10 90 20 Q100 10 110 20 Q130 10 150 20 Q170 40 150 60" 
-                                  fill="none" stroke="#0080ff" stroke-width="3"/>
-                            <!-- 眼睛 -->
-                            <circle cx="80" cy="90" r="5" fill="#ffffff"/>
-                            <circle cx="120" cy="90" r="5" fill="#ffffff"/>
-                            <!-- 音符符号 -->
-                            <text x="100" y="130" text-anchor="middle" fill="#ffffff" font-size="20">♪</text>
-                        </svg>
+                    <!-- 初音Live2D角色 -->
+                    <div id="miku-character" class="miku-character w-64 h-64 mx-auto mb-8 relative">
+                        <div id="live2d-container" class="w-full h-full"></div>
                     </div>
                     
                     <!-- 互动对话框 -->
@@ -495,28 +483,50 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <!-- 画廊项目 1 -->
-                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-1.jpg')">
-                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
-                            <img src="image/miku/gallery-1.jpg" alt="初音未来经典造型" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <div>
-                                <h3 class="text-lg font-semibold text-white">经典造型</h3>
-                                <p class="text-sm text-miku-200">初音未来标志性形象</p>
+                    <!-- 画廊项目 1 - 上下双层 -->
+                    <div class="card-hover relative overflow-hidden rounded-xl h-80 sm:h-96">
+                        <div class="flex flex-col h-full">
+                            <div class="relative flex-1 overflow-hidden cursor-pointer group min-h-0" onclick="openLightbox('image/miku/gallery-1.jpg')">
+                                <img src="image/miku/gallery-1.jpg" alt="初音未来经典造型" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">经典造型</h3>
+                                        <p class="text-xs text-miku-200">初音未来标志性形象</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative flex-1 overflow-hidden cursor-pointer group min-h-0 border-t-2 border-miku-500/30" onclick="openLightbox('image/miku/gallery-6.jpg')">
+                                <img src="image/miku/gallery-6.jpg" alt="初音未来歌姬风姿" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">歌姬风姿</h3>
+                                        <p class="text-xs text-miku-200">舞台上的初音</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- 画廊项目 2 -->
-                    <div class="card-hover group relative overflow-hidden rounded-xl cursor-pointer" onclick="openLightbox('image/miku/gallery-2.jpg')">
-                        <div class="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden">
-                            <img src="image/miku/gallery-2.jpg" alt="初音未来精美壁纸" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        </div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <div>
-                                <h3 class="text-lg font-semibold text-white">梦幻壁纸</h3>
-                                <p class="text-sm text-miku-200">蓝色幻想风格</p>
+                    <!-- 画廊项目 2 - 上下双层 -->
+                    <div class="card-hover relative overflow-hidden rounded-xl h-80 sm:h-96">
+                        <div class="flex flex-col h-full">
+                            <div class="relative flex-1 overflow-hidden cursor-pointer group min-h-0" onclick="openLightbox('image/miku/gallery-2.jpg')">
+                                <img src="image/miku/gallery-2.jpg" alt="初音未来精美壁纸" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">梦幻壁纸</h3>
+                                        <p class="text-xs text-miku-200">蓝色幻想风格</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative flex-1 overflow-hidden cursor-pointer group min-h-0 border-t-2 border-miku-500/30" onclick="openLightbox('image/miku/gallery-7.jpg')">
+                                <img src="image/miku/gallery-7.jpg" alt="初音未来清新壁纸" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                                    <div>
+                                        <h3 class="text-sm font-semibold text-white">清新初音</h3>
+                                        <p class="text-xs text-miku-200">简约唯美风格</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -827,7 +837,6 @@
         const mikuCharacter = document.getElementById('miku-character');
         const interactionDialog = document.getElementById('interaction-dialog');
         const interactionText = document.getElementById('interaction-text');
-        const interactiveMiku = document.getElementById('interactive-miku');
         
         // 初音对话内容
         const mikuResponses = {
@@ -879,6 +888,14 @@
             interactionDialog.style.left = x - 100 + 'px';
             interactionDialog.style.top = y - 60 + 'px';
             interactionDialog.classList.add('show');
+            
+            // 触发Live2D动作
+            const live2dContainer = document.getElementById('live2d-container');
+            if (live2dContainer && live2dContainer._model) {
+                try {
+                    live2dContainer._model.motion('null');
+                } catch(e) {}
+            }
             
             // 创建音符
             for (let i = 0; i < 3; i++) {
@@ -980,7 +997,7 @@
         document.addEventListener('keydown', function(e) {
             if (e.code === 'Space') {
                 e.preventDefault();
-                interactiveMiku.click();
+                mikuCharacter.click();
             }
         });
 
@@ -1012,6 +1029,40 @@
                 closeLightbox();
             }
         });
+
+        // Live2D 初音模型初始化
+        (async function initLive2D() {
+            const container = document.getElementById('live2d-container');
+            if (!container) return;
+            
+            const size = container.clientWidth || 256;
+            
+            const app = new PIXI.Application({
+                width: size,
+                height: size,
+                backgroundAlpha: 0,
+                antialias: true,
+                resolution: window.devicePixelRatio || 1,
+                autoDensity: true
+            });
+            
+            container.appendChild(app.view);
+            
+            try {
+                const model = await PIXI.live2d.Live2DModel.from(
+                    'https://cdn.jsdelivr.net/npm/live2d-widget-model-miku@1.0.5/assets/miku.model.json'
+                );
+                
+                model.anchor.set(0.5, 0.5);
+                model.position.set(size / 2, size / 2 + 15);
+                model.scale.set(0.45);
+                
+                app.stage.addChild(model);
+                container._model = model;
+            } catch (err) {
+                console.warn('Live2D模型加载失败:', err);
+            }
+        })();
     </script>
 </body>
 </html>
