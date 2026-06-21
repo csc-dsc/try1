@@ -3,235 +3,1330 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>关于我 | GOD·神</title>
-  <link rel="stylesheet" href="index.css">
+  <title>关于我</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #f0f4ff;
+      --card: rgba(255, 255, 255, 0.85);
+      --card-border: rgba(79, 140, 255, 0.15);
+      --accent: #4f8cff;
+      --accent-2: #6c5ce7;
+      --green: #00b894;
+      --orange: #e17055;
+      --pink: #fd79a8;
+      --text: #1e293b;
+      --text-dim: #475569;
+      --text-muted: #94a3b8;
+      --border: rgba(79, 140, 255, 0.12);
+      --shadow: 0 4px 24px rgba(79,140,255,0.08);
+      --shadow-hover: 0 8px 40px rgba(79,140,255,0.15);
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans SC", "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #e8f0fe 0%, #f0f4ff 40%, #e8f5e9 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ===== Canvas Background ===== */
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .bg-gradient {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 600px 400px at 20% 20%, rgba(79,140,255,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 500px 500px at 80% 80%, rgba(108,92,231,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 300px at 60% 10%, rgba(253,121,168,0.05) 0%, transparent 70%);
+    }
+
+    /* ===== Scroll Progress ===== */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--pink));
+      z-index: 1000;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===== Back button ===== */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(20px);
+      transition: all 0.3s;
+      margin-bottom: 1.5rem;
+    }
+    .back-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(79,140,255,0.2);
+    }
+
+    /* ===== Hero / Profile Card ===== */
+    .hero {
+      position: relative;
+      padding: 3rem 2.5rem;
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(24px);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: conic-gradient(from 0deg at 50% 50%,
+        transparent 0deg, rgba(79,140,255,0.04) 60deg,
+        transparent 120deg, rgba(108,92,231,0.04) 180deg,
+        transparent 240deg, rgba(253,121,168,0.04) 300deg,
+        transparent 360deg);
+      animation: heroRotate 20s linear infinite;
+    }
+
+    @keyframes heroRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .avatar-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid transparent;
+      background-image: linear-gradient(var(--bg), var(--bg)),
+                        linear-gradient(135deg, var(--accent), var(--accent-2), var(--pink));
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      box-shadow: 0 0 40px rgba(79,140,255,0.2);
+      animation: avatarFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes avatarFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .avatar-wrapper img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .avatar-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem; color: white;
+    }
+
+    .hero-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, #1e293b 0%, var(--accent) 50%, var(--accent-2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleShimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes titleShimmer {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2); }
+    }
+
+    .hero-subtitle {
+      color: var(--text-dim);
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .typed-wrap {
+      color: var(--accent);
+      font-size: 0.95rem;
+      font-style: italic;
+      min-height: 1.6em;
+      margin-bottom: 1.2rem;
+    }
+
+    .typed-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: text-bottom;
+      animation: blink 0.8s step-end infinite;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 0.7rem 0.4rem;
+      background: rgba(79,140,255,0.06);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.3s;
+    }
+
+    .stat-item:hover {
+      background: rgba(79,140,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .stat-item b {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--accent);
+    }
+
+    .stat-item span {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== SVG Decorations ===== */
+    .svg-deco {
+      position: absolute;
+      pointer-events: none;
+      opacity: 0.15;
+    }
+
+    .svg-deco-1 { top: -20px; right: -20px; width: 120px; height: 120px; animation: spinSlow 30s linear infinite; }
+    .svg-deco-2 { bottom: -10px; left: -10px; width: 80px; height: 80px; animation: spinSlow 25s linear infinite reverse; }
+
+    @keyframes spinSlow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* ===== Section Card ===== */
+    .section-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(24px);
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, rgba(79,140,255,0.03) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .section-card:hover {
+      border-color: rgba(79,140,255,0.3);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-icon {
+      width: 38px; height: 38px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: white;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .section-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
+    .section-header .en {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-left: auto;
+    }
+
+    /* ===== About Text ===== */
+    .about-text p {
+      color: var(--text-dim);
+      line-height: 1.9;
+      font-size: 0.92rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .about-text blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 0.8rem 1.2rem;
+      margin: 1rem 0;
+      background: #eff6ff;
+      border-radius: 0 12px 12px 0;
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.92rem;
+    }
+
+    .about-text .highlight {
+      display: inline;
+      background: linear-gradient(transparent 60%, rgba(79,140,255,0.2) 60%);
+      font-weight: 600;
+    }
+
+    /* ===== Skill Bars (Radial + Linear) ===== */
+    .skill-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-radial {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .radial-wrap {
+      position: relative;
+      width: 90px; height: 90px;
+    }
+
+    .radial-wrap svg {
+      width: 90px; height: 90px;
+      transform: rotate(-90deg);
+    }
+
+    .radial-track {
+      fill: none;
+      stroke: rgba(79,140,255,0.1);
+      stroke-width: 6;
+    }
+
+    .radial-fill {
+      fill: none;
+      stroke-width: 6;
+      stroke-linecap: round;
+      stroke-dasharray: 226.2;
+      stroke-dashoffset: 226.2;
+      transition: stroke-dashoffset 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      filter: drop-shadow(0 0 6px var(--accent));
+    }
+
+    .radial-fill.c1 { stroke: url(#grad1); }
+    .radial-fill.c2 { stroke: url(#grad2); }
+    .radial-fill.c3 { stroke: url(#grad3); }
+    .radial-fill.c4 { stroke: url(#grad4); }
+    .radial-fill.c5 { stroke: url(#grad5); }
+    .radial-fill.c6 { stroke: url(#grad6); }
+    .radial-fill.c7 { stroke: url(#grad7); }
+
+    .radial-pct {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .radial-label {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .skill-linear { margin-top: 0.5rem; }
+
+    .skill-item {
+      display: grid;
+      gap: 0.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+
+    .skill-label .name { color: var(--text-dim); }
+    .skill-label .pct { color: var(--text-muted); font-weight: 600; }
+
+    .skill-track {
+      height: 6px;
+      background: rgba(79,140,255,0.08);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+      width: 0;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    .skill-fill.re { background: linear-gradient(90deg, #4f8cff, #6c5ce7); color: #4f8cff; }
+    .skill-fill.pwn { background: linear-gradient(90deg, #e17055, #fd79a8); color: #e17055; }
+    .skill-fill.crypto { background: linear-gradient(90deg, #00b894, #55efc4); color: #00b894; }
+    .skill-fill.web { background: linear-gradient(90deg, #fdcb6e, #e17055); color: #fdcb6e; }
+    .skill-fill.tools { background: linear-gradient(90deg, #a29bfe, #6c5ce7); color: #a29bfe; }
+
+    /* ===== Tag Cloud ===== */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 500;
+      border: 1px solid;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .tag:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .tag.blue { background: #eff6ff; color: #3b82f6; border-color: #bfdbfe; }
+    .tag.purple { background: #f5f3ff; color: #7c3aed; border-color: #ddd6fe; }
+    .tag.green { background: #ecfdf5; color: #059669; border-color: #a7f3d0; }
+    .tag.orange { background: #fff7ed; color: #ea580c; border-color: #fed7aa; }
+    .tag.pink { background: #fdf2f8; color: #db2777; border-color: #fbcfe8; }
+    .tag.gray { background: #f8fafc; color: #475569; border-color: #e2e8f0; }
+
+    /* ===== Hobby Grid ===== */
+    .hobby-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .hobby-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.9rem 0.4rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .hobby-item:hover {
+      transform: translateY(-4px) scale(1.05);
+      background: #eff6ff;
+      border-color: var(--accent);
+      box-shadow: 0 8px 25px rgba(79,140,255,0.12);
+    }
+
+    .hobby-item .icon { font-size: 1.5rem; transition: transform 0.3s; }
+    .hobby-item:hover .icon { transform: scale(1.2) rotate(-5deg); }
+    .hobby-item .name { font-size: 0.72rem; color: var(--text-dim); font-weight: 500; }
+
+    .anime-section {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .anime-section p {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    .anime-section .label { color: var(--pink); font-weight: 600; }
+
+    /* ===== Tech Grid ===== */
+    .tech-group { margin-bottom: 1.2rem; }
+    .tech-group:last-child { margin-bottom: 0; }
+
+    .tech-group-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .tech-group-title .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      box-shadow: 0 0 8px currentColor;
+    }
+
+    /* ===== Timeline ===== */
+    .timeline {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0; top: 0.5rem; bottom: 0.5rem;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2), var(--pink));
+      border-radius: 1px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 1.2rem;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.55rem; top: 0.45rem;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 12px var(--accent);
+      animation: dotPulse 2s ease-in-out infinite;
+    }
+
+    .timeline-item:nth-child(2)::before { animation-delay: 0.3s; }
+    .timeline-item:nth-child(3)::before { animation-delay: 0.6s; }
+
+    @keyframes dotPulse {
+      0%, 100% { box-shadow: 0 0 4px var(--accent); }
+      50% { box-shadow: 0 0 16px var(--accent); }
+    }
+
+    .timeline-item h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-item h3 .badge {
+      display: inline-block;
+      padding: 0.12rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .badge.win { background: rgba(225,112,85,0.15); color: var(--orange); }
+    .badge.train { background: rgba(79,140,255,0.15); color: var(--accent); }
+    .badge.org { background: rgba(0,184,148,0.15); color: var(--green); }
+
+    .timeline-item p {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    .timeline-item ul { list-style: none; margin-top: 0.4rem; }
+
+    .timeline-item ul li {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      padding: 0.2rem 0 0.2rem 1rem;
+      position: relative;
+    }
+
+    .timeline-item ul li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    /* ===== Footer ===== */
+    .page-footer {
+      text-align: center;
+      padding: 2rem 0 1rem;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+    }
+
+    .page-footer a { color: var(--accent); text-decoration: none; }
+    .page-footer a:hover { text-decoration: underline; }
+
+    .footer-line {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      margin: 0 auto 1rem;
+    }
+
+    /* ===== Scroll Animations ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .scale-in {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .scale-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Stagger children */
+    .stagger > * { transition-delay: calc(var(--i, 0) * 0.06s); }
+
+    /* ===== Glow orbs ===== */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-orb-1 {
+      width: 300px; height: 300px;
+      background: rgba(79,140,255,0.08);
+      top: 10%; left: 5%;
+      animation: orbFloat1 12s ease-in-out infinite;
+    }
+    .glow-orb-2 {
+      width: 250px; height: 250px;
+      background: rgba(108,92,231,0.06);
+      bottom: 20%; right: 5%;
+      animation: orbFloat2 15s ease-in-out infinite;
+    }
+    .glow-orb-3 {
+      width: 200px; height: 200px;
+      background: rgba(253,121,168,0.05);
+      top: 50%; left: 60%;
+      animation: orbFloat3 18s ease-in-out infinite;
+    }
+
+    @keyframes orbFloat1 {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(30px, -40px); }
+      66% { transform: translate(-20px, 20px); }
+    }
+    @keyframes orbFloat2 {
+      0%, 100% { transform: translate(0, 0); }
+      33% { transform: translate(-40px, 30px); }
+      66% { transform: translate(20px, -20px); }
+    }
+    @keyframes orbFloat3 {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(-30px, -30px); }
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 700px) {
+      .container { padding: 1rem 0.8rem 2rem; }
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 2rem 1.2rem;
+      }
+      .avatar-wrapper { margin: 0 auto; width: 140px; height: 140px; }
+      .hero-title { font-size: 1.6rem; }
+      .typed-wrap { text-align: center; }
+      .section-card { padding: 1.3rem; }
+      .skill-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .hobby-grid { grid-template-columns: repeat(auto-fill, minmax(75px, 1fr)); }
+      .glow-orb { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      .skill-grid { grid-template-columns: 1fr 1fr; }
+      .radial-wrap { width: 72px; height: 72px; }
+      .radial-wrap svg { width: 72px; height: 72px; }
+    }
+  </style>
 </head>
-<body class="pond-page">
-  <canvas id="pondCanvas"></canvas>
+<body>
 
-  <div class="pond-title">—— 轻触荷叶，了解更多 ——</div>
+<!-- SVG Defs for radial gradients -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4f8cff"/>
+      <stop offset="100%" style="stop-color:#6c5ce7"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#6c5ce7"/>
+      <stop offset="100%" style="stop-color:#a29bfe"/>
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00b894"/>
+      <stop offset="100%" style="stop-color:#55efc4"/>
+    </linearGradient>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e17055"/>
+      <stop offset="100%" style="stop-color:#fd79a8"/>
+    </linearGradient>
+    <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fdcb6e"/>
+      <stop offset="100%" style="stop-color:#e17055"/>
+    </linearGradient>
+    <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a29bfe"/>
+      <stop offset="100%" style="stop-color:#6c5ce7"/>
+    </linearGradient>
+    <linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fd79a8"/>
+      <stop offset="100%" style="stop-color:#e84393"/>
+    </linearGradient>
+  </defs>
+</svg>
 
-  <div class="leaf" id="leaf0" style="top: 12%; left: 8%;">
-    <div class="leaf-visual"></div>
-    <span class="leaf-label">关于我</span>
-  </div>
+<!-- Background layers -->
+<canvas id="particles-canvas"></canvas>
+<div class="bg-gradient"></div>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+<div class="glow-orb glow-orb-3"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
 
-  <div class="leaf" id="leaf1" style="top: 40%; right: 6%;">
-    <div class="leaf-visual"></div>
-    <span class="leaf-label">兴趣</span>
-  </div>
+<div class="container">
+  <a href="index.html" class="back-btn fade-in">← 返回首页</a>
 
-  <div class="leaf" id="leaf2" style="bottom: 18%; left: 25%;">
-    <div class="leaf-visual"></div>
-    <span class="leaf-label">技术栈</span>
-  </div>
+  <!-- Hero -->
+  <div class="hero fade-in">
+    <!-- SVG Deco -->
+    <svg class="svg-deco svg-deco-1" viewBox="0 0 100 100">
+      <polygon points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5" fill="none" stroke="rgba(79,140,255,0.3)" stroke-width="1"/>
+      <polygon points="50,15 85,32.5 85,67.5 50,85 15,67.5 15,32.5" fill="none" stroke="rgba(108,92,231,0.2)" stroke-width="0.5"/>
+    </svg>
+    <svg class="svg-deco svg-deco-2" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(253,121,168,0.2)" stroke-width="0.8"/>
+      <circle cx="50" cy="50" r="30" fill="none" stroke="rgba(79,140,255,0.15)" stroke-width="0.5"/>
+    </svg>
 
-  <div class="lotus-burst" id="lotusBurst">
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-    <div class="lotus-petal"></div>
-  </div>
-
-  <div class="overlay" id="overlay">
-    <div class="content-card">
-      <button class="close-btn" id="closeBtn">&#x2715;</button>
-      <h2 id="cardTitle"></h2>
-      <div id="cardBody"></div>
+    <div class="avatar-wrapper">
+      <img src="image/isla.png" alt="avatar" onerror="this.parentElement.innerHTML='<div class=avatar-placeholder>⚡</div>'">
+    </div>
+    <div class="hero-content">
+      <div class="hero-title">ENTP · 探索者</div>
+      <p class="hero-subtitle">逆向工程 · 二进制安全 · CTF</p>
+      <div class="typed-wrap" id="typedTarget"></div>
+      <div class="hero-stats stagger">
+        <div class="stat-item" style="--i:0"><b>RE</b><span>主攻方向</span></div>
+        <div class="stat-item" style="--i:1"><b>CTF</b><span>逆向 + Crypto</span></div>
+        <div class="stat-item" style="--i:2"><b>Web</b><span>全栈开发</span></div>
+      </div>
     </div>
   </div>
 
-  <footer class="pond-footer">
-    <a href="index.html">&#x2190; 返回首页</a>
-  </footer>
+  <!-- About -->
+  <div class="section-card fade-in">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#4f8cff,#6c5ce7)">👤</div>
+      <h2>关于我</h2>
+      <span class="en">ABOUT</span>
+    </div>
+    <div class="about-text">
+      <p>略懂社交，喜欢新鲜知识，乐于尝试新事物。在逆向工程的世界里寻找逻辑之美，在 CTF 赛场上磨砺实战能力。</p>
+      <p>从 Web 入门转向二进制安全，在 0x401 新生赛中连续两个通宵啃下 5 道逆向题，新生赛一举 AK 逆向全赛道——发现自己真正热爱的是<span class="highlight">拆解底层逻辑</span>的快感。</p>
+      <blockquote>方向专一，拒绝泛学。锁定逆向赛道，长期高频专项训练。</blockquote>
+      <p>以逆向为主轴，同步了解 PWN（栈溢出/ROP）、Web（SQL注入/反序列化）、Crypto（TEA/AES/RSA），具备综合安全视野。同时在硬件维修、活动组织等方面保持热情，享受「动手解决问题」带来的成就感。</p>
+    </div>
+  </div>
 
-  <script>
-    const leafData = [
-      {
-        title: "\u5173\u4E8E\u6211",
-        body: '<p class="section-subtitle">ENTP \u00B7 \u63A2\u7D22\u8005</p><p>\u7565\u61C2\u793E\u4EA4\uFF0C\u559C\u6B22\u65B0\u9C9C\u77E5\u8BC6\uFF0C\u4E50\u4E8E\u5C1D\u8BD5\u65B0\u4E8B\u7269\u3002</p><blockquote>\u76F8\u4FE1\u81EA\u5DF1\uFF0C\u4FBF\u65E0\u4EBA\u53EF\u654C</blockquote>'
-      },
-      {
-        title: "\u5174\u8DA3\u7231\u597D",
-        body: '<div class="hobby-grid"><span>\u7FBD\u6BDB\u7403</span><span>\u7BEE\u7403</span><span>\u8DB3\u7403</span><span>\u5065\u8EAB</span><span>\u8DF3\u821E</span><span>\u957F\u8DD1</span><span>\u8C61\u68CB</span><span>\u56F4\u68CB</span><span>\u53CC\u622A\u68CD</span><span>\u9B54\u65B9</span><span>\u8774\u8776\u5200</span><span>\u9A91\u884C</span><span>\u8F6E\u6ED1</span></div><p class="hobby-note">\u4E8C\u6B21\u5143 \u00B7 \u8001\u756A \u00B7 V\u5708</p>'
-      },
-      {
-        title: "\u6280\u672F\u6808",
-        body: '<ul class="tech-list"><li><strong>RE\u5DE5\u7A0B</strong> \u2014 \u9006\u5411\u5206\u6790\u4E0E\u8C03\u8BD5</li><li><strong>\u5BC6\u7801\u5B66</strong> \u2014 \u4ECD\u5728\u7814\u7A76\u4E2D</li><li><strong>Web\u5F00\u53D1</strong> \u2014 HTML / CSS / JavaScript</li><li><strong>PHP</strong> \u2014 \u524D\u540E\u7AEF\u5F00\u53D1</li><li><strong>C++</strong> \u2014 \u6E38\u620F\u5F00\u53D1</li></ul>'
-      }
-    ];
+  <!-- Skills -->
+  <div class="section-card fade-in">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#e17055,#fd79a8)">📊</div>
+      <h2>技能图谱</h2>
+      <span class="en">SKILLS</span>
+    </div>
 
-    const canvas = document.getElementById("pondCanvas");
-    const ctx = canvas.getContext("2d");
-    let W, H, mouse = { x: -999, y: -999 }, ripples = [];
+    <div class="skill-grid" id="skillRadials">
+      <div class="skill-radial scale-in" style="--i:0">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c1" cx="40" cy="40" r="36" data-pct="35"/>
+          </svg>
+          <span class="radial-pct">35%</span>
+        </div>
+        <span class="radial-label">逆向工程</span>
+      </div>
+      <div class="skill-radial scale-in" style="--i:1">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c2" cx="40" cy="40" r="36" data-pct="20"/>
+          </svg>
+          <span class="radial-pct">20%</span>
+        </div>
+        <span class="radial-label">Android 逆向</span>
+      </div>
+      <div class="skill-radial scale-in" style="--i:2">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c3" cx="40" cy="40" r="36" data-pct="10"/>
+          </svg>
+          <span class="radial-pct">10%</span>
+        </div>
+        <span class="radial-label">脱壳与反调试</span>
+      </div>
+      <div class="skill-radial scale-in" style="--i:3">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c4" cx="40" cy="40" r="36" data-pct="10"/>
+          </svg>
+          <span class="radial-pct">10%</span>
+        </div>
+        <span class="radial-label">PWN</span>
+      </div>
+      <div class="skill-radial scale-in" style="--i:4">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c5" cx="40" cy="40" r="36" data-pct="10"/>
+          </svg>
+          <span class="radial-pct">10%</span>
+        </div>
+        <span class="radial-label">密码学</span>
+      </div>
+      <div class="skill-radial scale-in" style="--i:5">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c6" cx="40" cy="40" r="36" data-pct="5"/>
+          </svg>
+          <span class="radial-pct">5%</span>
+        </div>
+        <span class="radial-label">Web 安全</span>
+      </div>
+      <div class="skill-radial scale-in" style="--i:6">
+        <div class="radial-wrap">
+          <svg viewBox="0 0 80 80">
+            <circle class="radial-track" cx="40" cy="40" r="36"/>
+            <circle class="radial-fill c7" cx="40" cy="40" r="36" data-pct="10"/>
+          </svg>
+          <span class="radial-pct">10%</span>
+        </div>
+        <span class="radial-label">编程 & 工具链</span>
+      </div>
+    </div>
 
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
+    <div class="skill-linear">
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">逆向工程 (IDA / Ghidra / x64dbg)</span><span class="pct">35%</span></div>
+        <div class="skill-track"><div class="skill-fill re" data-width="35%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">Android 逆向 (APK / Smali / JNI / Frida)</span><span class="pct">20%</span></div>
+        <div class="skill-track"><div class="skill-fill re" data-width="20%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">脱壳与反调试 (UPX / DEX dump)</span><span class="pct">10%</span></div>
+        <div class="skill-track"><div class="skill-fill tools" data-width="10%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">PWN (ret2libc / ROP)</span><span class="pct">10%</span></div>
+        <div class="skill-track"><div class="skill-fill pwn" data-width="10%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">密码学 (TEA / AES / SM4 / RSA)</span><span class="pct">10%</span></div>
+        <div class="skill-track"><div class="skill-fill crypto" data-width="10%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">Web 安全 (SQL注入 / 反序列化)</span><span class="pct">5%</span></div>
+        <div class="skill-track"><div class="skill-fill web" data-width="5%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-label"><span class="name">编程 & 工具链 (Python / C++ / Frida)</span><span class="pct">10%</span></div>
+        <div class="skill-track"><div class="skill-fill tools" data-width="10%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tech Tags -->
+  <div class="section-card fade-in">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#00b894,#55efc4)">🛠</div>
+      <h2>技术栈</h2>
+      <span class="en">TECH STACK</span>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#4f8cff;color:#4f8cff"></span>逆向工程</div>
+      <div class="tag-cloud stagger">
+        <span class="tag blue" style="--i:0">IDA Pro</span>
+        <span class="tag blue" style="--i:1">Ghidra</span>
+        <span class="tag blue" style="--i:2">x64dbg</span>
+        <span class="tag purple" style="--i:3">ARM64</span>
+        <span class="tag purple" style="--i:4">Mach-O</span>
+        <span class="tag purple" style="--i:5">ELF</span>
+        <span class="tag purple" style="--i:6">PE</span>
+        <span class="tag blue" style="--i:7">花指令绕过</span>
+        <span class="tag blue" style="--i:8">反调试绕过</span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#fd79a8;color:#fd79a8"></span>Android 逆向</div>
+      <div class="tag-cloud stagger">
+        <span class="tag pink" style="--i:0">APK 结构解析</span>
+        <span class="tag pink" style="--i:1">Smali / Dalvik</span>
+        <span class="tag pink" style="--i:2">JNI</span>
+        <span class="tag pink" style="--i:3">Frida Hook</span>
+        <span class="tag pink" style="--i:4">DEX dump</span>
+        <span class="tag pink" style="--i:5">jadx</span>
+        <span class="tag pink" style="--i:6">JEB</span>
+        <span class="tag pink" style="--i:7">panda-dex-dumper</span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#e17055;color:#e17055"></span>PWN / 二进制漏洞</div>
+      <div class="tag-cloud stagger">
+        <span class="tag orange" style="--i:0">栈溢出</span>
+        <span class="tag orange" style="--i:1">ret2libc</span>
+        <span class="tag orange" style="--i:2">ret2text</span>
+        <span class="tag orange" style="--i:3">ret2shellcode</span>
+        <span class="tag orange" style="--i:4">ROP</span>
+        <span class="tag orange" style="--i:5">Payload 构造</span>
+        <span class="tag orange" style="--i:6">cdecl / stdcall / fastcall</span>
+        <span class="tag orange" style="--i:7">PWN 出题</span>
+        <span class="tag orange" style="--i:8">ret2syscall</span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#00b894;color:#00b894"></span>密码学</div>
+      <div class="tag-cloud stagger">
+        <span class="tag green" style="--i:0">TEA / XTEA</span>
+        <span class="tag green" style="--i:1">AES-CBC</span>
+        <span class="tag green" style="--i:2">SM4-ECB</span>
+        <span class="tag green" style="--i:3">RC4</span>
+        <span class="tag green" style="--i:4">RSA (共模/维纳/低指数)</span>
+        <span class="tag green" style="--i:5">古典密码</span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#6c5ce7;color:#6c5ce7"></span>编程 & 工具</div>
+      <div class="tag-cloud stagger">
+        <span class="tag purple" style="--i:0">Python</span>
+        <span class="tag purple" style="--i:1">C / C++</span>
+        <span class="tag purple" style="--i:2">PHP</span>
+        <span class="tag blue" style="--i:3">HTML / CSS / JS</span>
+        <span class="tag gray" style="--i:4">Git</span>
+        <span class="tag gray" style="--i:5">VS Code</span>
+        <span class="tag gray" style="--i:6">WSL</span>
+        <span class="tag gray" style="--i:7">Unicorn</span>
+        <span class="tag gray" style="--i:8">CyberChef</span>
+        <span class="tag gray" style="--i:9">Burp Suite</span>
+        <span class="tag gray" style="--i:10">gmssl</span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#fdcb6e;color:#fdcb6e"></span>Web 安全</div>
+      <div class="tag-cloud stagger">
+        <span class="tag orange" style="--i:0">SQL 注入</span>
+        <span class="tag orange" style="--i:1">文件上传</span>
+        <span class="tag orange" style="--i:2">命令执行</span>
+        <span class="tag orange" style="--i:3">PHP 反序列化</span>
+        <span class="tag orange" style="--i:4">Cookies 利用</span>
+      </div>
+    </div>
+
+    <div class="tech-group">
+      <div class="tech-group-title"><span class="dot" style="background:#94a3b8;color:#94a3b8"></span>脱壳与保护</div>
+      <div class="tag-cloud stagger">
+        <span class="tag gray" style="--i:0">UPX 脱壳</span>
+        <span class="tag gray" style="--i:1">UPX 魔改变种</span>
+        <span class="tag gray" style="--i:2">PyInstaller 提取</span>
+        <span class="tag gray" style="--i:3">360 加固原理</span>
+        <span class="tag gray" style="--i:4">内存 DEX dump</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hobbies -->
+  <div class="section-card fade-in">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#fdcb6e,#e17055)">🎯</div>
+      <h2>兴趣爱好</h2>
+      <span class="en">HOBBIES</span>
+    </div>
+    <div class="hobby-grid stagger">
+      <div class="hobby-item" style="--i:0"><span class="icon">🏸</span><span class="name">羽毛球</span></div>
+      <div class="hobby-item" style="--i:1"><span class="icon">🏀</span><span class="name">篮球</span></div>
+      <div class="hobby-item" style="--i:2"><span class="icon">🏓</span><span class="name">乒乓球</span></div>
+      <div class="hobby-item" style="--i:3"><span class="icon">💪</span><span class="name">健身</span></div>
+      <div class="hobby-item" style="--i:4"><span class="icon">🏃</span><span class="name">长跑</span></div>
+      <div class="hobby-item" style="--i:5"><span class="icon">🚴</span><span class="name">骑行</span></div>
+      <div class="hobby-item" style="--i:6"><span class="icon">🛼</span><span class="name">轮滑</span></div>
+      <div class="hobby-item" style="--i:7"><span class="icon">🎸</span><span class="name">吉他</span></div>
+      <div class="hobby-item" style="--i:8"><span class="icon">💃</span><span class="name">舞蹈</span></div>
+      <div class="hobby-item" style="--i:9"><span class="icon">🥋</span><span class="name">双截棍</span></div>
+      <div class="hobby-item" style="--i:10"><span class="icon">🔪</span><span class="name">蝴蝶刀</span></div>
+      <div class="hobby-item" style="--i:11"><span class="icon">🧊</span><span class="name">魔方</span></div>
+      <div class="hobby-item" style="--i:12"><span class="icon">♟️</span><span class="name">象棋</span></div>
+      <div class="hobby-item" style="--i:13"><span class="icon">⚫</span><span class="name">围棋</span></div>
+      <div class="hobby-item" style="--i:14"><span class="icon">🤸</span><span class="name">街健</span></div>
+    </div>
+    <div class="anime-section">
+      <p><span class="label">二次元：</span>新海诚 · V圈 · 超级喜欢 Miku · 之前喜欢玩 pjsk（音游）</p>
+      <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-muted)">在学院迎新晚会上同时表演了吉他 solo、舞蹈队群舞和班级合唱——三件事发生在同一天。</p>
+    </div>
+  </div>
+
+  <!-- Competition -->
+  <div class="section-card fade-in">
+    <div class="section-header">
+      <div class="section-icon" style="background:linear-gradient(135deg,#6c5ce7,#a29bfe)">🏆</div>
+      <h2>竞赛与实践</h2>
+      <span class="en">EXPERIENCE</span>
+    </div>
+    <div class="timeline stagger">
+      <div class="timeline-item" style="--i:0">
+        <h3>0x401 新生赛 <span class="badge win">逆向方向</span></h3>
+        <p>连续奋战两个通宵，独立完成 5 道逆向题，涵盖脱壳、算法还原、逻辑分析等题型。</p>
+      </div>
+      <div class="timeline-item" style="--i:1">
+        <h3>CTF 新生赛 <span class="badge win">二等奖</span></h3>
+        <p>AK 逆向方向全部赛题。同时参与 Web / Crypto / Misc 多方向解题，Crypto 方向独立解出 RSA 系列、SM4、AES、古典密码等全部密码题。赛后题解占团队全部 wp 的一半。</p>
+      </div>
+      <div class="timeline-item" style="--i:2">
+        <h3>逆向方向专项训练 <span class="badge train">日常</span></h3>
+        <ul>
+          <li>Jar / APK 逆向全流程：jadx 反编译 → Smali 字节码 → Frida 动态 Hook</li>
+          <li>Frida Java 层方法 Hook + Native so 层导出函数拦截与参数追踪</li>
+          <li>加壳 APK 运行时内存 DEX dump 技术</li>
+          <li>Unicorn 对 so 中关键算法片段进行隔离仿真还原</li>
+        </ul>
+      </div>
+      <div class="timeline-item" style="--i:3">
+        <h3>密码学积累 <span class="badge train">日常</span></h3>
+        <p>能独立识别 TEA 魔数 0x9E3779B9、AES S 盒、SM4 密钥结构、RC4 初始化模式，并编写对应的解密还原脚本。</p>
+      </div>
+      <div class="timeline-item" style="--i:4">
+        <h3>讲座统筹 <span class="badge org">组织</span></h3>
+        <p>组织 15 人志愿者团队，服务约 70 名同学。负责活动策划、现场执行与复盘，锻炼了技术分享与团队协作能力。</p>
+      </div>
+      <div class="timeline-item" style="--i:5">
+        <h3>义务维修 <span class="badge org">组织</span></h3>
+        <p>在飞扬俱乐部深度参与三场大型校园义务维修活动，在一线服务师生的同时帮助新同学熟悉维修流程。</p>
+      </div>
+      <div class="timeline-item" style="--i:6">
+        <h3>个人技术站点 <span class="badge train">项目</span></h3>
+        <p>搭建并部署个人网站（csc-dsc.github.io/try1/），积累飞书笔记，涵盖 APK 脱壳、Frida Hook 实战、算法还原等主题。同步开发 revers.college 靶场（仿 pwn.college）。</p>
+      </div>
+      <div class="timeline-item" style="--i:7">
+        <h3>PWN 出题与教学 <span class="badge train">项目</span></h3>
+        <p>独立编写 PWN 入门教程（出题人视角），覆盖栈溢出 → ret2text → ret2shellcode → ret2syscall → ret2libc 全链路。自出一整套从易到难的 PWN 训练题，含加密算法 + ROP 混合利用题型。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-line"></div>
+    <p>热爱逆向，踏实自律 · <a href="index.html">返回首页</a></p>
+  </div>
+</div>
+
+<!-- Typed.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script>
+// ===== Typed.js =====
+new Typed('#typedTarget', {
+  strings: [
+    '「代码即语言，每一段二进制背后都藏着故事」',
+    '「方向专一，拒绝泛学，锁定逆向赛道」',
+    '「拆解底层逻辑，享受逆向的快感」'
+  ],
+  typeSpeed: 50,
+  backSpeed: 30,
+  loop: true,
+  showCursor: true,
+  cursorChar: '|'
+});
+
+// ===== Canvas Particle Network =====
+(function() {
+  const canvas = document.getElementById('particles-canvas');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [], mouse = { x: null, y: null };
+  const PARTICLE_COUNT = 80;
+  const CONNECT_DIST = 120;
+  const MOUSE_RADIUS = 150;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.r = Math.random() * 2 + 0.5;
+      this.alpha = Math.random() * 0.5 + 0.2;
     }
-    resize();
-    window.addEventListener("resize", resize);
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > w) this.vx *= -1;
+      if (this.y < 0 || this.y > h) this.vy *= -1;
 
-    function addRipple(x, y) {
-      ripples.push({ x, y, r: 2, a: 0.5, max: 80 + Math.random() * 40 });
-    }
-
-    let time = 0;
-
-    function draw() {
-      time += 0.008;
-      ctx.clearRect(0, 0, W, H);
-
-      let grad = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, W * 0.7);
-      grad.addColorStop(0, "#0d3d4a");
-      grad.addColorStop(0.6, "#082838");
-      grad.addColorStop(1, "#041620");
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-      for (let y = 0; y < H; y += 5) {
-        let off = Math.sin(y * 0.008 + time * 0.6) * 0.4;
-        ctx.globalAlpha = 0.02 + off * 0.015;
-        ctx.fillStyle = "#aaddff";
-        ctx.fillRect(0, y, W, 1);
-      }
-      ctx.globalAlpha = 1;
-
-      if (mouse.x > 0) {
-        let dist = Math.hypot(mouse.x - W / 2, mouse.y - H / 2);
-        for (let i = -1; i <= 1; i++) {
-          for (let j = -1; j <= 1; j++) {
-            if (i === 0 && j === 0) continue;
-            let dx = mouse.x + i * W * 0.6;
-            let dy = mouse.y + j * H * 0.6;
-            let d = Math.hypot(dx - W / 2, dy - H / 2);
-            if (d < W * 0.5) {
-              let alpha = (1 - d / (W * 0.5)) * 0.025;
-              ctx.globalAlpha = alpha;
-              ctx.fillStyle = "#88ddcc";
-              ctx.beginPath();
-              ctx.arc(dx + Math.sin(time * 0.5 + i) * 20, dy + Math.cos(time * 0.3 + j) * 20, 30 + Math.sin(time + i + j) * 10, 0, Math.PI * 2);
-              ctx.fill();
-            }
-          }
+      if (mouse.x !== null) {
+        const dx = mouse.x - this.x, dy = mouse.y - this.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS) {
+          const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.02;
+          this.vx -= dx * force;
+          this.vy -= dy * force;
         }
-        ctx.globalAlpha = 1;
       }
 
-      for (let i = ripples.length - 1; i >= 0; i--) {
-        let rp = ripples[i];
-        let progress = rp.r / rp.max;
-        ctx.beginPath();
-        ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(150, 220, 255, ${rp.a * 0.35})`;
-        ctx.lineWidth = 1.8;
-        ctx.stroke();
-        if (rp.r > 8) {
+      const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+      if (speed > 1.5) { this.vx *= 0.98; this.vy *= 0.98; }
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(79, 140, 255, ${this.alpha * 0.7})`;
+      ctx.fill();
+    }
+  }
+
+  for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => { p.update(); p.draw(); });
+
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT_DIST) {
           ctx.beginPath();
-          ctx.arc(rp.x, rp.y, rp.r * 0.65, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(150, 220, 255, ${rp.a * 0.18})`;
-          ctx.lineWidth = 1;
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(79, 140, 255, ${0.06 * (1 - dist / CONNECT_DIST)})`;
+          ctx.lineWidth = 0.5;
           ctx.stroke();
         }
-        rp.r += 0.7 + (1 - progress) * 0.6;
-        rp.a -= 0.006 + (1 - progress) * 0.004;
-        if (rp.a <= 0 || rp.r > rp.max) ripples.splice(i, 1);
       }
-
-      requestAnimationFrame(draw);
     }
-    draw();
 
-    canvas.addEventListener("mousemove", e => {
-      mouse.x = e.clientX;
-      mouse.y = e.clientY;
-      addRipple(e.clientX, e.clientY);
-    });
-
-    canvas.addEventListener("touchmove", e => {
-      let t = e.touches[0];
-      mouse.x = t.clientX;
-      mouse.y = t.clientY;
-      addRipple(t.clientX, t.clientY);
-    }, { passive: true });
-
-    const leaves = document.querySelectorAll(".leaf");
-    let leafAngles = [0, 0, 0];
-    let leafBob = [0, 0, 0];
-
-    leaves.forEach((leaf, i) => {
-      const v = leaf.querySelector(".leaf-visual");
-      leafBob[i] = Math.random() * Math.PI * 2;
-
-      function updateLeaf() {
-        if (!leaf.classList.contains("active")) {
-          let dx = mouse.x - (leaf.offsetLeft + 65);
-          let dy = mouse.y - (leaf.offsetTop + 57);
-          let tiltX = Math.max(-8, Math.min(8, dy * 0.015));
-          let tiltY = Math.max(-8, Math.min(8, -dx * 0.015));
-          leafBob[i] += 0.02;
-          let bobY = Math.sin(leafBob[i]) * 2;
-          v.style.transform = `perspective(400px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(${bobY}px)`;
+    if (mouse.x !== null) {
+      particles.forEach(p => {
+        const dx = mouse.x - p.x, dy = mouse.y - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(mouse.x, mouse.y);
+          ctx.strokeStyle = `rgba(108, 92, 231, ${0.1 * (1 - dist / MOUSE_RADIUS)})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
         }
-        requestAnimationFrame(updateLeaf);
-      }
-      updateLeaf();
-    });
-
-    const overlay = document.getElementById("overlay");
-    const cardTitle = document.getElementById("cardTitle");
-    const cardBody = document.getElementById("cardBody");
-    const closeBtn = document.getElementById("closeBtn");
-    const lotusBurst = document.getElementById("lotusBurst");
-
-    function showContent(index) {
-      leaves.forEach(l => l.classList.remove("active"));
-      leaves[index].classList.add("active");
-
-      let leafEl = leaves[index];
-      let lx = leafEl.offsetLeft + 65;
-      let ly = leafEl.offsetTop + 57;
-      lotusBurst.style.left = lx + "px";
-      lotusBurst.style.top = ly + "px";
-      lotusBurst.classList.remove("active");
-      void lotusBurst.offsetWidth;
-      lotusBurst.classList.add("active");
-
-      cardTitle.textContent = leafData[index].title;
-      cardBody.innerHTML = leafData[index].body;
-      overlay.classList.add("open");
+      });
     }
 
-    leaves.forEach((leaf, i) => {
-      leaf.addEventListener("click", () => showContent(i));
-      leaf.addEventListener("touchend", (e) => {
-        e.preventDefault();
-        showContent(i);
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+// ===== Scroll Reveal =====
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// ===== Skill Bars Animation =====
+const skillObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.skill-fill').forEach(bar => {
+        bar.style.width = bar.dataset.width;
       });
-    });
+    }
+  });
+}, { threshold: 0.2 });
 
-    closeBtn.addEventListener("click", () => {
-      overlay.classList.remove("open");
-      leaves.forEach(l => l.classList.remove("active"));
-    });
+document.querySelectorAll('.skill-linear').forEach(el => skillObserver.observe(el));
 
-    overlay.addEventListener("click", (e) => {
-      if (e.target === overlay) {
-        overlay.classList.remove("open");
-        leaves.forEach(l => l.classList.remove("active"));
-      }
-    });
+// ===== Radial Skill Animation =====
+const CIRCUMFERENCE = 2 * Math.PI * 36; // r=36
+const radialObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.radial-fill').forEach(circle => {
+        const pct = parseInt(circle.dataset.pct);
+        const offset = CIRCUMFERENCE * (1 - pct / 100);
+        circle.style.strokeDashoffset = offset;
+      });
+    }
+  });
+}, { threshold: 0.3 });
 
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") {
-        overlay.classList.remove("open");
-        leaves.forEach(l => l.classList.remove("active"));
-      }
-    });
-  </script>
+document.querySelectorAll('#skillRadials').forEach(el => radialObserver.observe(el));
+
+// ===== Scroll Progress Bar =====
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById('scrollProgress').style.width = progress + '%';
+});
+
+// ===== Stagger delay assignment =====
+document.querySelectorAll('.stagger > *').forEach((el, i) => {
+  el.style.setProperty('--i', i);
+});
+</script>
+
+<!-- ===== 小魔女 Live2D 看板娘 ===== -->
+<!-- 项目: stevenjoezhang/live2d-widget (10.8k stars) -->
+<!-- 模型: xiazeyu/live2d-widget-models/live2d-widget-model-miku -->
+
+<script src="https://cdn.jsdelivr.net/npm/live2d-widgets@1.0.1/dist/autoload.js"></script>
+<script>
+initWidget({
+  waifuPath: "live2d/model_list.json",
+  cdnPath: "https://cdn.jsdelivr.net/gh/xiazeyu/live2d-widget-models@master/packages/live2d-widget-model-miku/",
+  modelId: 0,
+  drag: true,
+  tools: ["hitokoto", "switch-model", "switch-display", "photo", "about"],
+  logLevel: "error"
+});
+</script>
+
 </body>
 </html>
