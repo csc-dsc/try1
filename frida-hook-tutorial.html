@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>从了解 Hook 到全方面会用 Hook ———— 逆向进阶篇</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/c.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/nasm.min.js"></script>
+<script>hljs.highlightAll();</script>
+<style>
+:root {
+  --bg: #f8f9fa;
+  --bg2: #ffffff;
+  --bg3: #f0f2f5;
+  --border: #e1e4e8;
+  --text: #24292e;
+  --text2: #586069;
+  --accent: #0366d6;
+  --accent2: #0550ae;
+  --green: #22863a;
+  --orange: #d18616;
+  --purple: #6f42c1;
+  --red: #cf222e;
+  --cyan: #1b7c83;
+  --shadow: rgba(0,0,0,.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:24px; }
+body {
+  font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.8;
+}
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:#c1c7cd; border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:#a0a7af; }
+
+.main { max-width:960px; margin:0 auto; }
+.content {
+  max-width:880px; margin:0 auto; padding:48px 48px 120px;
+}
+
+h1 { font-size:30px; font-weight:700; margin:44px 0 14px; padding-bottom:10px; border-bottom:2px solid var(--accent); color:var(--accent2); }
+h1:first-of-type { margin-top:0; }
+h2 { font-size:22px; font-weight:600; margin:32px 0 10px; color:var(--accent); }
+h3 { font-size:17px; font-weight:600; margin:22px 0 8px; color:var(--text); }
+h4 { font-size:15px; font-weight:600; margin:14px 0 6px; color:var(--orange); }
+p { margin:8px 0; }
+ul, ol { margin:6px 0 6px 20px; }
+li { margin:3px 0; }
+strong { color:var(--text); }
+code {
+  font-family:'JetBrains Mono','Fira Code',monospace; font-size:13.5px;
+  background:#eff1f3; color:#d73a49; padding:2px 7px; border-radius:4px;
+}
+pre { margin:12px 0; border-radius:8px; overflow:hidden; position:relative; border:1px solid var(--border); }
+pre code { background:none !important; color:inherit; padding:0; font-size:13px; }
+.hljs { background:var(--bg3) !important; padding:16px 20px !important; }
+
+blockquote {
+  border-left:4px solid var(--accent); background:var(--bg3);
+  padding:10px 16px; margin:12px 0; border-radius:0 6px 6px 0; color:var(--text2);
+}
+
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; border-radius:6px; overflow:hidden; }
+th, td { padding:8px 14px; border:1px solid var(--border); text-align:left; }
+th { background:var(--bg3); color:var(--accent); font-weight:600; }
+td { background:var(--bg2); }
+
+hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
+
+.info { background:#ddf4ff; border:1px solid #b8e1ff; border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--text); }
+.warn { background:#fff8c5; border:1px solid #f0d87e; border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--text); }
+.tip { background:#dcffe4; border:1px solid #b4e5c4; border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--text); }
+.dng { color:var(--red); font-size:14px; }
+
+@media(max-width:768px) {
+  .content { padding:24px 16px 80px; }
+}
+
+.hero {
+  text-align:center; padding:48px 0 36px;
+}
+.hero h1 { font-size:36px; border:none; margin:0; padding:0; }
+.hero p { color:var(--text2); font-size:15px; margin-top:8px; }
+.hero .badge {
+  display:inline-block; background:var(--bg2); border:1px solid var(--border);
+  padding:3px 14px; border-radius:20px; font-size:12px; color:var(--text2); margin:3px;
+}
+.hero .badge:hover { border-color:var(--accent); color:var(--accent); }
+
+.toc { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:16px 24px; margin:24px 0; box-shadow:0 1px 4px var(--shadow); }
+.toc h3 { margin:0 0 10px; color:var(--accent); font-size:16px; }
+.toc a { color:var(--text2); text-decoration:none; font-size:14px; display:block; padding:2px 0; }
+.toc a:hover { color:var(--accent); }
+.toc .l2 { padding-left:20px; font-size:13px; }
+.toc .l3 { padding-left:40px; font-size:12.5px; }
+
+.author-note {
+  background:linear-gradient(135deg,#ddf4ff,#e8f5e9); border:1px solid #b8e1ff;
+  border-radius:10px; padding:20px 24px; margin:24px 0;
+}
+.author-note strong { color:var(--accent); }
+
+.rating { display:inline-block; font-size:13px; padding:2px 10px; border-radius:4px; margin:4px 0; }
+.rating-easy { background:#dcffe4; color:#22863a; }
+.rating-mid { background:#fff8c5; color:#d18616; }
+.rating-hard { background:#ffeef0; color:#cf222e; }
+
+.layer-badge {
+  display:inline-block; font-size:12px; font-weight:600; padding:2px 10px;
+  border-radius:4px; margin-right:6px;
+}
+.layer-3 { background:#dcffe4; color:#22863a; }
+.layer-0 { background:#ddf4ff; color:#0366d6; }
+.layer-m1 { background:#f3e8ff; color:#6f42c1; }
+.layer-m2 { background:#ffeef0; color:#cf222e; }
+
+.diff-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; }
+.diff-col { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:12px; }
+.diff-col h4 { margin:0 0 6px; }
+</style>
+</head>
+<body>
+
+<div class="main">
+<div class="content">
+
+<div class="hero">
+  <h1>从了解 Hook 到全方面会用 Hook</h1>
+  <p>逆向进阶篇 — 从 Ring 3 到 Ring -2 的 Hook 技术全景</p>
+  <div>
+    <span class="badge">IAT Hook</span>
+    <span class="badge">Inline Hook</span>
+    <span class="badge">SSDT Hook</span>
+    <span class="badge">EPT Hook</span>
+    <span class="badge">SMM Rootkit</span>
+    <span class="badge">PatchGuard</span>
+  </div>
+</div>
+
+
+<div class="author-note">
+<strong>为什么需要理解 Hook</strong><br><br>
+做逆向的，天天都在跟 Hook 打交道。反调试器挂了一大堆钩子等你踩，杀软在各种路径上插监控，游戏反作弊更是恨不得在每一个 API 上铺一圈钩网。你搞不明白它在哪钩的、怎么钩的，你就绕不过去。<br><br>
+Hook 归根到底就一件事：让一段正常的代码，先经过你的代码再继续跑。所有花样都是这个本质的变种：<br><br>
+改指针 — IAT、VTable、SSDT，改表里指向的函数地址<br>
+改指令 — 函数开头写个 JMP，跳到自己的 handler<br>
+借硬件 — EPT、SMM，在最底层拦截连操作系统都不知道<br><br>
+下面按权限从低到高往上刨。读到每个技术的时候可以想一个问题：这个 Hook 谁能发现？发现它要花多大代价？
+</div>
+
+<div style="padding: 24px; background: #f8f9fa; border-radius: 10px; margin: 32px 0;">
+<h3 style="margin-top:0;">Hook 技术演进时间线</h3>
+<div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:12px;">
+<div style="background:var(--bg2); border-radius:8px; padding:12px 16px; border-left:3px solid #0366d6;">
+<h4 style="margin:0 0 8px; font-size:14px;">1990s 起步期</h4>
+<ul style="margin:0; font-size:13px;">
+<li>IAT/EAT Hook 出现（PE 标准化后）</li>
+<li>Windows 9x VxD Hook</li>
+<li>API Monitor 跟踪</li>
+</ul>
+</div>
+<div style="background:var(--bg2); border-radius:8px; padding:12px 16px; border-left:3px solid #d18616;">
+<h4 style="margin:0 0 8px; font-size:14px;">2000s 爆发期</h4>
+<ul style="margin:0; font-size:13px;">
+<li>SSDT Hook 成 Rootkit 标配</li>
+<li>Inline Hook（Detours）</li>
+<li>DKOM 隐藏进程/驱动</li>
+<li>用户态 Rootkit 组合拳</li>
+</ul>
+</div>
+<div style="background:var(--bg2); border-radius:8px; padding:12px 16px; border-left:3px solid #cf222e;">
+<h4 style="margin:0 0 8px; font-size:14px;">2010s 对抗期</h4>
+<ul style="margin:0; font-size:13px;">
+<li>PatchGuard 封杀直接修改</li>
+<li>Callback/Minifilter 成 EDR 主流</li>
+<li>EPT/Hypervisor 技术出现</li>
+<li>BYOVD 成为新入口</li>
+</ul>
+</div>
+<div style="background:var(--bg2); border-radius:8px; padding:12px 16px; border-left:3px solid #22863a;">
+<h4 style="margin:0 0 8px; font-size:14px;">2020s 隐蔽期</h4>
+<ul style="margin:0; font-size:13px;">
+<li>PTE/VMFUNC 走向实用</li>
+<li>Stealth Hypervisor 精细化</li>
+<li>DMA + FPGA 组合</li>
+<li>固件级威胁成焦点</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="toc">
+<h3>目录</h3>
+<a href="#l1">第一层：用户态 Hook（Ring 3）</a>
+<a href="#l2">第二层：内核态 Hook（Ring 0）— 传统手段</a>
+<a href="#l3">第三层：内核态 Hook（Ring 0）— 高级手段</a>
+<a href="#l4">第四层：Hypervisor 级 Hook（Ring -1）</a>
+<a href="#l5">第五层：硬件 / 固件级 Hook（Ring -2 及以下）</a>
+<a href="#end">结语</a>
+</div>
+
+
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  第一层：用户态 Hook（Ring 3）                              -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<h1 id="l1">第一层：用户态 Hook（Ring 3）</h1>
+
+<p>上手成本最低、用得最多的 Hook 方式。不用写驱动，不用跟内核的内存管理较劲，改指针或者改字节就能干活。</p>
+
+<p>OD 和 x64dbg 里下的每个断点，本质也是一种 Hook——把指令第一个字节改成 <code>0xCC</code>。道理是一样的，只是实现精细度不一样。</p>
+
+<hr>
+
+<!-- ───── 1.1 IAT Hook ───── -->
+<h2 id="l1-iat">1.1 IAT Hook（导入地址表 Hook）</h2>
+<h3>原理</h3>
+
+<p>PE 文件的导入表（IAT）里存着程序从外部 DLL 导入的函数地址。程序调 <code>MessageBoxA</code>，实际上是 call 到 IAT 表项指向的地址去执行。改掉这个表项，调用就跑到了自己的函数里。</p>
+
+<p>操作上就几步：找到目标 DLL 在 IAT 里的位置 → 找到目标函数条目 → 把地址换成自己的 Hook 函数 → 完事。</p>
+
+<div class="info">IAT Hook 只管通过 IAT 走的调用。程序要是自己拿 <code>GetProcAddress</code> 动态取地址再去 call，IAT Hook 管不着。</div>
+
+<h3>实现</h3>
+
+<pre><code class="language-c">#include &lt;windows.h&gt;
+#include &lt;stdint.h&gt;
+
+// 原始函数类型定义
+typedef int (WINAPI* fnMessageBoxA)(HWND, LPCSTR, LPCSTR, UINT);
+fnMessageBoxA OriginalMessageBoxA = NULL;
+
+// 我们自定义的 Hook 函数
+int WINAPI HookedMessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType) {
+    // 先执行自定义逻辑
+    MessageBoxA(NULL, "你的 MessageBox 被 Hook 了！", "Hook Alert", MB_OK);
+    // 调用原始函数
+    return OriginalMessageBoxA(hWnd, lpText, lpCaption, uType);
+}
+
+// 核心：替换 IAT 条目
+void InstallIatHook() {
+    ULONG_PTR imageBase = (ULONG_PTR)GetModuleHandleA(NULL);
+    PIMAGE_DOS_HEADER dosHeader = (PIMAGE_DOS_HEADER)imageBase;
+    PIMAGE_NT_HEADERS ntHeaders = (PIMAGE_NT_HEADERS)(imageBase + dosHeader->e_lfanew);
+    PIMAGE_IMPORT_DESCRIPTOR importDesc = (PIMAGE_IMPORT_DESCRIPTOR)(
+        imageBase + ntHeaders->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_IMPORT].VirtualAddress
+    );
+
+    while (importDesc->Name != 0) {
+        char* dllName = (char*)(imageBase + importDesc->Name);
+        if (lstrcmpiA(dllName, "user32.dll") == 0) {
+            PIMAGE_THUNK_DATA thunk = (PIMAGE_THUNK_DATA)(imageBase + importDesc->FirstThunk);
+            PIMAGE_THUNK_DATA origThunk = (PIMAGE_THUNK_DATA)(imageBase + importDesc->OriginalFirstThunk);
+            while (thunk->u1.Function != 0) {
+                PIMAGE_IMPORT_BY_NAME importByName = (PIMAGE_IMPORT_BY_NAME)(imageBase + origThunk->u1.AddressOfData);
+                if (strcmp((char*)importByName->Name, "MessageBoxA") == 0) {
+                    OriginalMessageBoxA = (fnMessageBoxA)thunk->u1.Function;
+                    DWORD oldProtect;
+                    VirtualProtect(&thunk->u1.Function, sizeof(PVOID), PAGE_READWRITE, &oldProtect);
+                    thunk->u1.Function = (ULONG_PTR)HookedMessageBoxA;
+                    VirtualProtect(&thunk->u1.Function, sizeof(PVOID), oldProtect, &oldProtect);
+                    break;
+                }
+                thunk++; origThunk++;
+            }
+            break;
+        }
+        importDesc++;
+    }
+}
+
+int main() {
+    InstallIatHook();
+    MessageBoxA(NULL, "这是一个测试", "原消息", MB_OK);
+    return 0;
+}
+</code></pre>
+
+<h3>注意点</h3>
+<ul>
+  <li><strong>OriginalFirstThunk vs FirstThunk</strong>：INT 存函数名/序号，一般不修改；IAT 存解析后的地址，Hook 改的就是这个。PE 加载器解析完 DLL 后把地址填进 IAT，所以动手脚也是在 IAT 上。</li>
+  <li><strong>VirtualProtect</strong>：IAT 所在页经常是只读的（ASLR 开启时尤为常见），写之前要改成 <code>PAGE_READWRITE</code>。</li>
+  <li><strong>局限</strong>：只管 IAT 路径的调用。Delay-Load DLL 和 <code>GetProcAddress</code> 动态解析都管不了。</li>
+</ul>
+
+<p>实战里遇到 IAT Hook 的情况其实不多——因为太容易被发现了。不过外挂和某些杀软早期版本用过，现在更多是作为理解 Hook 基础概念的切入点。</p>
+
+<h3>检测</h3>
+<p><span class="rating rating-easy">难度：★☆☆☆☆</span></p>
+<ul>
+  <li>拿内存里的 IAT 和磁盘文件里的 IAT 逐项对比，不一样就是被钩了</li>
+  <li>拿 <code>GetProcAddress</code> 取到真实地址，跟 IAT 表项里的值对一下</li>
+  <li>正常的反作弊和 EDR 都有现成的 IAT 扫描模块，基本是秒级检测</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.2 EAT Hook ───── -->
+<h2 id="l1-eat">1.2 EAT Hook（导出地址表 Hook）</h2>
+
+<h3>原理</h3>
+<p>IAT 是改调用方的表，EAT 是改被调用 DLL 的表。DLL 的导出地址表里存着所有对外暴露的函数地址，<code>GetProcAddress</code> 就是从这儿查的。把这个表里的地址改了，所有从该 DLL 拿地址的人都会中招。</p>
+
+<p>实际中 EAT Hook 比 IAT Hook 少见——因为大部分场景下改 IAT 就够了，改 EAT 的影响面太大，容易搞崩系统。但反过来讲，如果恶意软件想全局拦截某个 API（比如杀软的扫描函数），改 EAT 确实更彻底。</p>
+
+<h3>实现</h3>
+<pre><code class="language-c">void InstallEatHook() {
+    HMODULE hKernel32 = GetModuleHandleA("kernel32.dll");
+    if (!hKernel32) return;
+
+    ULONG_PTR imageBase = (ULONG_PTR)hKernel32;
+    PIMAGE_DOS_HEADER dos = (PIMAGE_DOS_HEADER)imageBase;
+    PIMAGE_NT_HEADERS nt = (PIMAGE_NT_HEADERS)(imageBase + dos->e_lfanew);
+    PIMAGE_EXPORT_DIRECTORY exports = (PIMAGE_EXPORT_DIRECTORY)(
+        imageBase + nt->OptionalHeader.DataDirectory[IMAGE_DIRECTORY_ENTRY_EXPORT].VirtualAddress
+    );
+
+    DWORD* addressOfFunctions = (DWORD*)(imageBase + exports->AddressOfFunctions);
+    DWORD* addressOfNames = (DWORD*)(imageBase + exports->AddressOfNames);
+    WORD* addressOfOrdinals = (WORD*)(imageBase + exports->AddressOfNameOrdinals);
+
+    for (DWORD i = 0; i &lt; exports->NumberOfNames; i++) {
+        char* funcName = (char*)(imageBase + addressOfNames[i]);
+        if (strcmp(funcName, "GetProcAddress") == 0) {
+            WORD ordinal = addressOfOrdinals[i];
+            DWORD* targetEntry = &addressOfFunctions[ordinal];
+            DWORD oldProtect;
+            VirtualProtect(targetEntry, sizeof(DWORD), PAGE_READWRITE, &oldProtect);
+            *targetEntry = (DWORD)((ULONG_PTR)HookedGetProcAddress - imageBase);
+            VirtualProtect(targetEntry, sizeof(DWORD), oldProtect, &oldProtect);
+            break;
+        }
+    }
+}
+</code></pre>
+
+<h3>注意</h3>
+<ul>
+  <li>EAT 的地址是 RVA，不是绝对地址</li>
+  <li>改 EAT 全局生效，所有进程都会被影响</li>
+</ul>
+
+<h3>检测</h3>
+<p><span class="rating rating-easy">难度：★☆☆☆☆</span></p>
+<ul>
+  <li>内存 EAT 对比磁盘文件 EAT，不一致就有问题</li>
+  <li><code>GetProcAddress</code> 拿到的地址指向哪个模块一查便知</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.3 Inline Hook / Detour ───── -->
+<h2 id="l1-inline">1.3 Inline Hook / Detour 钩子</h2>
+
+<h3>原理</h3>
+<p>改表始终有局限——IAT Hook 管不着动态解析的调用。Inline Hook 的思路更暴力：不管你怎么调用、从哪调用，我直接改目标函数的指令。在函数开头写一个 JMP，跳转到我的 handler。</p>
+
+<div class="warn">问题是覆盖的字节是原始指令的一部分，hook 完了还得能恢复并执行原函数。保存+恢复这段逻辑叫 Trampoline，比看起来要麻烦不少。</div>
+
+<h3>实现（x64）</h3>
+<pre><code class="language-c">#include &lt;windows.h&gt;
+#include &lt;stdint.h&gt;
+
+#pragma pack(push, 1)
+typedef struct _JMP_HOOK_64 {
+    // mov rax, addr
+    BYTE op_mov_rax;      // 0x48
+    BYTE op_mov_rax2;     // 0xB8
+    ULONG64 targetAddr;   // 目标绝对地址
+    // jmp rax
+    BYTE op_jmp_rax;      // 0xFF
+    BYTE op_jmp_rax2;     // 0xE0
+} JMP_HOOK_64;
+#pragma pack(pop)
+
+// Trampoline 结构：保存原始指令 + 跳回
+typedef struct _TRAMPOLINE {
+    BYTE originalBytes[14];      // 保存被覆盖的原始指令
+    JMP_HOOK_64 jmpBack;         // 跳回原函数剩余部分
+} TRAMPOLINE;
+
+TRAMPOLINE g_Trampoline = {0};
+
+void InstallInlineHook(BYTE* targetFunc, BYTE* hookFunc) {
+    DWORD oldProtect;
+    memcpy(g_Trampoline.originalBytes, targetFunc, sizeof(JMP_HOOK_64));
+
+    // 构造 Trampoline 的跳回指令
+    g_Trampoline.jmpBack.op_mov_rax = 0x48;
+    g_Trampoline.jmpBack.op_mov_rax2 = 0xB8;
+    g_Trampoline.jmpBack.targetAddr = (ULONG64)(targetFunc + sizeof(JMP_HOOK_64));
+    g_Trampoline.jmpBack.op_jmp_rax = 0xFF;
+    g_Trampoline.jmpBack.op_jmp_rax2 = 0xE0;
+
+    VirtualProtect(targetFunc, sizeof(JMP_HOOK_64), PAGE_EXECUTE_READWRITE, &oldProtect);
+    JMP_HOOK_64 hook;
+    hook.op_mov_rax = 0x48;
+    hook.op_mov_rax2 = 0xB8;
+    hook.targetAddr = (ULONG64)hookFunc;
+    hook.op_jmp_rax = 0xFF;
+    hook.op_jmp_rax2 = 0xE0;
+    memcpy(targetFunc, &hook, sizeof(JMP_HOOK_64));
+    VirtualProtect(targetFunc, sizeof(JMP_HOOK_64), oldProtect, &oldProtect);
+    FlushInstructionCache(GetCurrentProcess(), targetFunc, sizeof(JMP_HOOK_64));
+}
+
+// 使用示例
+int (WINAPI* OriginalMessageBoxA)(HWND, LPCSTR, LPCSTR, UINT);
+
+int WINAPI MyMessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType) {
+    return OriginalMessageBoxA(hWnd, "Hook 成功！", lpCaption, uType);
+}
+
+void SetupHook() {
+    HMODULE hUser32 = LoadLibraryA("user32.dll");
+    BYTE* msgBox = (BYTE*)GetProcAddress(hUser32, "MessageBoxA");
+    OriginalMessageBoxA = (fnMessageBoxA)msgBox;
+    InstallInlineHook(msgBox, (BYTE*)MyMessageBoxA);
+}
+</code></pre>
+
+<h3>坑：多字节覆盖</h3>
+<p>x64 下 JMP 需要 14 字节（mov rax, imm64; jmp rax）。但目标函数头几条指令加起来不一定正好 14 字节——可能一条 2 字节一条 3 字节，凑不够。如果在指令中间截断，蹦回去的时候 CPU 吃到错误字节就崩了。</p>
+<p>正确做法是先反汇编目标函数头部，算清楚在指令边界上切断。Microsoft Detours 库里核心就是做了这件事。</p>
+<p>实战中 Inline Hook 很常见，可以说是用户态 Hook 的"主力"。但它的问题也很明显——函数前几个字节变了，随便扫一下就能发现。</p>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★☆☆☆</span></p>
+<ul>
+  <li>看函数前 14 字节有没有 JMP 到模块外</li>
+  <li>函数首字节是不是 <code>0xE9</code>（JMP rel32）或者 <code>0x48 0xB8</code></li>
+  <li>函数首字节是不是 <code>0xCC</code>（调试器断点，也是 Hook 的一种）</li>
+  <li>对已知函数算 CRC，跟原始值比对</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.4 VTable Hook ───── -->
+<h2 id="l1-vtable">1.4 VTable Hook（虚函数表 Hook）</h2>
+
+<h3>原理</h3>
+<p>C++ 虚函数调用走 VTable，每个有虚函数的对象开头都有一个指向 VTable 的指针。把 VTable 里的函数指针换了，就可以劫持这个类的所有虚函数调用。</p>
+<p>游戏逆向的常用手段——引擎大量用虚函数处理渲染、输入、网络事件，改 VTable 就能截住这些流程，而且不动模块代码段，常规的 IAT/Inline 检测扫不到。</p>
+
+<h3>实现</h3>
+<pre><code class="language-cpp">class Renderer {
+public:
+    virtual void Draw() { printf("Renderer::Draw() original\n"); }
+    virtual void Update(float dt) { printf("Renderer::Update(%f) original\n", dt); }
+};
+
+void MyDraw(Renderer* self) {
+    printf("Renderer::Draw() HOOKED! 调用者 = %p\n", self);
+}
+
+void MyUpdate(Renderer* self, float dt) {
+    printf("Renderer::Update(%f) HOOKED!\n", dt);
+}
+
+void HookVTable() {
+    Renderer renderer;
+    ULONG_PTR* vtable = *(ULONG_PTR**)&renderer;
+
+    DWORD oldProtect;
+    VirtualProtect(&vtable[0], sizeof(ULONG_PTR) * 2, PAGE_READWRITE, &oldProtect);
+    vtable[0] = (ULONG_PTR)MyDraw;
+    vtable[1] = (ULONG_PTR)MyUpdate;
+    VirtualProtect(&vtable[0], sizeof(ULONG_PTR) * 2, oldProtect, &oldProtect);
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★☆☆☆</span></p>
+<ul>
+  <li>VTable 指针指向模块的哪个段？正常的应该在 .rdata（只读数据段），跑到其他段就有问题</li>
+  <li>对关键类的 VTable 做 CRC 校验</li>
+  <li>有些反作弊会扫描所有对象的 VTable 位置合法性</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.5 Windows Message Hook ───── -->
+<h2 id="l1-msg">1.5 Windows Message Hook（消息钩子）</h2>
+
+<h3>原理</h3>
+<p>Windows 有一套官方的消息 Hook 机制——<code>SetWindowsHookEx</code>。严格来说这不算"Hack"，系统就支持你这样做。但它确实能拦截键盘、鼠标、窗口消息等事件。</p>
+<p>注意这是跨进程的——钩子 DLL 会被系统自动注入到目标进程，不需要手动写注入代码。这也是外挂和键盘记录器最常用的方式之一。</p>
+
+<h3>实现</h3>
+<pre><code class="language-c">#include &lt;windows.h&gt;
+
+LRESULT CALLBACK KeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode >= 0) {
+        if (wParam == WM_KEYDOWN) {
+            KBDLLHOOKSTRUCT* pKb = (KBDLLHOOKSTRUCT*)lParam;
+            printf("按键: %d (vkCode=%d)\n", pKb->vkCode, pKb->vkCode);
+            if (pKb->vkCode == VK_F1) {
+                printf("F1 被拦截！\n");
+                return 1;
+            }
+        }
+    }
+    return CallNextHookEx(NULL, nCode, wParam, lParam);
+}
+
+void InstallMsgHook() {
+    HHOOK hook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyboardProc,
+                                  GetModuleHandleA(NULL), 0);
+    if (hook) printf("键盘钩子安装成功！\n");
+}
+</code></pre>
+
+<h3>类型一览</h3>
+<table>
+<tr><th>Hook 类型</th><th>常量</th><th>用途</th></tr>
+<tr><td>键盘</td><td><code>WH_KEYBOARD_LL</code></td><td>低级键盘事件</td></tr>
+<tr><td>鼠标</td><td><code>WH_MOUSE_LL</code></td><td>低级鼠标事件</td></tr>
+<tr><td>消息</td><td><code>WH_CALLWNDPROC</code></td><td>窗口消息</td></tr>
+<tr><td>日志</td><td><code>WH_JOURNALRECORD</code></td><td>宏记录</td></tr>
+<tr><td>调试</td><td><code>WH_DEBUG</code></td><td>调试其他钩子</td></tr>
+</table>
+
+<h3>检测</h3>
+<p><span class="rating rating-easy">难度：★☆☆☆☆</span></p>
+<ul>
+  <li>遍历钩子链查一下装了哪些 Hook</li>
+  <li>检查进程里被注入的不可疑 DLL</li>
+  <li>钩子过程的地址落在哪个模块里，一眼就能看出来</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.6 API Monitor / Debug Register Hook ───── -->
+<h2 id="l1-monitor">1.6 API Monitor / 调试寄存器 Hook</h2>
+
+<h3>原理</h3>
+<p>CPU 的调试寄存器 DR0-DR7 可以用来设置硬件断点。每个线程的上下文里可以设最多 4 个断点，触发 INT1 异常后在 VEH（向量化异常处理）中解析调用上下文。</p>
+<p>好处是<strong>完全不动代码</strong>——不修改 IAT、EAT、函数指令、VTable，常规的 CRC 校验全都没用。</p>
+
+<h3>实现要点</h3>
+<pre><code class="language-c">void SetHardwareBreakpoint(void* targetAddr, int index) {
+    CONTEXT ctx = {0};
+    ctx.ContextFlags = CONTEXT_DEBUG_REGISTERS;
+    HANDLE hThread = GetCurrentThread();
+    GetThreadContext(hThread, &ctx);
+    switch (index) {
+        case 0: ctx.Dr0 = (ULONG_PTR)targetAddr; break;
+        case 1: ctx.Dr1 = (ULONG_PTR)targetAddr; break;
+        case 2: ctx.Dr2 = (ULONG_PTR)targetAddr; break;
+        case 3: ctx.Dr3 = (ULONG_PTR)targetAddr; break;
+    }
+    ctx.Dr7 |= (1 << (2 * index));
+    SetThreadContext(hThread, &ctx);
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★★☆☆</span></p>
+<ul>
+  <li>检查线程上下文的 DR0-DR3 是不是非零</li>
+  <li>读 VEH 链看有没有可疑的 INT1 handler</li>
+  <li>某些反作弊会定期清零调试寄存器</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.7 Instrumentation Callback Hook ───── -->
+<h2 id="l1-icb">1.7 Instrumentation Callback Hook</h2>
+
+<h3>原理</h3>
+<p>Windows x64 有个冷门但官方的机制——<code>ntdll!RtlpInstrumentationCallback</code>。把这个指针改成自己的函数，每个<strong>函数调用/返回</strong>都会自动触发一次回调。相当于一个全局自动的 Inline Hook，不需要手动改任何函数。</p>
+
+<div class="warn">不碰 IAT，不写指令，不走调试寄存器，三种常规检测全部绕开。比较适合安全软件做全局行为监控。</div>
+
+<h3>思路</h3>
+<pre><code class="language-c">typedef void (*INSTRUMENTATION_CALLBACK)(
+    ULONG_PTR callerRetAddr, ULONG_PTR calleeAddr,
+    ULONG_PTR callSiteAddr, ULONG flags);
+
+void MyInstrumentationCallback(
+    ULONG_PTR retAddr, ULONG_PTR callee, ULONG_PTR callSite, ULONG flags) {
+    printf("调用: 0x%llX -> 0x%llX\n", callSite, callee);
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★☆</span></p>
+<ul>
+  <li>检查 <code>NtGlobalFlag</code> 的 <code>FLG_INSTRUMENTATION</code> 位</li>
+  <li>检查 <code>ntdll!RtlpInstrumentationCallback</code> 指向哪</li>
+  <li>性能开销很明显——每个函数调用都进回调，跑的慢的就是有问题</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.8 DLL 注入技术补充 ───── -->
+<h2 id="l1-dll">1.8 DLL 注入技术补充</h2>
+
+<h3>原理</h3>
+<p>很多 Hook 技术依赖把代码加载到目标进程里（尤其是跨进程的 Message Hook 和 IAT Hook）。注入本身不是 Hook，但它是前置条件。</p>
+
+<h3>常见方式</h3>
+<table>
+<tr><th>方式</th><th>原理</th><th>检测难度</th></tr>
+<tr><td><code>CreateRemoteThread</code> + <code>LoadLibrary</code></td><td>在目标进程里开线程调 LoadLibrary</td><td>★★☆☆☆</td></tr>
+<tr><td><code>SetWindowsHookEx</code></td><td>系统自动把 DLL 注入到目标进程</td><td>★★☆☆☆</td></tr>
+<tr><td>APC 注入</td><td>利用异步过程调用队列执行注入代码</td><td>★★★☆☆</td></tr>
+<tr><td>反射式注入</td><td>不依赖 LoadLibrary，自己解析 PE 手动加载</td><td>★★★★☆</td></tr>
+<tr><td>Atom Bombing</td><td>全局原子表 + APC，不需要写磁盘的 DLL</td><td>★★★★☆</td></tr>
+<tr><td>Process Hollowing</td><td>创建挂起进程，替换代码段后恢复执行</td><td>★★★☆☆</td></tr>
+</table>
+
+<h3>检测</h3>
+<ul>
+  <li>枚举进程模块，检查不合法的 PE</li>
+  <li>监控 <code>CreateRemoteThread</code> 的调用</li>
+  <li>监控 <code>LoadLibrary</code> / <code>LdrLoadDll</code> 事件</li>
+  <li>扫描内存中的可疑 PE 头（反射式注入的残留）</li>
+</ul>
+
+<hr>
+
+<!-- ───── 1.9 用户态通用检测 ───── -->
+<h2 id="l1-check">1.9 用户态 Hook 的通用检测</h2>
+
+<h3>核心思想</h3>
+<p>所有用户态 Hook 的共同缺陷是<strong>内存被改了</strong>。不管改的是表还是指令还是什么，只要对比原始状态就能发现。</p>
+
+<h3>检测示例</h3>
+<pre><code class="language-c">bool CheckForHook(const char* moduleName, const char* funcName) {
+    HMODULE hMod = GetModuleHandleA(moduleName);
+    BYTE* memAddr = (BYTE*)GetProcAddress(hMod, funcName);
+
+    if (memAddr[0] == 0xE9 || (memAddr[0] == 0x48 && memAddr[1] == 0xB8))
+        return true;
+    return false;
+}
+</code></pre>
+
+<h3>防御思路</h3>
+<ul>
+  <li>直接用 <code>Nt*</code> 系统调用绕过用户态，不经过 user32 / kernel32</li>
+  <li>用独立的监控进程做校验，不在被钩的进程里运行检测代码</li>
+  <li>对关键函数做定期的 CRC 完整性校验</li>
+</ul>
+
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  第二层：内核态 Hook（Ring 0）— 传统手段                      -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="content">
+<h1 id="l2">第二层：内核态 Hook（Ring 0）— 传统手段</h1>
+
+<p>Ring 3 改表改代码虽然灵活，但权限有限——但凡进程自己不愿意被钩，做点检测就能把你扫出来。Ring 0 的玩法不一样：直接动内核的数据结构，系统服务表、中断表、驱动分发全都能改。代价也直接——写错一个指针就是蓝屏，没有"崩了重来"这回事。</p>
+
+<p>这一层只记最经典的基础手法。更深度的内核防护（PatchGuard）和绕过方法放在第三层。</p>
+
+<hr>
+
+<!-- ───── 2.1 SSDT Hook ───── -->
+<h2 id="l2-ssdt">2.1 SSDT Hook（系统服务描述符表 Hook）</h2>
+
+<h3>原理</h3>
+<p>SSDT 是内核用来派发系统调用的核心表。用户态调 <code>NtOpenProcess</code>（ntdll 里的 syscall 指令进内核之后），内核靠这个表找到真正的 <code>NtOpenProcess</code> 实现函数。表里存的是 <code>ntoskrnl.exe</code> 导出的所有 <code>Nt*</code>/<code>Zw*</code> 服务地址。</p>
+<p>这个表在 x86 上是可以直接改的——x64 上 PatchGuard 会盯着它，改完几分钟就蓝屏。</p>
+
+<h3>SSDT Hook 步骤</h3>
+<ol>
+  <li>拿 <code>KeServiceDescriptorTable</code> 拿到 SSDT 基址</li>
+  <li>按服务索引号定位目标条目</li>
+  <li>把条目里的函数指针换成自己的</li>
+  <li>自己的逻辑跑完之后调原函数</li>
+</ol>
+
+<h3>完整实现</h3>
+<pre><code class="language-c">#include &lt;ntddk.h&gt;
+
+// 声明 KeServiceDescriptorTable（在 ntoskrnl 中未导出，需自己声明）
+typedef struct _SERVICE_DESCRIPTOR_TABLE {
+    PVOID  ServiceTableBase;      // SSDT 基址
+    PVOID  ServiceCounterTable;
+    ULONG  NumberOfServices;
+    ULONG  ParamTableBase;
+} SERVICE_DESCRIPTOR_TABLE, *PSERVICE_DESCRIPTOR_TABLE;
+
+extern PSERVICE_DESCRIPTOR_TABLE KeServiceDescriptorTable;
+
+// 保存原函数指针
+ULONG_PTR OriginalNtOpenProcess = NULL;
+
+// 函数声明
+NTSTATUS MyNtOpenProcess(
+    PHANDLE ProcessHandle,
+    ACCESS_MASK DesiredAccess,
+    POBJECT_ATTRIBUTES ObjectAttributes,
+    PCLIENT_ID ClientId
+) {
+    // 检查要打开的进程 PID
+    if (ClientId && ClientId->UniqueProcess) {
+        HANDLE targetPid = ClientId->UniqueProcess;
+        DbgPrint("NtOpenProcess 被调用！目标 PID = %lu\n", (ULONG)targetPid);
+
+        // 可以阻止打开某些进程
+        if (targetPid == (HANDLE)4) {  // System 进程
+            return STATUS_ACCESS_DENIED;
+        }
+    }
+    // 调用原函数
+    return ((NTSTATUS(*)(PHANDLE, ACCESS_MASK, POBJECT_ATTRIBUTES, PCLIENT_ID))
+            OriginalNtOpenProcess)(ProcessHandle, DesiredAccess, ObjectAttributes, ClientId);
+}
+
+VOID InstallSsdtHook() {
+    // 获取 NtOpenProcess 在 SSDT 中的索引
+    // 索引值随 Windows 版本变化
+    ULONG ssdtIndex = 0x3A;  // Win10 x64 的 NtOpenProcess 索引
+
+    // 保存原函数地址
+    ULONG_PTR* targetEntry = &((ULONG_PTR*)KeServiceDescriptorTable->ServiceTableBase)[ssdtIndex];
+    OriginalNtOpenProcess = *targetEntry;
+
+    // 关闭 WP 保护（写保护）—— CR0 寄存器的第 16 位
+    // SSDT 所在内存通常是只读的，需要禁用写保护
+    _disable_write_protection();  // 伪代码，实际需要汇编操作 CR0
+
+    // 替换为 Hook 函数
+    *targetEntry = (ULONG_PTR)MyNtOpenProcess;
+
+    _enable_write_protection();
+
+    DbgPrint("SSDT Hook 安装成功！\n");
+}
+</code></pre>
+
+<h3>问题：KPP / PatchGuard</h3>
+<div class="warn">x64 Windows 的 PatchGuard 每 5-10 分钟扫一次 SSDT、IDT、GDT。发现修改就触发 Bug Check 0x109（CRITICAL_STRUCTURE_CORRUPTION）。这是 SSDT Hook 在 x64 上的硬门槛。</div>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★☆☆☆</span>（PatchGuard 动手之前）</p>
+<ul>
+  <li><strong>自动</strong>：PatchGuard 发现直接蓝屏</li>
+  <li><strong>手动</strong>：跟磁盘上的 sys 文件比一下 SSDT 内容</li>
+  <li><strong>绕过</strong>：干掉 PatchGuard（第三层讲），或者用不碰 SSDT 的方式 Hook（直接改函数代码）</li>
+</ul>
+
+<hr>
+
+<!-- ───── 2.2 IDT Hook ───── -->
+<h2 id="l2-idt">2.2 IDT Hook（中断描述符表 Hook）</h2>
+
+<h3>原理</h3>
+<p>IDT（Interrupt Descriptor Table）保存了每个中断/异常的处理函数入口。修改其中的中断处理函数（如 INT 0x2E、INT 0x80）可拦截中断调用。x86 上这是经典 rootkit 手段，x64 下 IDT 受 PatchGuard 保护，此路不通。</p>
+
+<pre><code class="language-c">// x86 上的 IDT Hook 示例
+// IDT 寄存器通过 SIDT 指令获取
+
+#pragma pack(push, 1)
+typedef struct _IDT_ENTRY {
+    USHORT offsetLow;
+    USHORT selector;
+    UCHAR  reserved;
+    UCHAR  flags;
+    USHORT offsetHigh;
+} IDT_ENTRY;
+#pragma pack(pop)
+
+typedef struct _IDTR {
+    USHORT limit;
+    ULONG  base;
+} IDTR;
+
+void InstallIdtHook() {
+    IDTR idtr;
+    __asm sidt idtr;  // 获取 IDT 基址
+
+    IDT_ENTRY* idt = (IDT_ENTRY*)idtr.base;
+
+    // 修改 INT 0x2E（旧式系统调用入口）
+    ULONG originalOffset = idt[0x2E].offsetLow | (idt[0x2E].offsetHigh << 16);
+    // 替换为 Hook 函数...
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-easy">难度：★☆☆☆☆</span>（PatchGuard 自动检测）</p>
+
+<hr>
+
+<!-- ───── 2.3 GDT / LDT Hook ───── -->
+<h2 id="l2-gdt">2.3 GDT / LDT Hook</h2>
+
+<h3>原理</h3>
+<p>GDT（Global Descriptor Table）定义内存段的属性和权限级别。修改 GDT 中的代码段描述符（CS），将用户态权限提升到 Ring 0。常用于内核漏洞利用中的提权（<code>ret2Ring0</code>）。实战中多见于结合栈溢出的复合攻击。</p>
+
+<pre><code class="language-c">// 修改 GDT 中的段描述符以提升权限
+// 此技术通常配合栈溢出使用
+// 将 CS 段的选择子从 Ring 3 (3) 修改为 Ring 0 (0)
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-easy">难度：★☆☆☆☆</span></p>
+<ul>
+  <li>SGDT 指令获取 GDT 基址，检查段描述符的 DPL（描述符特权级）</li>
+  <li>PatchGuard 在 x64 上检测 GDT 修改</li>
+</ul>
+
+<hr>
+
+<!-- ───── 2.4 DKOM ───── -->
+<h2 id="l2-dkom">2.4 DKOM（直接内核对象操作）</h2>
+
+<h3>原理</h3>
+<p>DKOM 不是 Hook，而是内核态隐藏/欺骗的经典手段。直接修改内核链表结构（进程链表、线程链表、驱动链表），将目标条目从链表中摘除，实现进程/驱动隐藏。虽然古老，但仍是恶意软件的保留手段。</p>
+
+<pre><code class="language-c">VOID HideProcess(ULONG targetPid) {
+    // 遍历 EPROCESS 链表，摘除目标进程
+    PLIST_ENTRY current = &PsInitialSystemProcess->ActiveProcessLinks;
+    do {
+        PEPROCESS process = (PEPROCESS)((ULONG_PTR)current - offsetof(EPROCESS, ActiveProcessLinks));
+        ULONG pid = (ULONG)PsGetProcessId(process);
+
+        if (pid == targetPid) {
+            // 从链表中摘除
+            current->Blink->Flink = current->Flink;
+            current->Flink->Blink = current->Blink;
+            break;
+        }
+        current = current->Flink;
+    } while (current != &PsInitialSystemProcess->ActiveProcessLinks);
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★★☆☆</span></p>
+<ul>
+  <li>交叉检测法：通过不同方式枚举进程（如 <code>CreateToolhelp32Snapshot</code> vs <code>Csrss.exe</code> 句柄表）</li>
+  <li>对比进程链表与句柄表的一致性</li>
+</ul>
+
+<hr>
+
+<!-- ───── 2.5 IRP Hook ───── -->
+<h2 id="l2-irp">2.5 IRP Hook（I/O 请求包 Hook）</h2>
+
+<h3>原理</h3>
+<p>驱动设备对象（DEVICE_OBJECT）维护了一个 MajorFunction 表（IRP_MJ_* 函数的分发例程）。替换表中的函数指针可拦截发往该设备的所有 IRP。</p>
+
+<pre><code class="language-c">NTSTATUS MyIrpCreate(PDEVICE_OBJECT DeviceObject, PIRP Irp) {
+    DbgPrint("IRP_MJ_CREATE 被调用！\n");
+    // 自定义处理逻辑
+    return ((PDRIVER_DISPATCH)OriginalIrpCreate)(DeviceObject, Irp);
+}
+
+VOID HookIrpDispatch(PDRIVER_OBJECT DriverObject) {
+    // 替换 IRP 分发函数
+    OriginalIrpCreate = DriverObject->MajorFunction[IRP_MJ_CREATE];
+    DriverObject->MajorFunction[IRP_MJ_CREATE] = MyIrpCreate;
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★☆☆☆</span></p>
+<ul>
+  <li>对比驱动文件的 MajorFunction 表与内存中的值</li>
+  <li>检查分发函数地址是否在驱动模块地址范围内</li>
+</ul>
+
+<hr>
+
+<!-- ───── 2.6 MSR Hook ───── -->
+<h2 id="l2-msr">2.6 MSR Hook（模型特定寄存器 Hook）</h2>
+
+<h3>原理</h3>
+<p>x64 系统调用通过 <code>syscall</code> 指令实现，入口地址存放在 <strong>MSR 0x176</strong>（IA32_LSTAR / Star MSR）中。修改这个 MSR 重定向所有系统调用入口，实现全局系统级 Hook。</p>
+
+<pre><code class="language-c">// 使用 WRMSR 指令修改 IA32_LSTAR
+// 注意：此操作在 PatchGuard 监控下，且需要 Ring 0 权限
+
+void InstallMsrHook() {
+    __writemsr(0xC0000082, (ULONG64)MySyscallEntry);  // IA32_LSTAR
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★☆☆☆</span></p>
+<ul>
+  <li>读取 MSR 0xC0000082 的值，与 ntoskrnl 中的 KiSystemCall64 对比</li>
+  <li>PatchGuard 自动检测</li>
+</ul>
+
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  第三层：内核态 Hook（Ring 0）— 高级手段                      -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="content">
+<h1 id="l3">第三层：内核态 Hook（Ring 0）— 高级手段</h1>
+
+<p>传统内核手段被 PatchGuard 盯死后，这一层是"带镣铐跳舞"——EDR 和游戏反作弊驱动的主要活动区间。</p>
+
+<p>每一项技术都比第二层复杂，也更难被检测。</p>
+
+<hr>
+
+<!-- ───── 3.1 内核回调 ───── -->
+<h2 id="l3-cb">3.1 内核回调（Callback）机制</h2>
+
+<h3>原理</h3>
+<p>Windows 内核提供官方的注册回调 API，用于监控进程创建、线程创建、模块加载、注册表修改、对象访问等事件。这不是 Hack，而是正经的 Windows 驱动开发接口。使用回调可实现与 Hook 相同的监控效果，且<strong>不被 PatchGuard 视为篡改</strong>。这是 EDR 最常使用的监控方案。</p>
+
+<pre><code class="language-c">// 进程创建回调
+VOID MyProcessCallback(HANDLE ParentId, HANDLE ProcessId, BOOLEAN Create) {
+    if (Create) {
+        DbgPrint("进程创建: %lu (父进程: %lu)\n", (ULONG)ProcessId, (ULONG)ParentId);
+    }
+}
+
+VOID InstallCallbacks() {
+    // 注册进程创建/退出回调
+    PsSetCreateProcessNotifyRoutine(MyProcessCallback, FALSE);
+
+    // 注册线程创建/退出回调
+    PsSetCreateThreadNotifyRoutine(MyThreadCallback);
+
+    // 注册模块加载回调
+    PsSetLoadImageNotifyRoutine(MyImageLoadCallback);
+
+    // 注册注册表回调（Win10+）
+    CmRegisterCallbackEx(MyRegistryCallback, &Altitude, NULL, NULL, &regCookie, NULL);
+
+    // 注册对象监控回调
+    ObRegisterCallbacks(&obRegistration, &obCookie);
+}
+</code></pre>
+
+<h3>常见回调类型</h3>
+<table>
+<tr><th>回调</th><th>API</th><th>用途</th></tr>
+<tr><td>进程通知</td><td><code>PsSetCreateProcessNotifyRoutine</code></td><td>监控进程创建/退出</td></tr>
+<tr><td>线程通知</td><td><code>PsSetCreateThreadNotifyRoutine</code></td><td>监控线程创建/退出</td></tr>
+<tr><td>模块加载</td><td><code>PsSetLoadImageNotifyRoutine</code></td><td>监控 DLL/驱动加载</td></tr>
+<tr><td>注册表</td><td><code>CmRegisterCallback</code></td><td>拦截注册表操作</td></tr>
+<tr><td>对象</td><td><code>ObRegisterCallbacks</code></td><td>拦截进程/句柄操作</td></tr>
+</table>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★★☆☆</span></p>
+<ul>
+  <li>枚举内核回调链表，检查回调函数地址是否属于合法驱动</li>
+  <li>使用 <code>!process 0 0</code> 配合 WinDbg 检查回调表</li>
+  <li>对比系统中已加载的驱动模块地址范围与回调地址</li>
+</ul>
+
+<hr>
+
+<!-- ───── 3.2 Minifilter ───── -->
+<h2 id="l3-mini">3.2 Minifilter（文件系统微过滤器）</h2>
+
+<h3>原理</h3>
+<p>Minifilter 是 Windows 文件系统驱动的新一代框架。注册 Minifilter 驱动后，透明拦截所有文件 I/O 操作——读、写、创建、删除、重命名。这是文件监控/隐藏的标准架构，反病毒软件的核心组件。</p>
+
+<pre><code class="language-c">// 注册 Minifilter 的 pre-operation 和 post-operation 回调
+CONST FLT_REGISTRATION FilterRegistration = {
+    sizeof(FLT_REGISTRATION),
+    FLT_REGISTRATION_VERSION,
+    0,
+    NULL,
+    &MyPreOperation,   // IRP 前回调
+    &MyPostOperation,  // IRP 后回调
+    NULL
+};
+
+FLT_PREOP_CALLBACK_STATUS MyPreOperation(
+    PFLT_CALLBACK_DATA Data, PCFLT_RELATED_OBJECTS FltObjects,
+    PVOID* CompletionContext
+) {
+    // 拦截文件操作
+    if (Data->Iopb->MajorFunction == IRP_MJ_CREATE) {
+        DbgPrint("文件被打开: %wZ\n", &Data->Iopb->TargetFileObject->FileName);
+    }
+    return FLT_PREOP_SUCCESS_WITH_CALLBACK;
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★☆</span></p>
+<ul>
+  <li>枚举已注册的 Minifilter，检查其 Altitude 和回调地址</li>
+  <li>通过 <code>fltmc filters</code> 命令查看所有 Minifilter</li>
+</ul>
+
+<hr>
+
+<!-- ───── 3.3 NDIS Hook / LSP ───── -->
+<h2 id="l3-ndis">3.3 NDIS Hook / LSP（网络层 Hook）</h2>
+
+<h3>原理</h3>
+<p>在网络层面，注册 NDIS 协议驱动或中间层驱动拦截所有网络流量。应用层通过 LSP 或 Windows Filtering Platform（WFP）实现网络监控。WFP 是微软推荐的方案，LSP 已逐渐被淘汰。</p>
+
+<pre><code class="language-c">// WFP 注入 DLL 的用户态钩子自动后的回调
+// WFP 提供 classify 回调，每个网络包经过时被调用
+void MyClassifyCallback(
+    const FWPS_INCOMING_VALUES* inFixedValues,
+    const FWPS_INCOMING_METADATA_VALUES* inMetaValues,
+    void* layerData, const void* classifyContext,
+    FWPS_FILTER* filter, UINT64 flowContext,
+    FWPS_CLASSIFY_OUT* classifyOut
+) {
+    // 检查并允许/阻止网络连接
+    classifyOut->actionType = FWP_ACTION_BLOCK;  // 阻止
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★★☆☆</span></p>
+<ul>
+  <li>检查网络驱动栈中的中间层驱动（NDIS）</li>
+  <li>枚举 WFP 过滤器的回调函数地址</li>
+</ul>
+
+<hr>
+
+<!-- ───── 3.4 Object Hook ───── -->
+<h2 id="l3-obj">3.4 Object Hook（对象 Hook / 句柄篡改）</h2>
+
+<h3>原理</h3>
+<p>通过 <code>ObRegisterCallbacks</code> 注册对象拦截回调，在进程打开句柄时拦截。EDR 监控进程访问的常用手段。</p>
+
+<h3>代码思路</h3>
+<pre><code class="language-c">OB_PREOP_CALLBACK_STATUS MyObjectPreCallback(
+    PVOID RegistrationContext,
+    POB_PRE_OPERATION_INFORMATION OperationInfo
+) {
+    if (OperationInfo->ObjectType == PsProcessType) {
+        PEPROCESS targetProcess = (PEPROCESS)OperationInfo->Object;
+        ULONG pid = (ULONG)PsGetProcessId(targetProcess);
+
+        // 拦截对 LSASS 的打开操作
+        if (pid == 0x2A0) { // lsass.exe
+            OperationInfo->Parameters->CreateHandleInformation.DesiredAccess &= ~PROCESS_VM_READ;
+        }
+    }
+    return OB_PREOP_SUCCESS;
+}
+</code></pre>
+
+<hr>
+
+<!-- ───── 3.5 BYOVD ───── -->
+<h2 id="l3-byovd">3.5 BYOVD（Bring Your Own Vulnerable Driver）</h2>
+
+<h3>原理</h3>
+<p>利用已签名但存在漏洞的驱动（MSI Afterburner、Asus PCEEControl、Capcom.sys 等），在<strong>用户态程序</strong>中获得读写内核内存的能力。最常见的是利用驱动的 <code>MmMapIoSpace</code> 功能读写物理内存。这是近年来攻击者最青睐的初始权限获取方式。</p>
+
+<div class="warn">不写自己的驱动，找已签名的存在漏洞的驱动，通过其 IOCTL 接口操纵内核。</div>
+
+<pre><code class="language-c">// 利用 Capcom.sys 提权（经典案例）
+// Capcom.sys 提供了一个 IOCTL，可以执行任意 Shellcode
+
+HANDLE hDevice = CreateFileA("\\\\.\\Htsysm72FB", GENERIC_READ|GENERIC_WRITE,
+                              0, NULL, OPEN_EXISTING, 0, NULL);
+
+// 发送 Shellcode 执行请求（在 Ring 0 上下文执行！）
+BYTE shellcode[] = { /* 你的内核 Shellcode */ };
+DWORD bytesRet;
+DeviceIoControl(hDevice, 0xAA013044, shellcode, sizeof(shellcode),
+                NULL, 0, &bytesRet, NULL);
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-mid">难度：★★★☆☆</span></p>
+<ul>
+  <li>维护已知漏洞驱动的黑名单</li>
+  <li>监控 IOCTL 分发例程的异常调用</li>
+  <li>检查驱动签名证书是否在已知漏洞列表中</li>
+</ul>
+
+<hr>
+
+<!-- ───── 3.6 PTE Hook ───── -->
+<h2 id="l3-pte">3.6 PTE Hook（页表项 Hook）</h2>
+
+<h3>原理</h3>
+<p>不修改代码，而是修改页表项（PTE）的映射关系。将物理页重新映射到另一个物理页，透明替换代码——虚拟地址不变，但实际指向 Payload。</p>
+<p>这是最"隐蔽"的内核 Hook 方式之一，几乎所有主流 EDR 都使用了这种技术。</p>
+
+<pre><code class="language-c">// PTE Hook 的核心思想：
+// 1. 找到目标代码所在的物理页
+// 2. 分配一个新的物理页，写入 Hook 代码
+// 3. 修改 PTE，将原虚拟地址映射到你的物理页
+// 4. 原页面作为"备份"保留
+
+// 因为虚拟地址没有变（代码段也没有变），
+// 所以 CRC 校验和 VAD 校验都查不出来。
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★☆</span></p>
+<ul>
+  <li>检查 PTE 的物理页属性是否异常（如代码页应该是只读的）</li>
+  <li>对比同一物理页的多个虚拟地址映射</li>
+  <li>检查 TLBs 是否一致性</li>
+</ul>
+
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  第四层：Hypervisor Hook（Ring -1）                           -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="content">
+<h1 id="l4">第四层：Hypervisor Hook（Ring -1）</h1>
+
+<p>Hypervisor 比操作系统内核还低一层，运行在 CPU 最高特权级（VMX root mode），完全控制宿主机的 CPU 和内存。</p>
+
+<p>Ring 0 Hook 是操作系统内部修改，Hypervisor Hook 则是把整个操作系统"装进虚拟机"，从外部监视一切。操作系统每一次内存访问、每一条特权指令都在 Hypervisor 监视之下。</p>
+
+<hr>
+
+<!-- ───── 4.1 EPT Hook ───── -->
+<h2 id="l4-ept">4.1 EPT Hook（扩展页表 Hook）</h2>
+
+<h3>原理</h3>
+<p>EPT（Extended Page Table）是 Intel VT-x 中用于虚拟化内存的二级页表。Hypervisor 修改 EPT 映射，在 Guest（操作系统）<strong>不知情</strong>的情况下控制物理内存访问。GameGuard 等反作弊系统使用此方案。</p>
+
+<p>EPT Hook 的核心思路：</p>
+<ol>
+  <li>将目标代码所在物理页的 EPT 权限设为"不可执行"（NX）</li>
+  <li>当 Guest 尝试执行该页代码时，CPU 触发 EPT Violation（VMExit）</li>
+  <li>Hypervisor 捕获这个 VMExit，分析上下文，执行自定义逻辑</li>
+  <li>单步执行原指令后继续</li>
+</ol>
+
+<div class="info">EPT Hook 对 Guest 完全透明。操作系统不知道 Hypervisor 存在，PatchGuard 也无法检测——它只能检查 Ring 0，EPT 是 Ring -1 的数据。</div>
+
+<h3>核心流程</h3>
+<pre><code class="language-c">// 伪代码：EPT Hook 处理流程
+
+VOID HandleEptViolation(VMX_EXIT_QUALIFICATION qual) {
+    // 1. 获取触发 EPT Violation 的 Guest 物理地址
+    ULONG64 guestPhysAddr = ReadVMCS(GUEST_PHYSICAL_ADDRESS);
+
+    // 2. 检查是否是我们 Hook 的目标地址
+    if (IsHookedAddress(guestPhysAddr)) {
+        // 3. 单步执行原指令
+        SingleStepOriginalInstruction();
+
+        // 4. 执行自定义 Hook 逻辑
+        DoCustomHookLogic();
+
+        // 5. 修改 EPT 权限，继续执行
+        SetEptPermissions(guestPhysAddr, EPT_READ_WRITE_EXECUTE);
+    }
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★★</span></p>
+<ul>
+  <li>检测 Hypervisor 的存在（通过 CPUID、VMWARE 端口等特征）</li>
+  <li>测量指令执行时间——EPT Hook 引入的 VMExit 开销会导致明显的延迟</li>
+  <li>检查 EPT 分页结构是否一致</li>
+</ul>
+
+<hr>
+
+<!-- ───── 4.2 VMFUNC Hook ───── -->
+<h2 id="l4-vmfunc">4.2 VMFUNC Hook</h2>
+
+<h3>原理</h3>
+<p>VMFUNC 是 Intel VT-x 提供的一组函数，允许 Guest（无需 VMExit）直接调用 Hypervisor 服务。通过 VMFUNC 修改 EPT 映射（<code>EPT Switching</code>），实现超高性能 Hook——无需每次触发 VMExit。比 EPT Violation 性能更好，但实现也更复杂。</p>
+
+<pre><code class="language-c">// VMFUNC EPT Switching 的核心思想：
+// - Hypervisor 提前配置好多个 EPT 视图（View）
+// - 需要在不同"视图"之间切换时，Guest 直接执行 VMFUNC 指令
+// - 无需 VMExit，性能远高于 EPT Violation 方案
+
+__asm {
+    mov eax, 0          // VMFUNC 号 (0 = EPT Switching)
+    mov ecx, 1          // 切换到 View 1
+    vmfunc              // 调用 Hypervisor 功能
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★★</span></p>
+<ul>
+  <li>检查 VMCS（虚拟机控制结构）中是否启用了 VMFUNC</li>
+  <li>检测 Guest 中是否出现异常的 VMFUNC 指令</li>
+</ul>
+
+<hr>
+
+<!-- ───── 4.3 Stealth Hypervisor ───── -->
+<h2 id="l4-stealth">4.3 Stealth Hypervisor（隐形 Hypervisor）</h2>
+
+<h3>原理</h3>
+<p>前面的 Hypervisor 技术有一个共同的弱点——存在可以被检测到（CPUID 时间戳、VMWARE 端口、红色 pill 等）。Stealth Hypervisor 的核心目标是：<strong>让 Guest 完全无法感知 Hypervisor 的存在</strong>。</p>
+
+<p>实现策略包括：</p>
+<ul>
+  <li>拦截并伪造 CPUID 返回（清除 Hypervisor 位）</li>
+  <li>伪造时间戳计数器（TSC），消除 VMExit 引入的时间差</li>
+  <li>模拟所有"检测型"指令序列</li>
+</ul>
+
+<pre><code class="language-c">// 伪造 CPUID 返回
+// 当 Guest 执行 CPUID 指令时，Hypervisor 截获并修改返回结果
+
+VOID FakeCpuid(ULONG64* rax, ULONG64* rbx, ULONG64* rcx, ULONG64* rdx) {
+    if (*rax == 1) {
+        // 清除 CPUID.1:ECX[31] — Hypervisor Present Bit
+        *rcx &= ~(1 << 31);
+    }
+}
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★★</span></p>
+<ul>
+  <li>基于时间差的检测（需要统计学的异常检测）</li>
+  <li>检查 TLB 和缓存行为的一致性</li>
+  <li>通过 CPU 硬件漏洞（如 Meltdown）侧信道读取 Hypervisor 内存</li>
+</ul>
+
+
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  第五层：固件层 Hook（Ring -2）                                -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="content">
+<h1 id="l5">第五层：固件层 Hook（Ring -2）</h1>
+
+<p>这是 Hook 技术的最底层。SMM 运行在比 Hypervisor 更隐蔽的环境中（Hypervisor 也无法直接读取 SMM 内存）。SMM 中的任何修改，对操作系统和 Hypervisor 完全不可见。</p>
+
+<div class="warn">这一层的技术仅供安全研究人员了解和防御参考。实际利用需要物理访问或极高的权限。</div>
+
+<hr>
+
+<!-- ───── 5.1 SMM Hook ───── -->
+<h2 id="l5-smm">5.1 SMM Hook（系统管理模式 Hook）</h2>
+
+<h3>原理</h3>
+<p>SMM 通过 SMI（系统管理中断）触发。SMI 发生时，CPU 保存当前状态并切换到 SMM 模式，执行 SMI Handler。SMM 代码存储在 SMRAM 中——被 CPU 硬件保护，Ring 0 和 Ring -1 都无法直接访问。</p>
+<p>SMM Hook 修改 SMI 处理程序或注册 SMI 处理函数，在 SMM 中执行恶意代码。</p>
+
+<pre><code class="language-c">// SMM Hook 通常通过以下方式实现：
+// 1. 利用 BIOS/UEFI 中的漏洞写入 SMRAM
+// 2. 修改 SMI 分发器的处理函数指针
+// 3. 在 SMM 中安装一个 rootkit，对所有操作系统完全隐形
+
+// SMM 中的代码可以：
+// - 读写物理内存（修改 Hypervisor 的 EPT、修改内核 SSDT）
+// - 监控所有 IO 操作
+// - 在操作系统关机/重启后仍然存在（持久化）
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★★</span></p>
+<ul>
+  <li>检查 SMRAM 是否被锁定（SMM Lock）</li>
+  <li>检查 SMI 处理程序是否被修改（通过对比 flash 中的 SMI 代码）</li>
+  <li>基于时间的 SMI 执行时间检测</li>
+</ul>
+
+<hr>
+
+<!-- ───── 5.2 DMA Attack ───── -->
+<h2 id="l5-dma">5.2 DMA 攻击</h2>
+
+<h3>原理</h3>
+<p>利用 Thunderbolt / PCIe 等高速外设总线的 DMA 能力，外设不经过 CPU 直接读写物理内存。伪造一个 PCIe 设备（如 Thunderbolt 接口的 FPGA），无需任何软件漏洞即可读取整个系统内存——包括内核和 Hypervisor。</p>
+
+<pre><code class="language-c">// DMA 攻击的核心：
+// 1. 连接一个支持 DMA 的设备（Thunderbolt 网卡、FPGA 开发板等）
+// 2. 通过 PCIe BAR 空间访问物理内存
+// 3. 直接读取/写入内核数据结构
+
+// 防御：VT-d / IOMMU 可以阻止 DMA 攻击
+// 但不支持 VT-d 的旧系统无法防御
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★☆</span></p>
+<ul>
+  <li>开启 IOMMU / VT-d 并验证其正确配置</li>
+  <li>检查 DMA 重映射表（DMAR）</li>
+  <li>使用内核 DMA 保护（Kernel DMA Protection）</li>
+</ul>
+
+<hr>
+
+<!-- ───── 5.3 UEFI / BIOS 级别 Hook ───── -->
+<h2 id="l5-uefi">5.3 UEFI / BIOS 级别 Hook</h2>
+
+<h3>原理</h3>
+<p>修改 UEFI 固件中的启动代码或 Runtime Services，在操作系统加载前植入代码。每次系统启动自动激活，对操作系统完全透明。重装操作系统也无法清除。</p>
+
+<pre><code class="language-c">// UEFI Bootkit 的常见手法：
+// 1. 修改 UEFI 引导加载程序
+// 2. 替换 UEFI Runtime Services 中的函数指针
+// 3. 在 S3 恢复（休眠恢复）过程中重新注入
+
+// 这类 Hook 甚至可以在重装操作系统后仍然存在
+// ——因为代码固化在固件中，而不是硬盘上
+</code></pre>
+
+<h3>检测</h3>
+<p><span class="rating rating-hard">难度：★★★★★</span></p>
+<ul>
+  <li>安全启动（Secure Boot）验证固件签名</li>
+  <li>UEFI 固件扫描工具（如 CHIPSEC）</li>
+  <li>硬件安全模块（TPM）的启动度量（测量启动）</li>
+</ul>
+
+
+<hr>
+
+
+
+<h1 id="end">结语</h1>
+
+<p>从 Ring 3 到 Ring -2，Hook 技术的演进是一场永无止境的攻防博弈：操作系统不断加固堵漏，攻击者不断寻找更低层的切入点。</p>
+
+<p>理解 Hook 技术不只是为了写 Rootkit 或反外挂：</p>
+<ul>
+  <li><strong>调试和逆向</strong>：深入理解系统行为</li>
+  <li><strong>安全防护</strong>：了解攻击手段才能有效防御</li>
+  <li><strong>系统架构</strong>：Hook 揭示了 Windows 系统的层次和边界</li>
+</ul>
+
+<blockquote><em>最后一条防线往往不是更聪明的算法，而是更底层的控制权。</em></blockquote>
+
+<p style="text-align:center;color:var(--text2);font-size:13px;margin-top:48px;">
+— 本文基于 Hook 技术文献与实战经验整理 —
+</p>
+
+</div> <!-- /content -->
+</div> <!-- /main -->
+</body>
+</html>

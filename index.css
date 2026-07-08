@@ -328,6 +328,10 @@ h2 { margin: 0; font-size: clamp(1.4rem, 3vw, 2rem); }
 .tag.csdn { background: rgba(255, 80, 0, 0.15); color: #ff5000; }
 .tag.new-site { background: rgba(103, 215, 255, 0.15); color: var(--accent); }
 .tag.reference { background: rgba(255, 200, 50, 0.12); color: #ffc832; }
+.tag.pwn { background: rgba(255, 107, 107, 0.15); color: #ff6b6b; }
+.tag.asm { background: rgba(78, 205, 196, 0.15); color: #4ecdc4; }
+.tag.hook { background: rgba(162, 155, 254, 0.15); color: #a29bfe; }
+.tag.STYLE { background: rgba(253, 121, 168, 0.15); color: #fd79a8; }
 
 /* ===== Pond / personal-instruction page ===== */
 .pond-page {

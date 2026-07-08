@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>内容1</title>
+  <style>:root {
+  /* 动态配置变量 */
+  --md-primary-color: #009874;
+  --md-font-family: -apple-system-font,BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB , Microsoft YaHei UI , Microsoft YaHei ,Arial,sans-serif;
+  --md-font-size: 16px;
+}
+
+/* 段落缩进和对齐 */
+p {
+  
+  
+}
+
+/**
+ * MD 基础主题样式
+ * 包含所有元素的基础样式和 CSS 变量定义
+ */
+
+/* ==================== 容器样式 ==================== */
+section,
+container {
+  font-family: -apple-system-font,BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB , Microsoft YaHei UI , Microsoft YaHei ,Arial,sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  text-align: left;
+}
+
+/* 确保 容器应用基础样式 */
+body {
+  font-family: -apple-system-font,BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB , Microsoft YaHei UI , Microsoft YaHei ,Arial,sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  text-align: left;
+}
+
+/* 去除第一个元素的 margin-top */
+section > :first-child {
+  margin-top: 0 !important;
+}
+
+.mermaid-diagram .nodeLabel p {
+  color: unset !important;
+  letter-spacing: unset !important;
+}
+
+
+/**
+ * MD 默认主题（经典主题）
+ * 按 Alt/Option + Shift + F 可格式化
+ * 如需使用主题色，请使用 #c9302c 代替颜色值
+ */
+
+/* ==================== 一级标题 ==================== */
+h1 {
+  display: table;
+  padding: 0 1em;
+  border-bottom: 2px solid #c9302c;
+  margin: 2em auto 1em;
+  color: hsl(var(--foreground));
+  font-size: 19.2px;
+  font-weight: bold;
+  text-align: center;
+}/* ==================== 二级标题 ==================== */
+h2 {
+  display: table;
+  padding: 0 0.2em;
+  margin: 4em auto 2em;
+  color: #fff;
+  background: #c9302c;
+  font-size: 19.2px;
+  font-weight: bold;
+  text-align: center;
+}/* ==================== 三级标题 ==================== */
+h3 {
+  padding-left: 8px;
+  border-left: 3px solid #c9302c;
+  margin: 2em 8px 0.75em 0;
+  color: hsl(var(--foreground));
+  font-size: 17.6px;
+  font-weight: bold;
+  line-height: 1.2;
+}/* ==================== 四级标题 ==================== */
+h4 {
+  margin: 2em 8px 0.5em;
+  color: #c9302c;
+  font-size: 16px;
+  font-weight: bold;
+}/* ==================== 五级标题 ==================== */
+h5 {
+  margin: 1.5em 8px 0.5em;
+  color: #c9302c;
+  font-size: 16px;
+  font-weight: bold;
+}/* ==================== 六级标题 ==================== */
+h6 {
+  margin: 1.5em 8px 0.5em;
+  font-size: 16px;
+  color: #c9302c;
+}/* ==================== 段落 ==================== */
+p {
+  margin: 1.5em 8px;
+  letter-spacing: 0.1em;
+  color: hsl(var(--foreground));
+}/* ==================== 引用块 ==================== */
+blockquote {
+  font-style: normal;
+  padding: 1em;
+  border-left: 4px solid #c9302c;
+  border-radius: 6px;
+  color: hsl(var(--foreground));
+  background: var(--blockquote-background);
+  margin-bottom: 1em;
+}blockquote > p {
+  display: block;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  color: hsl(var(--foreground));
+  margin: 0;
+}/* ==================== GFM 警告块 ==================== */
+.alert-title-note,
+.alert-title-tip,
+.alert-title-info,
+.alert-title-important,
+.alert-title-warning,
+.alert-title-caution,
+.alert-title-abstract,
+.alert-title-summary,
+.alert-title-tldr,
+.alert-title-todo,
+.alert-title-success,
+.alert-title-done,
+.alert-title-question,
+.alert-title-help,
+.alert-title-faq,
+.alert-title-failure,
+.alert-title-fail,
+.alert-title-missing,
+.alert-title-danger,
+.alert-title-error,
+.alert-title-bug,
+.alert-title-example,
+.alert-title-quote,
+.alert-title-cite {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 0.5em;
+}.alert-title-note {
+  color: #478be6;
+}.alert-title-tip {
+  color: #57ab5a;
+}.alert-title-info {
+  color: #93c5fd;
+}.alert-title-important {
+  color: #986ee2;
+}.alert-title-warning {
+  color: #c69026;
+}.alert-title-caution {
+  color: #e5534b;
+}/* Obsidian-style callout colors */
+.alert-title-abstract,
+.alert-title-summary,
+.alert-title-tldr {
+  color: #00bfff;
+}.alert-title-todo {
+  color: #478be6;
+}.alert-title-success,
+.alert-title-done {
+  color: #57ab5a;
+}.alert-title-question,
+.alert-title-help,
+.alert-title-faq {
+  color: #c69026;
+}.alert-title-failure,
+.alert-title-fail,
+.alert-title-missing {
+  color: #e5534b;
+}.alert-title-danger,
+.alert-title-error {
+  color: #e5534b;
+}.alert-title-bug {
+  color: #e5534b;
+}.alert-title-example {
+  color: #986ee2;
+}.alert-title-quote,
+.alert-title-cite {
+  color: #9ca3af;
+}/* GFM Alert SVG 图标颜色 */
+.alert-icon-note {
+  fill: #478be6;
+}.alert-icon-tip {
+  fill: #57ab5a;
+}.alert-icon-info {
+  fill: #93c5fd;
+}.alert-icon-important {
+  fill: #986ee2;
+}.alert-icon-warning {
+  fill: #c69026;
+}.alert-icon-caution {
+  fill: #e5534b;
+}/* Obsidian-style callout icon colors */
+.alert-icon-abstract,
+.alert-icon-summary,
+.alert-icon-tldr {
+  fill: #00bfff;
+}.alert-icon-todo {
+  fill: #478be6;
+}.alert-icon-success,
+.alert-icon-done {
+  fill: #57ab5a;
+}.alert-icon-question,
+.alert-icon-help,
+.alert-icon-faq {
+  fill: #c69026;
+}.alert-icon-failure,
+.alert-icon-fail,
+.alert-icon-missing {
+  fill: #e5534b;
+}.alert-icon-danger,
+.alert-icon-error {
+  fill: #e5534b;
+}.alert-icon-bug {
+  fill: #e5534b;
+}.alert-icon-example {
+  fill: #986ee2;
+}.alert-icon-quote,
+.alert-icon-cite {
+  fill: #9ca3af;
+}/* ==================== 代码块 ==================== */
+pre.code__pre,
+.hljs.code__pre {
+  font-size: 90%;
+  overflow-x: auto;
+  border-radius: 8px;
+  padding: 0 !important;
+  line-height: 1.5;
+  margin: 10px 8px;
+}/* ==================== 图片 ==================== */
+img {
+  display: block;
+  max-width: 100%;
+  margin: 0.1em auto 0.5em;
+  border-radius: 4px;
+}/* ==================== 列表 ==================== */
+ol {
+  padding-left: 1em;
+  margin-left: 0;
+  color: hsl(var(--foreground));
+}ul {
+  list-style: circle;
+  padding-left: 1em;
+  margin-left: 0;
+  color: hsl(var(--foreground));
+}li {
+  display: block;
+  margin: 0.2em 8px;
+  color: hsl(var(--foreground));
+}/* ==================== 脚注 ==================== */
+/* footnotes 在 buildFootnotes() 中渲染为 <p> 标签 */
+p.footnotes {
+  margin: 0.5em 8px;
+  font-size: 80%;
+  color: hsl(var(--foreground));
+}/* ==================== 图表 ==================== */
+figure {
+  margin: 1.5em 8px;
+  color: hsl(var(--foreground));
+}figcaption,
+.md-figcaption {
+  text-align: center;
+  color: color-mix(in srgb, hsl(var(--foreground)) 50%, transparent);
+  font-size: 0.8em;
+}/* ==================== 分隔线 ==================== */
+hr {
+  border-style: solid;
+  border-width: 2px 0 0;
+  border-color: rgba(0, 0, 0, 0.1);
+  -webkit-transform-origin: 0 0;
+  -webkit-transform: scale(1, 0.5);
+  transform-origin: 0 0;
+  transform: scale(1, 0.5);
+  height: 0.4em;
+  margin: 1.5em 0;
+}/* ==================== 行内代码 ==================== */
+.codespan {
+  font-size: 90%;
+  color: #c9302c;
+  background: color-mix(in srgb, #c9302c 8%, transparent);
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in srgb, #c9302c 20%, transparent);
+}/* 代码块内的 code 标签需要特殊处理（覆盖行内 code 样式） */
+pre.code__pre > code,
+.hljs.code__pre > code {
+  display: -webkit-box;
+  padding: 0.5em 1em 1em;
+  overflow-x: auto;
+  text-indent: 0;
+  color: inherit;
+  background: none;
+  white-space: nowrap;
+  margin: 0;
+}/* ==================== 强调 ==================== */
+em {
+  font-style: italic;
+  font-size: inherit;
+}/* ==================== 链接 ==================== */
+a {
+  color: #576b95;
+  text-decoration: none;
+}/* ==================== 粗体 ==================== */
+strong {
+  color: #c9302c;
+  font-weight: bold;
+  font-size: inherit;
+}/* ==================== 表格 ==================== */
+table {
+  color: hsl(var(--foreground));
+}thead {
+  font-weight: bold;
+  color: hsl(var(--foreground));
+}th {
+  border: 1px solid color-mix(in srgb, hsl(var(--foreground)) 15%, transparent);
+  padding: 0.25em 0.5em;
+  color: hsl(var(--foreground));
+  word-break: keep-all;
+  background: color-mix(in srgb, hsl(var(--foreground)) 5%, transparent);
+}td {
+  border: 1px solid color-mix(in srgb, hsl(var(--foreground)) 15%, transparent);
+  padding: 0.25em 0.5em;
+  color: hsl(var(--foreground));
+  word-break: keep-all;
+}/* ==================== KaTeX 公式 ==================== */
+.katex-inline {
+  max-width: 100%;
+  overflow-x: auto;
+}.katex-block {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.5em 0;
+  text-align: center;
+}/* ==================== 标记高亮 ==================== */
+.markup-highlight {
+  background-color: #c9302c;
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: #fff;
+}.markup-underline {
+  text-decoration: underline;
+  text-decoration-color: #c9302c;
+}.markup-wavyline {
+  text-decoration: underline wavy;
+  text-decoration-color: #c9302c;
+  text-decoration-thickness: 2px;
+}
+
+
+/**
+ * 红蓝黑金 · 白底终端风格
+ * 背景透明/白色，字体全部深色，红色蓝色金色强调
+ */
+:root {
+  --md-primary-color: #c9302c;
+  --text: #1a1a1a;
+  --muted: #555555;
+  --gold: #b8860b;
+  --gold-bright: #c9a03a;
+  --blue: #0044cc;
+  --blue-bright: #0066ff;
+  --red: #cc0000;
+  --red-bright: #e60000;
+  --border: #cccccc;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}.md-container {
+  background: none;
+  color: #1a1a1a;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.8;
+  padding: 2rem 2.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}section h1,
+section h2,
+section h3,
+section h4,
+section h5,
+section h6 {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-weight: 700;
+  color: #1a1a1a;
+  background: none;
+  margin-top: 2em;
+  margin-bottom: 0.6em;
+}section h1 {
+  font-size: 2.2rem;
+  border-bottom: 2px solid #b8860b;
+  color: #b8860b;
+  padding-bottom: 0.3em;
+}section h2 {
+  font-size: 1.7rem;
+  border-left: 4px solid #0044cc;
+  padding-left: 0.6em;
+  color: #0044cc;
+}section h3 {
+  font-size: 1.4rem;
+  color: #c9a03a;
+}section h4 {
+  font-size: 1.2rem;
+  color: #555555;
+  font-style: italic;
+}section h5,
+section h6 {
+  font-size: 1rem;
+  color: #b8860b;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}p {
+  margin: 1em 0;
+  font-size: 1rem;
+  color: #1a1a1a;
+}strong {
+  color: #c9a03a;
+  font-weight: 800;
+}em {
+  color: #0066ff;
+  font-style: italic;
+}blockquote {
+  background: none;
+  border-left: 3px solid #cc0000;
+  margin: 1.5em 0;
+  padding: 0.4em 1em;
+  color: #2a2a2a;
+}blockquote > p {
+  margin: 0;
+  color: inherit;
+}.codespan {
+  background: none;
+  color: #0066ff;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.9em;
+}pre.code__pre,
+.hljs.code__pre {
+  background: none;
+  border: 1px solid #cccccc;
+  padding: 1em;
+  margin: 1.5em 0;
+  overflow-x: auto;
+}pre.code__pre > code,
+.hljs.code__pre > code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-size: 0.92rem;
+  color: #1a1a1a;
+  background: none;
+}ol,
+ul {
+  padding-left: 2em;
+  margin: 1em 0;
+}li {
+  margin: 0.35em 0;
+  color: #1a1a1a;
+}ol > li::marker {
+  color: #b8860b;
+  font-weight: bold;
+}ul > li::marker {
+  color: #0044cc;
+}table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.8em 0;
+  background: none;
+  border: 1px solid #cccccc;
+}thead {
+  background: none;
+  border-bottom: 2px solid #b8860b;
+}th {
+  padding: 0.7em 1em;
+  color: #b8860b;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-weight: 700;
+  text-align: left;
+  background: none;
+}td {
+  padding: 0.6em 1em;
+  border-bottom: 1px solid #cccccc;
+  color: #1a1a1a;
+  background: none;
+}tr:last-child td {
+  border-bottom: none;
+}img {
+  max-width: 100%;
+  border: 1px solid #cccccc;
+}hr {
+  border: none;
+  height: 1px;
+  background: #cccccc;
+  margin: 2.5em 0;
+}hr.hr-dash {
+  border-top: 1px dashed #0044cc;
+  background: none;
+  height: auto;
+}hr.hr-star {
+  border: none;
+  height: 1px;
+  background: repeating-linear-gradient(90deg, #b8860b 0px, #b8860b 4px, transparent 4px, transparent 8px);
+  opacity: 0.6;
+}hr.hr-underscore {
+  border: none;
+  height: 2px;
+  background: #cc0000;
+}figure {
+  margin: 1.8em 0;
+  text-align: center;
+}figcaption {
+  font-size: 0.85rem;
+  color: #555555;
+  margin-top: 0.5em;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}.katex-inline {
+  color: #0066ff;
+  background: none;
+}.katex-block {
+  background: none;
+  border-left: 2px solid #b8860b;
+  padding: 0.8em 1em;
+  margin: 1.2em 0;
+}.markup-highlight {
+  background: none;
+  color: #c9a03a;
+  border-bottom: 2px solid #b8860b;
+}.markup-underline {
+  text-decoration: underline;
+  text-decoration-color: #0044cc;
+  text-underline-offset: 0.2em;
+}.markup-wavyline {
+  text-decoration: line-through wavy #cc0000;
+}[class^="alert-title-"],
+[class*=" alert-title-"] {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.3em;
+  background: none;
+}.alert-title-note { color: #0044cc; }.alert-title-tip { color: #0066ff; }.alert-title-info { color: #0044cc; }.alert-title-important { color: #cc0000; }.alert-title-warning { color: #b8860b; }.alert-title-caution { color: #e60000; }.alert-title-abstract { color: #333333; }.alert-title-summary { color: #333333; }.alert-title-tldr { color: #333333; }.alert-title-todo { color: #0044cc; }.alert-title-success { color: #0066ff; }.alert-title-done { color: #0066ff; }.alert-title-question { color: #b8860b; }.alert-title-help { color: #b8860b; }.alert-title-faq { color: #b8860b; }.alert-title-failure { color: #cc0000; }.alert-title-fail { color: #cc0000; }.alert-title-missing { color: #cc0000; }.alert-title-danger { color: #cc0000; }.alert-title-error { color: #cc0000; }.alert-title-bug { color: #cc0000; }.alert-title-example { color: #6a0dad; }.alert-title-quote { color: #555555; }.alert-title-cite { color: #555555; }.alert-icon-note { color: #0044cc; fill: currentColor; }.alert-icon-tip { color: #0066ff; fill: currentColor; }.alert-icon-info { color: #0044cc; fill: currentColor; }.alert-icon-important { color: #cc0000; fill: currentColor; }.alert-icon-warning { color: #b8860b; fill: currentColor; }.alert-icon-caution { color: #e60000; fill: currentColor; }.alert-icon-abstract { color: #333333; fill: currentColor; }.alert-icon-summary { color: #333333; fill: currentColor; }.alert-icon-tldr { color: #333333; fill: currentColor; }.alert-icon-todo { color: #0044cc; fill: currentColor; }.alert-icon-success { color: #0066ff; fill: currentColor; }.alert-icon-done { color: #0066ff; fill: currentColor; }.alert-icon-question { color: #b8860b; fill: currentColor; }.alert-icon-help { color: #b8860b; fill: currentColor; }.alert-icon-faq { color: #b8860b; fill: currentColor; }.alert-icon-failure { color: #cc0000; fill: currentColor; }.alert-icon-fail { color: #cc0000; fill: currentColor; }.alert-icon-missing { color: #cc0000; fill: currentColor; }.alert-icon-danger { color: #cc0000; fill: currentColor; }.alert-icon-error { color: #cc0000; fill: currentColor; }.alert-icon-bug { color: #cc0000; fill: currentColor; }.alert-icon-example { color: #6a0dad; fill: currentColor; }.alert-icon-quote { color: #555555; fill: currentColor; }.alert-icon-cite { color: #555555; fill: currentColor; }</style><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+  Theme: GitHub Dark
+  Description: Dark theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-dark
+  Current colors taken from GitHub's CSS
+*/.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}</style>
+</head>
+<body>
+  <div style="width: 750px; margin: auto; padding: 20px;">
+    <section class="container mx-auto"><h1 class="h1" data-heading="true" id="0" _msttexthash="246609922" _msthash="42546">逆向与二进制基础｜汇编：变量、栈、条件跳转，会 C 语言就会汇编</h1><blockquote class="blockquote"><p class="p"><font _mstmutation="1" _msttexthash="569831899" _msthash="42547">学过 C 语言再来看汇编，把寄存器当变量，栈还是你熟悉的那个栈， 比较、条件跳转选分支——入门真的很简单。</font><code class="codespan">cmp</code></p></blockquote><p class="p" _msttexthash="385442018" _msthash="42548">很多人一听到“汇编语言”，脑海里浮现的就是满屏的十六进制，还没开始学腿就先软了。</p><p class="p" _msttexthash="326091493" _msthash="42549">不过先别慌。 <strong class="strong" _istranslated="1">汇编不是逆向专家才能看的，是“懂一点点代码的人”都可以随便看的。 </strong></p><p class="p"><font _mstmutation="1" _msttexthash="1356362137" _msthash="42550">如果你学过 C 语言，知道指针、变量、函数调用、、，那你完全具备了看懂汇编的底色。 今天我们不管 CPU 怎么造出来的，不管内存颗粒的物理结构，甚至不用深究寄存器的硬件原理。</font><code class="codespan">if-else</code><code class="codespan">switch</code></p><p class="p"><strong class="strong" _msttexthash="30867135" _msthash="42551">我们只做三件事：</strong></p><ol class="ol"><li class="listitem" _msttexthash="37073023" _msthash="42552">1. 把寄存器当变量用。</li><li class="listitem" _msttexthash="229209370" _msthash="42553">2. 把栈直接当成你 C 语言里那个栈，看它在汇编里怎么长出来的。</li><li class="listitem"><font _mstmutation="1" _msttexthash="145679534" _msthash="42554">3. 把  当成  的条件比较，把条件跳转当成分支选择。</font><code class="codespan">cmp</code><code class="codespan">if</code></li></ol><blockquote class="blockquote"><p class="p"><font _mstmutation="1" _msttexthash="384855185" _msthash="42555">本文以 32 位汇编为主，也会混着讲点 64 位（原理一样，只是名字前面多了个 ，如  → ）。</font><code class="codespan">R</code><code class="codespan">EAX</code><code class="codespan">RAX</code></p></blockquote><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="1" _msttexthash="70058066" _msthash="42556">一、寄存器：8 个预定义的“变量”</h2><p class="p" _msttexthash="65949299" _msthash="42557">在 C 语言里，你定义变量：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-c"><span class="hljs-type">int</span>&nbsp;a&nbsp;=<span class="hljs-number">&nbsp;10</span>;<span class="hljs-type"><br>int</span>&nbsp;*p&nbsp;=&nbsp;&amp;a;</code></pre><p class="p" _msttexthash="192956478" _msthash="42558">在汇编里，没法随便新建变量，CPU 只给你<strong class="strong">有限的几个“变量”</strong></p><p class="p" _msttexthash="119159105" _msthash="42559">我们把常用寄存器分成三组，这样方便理解。</p><h3 class="h3" data-heading="true" id="2" _msttexthash="108029883" _msthash="42560">1. 数据寄存器（存值、存地址、存指针）</h3><p class="p"><code class="codespan">EAX</code> <code class="codespan">EBX</code> <code class="codespan">ECX</code> <code class="codespan">EDX</code> <code class="codespan">ESI</code> <code class="codespan">EDI</code></p><p class="p"><strong class="strong" _msttexthash="49828506" _msthash="42561">你就当它们是六个全局变量。</strong></p><ul class="ul"><li class="listitem"><font _mstmutation="1" _msttexthash="48237254" _msthash="42562">•  经常兼职“返回值”也就是return</font><code class="codespan">EAX</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="32428019" _msthash="42563">•  经常兼职“计数器”</font><code class="codespan">ECX</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="51495210" _msthash="42564">•  /  常用于字符串或数组操作</font><code class="codespan">ESI</code><code class="codespan">EDI</code></li></ul><h3 class="h3" data-heading="true" id="3" _msttexthash="109491642" _msthash="42565">2. 栈相关寄存器（管函数调用和栈帧）</h3><p class="p"><code class="codespan">ESP</code> <code class="codespan">EBP</code></p><p class="p" _msttexthash="237797547" _msthash="42566">由于栈的重要性，后面会用一整节来细讲，现在只需要记住：</p><ul class="ul"><li class="listitem"><font _mstmutation="1" _msttexthash="90583051" _msthash="42567">• ：栈顶指针，永远指向当前栈顶。</font><code class="codespan">ESP</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="134988386" _msthash="42568">• ：栈基址指针，用来固定一个函数的栈帧底部。</font><code class="codespan">EBP</code></li></ul><h3 class="h3" data-heading="true" id="4" _msttexthash="166256415" _msthash="42569">3. 程序指针寄存器（不能直接写，只能借指令改）</h3><p class="p"><code class="codespan">EIP</code><font _mstmutation="1" _msttexthash="21849191" _msthash="42570"> （64 位叫 ）</font><code class="codespan">RIP</code></p><p class="p" _msttexthash="177638435" _msthash="42571">它永远指向下一条要执行的指令地址，像程序的行号光标。</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-" data-language-pending="" data-raw-code="地址: 0x401000   mov eax, 60    ; 执行这行时，EIP = 0x401005
+地址: 0x401005   mov edi, 42    ; 执行这行时，EIP = 0x40100A" data-show-line-number="false">地址:&nbsp;0x401000&nbsp;&nbsp;&nbsp;mov&nbsp;eax,&nbsp;60&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;执行这行时，EIP&nbsp;=&nbsp;0x401005<br>地址:&nbsp;0x401005&nbsp;&nbsp;&nbsp;mov&nbsp;edi,&nbsp;42&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;执行这行时，EIP&nbsp;=&nbsp;0x40100A</code></pre><p class="p"><strong class="strong" _msttexthash="212995705" _msthash="42572"><code class="codespan">EIP</code> 不能直接 <code class="codespan">mov eip, 1234</code>，只能通过 <code class="codespan">jmp</code>、<code class="codespan">call</code>、<code class="codespan">ret</code> 等指令间接修改。</strong></p><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="5" _msttexthash="85568262" _msthash="42573">二、最常见的指令，其实就三个逻辑</h2><h3 class="h3" data-heading="true" id="6"><font _mstmutation="1" _msttexthash="84757517" _msthash="42574">1.  —— 就是 C 语言里的 （赋值）</font><code class="codespan">MOV</code><code class="codespan">=</code></h3><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-c"><span class="hljs-type">int</span>&nbsp;a&nbsp;=<span class="hljs-number">&nbsp;10</span>;<span class="hljs-type"><br>int</span>&nbsp;b&nbsp;=&nbsp;a;</code></pre><p class="p" _msttexthash="13546767" _msthash="42575">汇编：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">mov&nbsp;eax,&nbsp;10&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;eax&nbsp;=&nbsp;10<br>mov&nbsp;ebx,&nbsp;eax&nbsp;&nbsp;&nbsp;;&nbsp;ebx&nbsp;=&nbsp;eax</code></pre><h3 class="h3" data-heading="true" id="7"><font _mstmutation="1" _msttexthash="43133441" _msthash="42576">2.  —— 取地址，不是取值</font><code class="codespan">LEA</code></h3><p class="p" _msttexthash="91622076" _msthash="42577">mov知道了lea就不难了对比看一下：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">mov&nbsp;eax,&nbsp;[0x400000]&nbsp;&nbsp;&nbsp;<br>把地址&nbsp;0x400000里面存的值取出来，放进&nbsp;eax<br>lea&nbsp;eax,&nbsp;[0x400000]&nbsp;&nbsp;&nbsp;<br>把&nbsp;0x400000&nbsp;这个数本身（地址常数）放进&nbsp;eax</code></pre><p class="p" _msttexthash="45261489" _msthash="42578">这就跟 C 语言里的：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-c"><span class="hljs-type">int</span>&nbsp;x&nbsp;=&nbsp;*p;<span class="hljs-comment">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;mov&nbsp;&nbsp;取内容</span><span class="hljs-type"><br>int</span>&nbsp;*q&nbsp;=&nbsp;&amp;x;<span class="hljs-comment">&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;lea&nbsp;&nbsp;取地址</span></code></pre><p class="p" _msttexthash="228137390" _msthash="42579"><strong class="strong" _istranslated="1">注：有中括号 <code class="codespan" _istranslated="1">[ ]</code> 基本代表“去指针指向的地方拿东西”。 </strong> 也就是解指针</p><h3 class="h3" data-heading="true" id="8" _msttexthash="45115954" _msthash="42580">3. 加减乘除、移位、逻辑</h3><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">add&nbsp;eax,&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;加<br>sub&nbsp;eax,&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;减<br>mul&nbsp;ecx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;无符号乘<br>div&nbsp;ecx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;无符号除<br>shl&nbsp;eax,&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;左移<br>shr&nbsp;eax,&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;逻辑右移<br>and&nbsp;eax,&nbsp;0xFF&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;按位与<br>or&nbsp;eax,&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;按位或<br>xor&nbsp;eax,&nbsp;eax&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;清空&nbsp;eax&nbsp;的经典写法<br>movzx&nbsp;eax,&nbsp;byte&nbsp;ptr&nbsp;[地址]&nbsp;&nbsp;&nbsp;;&nbsp;读单字节并零扩展，避免高位污染</code></pre><p class="p" _msttexthash="251438213" _msthash="42581">这些基本都是见名知意，碰到不认识的查一下即可，无需死记硬背。</p><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="9" _msttexthash="124741019" _msthash="42582">三、栈与函数调用：从 C 代码到汇编的完整拆解</h2><p class="p" _msttexthash="1169147941" _msthash="42583">栈，你学 C 语言时就知道：函数调用时，局部变量、返回地址、参数都放在栈上。 汇编里的栈就是同一个东西。 另外栈的结构和c语言中的stack结构是一样的（先进后出）</p><p class="p"><font _mstmutation="1" _msttexthash="111457060" _msthash="42584"><strong class="strong" _mstmutation="1" _istranslated="1">栈向低地址方向生长。 </strong>   数据时  减小， 时  增大。</font><code class="codespan">push</code><code class="codespan">ESP</code><code class="codespan">pop</code><code class="codespan">ESP</code></p><h3 class="h3" data-heading="true" id="10" _msttexthash="134240197" _msthash="42585">3.1 一个最简单的函数，看看栈帧怎么搭起来的</h3><p class="p" _msttexthash="14190514" _msthash="42586">C 代码：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-c"><span class="hljs-type">void</span><span class="hljs-title function_">&nbsp;test</span><span class="hljs-params">()</span>&nbsp;{<span class="hljs-type"><br>&nbsp;&nbsp;&nbsp;&nbsp;int</span>&nbsp;val&nbsp;=<span class="hljs-number">&nbsp;0</span>;<span class="hljs-comment"><br>&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;do&nbsp;something...</span><br>}<span class="hljs-type"><br><br>int</span><span class="hljs-title function_">&nbsp;main</span><span class="hljs-params">()</span>&nbsp;{<br>&nbsp;&nbsp;&nbsp;&nbsp;test();<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;return</span><span class="hljs-number">&nbsp;0</span>;<br>}</code></pre><h4 class="h4" data-heading="true" id="11"><font _mstmutation="1" _msttexthash="79966068" _msthash="42587">汇编层面， 调用  时发生了什么？</font><code class="codespan">main</code><code class="codespan">test</code></h4><p class="p"><strong class="strong" _msttexthash="28328586" _msthash="42588">第一步：<code class="codespan">call test</code> 指令</strong></p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">call&nbsp;test</code></pre><p class="p"><code class="codespan">call</code><font _mstmutation="1" _msttexthash="21993803" _msthash="42589"> 做了两件事：</font></p><ol class="ol"><li class="listitem"><font _mstmutation="1" _msttexthash="128720774" _msthash="42590">1. 把<strong class="strong" _mstmutation="1">返回地址</strong>（ 下一条指令的地址）压入栈中。</font><code class="codespan">call</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="63628786" _msthash="42591">2. 跳转到  函数的地址开始执行。</font><code class="codespan">test</code></li></ol><p class="p"><font _mstmutation="1" _msttexthash="72066462" _msthash="42592">此时栈上多了一层返回地址， 减 4。</font><code class="codespan">ESP</code></p><p class="p"><strong class="strong" _msttexthash="63657789" _msthash="42593">第二步：进入 <code class="codespan">test</code>，标准开头</strong></p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">push&nbsp;ebp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;保存&nbsp;main&nbsp;函数的&nbsp;EBP（栈基址）<br>mov&nbsp;ebp,&nbsp;esp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;把当前栈顶设为&nbsp;test&nbsp;函数的栈基址<br>sub&nbsp;esp,&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;为局部变量&nbsp;val&nbsp;分配&nbsp;4&nbsp;字节空间</code></pre><p class="p" _msttexthash="87319414" _msthash="42594">这一步是<strong class="strong">每个函数必做的栈帧搭建</strong>：</p><ul class="ul"><li class="listitem"><font _mstmutation="1" _msttexthash="99119917" _msthash="42595">•  把调用者的  存起来，以便返回时恢复。</font><code class="codespan">push ebp</code><code class="codespan">EBP</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="113835007" _msthash="42596">•  把  当前值赋给 ，从此  固定指向  栈帧的底部。</font><code class="codespan">mov ebp, esp</code><code class="codespan">ESP</code><code class="codespan">EBP</code><code class="codespan">EBP</code><code class="codespan">test</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="124288580" _msthash="42597">•  把  往下移 4 字节，空出的位置就是局部变量 。</font><code class="codespan">sub esp, 4</code><code class="codespan">ESP</code><code class="codespan">val</code></li></ul><p class="p" _msttexthash="111454187" _msthash="42598">此时栈的布局（从高地址到低地址）：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-" data-language-pending="" data-raw-code="[ebp+4]   返回地址
+[ebp]     保存的 main 的 EBP
+[ebp-4]   局部变量 val    ← ESP 指向这里" data-show-line-number="false">[ebp+4]&nbsp;&nbsp;&nbsp;返回地址<br>[ebp]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保存的&nbsp;main&nbsp;的&nbsp;EBP<br>[ebp-4]&nbsp;&nbsp;&nbsp;局部变量&nbsp;val&nbsp;&nbsp;&nbsp;&nbsp;←&nbsp;ESP&nbsp;指向这里</code></pre><p class="p"><font _mstmutation="1" _msttexthash="237846843" _msthash="42599">函数内访问  就是 。 如果还有更多局部变量，就 ，然后用 、 等访问。</font><code class="codespan">val</code><code class="codespan">[ebp-4]</code><code class="codespan">sub esp, 更大的数</code><code class="codespan">[ebp-8]</code><code class="codespan">[ebp-12]</code></p><p class="p"><strong class="strong" _msttexthash="70303350" _msthash="42600">第三步：函数返回，标准结尾</strong></p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">mov&nbsp;esp,&nbsp;ebp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;释放所有局部变量，ESP&nbsp;指回保存的&nbsp;EBP&nbsp;处<br>pop&nbsp;ebp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;恢复&nbsp;main&nbsp;的&nbsp;EBP，ESP&nbsp;自动指向返回地址<br>ret&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;弹出返回地址到&nbsp;EIP，程序回到&nbsp;main&nbsp;继续执行</code></pre><p class="p" _msttexthash="145182817" _msthash="42601">这三步是<strong class="strong">函数收尾的标准动作</strong>，与开头严格对应：</p><ul class="ul"><li class="listitem"><font _mstmutation="1" _msttexthash="35354813" _msthash="42602">•  撤销  分配的空间。</font><code class="codespan">mov esp, ebp</code><code class="codespan">sub esp, N</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="27407185" _msthash="42603">•  恢复调用者的 。</font><code class="codespan">pop ebp</code><code class="codespan">EBP</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="70786989" _msthash="42604">•  弹出返回地址，跳回调用者。</font><code class="codespan">ret</code></li></ul><h3 class="h3" data-heading="true" id="12" _msttexthash="38360543" _msthash="42605">3.2 带参数的函数调用</h3><p class="p" _msttexthash="14190514" _msthash="42606">C 代码：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-c"><span class="hljs-type">int</span><span class="hljs-title function_">&nbsp;add</span><span class="hljs-params">(<span class="hljs-type">int</span>&nbsp;x,<span class="hljs-type">&nbsp;int</span>&nbsp;y)</span>&nbsp;{<span class="hljs-type"><br>&nbsp;&nbsp;&nbsp;&nbsp;int</span>&nbsp;sum&nbsp;=&nbsp;x&nbsp;+&nbsp;y;<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;return</span>&nbsp;sum;<br>}<span class="hljs-type"><br><br>int</span><span class="hljs-title function_">&nbsp;main</span><span class="hljs-params">()</span>&nbsp;{<span class="hljs-type"><br>&nbsp;&nbsp;&nbsp;&nbsp;int</span>&nbsp;result&nbsp;=&nbsp;add(<span class="hljs-number">3</span>,<span class="hljs-number">&nbsp;5</span>);<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;return</span><span class="hljs-number">&nbsp;0</span>;<br>}</code></pre><h4 class="h4" data-heading="true" id="13"><font _mstmutation="1" _msttexthash="97910618" _msthash="42607">调用者  的准备工作（cdecl 调用约定）</font><code class="codespan">main</code></h4><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">push&nbsp;5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;参数&nbsp;y&nbsp;先入栈（参数从右向左压入）<br>push&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;参数&nbsp;x&nbsp;入栈<br>call&nbsp;add&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;压入返回地址，跳转到&nbsp;add<br>add&nbsp;esp,&nbsp;8&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;调用者负责清理栈上的&nbsp;8&nbsp;字节参数</code></pre><h4 class="h4" data-heading="true" id="14"><code class="codespan">add</code><font _mstmutation="1" _msttexthash="25080211" _msthash="42608"> 函数的汇编实现</font></h4><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">push&nbsp;ebp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;保存&nbsp;main&nbsp;的&nbsp;EBP<br>mov&nbsp;ebp,&nbsp;esp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;建立&nbsp;add&nbsp;的栈帧<br>sub&nbsp;esp,&nbsp;4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;为局部变量&nbsp;sum&nbsp;分配空间<br><br>mov&nbsp;eax,&nbsp;[ebp+8]&nbsp;&nbsp;;&nbsp;取出参数&nbsp;x&nbsp;(3)<br>add&nbsp;eax,&nbsp;[ebp+12]&nbsp;;&nbsp;加上参数&nbsp;y&nbsp;(5)<br>mov&nbsp;[ebp-4],&nbsp;eax&nbsp;&nbsp;;&nbsp;存入局部变量&nbsp;sum<br><br>;&nbsp;返回值通常放在&nbsp;eax&nbsp;中<br>mov&nbsp;eax,&nbsp;[ebp-4]&nbsp;&nbsp;;&nbsp;sum&nbsp;的值放入&nbsp;eax<br><br>mov&nbsp;esp,&nbsp;ebp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;释放&nbsp;sum&nbsp;的空间<br>pop&nbsp;ebp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;恢复&nbsp;main&nbsp;的&nbsp;EBP<br>ret&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;返回，main&nbsp;的&nbsp;add&nbsp;esp,&nbsp;8&nbsp;随后清理参数</code></pre><p class="p"><font _mstmutation="1" _msttexthash="35419735" _msthash="42609">进入  后的栈布局：</font><code class="codespan">add</code></p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-" data-language-pending="" data-raw-code="[ebp+12]  参数 y (5)
+[ebp+8]   参数 x (3)
+[ebp+4]   返回地址
+[ebp]     保存的 main 的 EBP
+[ebp-4]   局部变量 sum   ← ESP 指向这里" data-show-line-number="false">[ebp+12]&nbsp;&nbsp;参数&nbsp;y&nbsp;(5)<br>[ebp+8]&nbsp;&nbsp;&nbsp;参数&nbsp;x&nbsp;(3)<br>[ebp+4]&nbsp;&nbsp;&nbsp;返回地址<br>[ebp]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保存的&nbsp;main&nbsp;的&nbsp;EBP<br>[ebp-4]&nbsp;&nbsp;&nbsp;局部变量&nbsp;sum&nbsp;&nbsp;&nbsp;←&nbsp;ESP&nbsp;指向这里</code></pre><p class="p"><strong class="strong" _msttexthash="16613220" _msthash="42610">栈平衡规则</strong></p><p class="p"><font _mstmutation="1" _msttexthash="996543808" _msthash="42611">函数用了多少栈空间，一定要释放多少。 和  要配对， 后必须有  或  来恢复。 参数要么由调用者清理（如 ），要么由被调用函数用  清理（stdcall 约定）。</font><code class="codespan">push</code><code class="codespan">pop</code><code class="codespan">sub esp, N</code><code class="codespan">mov esp, ebp</code><code class="codespan">add esp, N</code><code class="codespan">add esp, 8</code><code class="codespan">ret 8</code></p><h3 class="h3" data-heading="true" id="15" _msttexthash="73934913" _msthash="42612">3.3 函数标准头尾模板（32 位）</h3><p class="p" _msttexthash="244807147" _msthash="42613">任何一个函数在汇编里都有这个骨架，看到它就认出了函数边界：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">push&nbsp;ebp<br>mov&nbsp;ebp,&nbsp;esp<br>sub&nbsp;esp,&nbsp;0x20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;分配&nbsp;32&nbsp;字节局部变量空间<br>...&nbsp;函数体&nbsp;...<br>mov&nbsp;esp,&nbsp;ebp<br>pop&nbsp;ebp<br>ret</code></pre><p class="p" _msttexthash="142094004" _msthash="42614">这就是栈帧的完整生命周期：<strong class="strong">搭台子 → 用台子 → 拆台子</strong></p><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="16"><font _mstmutation="1" _msttexthash="113890764" _msthash="42615">四、条件判断： 做比较，条件跳转选分支</font><code class="codespan">cmp</code></h2><p class="p"><font _mstmutation="1" _msttexthash="937292564" _msthash="42616">汇编没有  关键字，没有  关键字。 它的条件判断就两步：<strong class="strong" _mstmutation="1" _istranslated="1">先用 <code class="codespan" _istranslated="1">cmp</code> 做比较（相当于 <code class="codespan" _istranslated="1">if</code> 括号里的条件），然后根据结果用条件跳转指令选择走哪条路。 </strong></font><code class="codespan">if</code><code class="codespan">switch</code></p><h3 class="h3" data-heading="true" id="17"><font _mstmutation="1" _msttexthash="122019131" _msthash="42617">4.1  —— 做减法，但不保存结果，只设标志位</font><code class="codespan">CMP</code></h3><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">cmp&nbsp;eax,&nbsp;10</code></pre><p class="p"><strong class="strong" _msttexthash="553987798" _msthash="42618"><code class="codespan">cmp eax, 10</code> 就是偷偷算了一下 <code class="codespan">eax - 10</code>，然后根据减出来的结果改变 CPU 内部的几个标志，结果本身直接丢掉。</strong></p><p class="p"><font _mstmutation="1" _msttexthash="176768644" _msthash="42619">这组标志存在  标志寄存器。 减法后会自动更新几个关键位：</font><code class="codespan">EFLAGS</code></p><ul class="ul"><li class="listitem" _msttexthash="241612085" _msthash="42620">• <strong class="strong" _istranslated="1">ZF（零标志）</strong>：减出来是 0，ZF 置为1。 （说明两个数相等）</li><li class="listitem"><font _mstmutation="1" _msttexthash="215131293" _msthash="42621">• <strong class="strong" _mstmutation="1" _istranslated="1">CF（进位/借位标志）</strong>：不够减，发生借位，CF 置为1。 比如 。</font><code class="codespan">cmp 2, 5</code></li><li class="listitem" _msttexthash="134840589" _msthash="42622">• <strong class="strong">SF（符号标志）</strong>：减出来是负数，SF 置为1。</li><li class="listitem" _msttexthash="178436635" _msthash="42623">• <strong class="strong">OF（溢出标志）</strong>：有符号数结果超出范围，OF 置为1。</li></ul><p class="p"><font _mstmutation="1" _msttexthash="1274854113" _msthash="42624"><strong class="strong" _mstmutation="1" _istranslated="1">乘法也会影响 CF 和 OF。 </strong> 比如 （有符号乘法），如果乘积的结果高位不是符号位的简单扩展，说明结果超出寄存器能表示的范围了，CF 和 OF 都会置为1。 这在检查乘法溢出时有用。</font><code class="codespan">imul</code></p><h3 class="h3" data-heading="true" id="18"><font _mstmutation="1" _msttexthash="85169253" _msthash="42625">4.2  后面跟条件跳转，就是完整的 </font><code class="codespan">cmp</code><code class="codespan">if</code></h3><p class="p"><code class="codespan">cmp</code><font _mstmutation="1" _msttexthash="316629079" _msthash="42626"> 把灯设好之后，后面一定跟一个条件跳转指令。 这些跳转指令就是看灯决定往哪走。</font></p><p class="p"><strong class="strong" _msttexthash="16354637" _msthash="42627">C 语言：</strong> <code class="codespan">if (a == b) { ... }</code></p><p class="p"><strong class="strong" _msttexthash="21406710" _msthash="42628">汇编就是：</strong></p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">cmp&nbsp;eax,&nbsp;ebx&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;相当于&nbsp;if&nbsp;(eax&nbsp;==&nbsp;ebx)&nbsp;的条件比较<br>je&nbsp;&nbsp;somewhere&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;如果&nbsp;ZF&nbsp;亮（相等），就跳到大括号里的代码</code></pre><p class="p" _msttexthash="165158448" _msthash="42629">常用跳转指令就是一张表，看过一遍有印象就行：</p>
+        <section style="max-width: 100%; overflow: auto; -webkit-overflow-scrolling: touch">
+          <table class="preview-table">
+            <thead><tr><th class="th" style="text-align: left" _msttexthash="4407325" _msthash="42630">指令</th><th class="th" style="text-align: left" _msttexthash="10024469" _msthash="42631">什么意思</th><th class="th" style="text-align: left" _msttexthash="11116937" _msthash="42632">看哪个灯</th><th class="th" style="text-align: left" _msttexthash="14858532" _msthash="42633">C 语言等价</th></tr></thead>
+            <tbody><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">je</code></td><td class="td" style="text-align: left" _msttexthash="13539227" _msthash="42634">相等就跳</td><td class="td" style="text-align: left" _msttexthash="28977" _msthash="42635">ZF = 1</td><td class="td" style="text-align: left"><code class="codespan">if (a == b)</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jne</code></td><td class="td" style="text-align: left" _msttexthash="12586002" _msthash="42636">不等就跳</td><td class="td" style="text-align: left" _msttexthash="28847" _msthash="42637">ZF = 0</td><td class="td" style="text-align: left"><code class="codespan">if (a != b)</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">ja</code></td><td class="td" style="text-align: left" _msttexthash="23832666" _msthash="42638">无符号大于就跳</td><td class="td" style="text-align: left" _msttexthash="2931370" _msthash="42639">CF=0 且 ZF=0</td><td class="td" style="text-align: left"><code class="codespan">if (a &gt; b)</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jb</code></td><td class="td" style="text-align: left" _msttexthash="23929386" _msthash="42640">无符号小于就跳</td><td class="td" style="text-align: left" _msttexthash="26884" _msthash="42641">CF=1</td><td class="td" style="text-align: left"><code class="codespan">if (a &lt; b)</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jae</code></td><td class="td" style="text-align: left" _msttexthash="22331725" _msthash="42642">无符号大于等于</td><td class="td" style="text-align: left" _msttexthash="26754" _msthash="42643">CF=0</td><td class="td" style="text-align: left"><code class="codespan">&gt;=</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jbe</code></td><td class="td" style="text-align: left" _msttexthash="22428445" _msthash="42644">无符号小于等于</td><td class="td" style="text-align: left" _msttexthash="3664141" _msthash="42645">CF=1 或 ZF=1</td><td class="td" style="text-align: left"><code class="codespan">&lt;=</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jg</code></td><td class="td" style="text-align: left" _msttexthash="23859693" _msthash="42646">有符号大于就跳</td><td class="td" style="text-align: left" _msttexthash="2952976" _msthash="42647">ZF=0 且 SF=OF</td><td class="td" style="text-align: left"><code class="codespan">if (a &gt; b)</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jl</code></td><td class="td" style="text-align: left" _msttexthash="23956413" _msthash="42648">有符号小于就跳</td><td class="td" style="text-align: left" _msttexthash="7682857" _msthash="42649">SF ！= OF</td><td class="td" style="text-align: left"><code class="codespan">if (a &lt; b)</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jge</code></td><td class="td" style="text-align: left" _msttexthash="22358752" _msthash="42650">有符号大于等于</td><td class="td" style="text-align: left" _msttexthash="42250" _msthash="42651">SF=OF</td><td class="td" style="text-align: left"><code class="codespan">&gt;=</code></td></tr><tr class="tr"><td class="td" style="text-align: left"><code class="codespan">jle</code></td><td class="td" style="text-align: left" _msttexthash="22455472" _msthash="42652">有符号小于等于</td><td class="td" style="text-align: left" _msttexthash="3694288" _msthash="42653">ZF=1 或 SF!=OF</td><td class="td" style="text-align: left"><code class="codespan">&lt;=</code></td></tr></tbody>
+          </table>
+        </section>
+      <p class="p"><strong class="strong" _msttexthash="37174956" _msthash="42654">重点区分一下 <code class="codespan">ja</code> 和 <code class="codespan">jg</code>：</strong></p><ul class="ul"><li class="listitem"><font _mstmutation="1" _msttexthash="183139749" _msthash="42655">• ：把你比的两个数当<strong class="strong" _mstmutation="1">无符号数</strong>（全是正数，0 到 42 亿）。</font><code class="codespan">ja</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="150389161" _msthash="42656">• ：把你比的两个数当<strong class="strong" _mstmutation="1">有符号数</strong>（可以有负数）。</font><code class="codespan">jg</code></li></ul><p class="p" _msttexthash="16115749" _msthash="42657">看例子：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">mov&nbsp;eax,&nbsp;-1&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;0xFFFFFFFF<br>cmp&nbsp;eax,&nbsp;0<br>ja&nbsp;&nbsp;somewhere&nbsp;&nbsp;&nbsp;<br>0xFFFFFFFF&nbsp;作为无符号数是&nbsp;42&nbsp;亿，大于&nbsp;0，会跳！<br>jg&nbsp;&nbsp;somewhere&nbsp;&nbsp;&nbsp;;&nbsp;作为有符号数，-1&nbsp;小于&nbsp;0，不跳。</code></pre><p class="p" _msttexthash="322243337" _msthash="42658">逆向时看到条件跳转，要留个心眼：编译器到底在比有符号数还是无符号数？</p><h3 class="h3" data-heading="true" id="19"><font _mstmutation="1" _msttexthash="43007393" _msthash="42659">4.3 实战： 的跳转表</font><code class="codespan">switch-case</code></h3><p class="p" _msttexthash="22055735" _msthash="42660">C 语言里：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-c"><span class="hljs-keyword">switch</span>(index)&nbsp;{<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;case</span><span class="hljs-number">&nbsp;0</span>:&nbsp;...<span class="hljs-keyword">&nbsp;break</span>;<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;case</span><span class="hljs-number">&nbsp;1</span>:&nbsp;...<span class="hljs-keyword">&nbsp;break</span>;<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;case</span><span class="hljs-number">&nbsp;2</span>:&nbsp;...<span class="hljs-keyword">&nbsp;break</span>;<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;case</span><span class="hljs-number">&nbsp;3</span>:&nbsp;...<span class="hljs-keyword">&nbsp;break</span>;<span class="hljs-keyword"><br>&nbsp;&nbsp;&nbsp;&nbsp;default</span>:&nbsp;...<br>}</code></pre><p class="p"><font _mstmutation="1" _msttexthash="211280446" _msthash="42661">编译器往往不会翻译成一长串 ，而是用<strong class="strong" _mstmutation="1">跳转表</strong>，效率更高。</font><code class="codespan">cmp/je</code></p><p class="p" _msttexthash="49644257" _msthash="42662">来看这段经典 x64 汇编：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">.intel_syntax&nbsp;noprefix<br>.global&nbsp;_start<br>_start:<br>&nbsp;&nbsp;&nbsp;&nbsp;cmp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rdi,&nbsp;3<br>&nbsp;&nbsp;&nbsp;&nbsp;ja&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;default&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;rdi&nbsp;&gt;&nbsp;3（无符号），直接去&nbsp;default<br>&nbsp;&nbsp;&nbsp;&nbsp;jmp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[rsi&nbsp;+&nbsp;rdi*8]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;rdi&nbsp;在&nbsp;0~3，查跳转表<br>default:<br>&nbsp;&nbsp;&nbsp;&nbsp;jmp&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[rsi&nbsp;+&nbsp;32]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;32&nbsp;=&nbsp;4*8，跳转表第&nbsp;5&nbsp;项</code></pre><p class="p"><strong class="strong" _msttexthash="25305449" _msthash="42663">逐行解释：</strong></p><ol class="ol"><li class="listitem"><font _mstmutation="1" _msttexthash="40806207" _msthash="42664">1.  ： 是 ，跟 3 比较。</font><code class="codespan">cmp rdi, 3</code><code class="codespan">rdi</code><code class="codespan">index</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="346724014" _msthash="42665">2.  ：如果 （无符号比较），直接跳到 。 跳转表只有 0~3 四项，超出下标必须保护。</font><code class="codespan">ja default</code><code class="codespan">rdi &gt; 3</code><code class="codespan">default</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="552218173" _msthash="42666">3.  ：核心。 是跳转表基地址，每个目标地址占 8 字节。 就是索引乘以 8。 从表里取出 8 字节的目标地址，然后  过去。</font><code class="codespan">jmp [rsi + rdi*8]</code><code class="codespan">rsi</code><code class="codespan">rdi*8</code><code class="codespan">[rsi + rdi*8]</code><code class="codespan">jmp</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="172134664" _msthash="42667">4.  的地址在 （前 4 项各 8 字节 = 32），就是表的第 5 项。</font><code class="codespan">default</code><code class="codespan">rsi+32</code></li></ol><p class="p"><strong class="strong" _msttexthash="120123952" _msthash="42668">这就是 <code class="codespan">switch</code> 的高效实现，比一个个 <code class="codespan">if</code> 快得多。</strong></p><p class="p"><font _mstmutation="1" _msttexthash="232379823" _msthash="42669">下次在反汇编里看到  这类语句，马上反应过来：它在查跳转表。</font><code class="codespan">jmp [rax + rcx*8]</code></p><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="20" _msttexthash="106978781" _msthash="42670">五、画龙点睛：汇编代码的骨架长这样</h2><p class="p" _msttexthash="205742485" _msthash="42671">抛开所有细节，大多数汇编程序都是由以下积木搭起来的：</p><ol class="ol"><li class="listitem"><font _mstmutation="1" _msttexthash="53312467" _msthash="42672">1. <strong class="strong" _mstmutation="1">变量搬运</strong>：、、、 清零。</font><code class="codespan">mov</code><code class="codespan">lea</code><code class="codespan">movzx</code><code class="codespan">xor</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="39134238" _msthash="42673">2. <strong class="strong" _mstmutation="1">算术逻辑</strong>：、、、、...</font><code class="codespan">add</code><code class="codespan">sub</code><code class="codespan">imul</code><code class="codespan">and</code><code class="codespan">shl</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="78527384" _msthash="42674">3. <strong class="strong" _mstmutation="1">栈帧操作（函数调用）</strong>：</font><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-asm">push&nbsp;ebp<br>mov&nbsp;ebp,&nbsp;esp<br>sub&nbsp;esp,&nbsp;0x20&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;&nbsp;分配局部变量空间<br>...<br>mov&nbsp;esp,&nbsp;ebp<br>pop&nbsp;ebp<br>ret</code></pre></li><li class="listitem"><font _mstmutation="1" _msttexthash="168070175" _msthash="42675">4. <strong class="strong" _mstmutation="1">条件判断</strong>： 设灯，然后 、、、 等看灯跳转，就是 。</font><code class="codespan">cmp</code><code class="codespan">je</code><code class="codespan">jne</code><code class="codespan">ja</code><code class="codespan">jg</code><code class="codespan">if</code></li><li class="listitem"><font _mstmutation="1" _msttexthash="35966034" _msthash="42676">5. <strong class="strong" _mstmutation="1">跳转表</strong>： 实现 。</font><code class="codespan">jmp [base + index*scale]</code><code class="codespan">switch</code></li></ol><p class="p" _msttexthash="203648614" _msthash="42677">当你下次看到一大片十六进制，心里就能浮现出这些结构：</p><p class="p"><em class="em" _msttexthash="357379477" _msthash="42678">“这里在设标志位…… 那里在看灯跳转…… 这是个函数头，<code class="codespan" _istranslated="1">push ebp; mov ebp, esp</code> 建栈帧…… 它要 <code class="codespan" _istranslated="1">ret</code> 回家了。 ”</em></p><p class="p" _msttexthash="177995272" _msthash="42679">汇编不再是天书，而是由几个简单部件组装成的精密机器。</p><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="21" _msttexthash="57501886" _msthash="42680">六、栈帧结构为什么是 PWN 的基础</h2><p class="p" _msttexthash="513152159" _msthash="42681">如果你将来要学习二进制漏洞利用（PWN），尤其是<strong class="strong">栈溢出</strong>，那么今天讲的栈帧结构就是你绕不开的地基。</p><p class="p" _msttexthash="648702171" _msthash="42682">栈溢出的本质非常简单：局部变量的空间是有限的，但程序没有检查输入的长度，导致数据越界写到了栈帧的其它区域。</p><p class="p" _msttexthash="39685685" _msthash="42683">回顾一下栈帧布局：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+    <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
+    <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
+    <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
+  </svg></span><code class="language-" data-language-pending="" data-raw-code="[ebp+8]   参数
+[ebp+4]   返回地址
+[ebp]     保存的 EBP
+[ebp-4]   局部变量 buf[8]
+[ebp-12]  ..." data-show-line-number="false">[ebp+8]&nbsp;&nbsp;&nbsp;参数<br>[ebp+4]&nbsp;&nbsp;&nbsp;返回地址<br>[ebp]&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;保存的&nbsp;EBP<br>[ebp-4]&nbsp;&nbsp;&nbsp;局部变量&nbsp;buf[8]<br>[ebp-12]&nbsp;&nbsp;...</code></pre><p class="p"><font _mstmutation="1" _msttexthash="1723436975" _msthash="42684">假设  只有 8 个字节，但你强行打了 20 个字节 的台子，多出的数据会一路向上覆盖掉 （保存的 EBP），再覆盖掉 （返回地址）。 当函数执行  时，就会把被篡改的值弹进 ，从而跳转到攻击者控制的地址上。</font><code class="codespan">buf</code><code class="codespan">[ebp]</code><code class="codespan">[ebp+4]</code><code class="codespan">ret</code><code class="codespan">EIP</code></p><p class="p"><font _mstmutation="1" _msttexthash="737159774" _msthash="42685">这就是经典的栈溢出劫持控制流。 你学到的每一个细节—— 怎么压返回地址、 怎么保存栈基址、局部变量在  的位置——都是漏洞利用的发力点。</font><code class="codespan">call</code><code class="codespan">push ebp</code><code class="codespan">[ebp-xx]</code></p><p class="p" _msttexthash="1685735181" _msthash="42686">很多 CTF 的 pwn 题，第一步就是 IDA 里看栈帧大小，找到缓冲区到返回地址的偏移，然后构造 payload 精准覆盖返回地址。 今天你在这里打下的栈帧基础，正是后面搞懂 ROP、ret2libc、canary 绕过等高阶技巧的基石。</p><p class="p"><strong class="strong" _msttexthash="1862288948" _msthash="42687">把今天的内容啃透，以后看到 <code class="codespan">sub esp, 0x28</code> 时，你不是在背指令，而是直接能想到：这函数向上搭了 40 字节的台子，buf 可能在 <code class="codespan">ebp-0x20</code> 处，返回地址就在 <code class="codespan">ebp+4</code>，我如果能控制输入，就能改变这个台子原本的作用。</strong></p><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="22" _msttexthash="12486825" _msthash="42688">下篇预告</h2><p class="p" _msttexthash="393203083" _msthash="42689">有了这些基础，我们就可以一起拆一个真正的程序，分析它的控制流，找出隐藏的逻辑。 </p><p class="p" _msttexthash="18010395" _msthash="42690">准备开始PWN了吗 !</p>
+    <style>
+      .preview-wrapper pre::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #ccc;
+        text-align: center;
+        font-size: 0.8em;
+        padding: 5px 10px 0;
+        line-height: 15px;
+        height: 15px;
+        font-weight: 600;
+      }
+    </style>
+  
+    <style>
+      .hljs.code__pre > .mac-sign {
+        display: flex;
+      }
+    </style>
+  
+    <style>
+      h2 strong {
+        color: inherit !important;
+      }
+    </style>
+  </section>
+  </div>
+</body>
+</html>
