@@ -191,6 +191,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             filter: drop-shadow(0 0 10px rgba(0, 128, 255, 0.5));
+            overflow: visible !important;
         }
         
         .miku-character:hover {
@@ -369,8 +370,8 @@
                 <!-- 初音角色互动区域 -->
                 <div class="relative inline-block">
                     <!-- 初音Live2D角色 -->
-                    <div id="miku-character" class="miku-character w-64 h-64 mx-auto mb-8 relative">
-                        <div id="live2d-container" class="w-full h-full"></div>
+                    <div id="miku-character" class="miku-character mx-auto mb-8 relative" style="width:256px;height:320px;overflow:visible;">
+                        <div id="live2d-container" class="w-full h-full" style="overflow:visible;"></div>
                     </div>
                     
                     <!-- 互动对话框 -->
@@ -1060,8 +1061,8 @@
                 );
                 
                 model.anchor.set(0.5, 0.5);
-                model.position.set(size / 2, size / 2 + 15);
-                model.scale.set(0.45);
+                model.position.set(size / 2, size * 0.6);
+                model.scale.set(0.4);
                 
                 app.stage.addChild(model);
                 container._model = model;
