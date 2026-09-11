@@ -6,12 +6,10 @@
     <meta charset="UTF-8">
     <!-- 适配移动端显示 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我叫GOD·陌</title>
+    <meta http-equiv="refresh" content="0; url=index.html">
+    <title>跳转中</title>
 </head>
 <body>
-    <!-- 网页内容 -->
-    <p>这是我的网页</p>
-    <br>
-    <p>刚开始学习，还有很多不懂的地方，我会虚心向各位大佬学习的</p>
+    <p>正在跳转到主页...</p>
 </body>
 </html>

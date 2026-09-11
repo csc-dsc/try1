@@ -1,199 +1,176 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="GOD·陌的个人主页，收录个人博客、博客园和常用站点入口。">
-  <title>GOD·陌 | Personal Site</title>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一座匿名的安全研究与创作档案馆，记录逆向工程、二进制安全、Android 分析与长期学习。">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Null Garden | Security Notes & Experiments</title>
+  <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div class="bg-orb bg-orb-a"></div>
-  <div class="bg-orb bg-orb-b"></div>
+  <a class="skip-link" href="#content">跳到正文</a>
 
-  <header class="topbar">
-    <a class="brand" href="#home">CSC</a>
-    <nav class="nav" id="nav">
-      <a href="personal-instruction.html">关于我</a>
-      <a href="#tutorials">教程</a>
-      <a href="#blogs">博客</a>
-      <a href="#links">链接</a>
-      <a href="miku-theme.html">旧作</a>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="#home" aria-label="Null Garden 首页">
+      <span class="wordmark-mark" aria-hidden="true">N//G</span>
+      <span>NULL GARDEN</span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a href="#work">作品</a>
+      <a href="#notes">笔记</a>
+      <a href="personal-instruction.html">关于</a>
+      <a href="miku-theme.html">MIKU</a>
     </nav>
-    <button class="icon-btn" id="theme-toggle" aria-label="切换主题">◐</button>
-    <button class="icon-btn menu-btn" id="menu-toggle" aria-label="展开菜单">☰</button>
+    <div class="header-tools">
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
+      <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button>
+    </div>
   </header>
 
-  <main class="shell">
-    <section class="hero reveal" id="home">
-      <div class="hero-copy">
-        <p class="eyebrow">Personal Home</p>
-        <h1>GOD·陌</h1>
-        <p class="lead">个人主页、博客入口、作品展示和常用链接都放这里。</p>
+  <main id="content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-noise" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="kicker">REVERSE / BUILD / DOCUMENT</p>
+        <h1 id="hero-title">把复杂系统<br>拆成可理解的光。</h1>
+        <p class="hero-lead">专注逆向工程与二进制安全，也持续探索 Android、AI 安全和更有表达力的网页。</p>
         <div class="hero-actions">
-          <a class="btn primary" href="https://god-re.gt.tc/" target="_blank" rel="noreferrer">新博客</a>
-          <a class="btn" href="https://www.cnblogs.com/dsc-/p" target="_blank" rel="noreferrer">博客园</a>
-          <a class="btn" href="https://blog.csdn.net/csc4188" target="_blank" rel="noreferrer">CSDN博客</a>
+          <a class="command primary" href="#work">查看作品 <span aria-hidden="true">↓</span></a>
+          <a class="command" href="personal-instruction.html">阅读档案 <span aria-hidden="true">↗</span></a>
         </div>
       </div>
+      <div class="hero-index" aria-label="站点摘要">
+        <span><b>01</b> Binary</span>
+        <span><b>02</b> Android</span>
+        <span><b>03</b> Creative web</span>
+      </div>
+    </section>
 
-      <aside class="profile-card">
-        <div class="avatar-container">
-          <img src="image/avatar.jpg" alt="GOD·陌" class="avatar">
+    <section class="ticker-band" aria-label="关注方向">
+      <div class="ticker-track">
+        <span>REVERSE ENGINEERING</span><i>✦</i><span>ANDROID</span><i>✦</i><span>PWN</span><i>✦</i><span>AI SECURITY</span><i>✦</i><span>CTF</span><i>✦</i><span>VISUAL WEB</span><i>✦</i>
+        <span aria-hidden="true">REVERSE ENGINEERING</span><i aria-hidden="true">✦</i><span aria-hidden="true">ANDROID</span><i aria-hidden="true">✦</i><span aria-hidden="true">PWN</span><i aria-hidden="true">✦</i><span aria-hidden="true">AI SECURITY</span><i aria-hidden="true">✦</i><span aria-hidden="true">CTF</span><i aria-hidden="true">✦</i><span aria-hidden="true">VISUAL WEB</span><i aria-hidden="true">✦</i>
+      </div>
+    </section>
+
+    <section class="band intro-band reveal" aria-labelledby="intro-title">
+      <div class="section-shell intro-layout">
+        <div class="section-label"><span>00</span> FIELD NOTES</div>
+        <div class="intro-copy">
+          <h2 id="intro-title">好奇心先行，证据落地。</h2>
+          <p>从 Web 走向更底层的世界，在静态分析、动态 Hook、算法还原和漏洞利用之间建立完整视角。每一次解题都尽量留下可复现的过程，而不只是答案。</p>
         </div>
-        <div class="meta">
-          <strong>个人站点中枢</strong>
-          <span>更新、文章、友链统一入口</span>
+        <dl class="identity-strip">
+          <div><dt>TYPE</dt><dd>ENTP</dd></div>
+          <div><dt>MODE</dt><dd>Hands-on</dd></div>
+          <div><dt>LOOP</dt><dd>Break → Learn → Write</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band work-band" id="work" aria-labelledby="work-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div class="section-label"><span>01</span> SELECTED WORK</div>
+          <h2 id="work-title">正在生长的实验</h2>
+          <p>公开仓库中的工具、内容与小型产品实验。</p>
         </div>
-        <div class="stats">
-          <div><b>3</b><span>核心站点</span></div>
-          <div><b>7+</b><span>精选文章</span></div>
-          <div><b>1</b><span>主主页</span></div>
+        <div class="project-list">
+          <article class="project-row reveal">
+            <span class="project-number">01</span>
+            <span class="project-main"><strong>Challenge Factory</strong><small>把出题、验证与交付过程沉淀为可复用工作流</small></span>
+            <span class="project-tags"><em>CTF</em><em>Automation</em></span>
+            <span class="project-arrow" aria-hidden="true">●</span>
+          </article>
+          <article class="project-row reveal">
+            <span class="project-number">02</span>
+            <span class="project-main"><strong>Poetry Lab</strong><small>把文本、生成式 AI 与轻量体验放进同一个实验场</small></span>
+            <span class="project-tags"><em>AI</em><em>Product</em></span>
+            <span class="project-arrow" aria-hidden="true">●</span>
+          </article>
+          <article class="project-row reveal">
+            <span class="project-number">03</span>
+            <span class="project-main"><strong>Utility Box</strong><small>为重复任务打造的小工具集合</small></span>
+            <span class="project-tags"><em>Tools</em><em>Practice</em></span>
+            <span class="project-arrow" aria-hidden="true">●</span>
+          </article>
+          <a class="project-row reveal accent-project" href="miku-theme.html">
+            <span class="project-number">04</span>
+            <span class="project-main"><strong>Miku Signal</strong><small>以本地影像、SVG 与节拍交互重构的视觉主题页</small></span>
+            <span class="project-tags"><em>Visual</em><em>Web</em></span>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </a>
         </div>
-      </aside>
-    </section>
-
-    <section class="section reveal" id="about">
-      <div class="section-head">
-        <p class="eyebrow">About</p>
-        <h2>关于我</h2>
-      </div>
-      <div class="grid two">
-        <article class="card">
-          <p>喜欢把站点做得清爽、能用、不卡。</p>
-          <p>主要内容是个人博客、技术笔记和一些页面实验。</p>
-        </article>
-        <article class="card">
-          <p>关于我的更多介绍，请移步 <a href="personal-instruction.html">关于我</a> 页面</p>
-        </article>
       </div>
     </section>
 
-    <section class="section reveal" id="blogs">
-      <div class="section-head">
-        <p class="eyebrow">Blogs</p>
-        <h2>博客入口</h2>
-      </div>
-      <div class="grid three">
-        <a class="card link-card" href="https://god-re.gt.tc/" target="_blank" rel="noreferrer">
-          <span class="tag new-site">NEW</span>
-          <strong>新博客</strong>
-          <p>https://god-re.gt.tc/</p>
-        </a>
-        <a class="card link-card" href="https://www.cnblogs.com/dsc-/p" target="_blank" rel="noreferrer">
-          <span class="tag cnblogs">CNBLOGS</span>
-          <strong>博客园随笔</strong>
-          <p>https://www.cnblogs.com/dsc-/p</p>
-        </a>
-        <a class="card link-card" href="https://www.zimo.click/" target="_blank" rel="noreferrer">
-          <span class="tag STYLE">STYLE</span>
-          <strong>Zimo's Blogs</strong>
-          <p>参考 zimo.click 和博客园首页的「最近更新」「文章卡片」「清晰导航」整理成此主页</p>
-        </a>
-      </div>
-    </section>
-
-    <section class="section reveal">
-      <div class="section-head">
-        <p class="eyebrow">Recent</p>
-        <h2>最近更新</h2>
-      </div>
-      <div class="grid three">
-        <a class="card post-card" href="https://www.cnblogs.com/dsc-/p/19787224" target="_blank" rel="noreferrer">
-          <strong>写网页</strong>
-          <span>博客园 · 2026-04-02</span>
-        </a>
-        <a class="card post-card" href="https://www.cnblogs.com/dsc-/p/19787155" target="_blank" rel="noreferrer">
-          <strong>随笔和文章的区别</strong>
-          <span>博客园 · 2026-03-28</span>
-        </a>
-        <a class="card post-card" href="https://www.cnblogs.com/dsc-/p/19786992" target="_blank" rel="noreferrer">
-          <strong>第一次用博客园</strong>
-          <span>博客园 · 2026-03-28</span>
-        </a>
-        <a class="card post-card" href="https://www.zimo.click/2026/04/22/FastJson/" target="_blank" rel="noreferrer">
-          <strong>FastJson</strong>
-          <span>Zimo · 2026-04-22</span>
-        </a>
-        <a class="card post-card" href="https://www.zimo.click/2026/04/08/内存马/" target="_blank" rel="noreferrer">
-          <strong>Java内存马</strong>
-          <span>Zimo · 2026-04-08</span>
-        </a>
-        <a class="card post-card" href="https://www.zimo.click/2026/04/04/ClassLoader/" target="_blank" rel="noreferrer">
-          <strong>ClassLoader</strong>
-          <span>Zimo · 2026-04-04</span>
-        </a>
+    <section class="band notes-band" id="notes" aria-labelledby="notes-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div class="section-label"><span>02</span> DEEP DIVES</div>
+          <h2 id="notes-title">从原理到复现</h2>
+          <p>不是知识点堆叠，而是能跟着做完的学习路径。</p>
+        </div>
+        <div class="note-grid">
+          <a class="note-card reveal" href="assembly-tutorial.html">
+            <span class="note-code">ASM / 01</span>
+            <h3>会 C 语言，就能读汇编</h3>
+            <p>寄存器、栈帧、条件跳转与调用约定的直觉式入门。</p>
+            <span class="note-link">开始阅读 <b aria-hidden="true">→</b></span>
+          </a>
+          <a class="note-card reveal" href="frida-hook-tutorial.html">
+            <span class="note-code">HOOK / 02</span>
+            <h3>Frida 动态分析路径</h3>
+            <p>从 Java 层定位到 Native 参数追踪，建立可迁移的 Hook 思路。</p>
+            <span class="note-link">开始阅读 <b aria-hidden="true">→</b></span>
+          </a>
+          <a class="note-card reveal" href="pwn-tutorial.html">
+            <span class="note-code">PWN / 03</span>
+            <h3>二进制漏洞利用入门</h3>
+            <p>以栈与控制流为主线，把保护机制和利用方式串起来。</p>
+            <span class="note-link">开始阅读 <b aria-hidden="true">→</b></span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="section reveal" id="tutorials">
-      <div class="section-head">
-        <p class="eyebrow">Tutorials</p>
-        <h2>技术教程</h2>
-      </div>
-      <div class="grid three">
-        <a class="card link-card" href="pwn-tutorial.html">
-          <span class="tag pwn">PWN</span>
-          <strong>PWN 入门教程</strong>
-          <p>从零到一 · 出题人视角的二进制安全入门</p>
-        </a>
-        <a class="card link-card" href="assembly-tutorial.html">
-          <span class="tag asm">ASM</span>
-          <strong>汇编语言教程</strong>
-          <p>变量、栈、条件跳转，会 C 语言就会汇编</p>
-        </a>
-        <a class="card link-card" href="frida-hook-tutorial.html">
-          <span class="tag hook">HOOK</span>
-          <strong>Frida Hook 教程</strong>
-          <p>从了解到全方位会用 · 逆向进阶篇</p>
-        </a>
+    <section class="band process-band reveal" aria-labelledby="process-title">
+      <div class="section-shell process-layout">
+        <div>
+          <div class="section-label"><span>03</span> LEARNING LOOP</div>
+          <h2 id="process-title">一条可重复的学习回路</h2>
+        </div>
+        <ol class="process-list">
+          <li><span>01</span><strong>Observe</strong><p>先收集行为、字符串、调用关系与环境线索。</p></li>
+          <li><span>02</span><strong>Reconstruct</strong><p>用静态、动态与仿真交叉验证关键逻辑。</p></li>
+          <li><span>03</span><strong>Explain</strong><p>写成别人可以复现、未来自己也看得懂的记录。</p></li>
+        </ol>
       </div>
     </section>
 
-    <section class="section reveal" id="links">
-      <div class="section-head">
-        <p class="eyebrow">Links</p>
-        <h2>常用链接</h2>
+    <section class="band links-band" aria-labelledby="links-title">
+      <div class="section-shell links-layout reveal">
+        <div>
+          <div class="section-label"><span>04</span> ELSEWHERE</div>
+          <h2 id="links-title">继续向外探索</h2>
+        </div>
+        <div class="external-links">
+          <a href="https://god-re.gt.tc/" target="_blank" rel="noreferrer"><span>独立笔记</span><b>Latest writing ↗</b></a>
+          <a href="personal-instruction.html"><span>匿名学习档案</span><b>Profile →</b></a>
+          <a href="miku-theme.html"><span>初音视觉主题</span><b>MIKU / 39 →</b></a>
+        </div>
       </div>
-      <div class="grid two">
-        <a class="card link-card" href="https://github.com/csc-dsc" target="_blank" rel="noreferrer">
-          <strong>GitHub</strong>
-          <p>仓库和主页入口</p>
-        </a>
-        <a class="card link-card" href="miku-theme.html">
-          <strong>初音主题页</strong>
-          <p>保留旧作展示</p>
-        </a>
-        <a class="card link-card" href="https://pcn0uzhoxu7z.feishu.cn/wiki/CzjBwZYLmidZSukv4ZpcmO4xnpd?from=from_copylink" target="_blank" rel="noreferrer">
-          <span class="tag">PWN</span>
-          <strong>飞书·PWN</strong>
-          <p>密码: GOD-101-pwn</p>
-        </a>
-        <a class="card link-card" href="https://pcn0uzhoxu7z.feishu.cn/wiki/WTmDwHJ3Wi34ytkeuj3cyQEanYc" target="_blank" rel="noreferrer">
-          <span class="tag">RE</span>
-          <strong>飞书·RE</strong>
-          <p>密码: GOD-101-RE</p>
-        </a>
-        <a class="card link-card" href="https://csc-dsc.github.io/try1/" target="_blank" rel="noreferrer">
-          <strong>GitHub Pages 站点</strong>
-          <p>作品展示与主题页面</p>
-        </a>
-              </div>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>© <span id="year">2026</span> GOD·陌</p>
+  <footer class="site-footer">
+    <span>NULL GARDEN / <span id="year">2026</span></span>
+    <span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span>
+    <a href="#top">TOP ↑</a>
   </footer>
 
   <script src="index.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-

@@ -1,0 +1,7 @@
+# Private local materials. Never publish these from this repository.
+/CSC/
+/CSC.zip
+
+# Local review artifacts
+/*.log
+/.tmp/
