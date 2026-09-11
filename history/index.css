@@ -40,6 +40,7 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+body.history-home::selection { color: #210b16; background: #ff76a8; }
 
 .bg-orb {
   position: fixed;

@@ -33,6 +33,11 @@
 html { scroll-behavior: smooth; scroll-padding-top: 6rem; }
 body { margin: 0; min-width: 320px; overflow-x: hidden; background: var(--ink); color: var(--paper); font-family: var(--sans); letter-spacing: 0; }
 body::selection { color: #080a0c; background: var(--acid); }
+.page-profile::selection { color: #041719; background: #33e6e0; }
+.page-platforms::selection { color: #1b0710; background: #ff4f91; }
+.page-articles::selection { color: #241700; background: #ffc857; }
+.page-links::selection { color: #16072d; background: #bb8cff; }
+.page-other::selection { color: #071625; background: rgba(105, 193, 255, .82); }
 a { color: inherit; text-decoration: none; }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { font: inherit; }
