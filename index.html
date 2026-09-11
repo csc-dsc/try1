@@ -13,15 +13,18 @@
   <a class="skip-link" href="#content">跳到正文</a>
 
   <header class="site-header" id="top">
-    <a class="wordmark" href="#home" aria-label="Null Garden 首页">
+    <a class="wordmark" href="index.html" aria-label="Null Garden 首页">
       <span class="wordmark-mark" aria-hidden="true">N//G</span>
       <span>NULL GARDEN</span>
     </a>
     <nav class="site-nav" id="site-nav" aria-label="主导航">
-      <a href="#work">作品</a>
-      <a href="#notes">笔记</a>
-      <a href="personal-instruction.html">关于</a>
+      <a href="index.html" aria-current="page">首页</a>
+      <a href="platforms.html">平台</a>
+      <a href="articles.html">文章</a>
+      <a href="personal-instruction.html">关于我</a>
+      <a href="links.html">友链</a>
       <a href="miku-theme.html">MIKU</a>
+      <a href="other.html">其他</a>
     </nav>
     <div class="header-tools">
       <button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
@@ -34,7 +37,7 @@
       <div class="hero-noise" aria-hidden="true"></div>
       <div class="hero-content">
         <p class="kicker">REVERSE / BUILD / DOCUMENT</p>
-        <h1 id="hero-title">把复杂系统<br>拆成可理解的光。</h1>
+        <h1 id="hero-title">把复杂系统<br>拆成可理解的光</h1>
         <p class="hero-lead">专注逆向工程与二进制安全，也持续探索 Android、AI 安全和更有表达力的网页。</p>
         <div class="hero-actions">
           <a class="command primary" href="#work">查看作品 <span aria-hidden="true">↓</span></a>
@@ -67,6 +70,10 @@
           <div><dt>MODE</dt><dd>Hands-on</dd></div>
           <div><dt>LOOP</dt><dd>Break → Learn → Write</dd></div>
         </dl>
+        <div class="terminal-mini" aria-label="学习状态终端">
+          <span class="terminal-prompt" aria-hidden="true">ng@field:~$</span>
+          <span class="terminal-output" id="terminal-output" aria-live="polite"></span><span class="terminal-cursor" aria-hidden="true"></span>
+        </div>
       </div>
     </section>
 
@@ -157,7 +164,7 @@
           <h2 id="links-title">继续向外探索</h2>
         </div>
         <div class="external-links">
-          <a href="https://god-re.gt.tc/" target="_blank" rel="noreferrer"><span>独立笔记</span><b>Latest writing ↗</b></a>
+          <a href="links.html"><span>博客、飞书与友链</span><b>Links →</b></a>
           <a href="personal-instruction.html"><span>匿名学习档案</span><b>Profile →</b></a>
           <a href="miku-theme.html"><span>初音视觉主题</span><b>MIKU / 39 →</b></a>
         </div>
@@ -171,6 +178,6 @@
     <a href="#top">TOP ↑</a>
   </footer>
 
-  <script src="index.js"></script>
+  <script src="index.js?v=20260911-2"></script>
 </body>
 </html>

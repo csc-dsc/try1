@@ -34,6 +34,7 @@ img { display: block; max-width: 100%; }
 .miku-wordmark b { display: grid; place-items: center; width: 38px; height: 30px; color: #031011; background: var(--accent); font-size: .78rem; transition: background .2s ease; }
 .miku-nav { display: flex; gap: clamp(1.1rem, 3vw, 3rem); font: 700 .68rem var(--mono); }
 .miku-nav a { color: #c9d9da; }
+.miku-nav a[aria-current="page"] { color: var(--accent); }
 .miku-nav a:hover, .miku-nav a:focus-visible { color: var(--accent); }
 .miku-tools { justify-self: end; display: flex; gap: .5rem; }
 .square-button { width: 38px; height: 38px; padding: 0; border: 1px solid rgba(255,255,255,.28); border-radius: 0; background: transparent; cursor: pointer; }
@@ -133,7 +134,7 @@ html[data-mode="dark"] .archive-copy p { color: #aabbbc; }
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.is-visible { opacity: 1; transform: none; }
 
-@media (max-width: 860px) {
+@media (max-width: 1040px) {
   .miku-header { height: 64px; grid-template-columns: 1fr auto; }
   .miku-nav { position: absolute; top: 64px; left: 0; right: 0; display: none; padding: .8rem 1rem 1rem; background: rgba(3,10,14,.96); border-bottom: 1px solid rgba(255,255,255,.2); }
   .miku-nav.is-open { display: grid; }

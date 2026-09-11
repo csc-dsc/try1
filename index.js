@@ -51,3 +51,48 @@ if ('IntersectionObserver' in window) {
 
 const year = document.getElementById('year');
 if (year) year.textContent = String(new Date().getFullYear());
+
+const terminalOutput = document.getElementById('terminal-output');
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const terminalMessages = [
+  'TYPE=ENTP',
+  'MODE=Hands-on',
+  'LOOP=Break -> Learn -> Write',
+  'STATUS=Exploring systems'
+];
+
+if (terminalOutput) {
+  if (reducedMotion) {
+    terminalOutput.textContent = terminalMessages[0];
+  } else {
+    let messageIndex = 0;
+    let characterIndex = 0;
+    let deleting = false;
+
+    const renderTerminal = () => {
+      const message = terminalMessages[messageIndex];
+      terminalOutput.textContent = message.slice(0, characterIndex);
+
+      if (!deleting && characterIndex < message.length) {
+        characterIndex += 1;
+        window.setTimeout(renderTerminal, 58);
+        return;
+      }
+      if (!deleting) {
+        deleting = true;
+        window.setTimeout(renderTerminal, 1300);
+        return;
+      }
+      if (characterIndex > 0) {
+        characterIndex -= 1;
+        window.setTimeout(renderTerminal, 28);
+        return;
+      }
+      deleting = false;
+      messageIndex = (messageIndex + 1) % terminalMessages.length;
+      window.setTimeout(renderTerminal, 360);
+    };
+
+    renderTerminal();
+  }
+}
