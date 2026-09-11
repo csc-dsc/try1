@@ -35,6 +35,17 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') closeMenu();
 });
 
+document.querySelectorAll('.resource-contact[href="#contact"]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    const contact = document.getElementById('contact');
+    if (!contact) return;
+    event.preventDefault();
+    history.replaceState(null, '', '#contact');
+    const targetTop = contact.getBoundingClientRect().top + window.scrollY - 72;
+    window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+  });
+});
+
 const reveals = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {

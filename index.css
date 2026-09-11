@@ -196,6 +196,10 @@ img { max-width: 100%; }
 .directory-row strong { font-size: 1.1rem; }
 .directory-row small { color: var(--muted); line-height: 1.55; }
 .directory-row b { justify-self: end; font-size: 1.2rem; }
+.resource-primary, .resource-contact, .resource-arrow { color: inherit; }
+.resource-primary:hover strong, .resource-primary:focus-visible strong, .resource-arrow:hover, .resource-arrow:focus-visible { color: var(--cyan); }
+.resource-contact:hover small, .resource-contact:focus-visible small { color: var(--rose); }
+.resource-arrow { justify-self: end; font-size: 1.2rem; }
 .contact-panel { display: grid; grid-template-columns: .75fr 1.25fr; gap: 5rem; align-items: start; }
 .contact-panel h2 { margin: .8rem 0 0; font: 600 clamp(2.8rem, 6vw, 5.5rem)/.95 KaiTi, STKaiti, "Kaiti SC", serif; }
 .contact-actions { display: grid; gap: .8rem; }
@@ -250,6 +254,8 @@ img { max-width: 100%; }
   .directory-row { grid-template-columns: 34px minmax(0, 1fr) 20px; padding: .9rem 0; }
   .directory-row small { grid-column: 2; }
   .directory-row b { grid-column: 3; grid-row: 1; }
+  .directory-row .resource-contact { grid-column: 2; }
+  .directory-row .resource-arrow { grid-column: 3; grid-row: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
