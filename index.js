@@ -107,3 +107,49 @@ if (terminalOutput) {
     renderTerminal();
   }
 }
+
+const profileTerminalOutput = document.getElementById('profile-terminal-output');
+const profileTerminalMessages = [
+  { text: 'R3vErSe EvErYtH1nG', color: '#008f90' },
+  { text: 'Br3Ak L1m1tS', color: '#d92862' },
+  { text: '0wN SySt3mS', color: '#537d00' },
+  { text: 'Cr3At3 W0rLdS', color: '#a85b00' }
+];
+
+if (profileTerminalOutput) {
+  if (reducedMotion) {
+    profileTerminalOutput.textContent = profileTerminalMessages[0].text;
+    profileTerminalOutput.style.color = profileTerminalMessages[0].color;
+  } else {
+    let profileMessageIndex = 0;
+    let profileCharacterIndex = 0;
+    let profileDeleting = false;
+
+    const renderProfileTerminal = () => {
+      const message = profileTerminalMessages[profileMessageIndex];
+      profileTerminalOutput.textContent = message.text.slice(0, profileCharacterIndex);
+      profileTerminalOutput.style.color = message.color;
+
+      if (!profileDeleting && profileCharacterIndex < message.text.length) {
+        profileCharacterIndex += 1;
+        window.setTimeout(renderProfileTerminal, 56);
+        return;
+      }
+      if (!profileDeleting) {
+        profileDeleting = true;
+        window.setTimeout(renderProfileTerminal, 1450);
+        return;
+      }
+      if (profileCharacterIndex > 0) {
+        profileCharacterIndex -= 1;
+        window.setTimeout(renderProfileTerminal, 26);
+        return;
+      }
+      profileDeleting = false;
+      profileMessageIndex = (profileMessageIndex + 1) % profileTerminalMessages.length;
+      window.setTimeout(renderProfileTerminal, 360);
+    };
+
+    renderProfileTerminal();
+  }
+}
