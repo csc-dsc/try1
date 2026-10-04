@@ -1,0 +1,35 @@
+{
+  "base": "models/",
+  "models": [
+    {
+      "id": "balisong",
+      "label": "蝴蝶刀",
+      "src": "balisong/scene.gltf",
+      "license": "balisong/license.txt",
+      "source": "https://sketchfab.com/3d-models/balisong-85f7e55c67974a3585eeed345fbbd972",
+      "credit": "DUCK_",
+      "clip": "Take 01",
+      "motionStatus": "source-animation-present-rendering-pending"
+    },
+    {
+      "id": "nunchaku",
+      "label": "双截棍",
+      "src": "nunchaku/scene.gltf",
+      "license": "nunchaku/license.txt",
+      "source": "https://sketchfab.com/3d-models/game-of-death-nunchaku-059e31451a464c1ea969b5b3a58c36b1",
+      "credit": "B3M DESIGNER",
+      "clip": null,
+      "motionStatus": "ten-per-object-tracks-require-synchronized-review"
+    },
+    {
+      "id": "guitar",
+      "label": "木吉他",
+      "src": "guitar/scene.gltf",
+      "license": "guitar/license.txt",
+      "source": "https://sketchfab.com/3d-models/sm-yamaha-string-acoustic-guitar-instrument-38d4be70e4054a15afd77946b1b3211a",
+      "credit": "effiebop",
+      "clip": null,
+      "motionStatus": "no-playable-plucking-motion-strings-share-one-mesh"
+    }
+  ]
+}

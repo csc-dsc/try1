@@ -1,0 +1,155 @@
+.work-band.work-band {
+  --work-text: #f4f6f1;
+  --work-muted: #b4c5bd;
+  --work-line: rgba(228, 242, 232, .24);
+  --work-factory: #a7e6cf;
+  --work-poetry: #edafce;
+  --work-utility: #e6d69f;
+  --work-miku: #b5dcea;
+  --work-factory-wash: rgba(88, 213, 165, .1);
+  --work-poetry-wash: rgba(235, 143, 189, .1);
+  --work-utility-wash: rgba(221, 186, 107, .1);
+  --work-miku-wash: rgba(157, 212, 232, .1);
+  background: #111817;
+  color: var(--work-text);
+}
+html[data-theme="light"] .work-band {
+  --work-text: #182a2a;
+  --work-muted: #485b5b;
+  --work-line: rgba(28, 57, 53, .24);
+  --work-factory: #176a55;
+  --work-poetry: #8f3c63;
+  --work-utility: #75581e;
+  --work-miku: #2e617c;
+  --work-factory-wash: rgba(40, 133, 96, .1);
+  --work-poetry-wash: rgba(151, 67, 106, .09);
+  --work-utility-wash: rgba(148, 115, 53, .1);
+  --work-miku-wash: rgba(64, 127, 157, .1);
+}
+html[data-theme="prism"] .work-band {
+  --work-text: #fcf8ff;
+  --work-muted: #d9cce0;
+  --work-line: rgba(233, 208, 242, .27);
+  --work-factory: #e1c4f1;
+  --work-poetry: #ffc0d8;
+  --work-utility: #f1d99f;
+  --work-miku: #bde4f2;
+  --work-factory-wash: rgba(219, 179, 240, .11);
+  --work-poetry-wash: rgba(246, 155, 198, .1);
+  --work-utility-wash: rgba(232, 202, 144, .1);
+  --work-miku-wash: rgba(171, 218, 236, .1);
+}
+
+.work-band .project-list { border-top: 1px solid var(--work-line); }
+.work-band .project-row {
+  --project-accent: var(--work-factory);
+  --project-wash: var(--work-factory-wash);
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1.35fr) minmax(210px, .85fr) 125px 26px;
+  align-items: center;
+  gap: 1.2rem;
+  min-height: 188px;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  border: 0;
+  border-bottom: 1px solid var(--work-line);
+  background: transparent;
+  color: var(--work-text);
+  transition: opacity .65s ease, transform .35s ease;
+}
+.work-band .project-row--poetry { --project-accent: var(--work-poetry); --project-wash: var(--work-poetry-wash); }
+.work-band .project-row--utility { --project-accent: var(--work-utility); --project-wash: var(--work-utility-wash); }
+.work-band .project-row--miku { --project-accent: var(--work-miku); --project-wash: var(--work-miku-wash); }
+.work-band .project-row::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, var(--project-wash) 50%, transparent);
+  opacity: 0;
+  transform: translateX(-18%);
+  pointer-events: none;
+  transition: opacity .4s ease, transform .65s ease;
+}
+.work-band .project-row > * { position: relative; z-index: 1; }
+.work-band .project-row:is(:hover, :focus-visible)::before { opacity: 1; transform: none; }
+.work-band .project-row:is(:hover, :focus-visible),
+.work-band .project-row[href]:is(:hover, :focus-visible) { padding: 1.5rem 0; background: transparent; color: var(--work-text); transform: none; }
+.work-band .project-row[href]:focus-visible { outline: 2px solid var(--project-accent); outline-offset: -3px; }
+.work-band .project-row[href]:active { transform: scale(.996); }
+.work-band .project-row:not([href]) { cursor: default; }
+.work-band .project-number { align-self: start; margin-top: .45rem; color: var(--project-accent); font: 700 .72rem var(--mono); }
+.work-band .project-main { min-width: 0; gap: .65rem; }
+.work-band .project-main strong { color: var(--work-text); font: 700 2rem/1.15 "Trebuchet MS", "Microsoft YaHei UI", var(--sans); transition: color .35s ease, transform .35s ease; }
+.work-band .project-row:is(:hover, :focus-visible) .project-main strong { color: var(--project-accent); transform: translateX(5px); }
+.work-band .project-main small { max-width: 45ch; color: var(--work-muted); font-size: .9rem; line-height: 1.65; }
+.work-band .project-tags { justify-content: flex-end; }
+.work-band .project-tags em { color: var(--work-muted); }
+.work-band .project-arrow { justify-self: end; color: var(--project-accent); font-size: 1.35rem; transition: transform .35s ease; }
+.work-band .project-row[href]:is(:hover, :focus-visible) .project-arrow { transform: translate(4px, -4px); }
+.work-band .project-row--poetry .project-arrow { color: var(--work-muted); font-size: .85rem; }
+
+.work-band .project-visual { position: relative; display: block; width: 100%; height: 110px; min-width: 0; overflow: hidden; color: var(--project-accent); pointer-events: none; }
+.work-band .project-visual--factory { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .5rem; align-items: center; }
+.work-band .project-visual--factory span { display: grid; place-items: center; min-height: 54px; border-top: 1px solid currentColor; border-bottom: 1px solid currentColor; opacity: .5; color: var(--project-accent); font: 700 .57rem var(--mono); transform: translateY(12px) rotate(-6deg); transition: opacity .35s ease, transform .55s cubic-bezier(.18,.8,.2,1); }
+.work-band .project-visual--factory span:nth-child(2) { transform: translateY(-13px) rotate(5deg); transition-delay: .08s; }
+.work-band .project-visual--factory span:nth-child(3) { transform: translateY(16px) rotate(-4deg); transition-delay: .16s; }
+.work-band .project-row--factory:is(:hover, :focus-visible) .project-visual--factory span { opacity: 1; transform: none; }
+
+.work-band .project-visual--poetry { display: flex; align-items: center; justify-content: center; gap: .15rem; }
+.work-band .project-visual--poetry span { color: var(--project-accent); font: 500 3.3rem/1 Georgia, "Times New Roman", serif; opacity: .57; transition: transform .65s cubic-bezier(.2,.8,.2,1), opacity .55s ease; }
+.work-band .project-visual--poetry span:nth-child(1) { transform: translateY(-15px) rotate(-12deg); }
+.work-band .project-visual--poetry span:nth-child(2) { transform: translateY(12px) rotate(9deg); }
+.work-band .project-visual--poetry span:nth-child(3) { transform: translateY(-7px) rotate(-5deg); }
+.work-band .project-visual--poetry span:nth-child(4) { transform: translateY(16px) rotate(11deg); }
+.work-band .project-visual--poetry span:nth-child(5) { transform: translateY(-13px) rotate(-7deg); }
+.work-band .project-visual--poetry span:nth-child(6) { transform: translateY(9px) rotate(8deg); }
+.work-band .project-row--poetry:hover .project-visual--poetry span { opacity: 1; transform: none; }
+
+.work-band .project-visual--utility svg { position: absolute; top: 50%; width: 90px; height: 90px; overflow: visible; opacity: .55; transform: translateY(-50%) rotate(var(--tool-rotation)); transition: transform .7s cubic-bezier(.18,.85,.2,1), margin-top .7s cubic-bezier(.18,.85,.2,1), opacity .45s ease; }
+.work-band .project-visual--utility svg:nth-child(1) { left: 4%; --tool-rotation: -28deg; margin-top: 17px; }
+.work-band .project-visual--utility svg:nth-child(2) { left: 37%; --tool-rotation: 23deg; margin-top: -13px; }
+.work-band .project-visual--utility svg:nth-child(3) { left: 70%; --tool-rotation: -19deg; margin-top: 15px; }
+html[data-theme="light"] .work-band .project-visual--utility svg { filter: brightness(0); }
+html[data-theme="prism"] .work-band .project-visual--utility svg { filter: grayscale(1) brightness(1.25); }
+.work-band .project-row--utility:is(:hover, :focus-visible) .project-visual--utility svg { opacity: .95; transform: translateY(-50%) rotate(0); }
+.work-band .project-row--utility:is(:hover, :focus-visible) .project-visual--utility svg:nth-child(n) { margin-top: 0; }
+
+.work-band .project-visual--miku img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 44%; filter: saturate(.88); transition: transform .75s cubic-bezier(.2,.8,.2,1), filter .6s ease; }
+.work-band .project-visual--miku img:nth-child(1) { clip-path: inset(0 65% 0 0); transform: translate(-17px, -7px) rotate(-3deg); }
+.work-band .project-visual--miku img:nth-child(2) { clip-path: inset(0 31% 0 31%); transform: translateY(14px); }
+.work-band .project-visual--miku img:nth-child(3) { clip-path: inset(0 0 0 65%); transform: translate(17px, -5px) rotate(3deg); }
+.work-band .project-visual--miku .project-visual__complete { clip-path: none; opacity: 0; transform: none; transition: opacity .22s ease; }
+.work-band .project-row--miku:is(:hover, :focus-visible) .project-visual--miku img { transform: none; filter: saturate(1.12); }
+.work-band .project-row--miku:is(:hover, :focus-visible) .project-visual__complete { opacity: 1; transition-delay: .48s; }
+
+@media (max-width: 1040px) {
+  .work-band .project-row { grid-template-columns: 45px minmax(0, 1fr) minmax(180px, .65fr) 25px; gap: .8rem 1.2rem; }
+  .work-band .project-tags { grid-column: 2 / 4; grid-row: 2; justify-content: flex-start; }
+  .work-band .project-arrow { grid-column: 4; grid-row: 1; }
+}
+@media (max-width: 700px) {
+  .work-band .project-row { grid-template-columns: 42px minmax(0, 1fr) 24px; gap: .75rem 1rem; min-height: 0; padding: 1.6rem 0; }
+  .work-band .project-row:is(:hover, :focus-visible), .work-band .project-row[href]:is(:hover, :focus-visible) { padding: 1.6rem 0; }
+  .work-band .project-number { grid-column: 1; grid-row: 1; }
+  .work-band .project-main { grid-column: 2; grid-row: 1; }
+  .work-band .project-main strong { font-size: 1.55rem; }
+  .work-band .project-main small { font-size: .82rem; }
+  .work-band .project-visual { grid-column: 2; grid-row: 2; width: min(100%, 280px); height: 100px; }
+  .work-band .project-tags { grid-column: 2; grid-row: 3; }
+  .work-band .project-arrow { grid-column: 3; grid-row: 1; }
+  .work-band .project-visual--utility svg { width: 76px; height: 76px; }
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .work-band .project-visual--factory span,
+  .work-band .project-visual--poetry span,
+  .work-band .project-visual--miku img { opacity: 1; transform: none; filter: none; }
+  .work-band .project-visual--miku .project-visual__complete { opacity: 1; }
+  .work-band .project-visual--utility svg { opacity: 1; transform: translateY(-50%) rotate(0); }
+  .work-band .project-visual--utility svg:nth-child(n) { margin-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .work-band .project-row:is(:hover, :focus-visible), .work-band .project-row[href]:active { transform: none; }
+}

@@ -148,8 +148,10 @@ hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
 }
 .author-note strong { color:var(--accent); }
 </style>
+<link rel="stylesheet" href="visual-system.css?v=20260930-1">
+<link rel="stylesheet" href="tutorial-visual.css?v=20260930-2">
 </head>
-<body>
+<body class="page-tutorial">
 
 <aside class="sidebar">
   <div class="sidebar-logo">
@@ -158,7 +160,7 @@ hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
   </div>
   <nav>
     <div class="label">章节</div>
-    <a href="#env" class="active">1. PWN 环境配置</a>
+    <a href="#env">1. PWN 环境配置</a>
     <a href="#review" class="sec">2. x86 基础回顾</a>
     <a href="#overflow" class="sec">3. 栈溢出原理</a>
     <a href="#danger" class="sec2">危险函数</a>
@@ -1173,5 +1175,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('h1[id]').forEach(h => observer.observe(h));
 </script>
 
+<script defer src="vendor/lottie_light.min.js"></script>
+<script defer src="visual-system.js?v=20260930-1"></script>
 </body>
 </html>

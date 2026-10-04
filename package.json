@@ -1,0 +1,27 @@
+{
+  "name": "null-garden-rebuild",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check:platforms": "node --test tools/check-platforms-interactions.mjs",
+    "check:navigation": "node --test tools/check-auto-browse.mjs",
+    "check:theme": "node tools/check-prism-mode.mjs && node tools/check-prism-colors.mjs",
+    "check:models": "node tools/check-model-assets.mjs && node tools/check-model-motion.mjs && node tools/check-nunchaku-rig.mjs && node tools/check-balisong-framing.mjs"
+  },
+  "dependencies": {
+    "gsap": "3.11.5",
+    "lenis": "1.1.6",
+    "lottie-web": "5.10.2",
+    "matter-js": "0.19.0",
+    "three": "0.167.1",
+    "vue": "2.7.14",
+    "vue-router": "3.6.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue2": "2.3.4",
+    "vite": "5.4.20"
+  }
+}

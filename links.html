@@ -8,13 +8,32 @@
   <title>Links | Null Garden</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=20260911-6">
+  <link rel="stylesheet" href="visual-system.css?v=20260930-5">
+  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
 </head>
 <body class="page-links">
   <a class="skip-link" href="#content">跳到正文</a>
   <header class="site-header" id="top">
     <a class="wordmark" href="index.html" aria-label="Null Garden 首页"><span class="wordmark-mark" aria-hidden="true">N//G</span><span>NULL GARDEN</span></a>
     <nav class="site-nav" id="site-nav" aria-label="主导航"><a href="index.html">首页</a><a href="platforms.html">平台</a><a href="articles.html">文章</a><a href="personal-instruction.html">关于我</a><a href="links.html" aria-current="page">友链</a><a href="miku-theme.html">MIKU</a><a href="other.html">其他</a></nav>
-    <div class="header-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button><button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button></div>
+    <div class="header-tools">
+      <div class="auto-browse-control">
+        <button class="icon-button auto-browse-toggle" id="auto-browse-toggle" type="button" aria-label="自动浏览" aria-pressed="false" aria-expanded="false" aria-haspopup="menu" aria-controls="auto-browse-menu" title="自动浏览"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></button>
+        <div class="auto-browse-menu" id="auto-browse-menu" role="menu" aria-label="浏览速度" hidden>
+          <div class="auto-browse-speeds">
+            <button type="button" data-browse-level="2" role="menuitemradio" aria-checked="false" tabindex="-1"><span>慢</span></button>
+            <button type="button" data-browse-level="3" role="menuitemradio" aria-checked="false" tabindex="-1"><span>中</span></button>
+            <button type="button" data-browse-level="4" role="menuitemradio" aria-checked="false" tabindex="-1"><span>快</span></button>
+            <button type="button" data-browse-level="5" role="menuitemradio" aria-checked="false" tabindex="-1"><span>较快</span></button>
+          </div>
+        </div>
+      </div>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
+      <button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button>
+      <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button>
+    </div>
   </header>
 
   <main class="directory-main" id="content">
@@ -27,10 +46,20 @@
       <a class="directory-row reveal" href="https://github.com/csc-dsc" target="_blank" rel="noreferrer"><span>04</span><strong>GitHub</strong><small>公开代码、工具与站点源文件</small><b>↗</b></a>
     </div></div></section>
 
+    <div class="screen-breach" aria-hidden="true">
+      <span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span>
+      <span class="screen-breach__scan"></span>
+    </div>
+
     <section class="band intro-band" id="feishu" aria-labelledby="feishu-title"><div class="section-shell"><div class="section-heading reveal"><div class="section-label"><span>02</span> KNOWLEDGE BASE</div><h2 id="feishu-title">飞书资料</h2><p>按主题沉淀的学习笔记和资料入口。</p></div><div class="directory-list">
-      <div class="directory-row reveal"><span>01</span><a class="resource-primary" href="https://pcn0uzhoxu7z.feishu.cn/wiki/CzjBwZYLmidZSukv4ZpcmO4xnpd?from=from_copylink" target="_blank" rel="noreferrer"><strong>PWN 知识库</strong></a><a class="resource-contact" href="#contact"><small>获取访问口令，请通过邮箱或 QQ 联系作者</small></a><a class="resource-arrow" href="https://pcn0uzhoxu7z.feishu.cn/wiki/CzjBwZYLmidZSukv4ZpcmO4xnpd?from=from_copylink" target="_blank" rel="noreferrer" aria-label="打开 PWN 知识库">↗</a></div>
-      <div class="directory-row reveal"><span>02</span><a class="resource-primary" href="https://pcn0uzhoxu7z.feishu.cn/wiki/WTmDwHJ3Wi34ytkeuj3cyQEanYc" target="_blank" rel="noreferrer"><strong>RE 知识库</strong></a><a class="resource-contact" href="#contact"><small>获取访问口令，请通过邮箱或 QQ 联系作者</small></a><a class="resource-arrow" href="https://pcn0uzhoxu7z.feishu.cn/wiki/WTmDwHJ3Wi34ytkeuj3cyQEanYc" target="_blank" rel="noreferrer" aria-label="打开 RE 知识库">↗</a></div>
-    </div></div></section>
+      <div class="directory-row reveal"><span>01</span><a class="resource-primary" href="https://pcn0uzhoxu7z.feishu.cn/wiki/CzjBwZYLmidZSukv4ZpcmO4xnpd?from=from_copylink" target="_blank" rel="noopener noreferrer"><strong>PWN 知识库</strong></a><small>访问口令另行获取</small><span class="resource-arrow" aria-hidden="true">↗</span></div>
+      <div class="directory-row reveal"><span>02</span><a class="resource-primary" href="https://pcn0uzhoxu7z.feishu.cn/wiki/WTmDwHJ3Wi34ytkeuj3cyQEanYc" target="_blank" rel="noopener noreferrer"><strong>RE 知识库</strong></a><small>访问口令另行获取</small><span class="resource-arrow" aria-hidden="true">↗</span></div>
+    </div><a class="knowledge-contact" href="#contact">联系获取访问口令 <span aria-hidden="true">↓</span></a></div></section>
+
+    <div class="shatter-bridge" aria-hidden="true">
+      <span class="shatter-bridge__word">REFERENCES</span>
+      <i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i>
+    </div>
 
     <section class="band notes-band" aria-labelledby="friends-title"><div class="section-shell"><div class="section-heading reveal"><div class="section-label"><span>03</span> INSPIRATION</div><h2 id="friends-title">灵感站点</h2><p>内容组织、技术博客与个人站点设计的参考来源。</p></div><div class="directory-list">
       <a class="directory-row reveal" href="https://feiyang.ac.cn/index.html" target="_blank" rel="noreferrer"><span>01</span><strong>飞扬俱乐部官网</strong><small>技术交流、电脑维修、软件研发与公益实践</small><b>↗</b></a>
@@ -39,12 +68,18 @@
       <a class="directory-row reveal" href="https://www.zimo.click/" target="_blank" rel="noreferrer"><span>04</span><strong>Zimo's Blogs</strong><small>清晰导航、更新索引与文章卡片</small><b>↗</b></a>
     </div></div></section>
 
+    <div class="tear-bridge" aria-hidden="true"><span class="tear-bridge__edge"></span></div>
+
     <section class="band links-band" id="contact" aria-labelledby="contact-title"><div class="section-shell contact-panel reveal"><div><div class="section-label"><span>04</span> CONTACT</div><h2 id="contact-title">需要访问口令</h2></div><div><div class="contact-actions">
       <a href="mailto:915989956@qq.com"><span><strong>915989956@qq.com</strong><small>邮件联系</small></span><b>MAIL ↗</b></a>
       <a href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=915989956"><span><strong>添加 QQ 好友</strong><small>用于资料交流和口令获取</small></span><b>QQ ↗</b></a>
     </div><p class="contact-note">飞书访问口令，请先通过邮件或 QQ 联系作者。</p></div></div></section>
   </main>
   <footer class="site-footer"><span>NULL GARDEN / <span id="year">2026</span></span><span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span><a href="#top">TOP ↑</a></footer>
-  <script src="index.js?v=20260911-3"></script>
+  <script src="index.js?v=20261004-1"></script>
+  <script defer src="prism-mode.js?v=20261004-2"></script>
+  <script defer src="auto-browse.js?v=20261004-4"></script>
+  <script defer src="vendor/lottie_light.min.js"></script>
+  <script defer src="visual-system.js?v=20260930-6"></script>
 </body>
 </html>

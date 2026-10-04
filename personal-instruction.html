@@ -8,6 +8,10 @@
   <title>Profile | Null Garden</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=20260911-6">
+  <link rel="stylesheet" href="visual-system.css?v=20260930-5">
+  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
 </head>
 <body class="page-profile">
   <a class="skip-link" href="#content">跳到正文</a>
@@ -26,13 +30,30 @@
       <a href="other.html">其他</a>
     </nav>
     <div class="header-tools">
+      <div class="auto-browse-control">
+        <button class="icon-button auto-browse-toggle" id="auto-browse-toggle" type="button" aria-label="自动浏览" aria-pressed="false" aria-expanded="false" aria-haspopup="menu" aria-controls="auto-browse-menu" title="自动浏览"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></button>
+        <div class="auto-browse-menu" id="auto-browse-menu" role="menu" aria-label="浏览速度" hidden>
+          <div class="auto-browse-speeds">
+            <button type="button" data-browse-level="2" role="menuitemradio" aria-checked="false" tabindex="-1"><span>慢</span></button>
+            <button type="button" data-browse-level="3" role="menuitemradio" aria-checked="false" tabindex="-1"><span>中</span></button>
+            <button type="button" data-browse-level="4" role="menuitemradio" aria-checked="false" tabindex="-1"><span>快</span></button>
+            <button type="button" data-browse-level="5" role="menuitemradio" aria-checked="false" tabindex="-1"><span>较快</span></button>
+          </div>
+        </div>
+      </div>
       <button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
+      <button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button>
       <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button>
     </div>
   </header>
 
   <main class="profile-main" id="content">
     <section class="profile-hero" id="profile" aria-labelledby="profile-title">
+      <div class="profile-portrait" aria-hidden="true">
+        <img class="profile-portrait__line" src="graphics/avatar-lineart.svg" alt="">
+        <img class="profile-portrait__photo" src="image/avatar.jpg" alt="">
+        <span class="profile-portrait__scan"></span>
+      </div>
       <div class="section-shell">
         <div class="section-label"><span>PROFILE</span> ANONYMOUS BY DESIGN</div>
         <h1 id="profile-title">Curious.<br>Restless.<br>Building.</h1>
@@ -43,6 +64,11 @@
         </div>
       </div>
     </section>
+
+    <div class="screen-breach" aria-hidden="true">
+      <span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span>
+      <span class="screen-breach__scan"></span>
+    </div>
 
     <section class="band intro-band reveal" aria-labelledby="portrait-title">
       <div class="section-shell">
@@ -72,6 +98,11 @@
       </div>
     </section>
 
+    <div class="shatter-bridge" aria-hidden="true">
+      <span class="shatter-bridge__word">CAPABILITY</span>
+      <i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i>
+    </div>
+
     <section class="band work-band" aria-labelledby="matrix-title">
       <div class="section-shell">
         <div class="section-heading reveal">
@@ -81,7 +112,7 @@
         </div>
         <div class="skill-matrix reveal">
           <article class="skill-column"><h3>Reverse / foundations</h3><p>x86 / x64 / ARM64 汇编，寄存器与标志位、栈帧、调用约定、ABI、结构体恢复、堆栈与进程内存布局。</p></article>
-          <article class="skill-column"><h3>Reverse / executable formats</h3><p>PE / ELF / Mach-O 的节区、导入导出、重定位、链接与加载过程；IDA Pro、Ghidra、x64dbg 的静态与动态联动。</p></article>
+          <article class="skill-column"><h3>Reverse / executable formats <img class="tool-mark" src="graphics/ghidra.jpg" alt="" width="16" height="16"></h3><p>PE / ELF / Mach-O 的节区、导入导出、重定位、链接与加载过程；IDA Pro、Ghidra、x64dbg 的静态与动态联动。</p></article>
           <article class="skill-column"><h3>Reverse / protection</h3><p>UPX 与 PyInstaller 提取、常见反调试与花指令、控制流混淆、OLLVM 相关还原思路，以及关键算法的定位与验证。</p></article>
           <article class="skill-column"><h3>Android analysis</h3><p>APK 与 Smali、jadx / JEB、JNI 定位、Frida Java / Native Hook、DEX 运行时获取、so 层参数追踪与二次分析。</p></article>
           <article class="skill-column"><h3>Crypto reconstruction</h3><p>TEA / XTEA、AES-CBC、SM4-ECB、RC4 和 RSA 常见攻击面的特征识别、脚本还原与结果交叉验证。</p></article>
@@ -95,6 +126,13 @@
         </div>
       </div>
     </section>
+
+    <div class="wave-bridge" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path class="wave-bridge__fill" d="M0 56L1200 56V120H0Z"></path>
+        <path class="wave-bridge__crest" d="M0 56L1200 56"></path>
+      </svg>
+    </div>
 
     <section class="band notes-band reveal" aria-labelledby="principles-title">
       <div class="section-shell process-layout">
@@ -111,7 +149,9 @@
       </div>
     </section>
 
-    <section class="band links-band" aria-labelledby="offscreen-title">
+    <div class="tear-bridge" aria-hidden="true"><span class="tear-bridge__edge"></span></div>
+
+    <section class="band links-band profile-offscreen" aria-labelledby="offscreen-title">
       <div class="section-shell links-layout reveal">
         <div>
           <div class="section-label"><span>04</span> OFF SCREEN</div>
@@ -123,6 +163,7 @@
             <span>HATSUNE MIKU</span><span>VOCALOID</span><span>ANIMATION</span><span>MUSIC</span><span>PLAYLISTS</span><span>ROLLER SKATING</span><span>STAGE PERFORMANCE</span><span>GAMES</span><span>WEB VISUALS</span><span>OPEN SOURCE</span>
           </div>
         </div>
+        <div class="ambient-slot ambient-slot--guitar" data-ambient-model="guitar"></div>
       </div>
     </section>
   </main>
@@ -132,6 +173,11 @@
     <span>NO NAME · NO SCHOOL · JUST THE WORK</span>
     <a href="index.html">HOME ←</a>
   </footer>
-  <script src="index.js?v=20260911-4"></script>
+  <script type="module" src="index.js?v=20261004-1"></script>
+  <script type="module" src="prism-mode.js?v=20261004-2"></script>
+  <script type="module" src="auto-browse.js?v=20261004-4"></script>
+  <script type="module" src="src/ambient/main.js"></script>
+  <script defer src="vendor/lottie_light.min.js"></script>
+  <script defer src="visual-system.js?v=20260930-6"></script>
 </body>
 </html>

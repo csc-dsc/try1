@@ -5,3 +5,8 @@
 # Local review artifacts
 /*.log
 /.tmp/
+
+# Local rebuild dependencies and generated output
+/node_modules/
+/dist/
+/.vite/

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <defs>
+    <style>
+      .line{fill:none;stroke:#e9f1ec;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+      .fine{fill:none;stroke:#e9f1ec;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+      .pulse{fill:none;stroke:#c6ff55;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+      .dot{fill:#c6ff55}
+    </style>
+  </defs>
+
+  <symbol id="cpu" viewBox="0 0 180 180">
+    <path class="line" d="M43 43h94v94H43zM60 60h60v60H60z"/>
+    <path class="fine" d="M68 68h44v44H68zM75 75h30v30H75z"/>
+    <path class="line" d="M54 22v21m18-21v21m18-21v21m18-21v21m18-21v21M54 137v21m18-21v21m18-21v21m18-21v21m18-21v21M22 54h21M22 72h21M22 90h21M22 108h21M22 126h21m115-72h21m-21 18h21m-21 18h21m-21 18h21m-21 18h21"/>
+    <path class="pulse" d="M79 90h22M90 79v22"/>
+    <circle class="dot" cx="43" cy="43" r="3"/><circle class="dot" cx="137" cy="137" r="3"/>
+  </symbol>
+
+  <symbol id="keyboard" viewBox="0 0 180 180">
+    <path class="line" d="M26 49h128l16 83H10l16-83Z"/>
+    <path class="fine" d="M29 61h14v13H26l3-13Zm23 0h14v13H52V61Zm23 0h14v13H75V61Zm23 0h14v13H98V61Zm23 0h14v13h-14V61Zm23 0h11l3 13h-14V61ZM24 84h22v13H21l3-13Zm31 0h14v13H55V84Zm23 0h14v13H78V84Zm23 0h14v13h-14V84Zm23 0h14v13h-14V84Zm23 0h14l3 13h-17V84ZM19 107h24v13H16l3-13Zm33 0h75v13H52v-13Zm84 0h26l3 13h-29v-13Z"/>
+    <path class="pulse" d="M52 132h76"/>
+    <circle class="dot" cx="16" cy="132" r="3"/>
+  </symbol>
+
+  <symbol id="mouse" viewBox="0 0 180 180">
+    <path class="line" d="M88 32c-31 0-49 24-49 60v17c0 34 21 55 49 55s49-21 49-55V92c0-36-18-60-49-60Z"/>
+    <path class="fine" d="M88 33v52M39 88h98M67 49c5-4 11-6 21-6m29 6c-5-4-11-6-20-6"/>
+    <rect class="pulse" x="83" y="57" width="10" height="21" rx="5"/>
+    <path class="fine" d="M88 32V18c0-9 5-13 15-13h17c10 0 13 4 13 11s-5 11-13 11h-8"/>
+    <circle class="dot" cx="133" cy="28" r="3"/>
+  </symbol>
+
+  <symbol id="screwdriver" viewBox="0 0 180 180">
+    <g transform="rotate(-38 90 90)">
+      <path class="line" d="M71 22c0-9 7-16 16-16h6c9 0 16 7 16 16v59c0 9-7 16-16 16h-6c-9 0-16-7-16-16V22Z"/>
+      <path class="fine" d="M79 20h22M79 37h22M79 54h22M79 71h22M79 84h22"/>
+      <path class="line" d="M85 97v57m10-57v57M83 154h14l-7 18-7-18Z"/>
+      <path class="pulse" d="M70 30h-8m47 0h8"/>
+    </g>
+  </symbol>
+
+  <symbol id="blower" viewBox="0 0 180 180">
+    <path class="line" d="M58 36c-20 3-33 22-33 48 0 33 19 56 47 56 22 0 37-15 39-36l21-10V73l-21-9C107 45 86 32 58 36Z"/>
+    <path class="fine" d="M44 58c-9 12-10 28-5 43M111 64l-4 40M132 73h16v21h-16"/>
+    <path class="pulse" d="M153 68c9-4 13-4 19 0m-19 15c12-4 16-4 23 0m-23 16c9-4 13-4 19 0"/>
+    <path class="fine" d="M64 141v16h24v-19"/>
+    <circle class="dot" cx="69" cy="88" r="4"/>
+  </symbol>
+
+  <symbol id="solder" viewBox="0 0 180 180">
+    <path class="line" d="m36 120 48-47 21 21-48 47c-6 6-15 6-21 0s-6-15 0-21Zm69-26 28-28-21-21-28 28"/>
+    <path class="fine" d="m113 45 27-27 22 22-29 26M42 126l9 9m-2-20 9 9m-1-20 9 9m10-16 9 9"/>
+    <path class="pulse" d="m162 40 10-10M30 159h120m-73 0v-15m29 15v-15"/>
+    <path class="fine" d="M99 142c0-8 4-11 4-17m10 17c0-7 4-10 4-15"/>
+    <circle class="dot" cx="90" cy="159" r="3"/><circle class="dot" cx="120" cy="159" r="3"/>
+  </symbol>
+</svg>

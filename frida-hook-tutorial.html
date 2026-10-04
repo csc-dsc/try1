@@ -29,10 +29,12 @@
   --red: #cf222e;
   --cyan: #1b7c83;
   --shadow: rgba(0,0,0,.06);
+  --sidebar-w: 280px;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; scroll-padding-top:24px; }
 body {
+  display:flex; min-height:100vh;
   font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   background:var(--bg); color:var(--text); line-height:1.8;
 }
@@ -41,7 +43,7 @@ body {
 ::-webkit-scrollbar-thumb { background:#c1c7cd; border-radius:4px; }
 ::-webkit-scrollbar-thumb:hover { background:#a0a7af; }
 
-.main { max-width:960px; margin:0 auto; }
+.main { margin-left:var(--sidebar-w); flex:1; max-width:100%; }
 .content {
   max-width:880px; margin:0 auto; padding:48px 48px 120px;
 }
@@ -81,6 +83,8 @@ hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
 .dng { color:var(--red); font-size:14px; }
 
 @media(max-width:768px) {
+  .sidebar { display:none; }
+  .main { margin-left:0; }
   .content { padding:24px 16px 80px; }
 }
 
@@ -125,9 +129,78 @@ hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
 .diff-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin:12px 0; }
 .diff-col { background:var(--bg2); border:1px solid var(--border); border-radius:8px; padding:12px; }
 .diff-col h4 { margin:0 0 6px; }
+
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--bg2); border-right:1px solid var(--border);
+  overflow-y:auto; z-index:100; padding:24px 0;
+  box-shadow:1px 0 3px var(--shadow);
+}
+.sidebar::-webkit-scrollbar { width:4px; }
+.sidebar-logo {
+  text-align:center; padding:0 20px 20px; border-bottom:1px solid var(--border); margin-bottom:8px;
+}
+.sidebar-logo h1 { font-size:20px; font-weight:700; color:var(--accent); }
+.sidebar-logo p { font-size:12px; color:var(--text2); margin-top:2px; }
+.sidebar nav { padding:0 12px; }
+.sidebar nav a {
+  display:block; padding:7px 14px; margin:2px 0;
+  color:var(--text2); text-decoration:none; font-size:14px;
+  border-radius:6px; transition:.2s;
+}
+.sidebar nav a:hover, .sidebar nav a.active { color:var(--accent); background:var(--bg3); }
+.sidebar nav .sec { padding-left:28px; font-size:13px; }
+.sidebar nav .sec2 { padding-left:42px; font-size:12.5px; }
+.sidebar nav .sec2:hover { color:var(--cyan); }
+.sidebar nav .label { font-size:11px; color:var(--text2); padding:12px 14px 4px; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
 </style>
+<link rel="stylesheet" href="visual-system.css?v=20260930-1">
+<link rel="stylesheet" href="tutorial-visual.css?v=20260930-2">
 </head>
-<body>
+<body class="page-tutorial">
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <h1>Hook Teach</h1>
+    <p>逆向进阶篇</p>
+  </div>
+  <nav>
+    <div class="label">章节</div>
+    <a href="#l1">第一层：用户态 Hook</a>
+    <a href="#l1-iat" class="sec">1.1 IAT Hook</a>
+    <a href="#l1-eat" class="sec">1.2 EAT Hook</a>
+    <a href="#l1-inline" class="sec">1.3 Inline Hook</a>
+    <a href="#l1-vtable" class="sec">1.4 VTable Hook</a>
+    <a href="#l1-msg" class="sec">1.5 Message Hook</a>
+    <a href="#l1-monitor" class="sec">1.6 API Monitor</a>
+    <a href="#l1-icb" class="sec">1.7 Instrumentation</a>
+    <a href="#l1-dll" class="sec">1.8 DLL 注入</a>
+    <a href="#l1-check" class="sec">1.9 用户态检测</a>
+    <a href="#l2" class="sec">第二层：内核态（传统）</a>
+    <a href="#l2-ssdt" class="sec">2.1 SSDT Hook</a>
+    <a href="#l2-idt" class="sec">2.2 IDT Hook</a>
+    <a href="#l2-gdt" class="sec">2.3 GDT/LDT</a>
+    <a href="#l2-dkom" class="sec">2.4 DKOM</a>
+    <a href="#l2-irp" class="sec">2.5 IRP Hook</a>
+    <a href="#l2-msr" class="sec">2.6 MSR Hook</a>
+    <a href="#l3" class="sec">第三层：内核态（高级）</a>
+    <a href="#l3-cb" class="sec">3.1 内核回调</a>
+    <a href="#l3-mini" class="sec">3.2 Minifilter</a>
+    <a href="#l3-ndis" class="sec">3.3 NDIS Hook</a>
+    <a href="#l3-obj" class="sec">3.4 Object Hook</a>
+    <a href="#l3-byovd" class="sec">3.5 BYOVD</a>
+    <a href="#l3-pte" class="sec">3.6 PTE Hook</a>
+    <a href="#l4" class="sec">第四层：Hypervisor</a>
+    <a href="#l4-ept" class="sec">4.1 EPT Hook</a>
+    <a href="#l4-vmfunc" class="sec">4.2 VMFUNC Hook</a>
+    <a href="#l4-stealth" class="sec">4.3 隐形 Hypervisor</a>
+    <a href="#l5" class="sec">第五层：固件级</a>
+    <a href="#l5-smm" class="sec">5.1 SMM Hook</a>
+    <a href="#l5-dma" class="sec">5.2 DMA 攻击</a>
+    <a href="#l5-uefi" class="sec">5.3 UEFI Hook</a>
+    <a href="#end">结语</a>
+  </nav>
+</aside>
 
 <div class="main">
 <div class="content">
@@ -200,10 +273,37 @@ Hook 归根到底就一件事：让一段正常的代码，先经过你的代码
 <div class="toc">
 <h3>目录</h3>
 <a href="#l1">第一层：用户态 Hook（Ring 3）</a>
+<a href="#l1-iat" class="l2">1.1 IAT Hook</a>
+<a href="#l1-eat" class="l2">1.2 EAT Hook</a>
+<a href="#l1-inline" class="l2">1.3 Inline Hook</a>
+<a href="#l1-vtable" class="l2">1.4 VTable Hook</a>
+<a href="#l1-msg" class="l2">1.5 Message Hook</a>
+<a href="#l1-monitor" class="l2">1.6 API Monitor</a>
+<a href="#l1-icb" class="l2">1.7 Instrumentation</a>
+<a href="#l1-dll" class="l2">1.8 DLL 注入</a>
+<a href="#l1-check" class="l2">1.9 用户态检测</a>
 <a href="#l2">第二层：内核态 Hook（Ring 0）— 传统手段</a>
+<a href="#l2-ssdt" class="l2">2.1 SSDT Hook</a>
+<a href="#l2-idt" class="l2">2.2 IDT Hook</a>
+<a href="#l2-gdt" class="l2">2.3 GDT/LDT</a>
+<a href="#l2-dkom" class="l2">2.4 DKOM</a>
+<a href="#l2-irp" class="l2">2.5 IRP Hook</a>
+<a href="#l2-msr" class="l2">2.6 MSR Hook</a>
 <a href="#l3">第三层：内核态 Hook（Ring 0）— 高级手段</a>
-<a href="#l4">第四层：Hypervisor 级 Hook（Ring -1）</a>
-<a href="#l5">第五层：硬件 / 固件级 Hook（Ring -2 及以下）</a>
+<a href="#l3-cb" class="l2">3.1 内核回调</a>
+<a href="#l3-mini" class="l2">3.2 Minifilter</a>
+<a href="#l3-ndis" class="l2">3.3 NDIS Hook</a>
+<a href="#l3-obj" class="l2">3.4 Object Hook</a>
+<a href="#l3-byovd" class="l2">3.5 BYOVD</a>
+<a href="#l3-pte" class="l2">3.6 PTE Hook</a>
+<a href="#l4">第四层：Hypervisor Hook（Ring -1）</a>
+<a href="#l4-ept" class="l2">4.1 EPT Hook</a>
+<a href="#l4-vmfunc" class="l2">4.2 VMFUNC Hook</a>
+<a href="#l4-stealth" class="l2">4.3 隐形 Hypervisor</a>
+<a href="#l5">第五层：固件层 Hook（Ring -2）</a>
+<a href="#l5-smm" class="l2">5.1 SMM Hook</a>
+<a href="#l5-dma" class="l2">5.2 DMA 攻击</a>
+<a href="#l5-uefi" class="l2">5.3 UEFI Hook</a>
 <a href="#end">结语</a>
 </div>
 
@@ -1351,5 +1451,7 @@ VOID FakeCpuid(ULONG64* rax, ULONG64* rbx, ULONG64* rcx, ULONG64* rdx) {
 
 </div> <!-- /content -->
 </div> <!-- /main -->
+<script defer src="vendor/lottie_light.min.js"></script>
+<script defer src="visual-system.js?v=20260930-1"></script>
 </body>
 </html>

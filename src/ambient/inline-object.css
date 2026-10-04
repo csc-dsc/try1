@@ -1,0 +1,43 @@
+.ambient-object { position: relative; width: 100%; height: 100%; opacity: 0; transition: opacity .65s ease; }
+.ambient-object.is-ready { opacity: 1; }
+.ambient-object--balisong { --balisong-zoom: 3; transform: translateY(-28px); }
+.ambient-object__canvas { display: block; width: 100%; height: 100%; touch-action: pan-y; cursor: grab; }
+.ambient-object--balisong .ambient-object__canvas {
+  transform: translate(-72px, -58px) scale(var(--balisong-zoom));
+  transform-origin: center;
+  clip-path: inset(0 22%);
+}
+.ambient-object__canvas:active { cursor: grabbing; }
+.ambient-object__tools { position: absolute; right: 5%; bottom: 5%; z-index: 2; display: flex; gap: .4rem; }
+.ambient-object__tools button {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 1px solid rgba(242, 240, 233, .55);
+  border-radius: 50%;
+  background: rgba(9, 20, 18, .7);
+  color: #f2f0e9;
+  cursor: pointer;
+}
+.ambient-object__tools button[aria-pressed="true"] { border-color: #c6ff55; color: #c6ff55; }
+.ambient-object__tools button:hover, .ambient-object__tools button:focus-visible { border-color: #c6ff55; outline: 0; box-shadow: 0 0 0 2px rgba(198, 255, 85, .24); }
+.ambient-object__tools svg { width: 27px; height: 27px; }
+.ambient-object__tools span { font-size: 1.15rem; line-height: 1; }
+.ambient-object__credit { position: absolute; right: 6%; top: 5%; z-index: 2; color: #d3e1d7; font: 700 .6rem var(--mono); }
+.ambient-object--balisong .ambient-object__credit { color: #214c43; }
+.ambient-object__error { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+@media (max-width: 700px) {
+  .ambient-object--balisong { height: 450px; transform: translateY(-16px); }
+  .ambient-object--balisong .ambient-object__canvas {
+    position: absolute;
+    left: 0;
+    bottom: 125px;
+    height: auto;
+    aspect-ratio: 2;
+    transform: translate(-12px, -36px) scale(var(--balisong-zoom));
+    clip-path: inset(8% 22%);
+  }
+}
+@media (prefers-reduced-motion: reduce) { .ambient-object { transition: none; } .ambient-object__canvas { cursor: default; } }

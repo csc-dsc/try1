@@ -58,7 +58,7 @@ img { max-width: 100%; }
 .icon-button:hover, .icon-button:focus-visible { color: #080a0c; background: var(--acid); border-color: var(--acid); }
 .menu-button { display: none; }
 
-.hero { position: relative; min-height: 540px; height: min(760px, calc(100svh - 118px)); margin-top: 72px; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end; background: #07090b url("image/avatar.jpg") no-repeat calc(100% - clamp(0rem, 8vw, 8rem)) 24% / min(48vw, 600px) auto; border-bottom: 1px solid var(--line); }
+.hero { position: relative; min-height: 540px; height: min(760px, calc(100svh - 118px)); margin-top: 72px; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end; background: #07090b; border-bottom: 1px solid var(--line); }
 .hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(7,9,11,.98) 0%, rgba(7,9,11,.94) 36%, rgba(7,9,11,.24) 74%, rgba(7,9,11,.75) 100%), linear-gradient(0deg, rgba(7,9,11,.92), transparent 58%); }
 .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; opacity: .28; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 68px 68px; mask-image: linear-gradient(90deg, #000, transparent 70%); }
 .hero-noise { position: absolute; inset: 0; pointer-events: none; opacity: .22; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.025) 3px 4px); }
@@ -95,6 +95,10 @@ img { max-width: 100%; }
 .section-heading { display: grid; grid-template-columns: minmax(180px, .6fr) 1.3fr .8fr; gap: 2rem; align-items: end; margin-bottom: 3rem; }
 .section-heading h2, .intro-copy h2, .process-layout h2, .links-layout h2 { margin: 0; font: 400 clamp(2.6rem, 6vw, 5.4rem)/.92 var(--display); text-transform: uppercase; }
 .section-heading p { margin: 0; color: var(--muted); line-height: 1.7; }
+.work-band .section-heading { grid-template-columns: 1fr; justify-items: center; gap: 1.1rem; }
+.work-band .section-heading .section-label { justify-self: start; }
+.work-band .section-heading h2 { max-width: 100%; font-size: 3.75rem; line-height: 1.16; text-align: center; white-space: nowrap; }
+.work-band .section-heading p { text-align: center; }
 
 .intro-band { background: var(--paper); color: var(--ink); }
 .intro-layout { display: grid; grid-template-columns: minmax(160px, .5fr) 1.25fr; gap: 2rem 5rem; }
@@ -112,7 +116,8 @@ img { max-width: 100%; }
 .work-band { background: var(--ink-soft); }
 .project-list { border-top: 1px solid var(--line); }
 .project-row { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto 30px; gap: 1.2rem; align-items: center; min-height: 126px; border-bottom: 1px solid var(--line); transition: background .2s ease, padding .2s ease; }
-.project-row:hover { padding: 0 1rem; background: rgba(255,255,255,.04); }
+.project-row[href]:hover, .project-row[href]:focus-visible { padding: 0 1rem; background: rgba(255,255,255,.04); }
+.project-row[href]:focus-visible { outline: 2px solid var(--cyan); outline-offset: -2px; }
 .project-number { color: var(--rose); font: 700 .7rem var(--mono); }
 .project-main { display: grid; gap: .4rem; }
 .project-main strong { font-size: clamp(1.4rem, 3vw, 2.2rem); }
@@ -142,6 +147,10 @@ img { max-width: 100%; }
 .process-list span { color: var(--rose); font: 700 .68rem var(--mono); }
 .process-list strong { font: 700 .82rem var(--mono); }
 .process-list p { margin: 0; color: var(--paper-soft); line-height: 1.6; }
+.hobby-band { container-type: inline-size; background: var(--paper); color: var(--ink); }
+.hobby-fallback { min-height: 400px; }
+.hobby-fallback h2 { margin: 1.1rem 0 0; font: 600 3.1rem/1.2 KaiTi, STKaiti, "Kaiti SC", serif; }
+.hobby-fallback p { margin: 1rem 0 0; color: var(--muted); }
 
 .links-band { background: var(--ink); }
 .links-layout { display: grid; grid-template-columns: .8fr 1.2fr; gap: 5rem; }
@@ -231,6 +240,7 @@ img { max-width: 100%; }
   .hero h1 { font-size: clamp(3rem, 13vw, 5.7rem); }
   .hero-index { left: 1rem; right: auto; bottom: 1rem; flex-wrap: wrap; }
   .section-heading, .intro-layout, .process-layout, .links-layout { grid-template-columns: 1fr; gap: 1.4rem; }
+  .work-band .section-heading h2 { font-size: 3rem; }
   .identity-strip { grid-column: 1; }
   .terminal-mini { grid-column: 1; }
   .note-grid { grid-template-columns: 1fr; }
@@ -257,6 +267,8 @@ img { max-width: 100%; }
   .identity-strip { grid-template-columns: 1fr; }
   .identity-strip div { padding: 1rem 0; border-bottom: 1px solid var(--line); }
   .section-shell { width: min(100% - 1.25rem, 1180px); }
+  .hobby-fallback h2 { font-size: 2rem; }
+  .work-band .section-heading h2 { font-size: 2.25rem; }
   .project-main small { font-size: .8rem; }
   .profile-hero h1 { font-size: clamp(3.6rem, 19vw, 6rem); }
   .directory-grid { grid-template-columns: 1fr; }

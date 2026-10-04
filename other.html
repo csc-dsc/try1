@@ -8,27 +8,82 @@
   <title>Other | Null Garden</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=20260911-6">
+  <link rel="stylesheet" href="visual-system.css?v=20260930-5">
+  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
+  <link rel="stylesheet" href="other-archive.css?v=20261004-4">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
 </head>
 <body class="page-other">
   <a class="skip-link" href="#content">跳到正文</a>
   <header class="site-header" id="top">
     <a class="wordmark" href="index.html" aria-label="Null Garden 首页"><span class="wordmark-mark" aria-hidden="true">N//G</span><span>NULL GARDEN</span></a>
     <nav class="site-nav" id="site-nav" aria-label="主导航"><a href="index.html">首页</a><a href="platforms.html">平台</a><a href="articles.html">文章</a><a href="personal-instruction.html">关于我</a><a href="links.html">友链</a><a href="miku-theme.html">MIKU</a><a href="other.html" aria-current="page">其他</a></nav>
-    <div class="header-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button><button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button></div>
+    <div class="header-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button><button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button><button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button></div>
   </header>
 
   <main class="directory-main" id="content">
-    <section class="directory-hero" aria-labelledby="other-title"><div class="section-shell"><div class="section-label"><span>07</span> OTHER</div><h1 id="other-title">不在主线里的<br>也值得保留</h1><p>主题页、视觉实验、小型工具和早期页面都放在这一栏。它们不一定完整，但记录了每一次动手的方向。</p></div></section>
-    <section class="band"><div class="section-shell"><div class="directory-grid">
-      <a class="directory-card reveal" href="miku-theme.html"><span class="directory-code">EXPERIMENT / 01</span><h3>Miku Signal</h3><p>本地影像、授权 SVG、画廊与极简视觉系统组成的初音主题实验。</p><span class="directory-action">OPEN THEME <b>→</b></span></a>
-      <a class="directory-card reveal" href="personal-instruction.html"><span class="directory-code">EXPERIMENT / 02</span><h3>Anonymous Profile</h3><p>将技术图谱、学习方式和兴趣内容与身份信息彻底分离的个人档案页。</p><span class="directory-action">OPEN PROFILE <b>→</b></span></a>
-      <a class="directory-card reveal" href="history/index.html"><span class="directory-code">HISTORY / 03</span><h3>First Route</h3><p>改版前的主页快照，保留当时的布局、博客区、更新区与教程索引。</p><span class="directory-action">OPEN HISTORY <b>→</b></span></a>
-      <a class="directory-card reveal" href="links.html"><span class="directory-code">EXPERIMENT / 04</span><h3>External Index</h3><p>博客、知识库、灵感站点与联系方法的集中入口。</p><span class="directory-action">OPEN LINKS <b>→</b></span></a>
-      <a class="directory-card reveal" href="history/about.html"><span class="directory-code">HISTORY / 05</span><h3>Historical Profile</h3><p>改版前的关于我页面快照，保留当时的交互与技能展示。</p><span class="directory-action">OPEN HISTORY <b>→</b></span></a>
-      <a class="directory-card reveal" href="index.html"><span class="directory-code">EXPERIMENT / 06</span><h3>Return to Home</h3><p>回到研究、创作和学习记录共同交汇的首页。</p><span class="directory-action">GO HOME <b>→</b></span></a>
-    </div></div></section>
+    <section class="directory-hero" aria-labelledby="other-title"><div class="section-shell"><div class="section-label"><span>07</span> OTHER</div><h1 id="other-title">不在主线里的<br>也值得保留</h1><p>主题页、视觉实验、小型工具和早期页面都放在这一栏。它们不一定完整，但记录了每一次动手的方向。</p></div><div class="ambient-slot ambient-slot--nunchaku" data-ambient-model="nunchaku"></div></section>
+    <section class="archive-trail" aria-label="实验与历史档案">
+      <svg class="archive-trail__path" viewBox="0 0 1200 1500" preserveAspectRatio="none" aria-hidden="true"><path class="archive-trail__path-base" d="M575 0 C575 180 905 160 905 410 S250 695 315 855 S875 1115 610 1500"/><path class="archive-trail__path-live" d="M575 0 C575 180 905 160 905 410 S250 695 315 855 S875 1115 610 1500"/></svg>
+
+      <a class="archive-scene archive-scene--signal" href="miku-theme.html" aria-labelledby="archive-signal-title">
+        <div class="archive-scene__inner">
+          <div class="archive-scene__copy">
+            <div class="archive-scene__meta"><span>EXPERIMENT / 01</span><span>CV01 · SIGNAL 39</span></div>
+            <h2 id="archive-signal-title"><span>声线实验</span><small>Miku Signal</small></h2>
+            <p>本地影像、授权 SVG、画廊与极简视觉系统组成的初音主题实验。</p>
+            <span class="archive-scene__action">进入主题 <b aria-hidden="true">↗</b></span>
+          </div>
+          <div class="archive-scene__visual archive-signal" aria-hidden="true">
+            <img class="archive-signal__image" src="image/miku/miku-hero.jpg" alt="" loading="lazy">
+            <svg class="archive-signal__wave" viewBox="0 0 820 160" preserveAspectRatio="none"><path d="M0 80 H75 L90 77 L102 84 L114 65 L126 103 L138 35 L150 128 L162 74 L178 80 H265 L281 78 L294 86 L306 55 L318 112 L330 19 L342 140 L354 74 L370 80 H460 L475 78 L488 85 L500 59 L512 106 L524 31 L536 132 L548 74 L565 80 H650 L665 77 L678 84 L690 62 L702 101 L714 41 L726 119 L738 75 L754 80 H820"/></svg>
+            <span class="archive-signal__frequency">39 Hz / 未来声线</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="archive-scene archive-scene--route" href="history/index.html" aria-labelledby="archive-route-title">
+        <div class="archive-scene__inner">
+          <div class="archive-scene__visual archive-route" aria-hidden="true">
+            <span class="archive-route__index">ORIGINAL ROUTE / 001</span>
+            <strong class="archive-route__name">GOD·陌</strong>
+            <div class="archive-route__strata"><span>PERSONAL HOME</span><span>关于我</span><span>博客入口</span><span>技术教程</span></div>
+            <span class="archive-route__trace">/history/index.html</span>
+          </div>
+          <div class="archive-scene__copy">
+            <div class="archive-scene__meta"><span>HISTORY / 02</span><span>ORIGINAL ROUTE</span></div>
+            <h2 id="archive-route-title"><span>最初的路径</span><small>First Route</small></h2>
+            <p>改版前的主页快照，保留当时的布局、博客区、更新区与教程索引。</p>
+            <span class="archive-scene__action">查看旧版 <b aria-hidden="true">↗</b></span>
+          </div>
+        </div>
+      </a>
+
+      <div class="archive-scene archive-scene--profile">
+        <div class="archive-scene__inner">
+          <a class="archive-scene__copy archive-scene__link" href="history/about.html" aria-labelledby="archive-profile-title">
+            <div class="archive-scene__meta"><span>HISTORY / 03</span><span>IDENTITY ARCHIVE</span></div>
+            <h2 id="archive-profile-title"><span>曾经的自述</span><small>Historical Profile</small></h2>
+            <p>改版前的关于我页面快照，保留当时的交互与技能展示。</p>
+            <span class="archive-scene__action">查看旧版 <b aria-hidden="true">↗</b></span>
+          </a>
+          <button class="archive-scene__visual archive-profile" type="button" aria-label="显影旧版头像" aria-pressed="false" title="显影旧版头像">
+            <img class="archive-profile__ghost" src="image/isla.png" alt="" loading="lazy">
+            <img class="archive-profile__photo" src="image/isla.png" alt="" loading="lazy">
+            <span class="archive-profile__scan" aria-hidden="true"></span>
+            <span class="archive-profile__index">PROFILE / ARCHIVE</span>
+          </button>
+        </div>
+      </div>
+    </section>
   </main>
   <footer class="site-footer"><span>NULL GARDEN / <span id="year">2026</span></span><span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span><a href="#top">TOP ↑</a></footer>
-  <script src="index.js?v=20260911-2"></script>
+  <script type="module" src="index.js?v=20261004-1"></script>
+  <script type="module" src="prism-mode.js?v=20261004-2"></script>
+  <script type="module" src="src/ambient/main.js"></script>
+  <script type="module" src="other-archive.js?v=20261004-4"></script>
+  <script defer src="vendor/lottie_light.min.js"></script>
+  <script defer src="visual-system.js?v=20260930-6"></script>
 </body>
 </html>

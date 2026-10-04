@@ -1,0 +1,734 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 120,
+      "max": [
+        0.5416698455810547,
+        2.3769140243530273,
+        0.3421974778175354
+      ],
+      "min": [
+        -0.5031664371490479,
+        -2.1551761627197266,
+        0.28551745414733887
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 1440,
+      "componentType": 5126,
+      "count": 120,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -0.9973942637443542,
+        -3.581112423489685e-06
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 120,
+      "max": [
+        0.6443045735359192,
+        0.8228242993354797
+      ],
+      "min": [
+        0.3598041534423828,
+        0.09833045303821564
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 240,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 2880,
+      "componentType": 5126,
+      "count": 699,
+      "max": [
+        1.3757530450820923,
+        3.3840394020080566,
+        0.37042945623397827
+      ],
+      "min": [
+        -1.3757529258728027,
+        -3.3840394020080566,
+        -0.37076136469841003
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 11268,
+      "componentType": 5126,
+      "count": 699,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        -1.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 960,
+      "componentType": 5126,
+      "count": 699,
+      "max": [
+        0.9390701651573181,
+        0.9822567105293274
+      ],
+      "min": [
+        0.009109795093536377,
+        0.08331059664487839
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 960,
+      "componentType": 5125,
+      "count": 1368,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 19656,
+      "componentType": 5126,
+      "count": 432,
+      "max": [
+        0.1894237995147705,
+        2.3908567428588867,
+        0.3480393886566162
+      ],
+      "min": [
+        -0.1799519658088684,
+        -0.5516140460968018,
+        0.3057761788368225
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 24840,
+      "componentType": 5126,
+      "count": 432,
+      "max": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -1.0,
+        0.0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 6552,
+      "componentType": 5126,
+      "count": 432,
+      "max": [
+        0.7104212045669556,
+        0.2584223747253418
+      ],
+      "min": [
+        0.3771624267101288,
+        0.07620012760162354
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 6432,
+      "componentType": 5125,
+      "count": 666,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 30024,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        0.18003356456756592,
+        3.1535496711730957,
+        0.3707614541053772
+      ],
+      "min": [
+        -0.15374255180358887,
+        -2.0212793350219727,
+        0.26876676082611084
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 30888,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        0.0,
+        0.07816755771636963,
+        0.9999660849571228
+      ],
+      "min": [
+        0.0,
+        -0.09030929207801819,
+        0.9959138035774231
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 10008,
+      "componentType": 5126,
+      "count": 72,
+      "max": [
+        0.7804029583930969,
+        0.07333362102508545
+      ],
+      "min": [
+        0.015317559242248535,
+        0.02169942855834961
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 9096,
+      "componentType": 5125,
+      "count": 144,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 31752,
+      "componentType": 5126,
+      "count": 936,
+      "max": [
+        0.323140025138855,
+        3.214265823364258,
+        0.3406359553337097
+      ],
+      "min": [
+        -0.34807729721069336,
+        2.5720462799072266,
+        0.1745627522468567
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 42984,
+      "componentType": 5126,
+      "count": 936,
+      "max": [
+        1.0,
+        0.9896876811981201,
+        0.9990008473396301
+      ],
+      "min": [
+        -1.0,
+        -0.9896899461746216,
+        -0.9986536502838135
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 10584,
+      "componentType": 5126,
+      "count": 936,
+      "max": [
+        0.9886968731880188,
+        0.10832390189170837
+      ],
+      "min": [
+        0.7942843437194824,
+        0.010034032166004181
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 9672,
+      "componentType": 5125,
+      "count": 2304,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 54216,
+      "componentType": 5126,
+      "count": 214,
+      "max": [
+        0.8287311792373657,
+        -0.4596775770187378,
+        0.3147602081298828
+      ],
+      "min": [
+        0.17733484506607056,
+        -1.8338398933410645,
+        0.28121864795684814
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 56784,
+      "componentType": 5126,
+      "count": 214,
+      "max": [
+        1.0,
+        0.9943888187408447,
+        1.0
+      ],
+      "min": [
+        -1.0,
+        -0.9950371384620667,
+        -2.0241045604052488e-06
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 18072,
+      "componentType": 5126,
+      "count": 214,
+      "max": [
+        0.9803709387779236,
+        0.9543057680130005
+      ],
+      "min": [
+        0.44294166564941406,
+        0.07576972246170044
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 18888,
+      "componentType": 5125,
+      "count": 336,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 1,
+      "max": [
+        0.0416666679084301
+      ],
+      "min": [
+        0.0416666679084301
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 4,
+      "componentType": 5126,
+      "count": 1,
+      "max": [
+        -0.002694368362426758,
+        0.005020022392272949,
+        0.601383626461029
+      ],
+      "min": [
+        -0.002694368362426758,
+        0.005020022392272949,
+        0.601383626461029
+      ],
+      "type": "VEC3"
+    }
+  ],
+  "animations": [
+    {
+      "channels": [
+        {
+          "sampler": 0,
+          "target": {
+            "node": 4,
+            "path": "translation"
+          }
+        }
+      ],
+      "name": "Take 001",
+      "samplers": [
+        {
+          "input": 24,
+          "interpolation": "LINEAR",
+          "output": 25
+        }
+      ]
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "effiebop (https://sketchfab.com/effiebop)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/sm-yamaha-string-acoustic-guitar-instrument-38d4be70e4054a15afd77946b1b3211a",
+      "title": "SM Yamaha String Acoustic Guitar Instrument"
+    },
+    "generator": "Sketchfab-14.32.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 20232,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 19784,
+      "byteOffset": 20232,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 59352,
+      "byteOffset": 40016,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 4,
+      "byteOffset": 99368,
+      "name": "floatBufferViews"
+    },
+    {
+      "buffer": 0,
+      "byteLength": 12,
+      "byteOffset": 99372,
+      "byteStride": 12,
+      "name": "floatBufferViews"
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 99384,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/WoodMatt_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/Plastic_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "WoodMatt",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Body",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.30666455364435397
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Plastic",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.4
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Strings",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0.0
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "Metal",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.08723531347905067
+      }
+    },
+    {
+      "doubleSided": true,
+      "name": "BlackDetailShine",
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 1
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.11771159683534282
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Guitar_WoodMatt_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TEXCOORD_0": 2
+          },
+          "indices": 3,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Guitar_Body_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 5,
+            "POSITION": 4,
+            "TEXCOORD_0": 6
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Guitar_Plastic_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TEXCOORD_0": 10
+          },
+          "indices": 11,
+          "material": 2,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Guitar_Strings_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 13,
+            "POSITION": 12,
+            "TEXCOORD_0": 14
+          },
+          "indices": 15,
+          "material": 3,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Guitar_Metal_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 17,
+            "POSITION": 16,
+            "TEXCOORD_0": 18
+          },
+          "indices": 19,
+          "material": 4,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Guitar_BlackDetailShine_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 21,
+            "POSITION": 20,
+            "TEXCOORD_0": 22
+          },
+          "indices": 23,
+          "material": 5,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "SM_Guitar.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "Object_2"
+    },
+    {
+      "children": [
+        4
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "name": "Guitar",
+      "translation": [
+        0.7668020129203796,
+        3.615316390991211,
+        0.6322305202484131
+      ]
+    },
+    {
+      "mesh": 0,
+      "name": "Guitar_WoodMatt_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Guitar_Body_0"
+    },
+    {
+      "mesh": 2,
+      "name": "Guitar_Plastic_0"
+    },
+    {
+      "mesh": 3,
+      "name": "Guitar_Strings_0"
+    },
+    {
+      "mesh": 4,
+      "name": "Guitar_Metal_0"
+    },
+    {
+      "mesh": 5,
+      "name": "Guitar_BlackDetailShine_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ]
+}

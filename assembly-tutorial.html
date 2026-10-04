@@ -2,553 +2,138 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>内容1</title>
-  <style>:root {
-  /* 动态配置变量 */
-  --md-primary-color: #009874;
-  --md-font-family: -apple-system-font,BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB , Microsoft YaHei UI , Microsoft YaHei ,Arial,sans-serif;
-  --md-font-size: 16px;
-}
-
-/* 段落缩进和对齐 */
-p {
-  
-  
-}
-
-/**
- * MD 基础主题样式
- * 包含所有元素的基础样式和 CSS 变量定义
- */
-
-/* ==================== 容器样式 ==================== */
-section,
-container {
-  font-family: -apple-system-font,BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB , Microsoft YaHei UI , Microsoft YaHei ,Arial,sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-  text-align: left;
-}
-
-/* 确保 容器应用基础样式 */
-body {
-  font-family: -apple-system-font,BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB , Microsoft YaHei UI , Microsoft YaHei ,Arial,sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-  text-align: left;
-}
-
-/* 去除第一个元素的 margin-top */
-section > :first-child {
-  margin-top: 0 !important;
-}
-
-.mermaid-diagram .nodeLabel p {
-  color: unset !important;
-  letter-spacing: unset !important;
-}
-
-
-/**
- * MD 默认主题（经典主题）
- * 按 Alt/Option + Shift + F 可格式化
- * 如需使用主题色，请使用 #c9302c 代替颜色值
- */
-
-/* ==================== 一级标题 ==================== */
-h1 {
-  display: table;
-  padding: 0 1em;
-  border-bottom: 2px solid #c9302c;
-  margin: 2em auto 1em;
-  color: hsl(var(--foreground));
-  font-size: 19.2px;
-  font-weight: bold;
-  text-align: center;
-}/* ==================== 二级标题 ==================== */
-h2 {
-  display: table;
-  padding: 0 0.2em;
-  margin: 4em auto 2em;
-  color: #fff;
-  background: #c9302c;
-  font-size: 19.2px;
-  font-weight: bold;
-  text-align: center;
-}/* ==================== 三级标题 ==================== */
-h3 {
-  padding-left: 8px;
-  border-left: 3px solid #c9302c;
-  margin: 2em 8px 0.75em 0;
-  color: hsl(var(--foreground));
-  font-size: 17.6px;
-  font-weight: bold;
-  line-height: 1.2;
-}/* ==================== 四级标题 ==================== */
-h4 {
-  margin: 2em 8px 0.5em;
-  color: #c9302c;
-  font-size: 16px;
-  font-weight: bold;
-}/* ==================== 五级标题 ==================== */
-h5 {
-  margin: 1.5em 8px 0.5em;
-  color: #c9302c;
-  font-size: 16px;
-  font-weight: bold;
-}/* ==================== 六级标题 ==================== */
-h6 {
-  margin: 1.5em 8px 0.5em;
-  font-size: 16px;
-  color: #c9302c;
-}/* ==================== 段落 ==================== */
-p {
-  margin: 1.5em 8px;
-  letter-spacing: 0.1em;
-  color: hsl(var(--foreground));
-}/* ==================== 引用块 ==================== */
-blockquote {
-  font-style: normal;
-  padding: 1em;
-  border-left: 4px solid #c9302c;
-  border-radius: 6px;
-  color: hsl(var(--foreground));
-  background: var(--blockquote-background);
-  margin-bottom: 1em;
-}blockquote > p {
-  display: block;
-  font-size: 1em;
-  letter-spacing: 0.1em;
-  color: hsl(var(--foreground));
-  margin: 0;
-}/* ==================== GFM 警告块 ==================== */
-.alert-title-note,
-.alert-title-tip,
-.alert-title-info,
-.alert-title-important,
-.alert-title-warning,
-.alert-title-caution,
-.alert-title-abstract,
-.alert-title-summary,
-.alert-title-tldr,
-.alert-title-todo,
-.alert-title-success,
-.alert-title-done,
-.alert-title-question,
-.alert-title-help,
-.alert-title-faq,
-.alert-title-failure,
-.alert-title-fail,
-.alert-title-missing,
-.alert-title-danger,
-.alert-title-error,
-.alert-title-bug,
-.alert-title-example,
-.alert-title-quote,
-.alert-title-cite {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-bottom: 0.5em;
-}.alert-title-note {
-  color: #478be6;
-}.alert-title-tip {
-  color: #57ab5a;
-}.alert-title-info {
-  color: #93c5fd;
-}.alert-title-important {
-  color: #986ee2;
-}.alert-title-warning {
-  color: #c69026;
-}.alert-title-caution {
-  color: #e5534b;
-}/* Obsidian-style callout colors */
-.alert-title-abstract,
-.alert-title-summary,
-.alert-title-tldr {
-  color: #00bfff;
-}.alert-title-todo {
-  color: #478be6;
-}.alert-title-success,
-.alert-title-done {
-  color: #57ab5a;
-}.alert-title-question,
-.alert-title-help,
-.alert-title-faq {
-  color: #c69026;
-}.alert-title-failure,
-.alert-title-fail,
-.alert-title-missing {
-  color: #e5534b;
-}.alert-title-danger,
-.alert-title-error {
-  color: #e5534b;
-}.alert-title-bug {
-  color: #e5534b;
-}.alert-title-example {
-  color: #986ee2;
-}.alert-title-quote,
-.alert-title-cite {
-  color: #9ca3af;
-}/* GFM Alert SVG 图标颜色 */
-.alert-icon-note {
-  fill: #478be6;
-}.alert-icon-tip {
-  fill: #57ab5a;
-}.alert-icon-info {
-  fill: #93c5fd;
-}.alert-icon-important {
-  fill: #986ee2;
-}.alert-icon-warning {
-  fill: #c69026;
-}.alert-icon-caution {
-  fill: #e5534b;
-}/* Obsidian-style callout icon colors */
-.alert-icon-abstract,
-.alert-icon-summary,
-.alert-icon-tldr {
-  fill: #00bfff;
-}.alert-icon-todo {
-  fill: #478be6;
-}.alert-icon-success,
-.alert-icon-done {
-  fill: #57ab5a;
-}.alert-icon-question,
-.alert-icon-help,
-.alert-icon-faq {
-  fill: #c69026;
-}.alert-icon-failure,
-.alert-icon-fail,
-.alert-icon-missing {
-  fill: #e5534b;
-}.alert-icon-danger,
-.alert-icon-error {
-  fill: #e5534b;
-}.alert-icon-bug {
-  fill: #e5534b;
-}.alert-icon-example {
-  fill: #986ee2;
-}.alert-icon-quote,
-.alert-icon-cite {
-  fill: #9ca3af;
-}/* ==================== 代码块 ==================== */
-pre.code__pre,
-.hljs.code__pre {
-  font-size: 90%;
-  overflow-x: auto;
-  border-radius: 8px;
-  padding: 0 !important;
-  line-height: 1.5;
-  margin: 10px 8px;
-}/* ==================== 图片 ==================== */
-img {
-  display: block;
-  max-width: 100%;
-  margin: 0.1em auto 0.5em;
-  border-radius: 4px;
-}/* ==================== 列表 ==================== */
-ol {
-  padding-left: 1em;
-  margin-left: 0;
-  color: hsl(var(--foreground));
-}ul {
-  list-style: circle;
-  padding-left: 1em;
-  margin-left: 0;
-  color: hsl(var(--foreground));
-}li {
-  display: block;
-  margin: 0.2em 8px;
-  color: hsl(var(--foreground));
-}/* ==================== 脚注 ==================== */
-/* footnotes 在 buildFootnotes() 中渲染为 <p> 标签 */
-p.footnotes {
-  margin: 0.5em 8px;
-  font-size: 80%;
-  color: hsl(var(--foreground));
-}/* ==================== 图表 ==================== */
-figure {
-  margin: 1.5em 8px;
-  color: hsl(var(--foreground));
-}figcaption,
-.md-figcaption {
-  text-align: center;
-  color: color-mix(in srgb, hsl(var(--foreground)) 50%, transparent);
-  font-size: 0.8em;
-}/* ==================== 分隔线 ==================== */
-hr {
-  border-style: solid;
-  border-width: 2px 0 0;
-  border-color: rgba(0, 0, 0, 0.1);
-  -webkit-transform-origin: 0 0;
-  -webkit-transform: scale(1, 0.5);
-  transform-origin: 0 0;
-  transform: scale(1, 0.5);
-  height: 0.4em;
-  margin: 1.5em 0;
-}/* ==================== 行内代码 ==================== */
-.codespan {
-  font-size: 90%;
-  color: #c9302c;
-  background: color-mix(in srgb, #c9302c 8%, transparent);
-  padding: 3px 5px;
-  border-radius: 4px;
-  border: 1px solid color-mix(in srgb, #c9302c 20%, transparent);
-}/* 代码块内的 code 标签需要特殊处理（覆盖行内 code 样式） */
-pre.code__pre > code,
-.hljs.code__pre > code {
-  display: -webkit-box;
-  padding: 0.5em 1em 1em;
-  overflow-x: auto;
-  text-indent: 0;
-  color: inherit;
-  background: none;
-  white-space: nowrap;
-  margin: 0;
-}/* ==================== 强调 ==================== */
-em {
-  font-style: italic;
-  font-size: inherit;
-}/* ==================== 链接 ==================== */
-a {
-  color: #576b95;
-  text-decoration: none;
-}/* ==================== 粗体 ==================== */
-strong {
-  color: #c9302c;
-  font-weight: bold;
-  font-size: inherit;
-}/* ==================== 表格 ==================== */
-table {
-  color: hsl(var(--foreground));
-}thead {
-  font-weight: bold;
-  color: hsl(var(--foreground));
-}th {
-  border: 1px solid color-mix(in srgb, hsl(var(--foreground)) 15%, transparent);
-  padding: 0.25em 0.5em;
-  color: hsl(var(--foreground));
-  word-break: keep-all;
-  background: color-mix(in srgb, hsl(var(--foreground)) 5%, transparent);
-}td {
-  border: 1px solid color-mix(in srgb, hsl(var(--foreground)) 15%, transparent);
-  padding: 0.25em 0.5em;
-  color: hsl(var(--foreground));
-  word-break: keep-all;
-}/* ==================== KaTeX 公式 ==================== */
-.katex-inline {
-  max-width: 100%;
-  overflow-x: auto;
-}.katex-block {
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 0.5em 0;
-  text-align: center;
-}/* ==================== 标记高亮 ==================== */
-.markup-highlight {
-  background-color: #c9302c;
-  padding: 2px 4px;
-  border-radius: 2px;
-  color: #fff;
-}.markup-underline {
-  text-decoration: underline;
-  text-decoration-color: #c9302c;
-}.markup-wavyline {
-  text-decoration: underline wavy;
-  text-decoration-color: #c9302c;
-  text-decoration-thickness: 2px;
-}
-
-
-/**
- * 红蓝黑金 · 白底终端风格
- * 背景透明/白色，字体全部深色，红色蓝色金色强调
- */
+  <title>汇编语言教程 · 会 C 语言就会汇编</title>
+  <style>
 :root {
-  --md-primary-color: #c9302c;
-  --text: #1a1a1a;
-  --muted: #555555;
-  --gold: #b8860b;
-  --gold-bright: #c9a03a;
-  --blue: #0044cc;
-  --blue-bright: #0066ff;
-  --red: #cc0000;
-  --red-bright: #e60000;
-  --border: #cccccc;
-  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-}.md-container {
-  background: none;
-  color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.8;
-  padding: 2rem 2.5rem;
-  max-width: 860px;
-  margin: 0 auto;
-}section h1,
-section h2,
-section h3,
-section h4,
-section h5,
-section h6 {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-  font-weight: 700;
-  color: #1a1a1a;
-  background: none;
-  margin-top: 2em;
-  margin-bottom: 0.6em;
-}section h1 {
-  font-size: 2.2rem;
-  border-bottom: 2px solid #b8860b;
-  color: #b8860b;
-  padding-bottom: 0.3em;
-}section h2 {
-  font-size: 1.7rem;
-  border-left: 4px solid #0044cc;
-  padding-left: 0.6em;
-  color: #0044cc;
-}section h3 {
-  font-size: 1.4rem;
-  color: #c9a03a;
-}section h4 {
-  font-size: 1.2rem;
-  color: #555555;
-  font-style: italic;
-}section h5,
-section h6 {
-  font-size: 1rem;
-  color: #b8860b;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}p {
-  margin: 1em 0;
-  font-size: 1rem;
-  color: #1a1a1a;
-}strong {
-  color: #c9a03a;
-  font-weight: 800;
-}em {
-  color: #0066ff;
-  font-style: italic;
-}blockquote {
-  background: none;
-  border-left: 3px solid #cc0000;
-  margin: 1.5em 0;
-  padding: 0.4em 1em;
-  color: #2a2a2a;
-}blockquote > p {
-  margin: 0;
-  color: inherit;
-}.codespan {
-  background: none;
-  color: #0066ff;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-  font-size: 0.9em;
-}pre.code__pre,
-.hljs.code__pre {
-  background: none;
-  border: 1px solid #cccccc;
-  padding: 1em;
-  margin: 1.5em 0;
-  overflow-x: auto;
-}pre.code__pre > code,
-.hljs.code__pre > code {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-  font-size: 0.92rem;
-  color: #1a1a1a;
-  background: none;
-}ol,
-ul {
-  padding-left: 2em;
-  margin: 1em 0;
-}li {
-  margin: 0.35em 0;
-  color: #1a1a1a;
-}ol > li::marker {
-  color: #b8860b;
-  font-weight: bold;
-}ul > li::marker {
-  color: #0044cc;
-}table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.8em 0;
-  background: none;
-  border: 1px solid #cccccc;
-}thead {
-  background: none;
-  border-bottom: 2px solid #b8860b;
-}th {
-  padding: 0.7em 1em;
-  color: #b8860b;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-  font-weight: 700;
-  text-align: left;
-  background: none;
-}td {
-  padding: 0.6em 1em;
-  border-bottom: 1px solid #cccccc;
-  color: #1a1a1a;
-  background: none;
-}tr:last-child td {
-  border-bottom: none;
-}img {
-  max-width: 100%;
-  border: 1px solid #cccccc;
-}hr {
-  border: none;
-  height: 1px;
-  background: #cccccc;
-  margin: 2.5em 0;
-}hr.hr-dash {
-  border-top: 1px dashed #0044cc;
-  background: none;
-  height: auto;
-}hr.hr-star {
-  border: none;
-  height: 1px;
-  background: repeating-linear-gradient(90deg, #b8860b 0px, #b8860b 4px, transparent 4px, transparent 8px);
-  opacity: 0.6;
-}hr.hr-underscore {
-  border: none;
-  height: 2px;
-  background: #cc0000;
-}figure {
-  margin: 1.8em 0;
-  text-align: center;
-}figcaption {
-  font-size: 0.85rem;
-  color: #555555;
-  margin-top: 0.5em;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-}.katex-inline {
-  color: #0066ff;
-  background: none;
-}.katex-block {
-  background: none;
-  border-left: 2px solid #b8860b;
-  padding: 0.8em 1em;
-  margin: 1.2em 0;
-}.markup-highlight {
-  background: none;
-  color: #c9a03a;
-  border-bottom: 2px solid #b8860b;
-}.markup-underline {
-  text-decoration: underline;
-  text-decoration-color: #0044cc;
-  text-underline-offset: 0.2em;
-}.markup-wavyline {
-  text-decoration: line-through wavy #cc0000;
-}[class^="alert-title-"],
-[class*=" alert-title-"] {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.3em;
-  background: none;
-}.alert-title-note { color: #0044cc; }.alert-title-tip { color: #0066ff; }.alert-title-info { color: #0044cc; }.alert-title-important { color: #cc0000; }.alert-title-warning { color: #b8860b; }.alert-title-caution { color: #e60000; }.alert-title-abstract { color: #333333; }.alert-title-summary { color: #333333; }.alert-title-tldr { color: #333333; }.alert-title-todo { color: #0044cc; }.alert-title-success { color: #0066ff; }.alert-title-done { color: #0066ff; }.alert-title-question { color: #b8860b; }.alert-title-help { color: #b8860b; }.alert-title-faq { color: #b8860b; }.alert-title-failure { color: #cc0000; }.alert-title-fail { color: #cc0000; }.alert-title-missing { color: #cc0000; }.alert-title-danger { color: #cc0000; }.alert-title-error { color: #cc0000; }.alert-title-bug { color: #cc0000; }.alert-title-example { color: #6a0dad; }.alert-title-quote { color: #555555; }.alert-title-cite { color: #555555; }.alert-icon-note { color: #0044cc; fill: currentColor; }.alert-icon-tip { color: #0066ff; fill: currentColor; }.alert-icon-info { color: #0044cc; fill: currentColor; }.alert-icon-important { color: #cc0000; fill: currentColor; }.alert-icon-warning { color: #b8860b; fill: currentColor; }.alert-icon-caution { color: #e60000; fill: currentColor; }.alert-icon-abstract { color: #333333; fill: currentColor; }.alert-icon-summary { color: #333333; fill: currentColor; }.alert-icon-tldr { color: #333333; fill: currentColor; }.alert-icon-todo { color: #0044cc; fill: currentColor; }.alert-icon-success { color: #0066ff; fill: currentColor; }.alert-icon-done { color: #0066ff; fill: currentColor; }.alert-icon-question { color: #b8860b; fill: currentColor; }.alert-icon-help { color: #b8860b; fill: currentColor; }.alert-icon-faq { color: #b8860b; fill: currentColor; }.alert-icon-failure { color: #cc0000; fill: currentColor; }.alert-icon-fail { color: #cc0000; fill: currentColor; }.alert-icon-missing { color: #cc0000; fill: currentColor; }.alert-icon-danger { color: #cc0000; fill: currentColor; }.alert-icon-error { color: #cc0000; fill: currentColor; }.alert-icon-bug { color: #cc0000; fill: currentColor; }.alert-icon-example { color: #6a0dad; fill: currentColor; }.alert-icon-quote { color: #555555; fill: currentColor; }.alert-icon-cite { color: #555555; fill: currentColor; }</style><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
+  --bg: #f8f9fa;
+  --bg2: #ffffff;
+  --bg3: #f0f2f5;
+  --border: #e1e4e8;
+  --text: #24292e;
+  --text2: #586069;
+  --accent: #0366d6;
+  --accent2: #0550ae;
+  --green: #22863a;
+  --orange: #d18616;
+  --purple: #6f42c1;
+  --red: #cf222e;
+  --cyan: #1b7c83;
+  --shadow: rgba(0,0,0,.06);
+  --sidebar-w: 280px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:24px; }
+body {
+  font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.8;
+  display:flex; min-height:100vh;
+}
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:#c1c7cd; border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:#a0a7af; }
+
+.sidebar {
+  position:fixed; top:0; left:0; width:var(--sidebar-w); height:100vh;
+  background:var(--bg2); border-right:1px solid var(--border);
+  overflow-y:auto; z-index:100; padding:24px 0;
+  box-shadow:1px 0 3px var(--shadow);
+}
+.sidebar::-webkit-scrollbar { width:4px; }
+.sidebar-logo {
+  text-align:center; padding:0 20px 20px; border-bottom:1px solid var(--border); margin-bottom:8px;
+}
+.sidebar-logo h1 { font-size:20px; font-weight:700; color:var(--accent); }
+.sidebar-logo p { font-size:12px; color:var(--text2); margin-top:2px; }
+.sidebar nav { padding:0 12px; }
+.sidebar nav a {
+  display:block; padding:7px 14px; margin:2px 0;
+  color:var(--text2); text-decoration:none; font-size:14px;
+  border-radius:6px; transition:.2s;
+}
+.sidebar nav a:hover, .sidebar nav a.active { color:var(--accent); background:var(--bg3); }
+.sidebar nav .sec { padding-left:28px; font-size:13px; }
+.sidebar nav .sec2 { padding-left:42px; font-size:12.5px; }
+.sidebar nav .sec2:hover { color:var(--cyan); }
+.sidebar nav .label { font-size:11px; color:var(--text2); padding:12px 14px 4px; font-weight:500; letter-spacing:1px; text-transform:uppercase; }
+
+.main { margin-left:var(--sidebar-w); flex:1; max-width:100%; }
+.content {
+  max-width:880px; margin:0 auto; padding:48px 48px 120px;
+}
+
+h1 { font-size:30px; font-weight:700; margin:44px 0 14px; padding-bottom:10px; border-bottom:2px solid var(--accent); color:var(--accent2); }
+h1:first-of-type { margin-top:0; }
+h2 { font-size:22px; font-weight:600; margin:32px 0 10px; color:var(--accent); }
+h3 { font-size:17px; font-weight:600; margin:22px 0 8px; color:var(--text); }
+h4 { font-size:15px; font-weight:600; margin:14px 0 6px; color:var(--orange); }
+p { margin:8px 0; }
+ul, ol { margin:6px 0 6px 20px; }
+li { margin:3px 0; }
+strong { color:var(--text); }
+code {
+  font-family:'JetBrains Mono','Fira Code',monospace; font-size:13.5px;
+  background:#eff1f3; color:#d73a49; padding:2px 7px; border-radius:4px;
+}
+pre { margin:12px 0; border-radius:8px; overflow:hidden; position:relative; border:1px solid var(--border); }
+pre code { background:none !important; color:inherit; padding:0; font-size:13px; }
+.hljs { background:var(--bg3) !important; padding:16px 20px !important; }
+
+blockquote {
+  border-left:4px solid var(--accent); background:var(--bg3);
+  padding:10px 16px; margin:12px 0; border-radius:0 6px 6px 0; color:var(--text2);
+}
+
+table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; border-radius:6px; overflow:hidden; }
+th, td { padding:8px 14px; border:1px solid var(--border); text-align:left; }
+th { background:var(--bg3); color:var(--accent); font-weight:600; }
+td { background:var(--bg2); }
+
+hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
+
+.info { background:#ddf4ff; border:1px solid #b8e1ff; border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--text); }
+.warn { background:#fff8c5; border:1px solid #f0d87e; border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--text); }
+.tip { background:#dcffe4; border:1px solid #b4e5c4; border-radius:8px; padding:12px 16px; margin:12px 0; color:var(--text); }
+.dng { color:var(--red); font-size:14px; }
+.diagram {
+  background:var(--bg2); border:1px solid var(--border); border-radius:10px;
+  padding:20px; margin:16px 0; overflow-x:auto; text-align:center;
+  box-shadow:0 1px 4px var(--shadow);
+}
+.diagram svg { max-width:100%; height:auto; }
+.diagram figcaption { font-size:13px; color:var(--text2); margin-top:8px; font-style:italic; }
+
+@media(max-width:768px) {
+  .sidebar { display:none; }
+  .main { margin-left:0; }
+  .content { padding:24px 16px 80px; }
+}
+
+.hero {
+  text-align:center; padding:48px 0 36px;
+}
+.hero h1 { font-size:36px; border:none; margin:0; padding:0; }
+.hero p { color:var(--text2); font-size:15px; margin-top:8px; }
+.hero .badge {
+  display:inline-block; background:var(--bg2); border:1px solid var(--border);
+  padding:3px 14px; border-radius:20px; font-size:12px; color:var(--text2); margin:3px;
+  transition:.2s;
+}
+.hero .badge:hover { border-color:var(--accent); color:var(--accent); }
+
+.toc { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:16px 24px; margin:24px 0; box-shadow:0 1px 4px var(--shadow); }
+.toc h3 { margin:0 0 10px; color:var(--accent); font-size:16px; }
+.toc a { color:var(--text2); text-decoration:none; font-size:14px; display:block; padding:2px 0; }
+.toc a:hover { color:var(--accent); }
+.toc .l2 { padding-left:20px; font-size:13px; }
+.toc .l3 { padding-left:40px; font-size:12.5px; }
+
+.author-note {
+  background:linear-gradient(135deg,#ddf4ff,#e8f5e9); border:1px solid #b8e1ff;
+  border-radius:10px; padding:20px 24px; margin:24px 0;
+}
+.author-note strong { color:var(--accent); }
+</style><style>pre code.hljs{display:block;overflow-x:auto;padding:1em}code.hljs{padding:3px 5px}/*!
   Theme: GitHub Dark
   Description: Dark theme as seen on github.com
   Author: github.com
@@ -558,10 +143,79 @@ ul {
   Outdated base version: https://github.com/primer/github-syntax-dark
   Current colors taken from GitHub's CSS
 */.hljs{color:#c9d1d9;background:#0d1117}.hljs-doctag,.hljs-keyword,.hljs-meta .hljs-keyword,.hljs-template-tag,.hljs-template-variable,.hljs-type,.hljs-variable.language_{color:#ff7b72}.hljs-title,.hljs-title.class_,.hljs-title.class_.inherited__,.hljs-title.function_{color:#d2a8ff}.hljs-attr,.hljs-attribute,.hljs-literal,.hljs-meta,.hljs-number,.hljs-operator,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-variable{color:#79c0ff}.hljs-meta .hljs-string,.hljs-regexp,.hljs-string{color:#a5d6ff}.hljs-built_in,.hljs-symbol{color:#ffa657}.hljs-code,.hljs-comment,.hljs-formula{color:#8b949e}.hljs-name,.hljs-quote,.hljs-selector-pseudo,.hljs-selector-tag{color:#7ee787}.hljs-subst{color:#c9d1d9}.hljs-section{color:#1f6feb;font-weight:700}.hljs-bullet{color:#f2cc60}.hljs-emphasis{color:#c9d1d9;font-style:italic}.hljs-strong{color:#c9d1d9;font-weight:700}.hljs-addition{color:#aff5b4;background-color:#033a16}.hljs-deletion{color:#ffdcd7;background-color:#67060c}</style>
+  <link rel="stylesheet" href="visual-system.css?v=20260930-1">
+  <link rel="stylesheet" href="tutorial-visual.css?v=20260930-2">
 </head>
-<body>
-  <div style="width: 750px; margin: auto; padding: 20px;">
-    <section class="container mx-auto"><h1 class="h1" data-heading="true" id="0" _msttexthash="246609922" _msthash="42546">逆向与二进制基础｜汇编：变量、栈、条件跳转，会 C 语言就会汇编</h1><blockquote class="blockquote"><p class="p"><font _mstmutation="1" _msttexthash="569831899" _msthash="42547">学过 C 语言再来看汇编，把寄存器当变量，栈还是你熟悉的那个栈， 比较、条件跳转选分支——入门真的很简单。</font><code class="codespan">cmp</code></p></blockquote><p class="p" _msttexthash="385442018" _msthash="42548">很多人一听到“汇编语言”，脑海里浮现的就是满屏的十六进制，还没开始学腿就先软了。</p><p class="p" _msttexthash="326091493" _msthash="42549">不过先别慌。 <strong class="strong" _istranslated="1">汇编不是逆向专家才能看的，是“懂一点点代码的人”都可以随便看的。 </strong></p><p class="p"><font _mstmutation="1" _msttexthash="1356362137" _msthash="42550">如果你学过 C 语言，知道指针、变量、函数调用、、，那你完全具备了看懂汇编的底色。 今天我们不管 CPU 怎么造出来的，不管内存颗粒的物理结构，甚至不用深究寄存器的硬件原理。</font><code class="codespan">if-else</code><code class="codespan">switch</code></p><p class="p"><strong class="strong" _msttexthash="30867135" _msthash="42551">我们只做三件事：</strong></p><ol class="ol"><li class="listitem" _msttexthash="37073023" _msthash="42552">1. 把寄存器当变量用。</li><li class="listitem" _msttexthash="229209370" _msthash="42553">2. 把栈直接当成你 C 语言里那个栈，看它在汇编里怎么长出来的。</li><li class="listitem"><font _mstmutation="1" _msttexthash="145679534" _msthash="42554">3. 把  当成  的条件比较，把条件跳转当成分支选择。</font><code class="codespan">cmp</code><code class="codespan">if</code></li></ol><blockquote class="blockquote"><p class="p"><font _mstmutation="1" _msttexthash="384855185" _msthash="42555">本文以 32 位汇编为主，也会混着讲点 64 位（原理一样，只是名字前面多了个 ，如  → ）。</font><code class="codespan">R</code><code class="codespan">EAX</code><code class="codespan">RAX</code></p></blockquote><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="1" _msttexthash="70058066" _msthash="42556">一、寄存器：8 个预定义的“变量”</h2><p class="p" _msttexthash="65949299" _msthash="42557">在 C 语言里，你定义变量：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
+<body class="page-tutorial">
+  <aside class="sidebar">
+  <div class="sidebar-logo">
+    <h1>ASM Teach</h1>
+    <p>汇编语言入门</p>
+  </div>
+  <nav>
+    <div class="label">章节</div>
+    <a href="#1" class="active">一、寄存器</a>
+    <a href="#2" class="sec">1. 数据寄存器</a>
+    <a href="#3" class="sec">2. 栈寄存器</a>
+    <a href="#4" class="sec">3. 程序指针</a>
+    <a href="#5" class="sec">二、常见指令</a>
+    <a href="#6" class="sec2">1. MOV 赋值</a>
+    <a href="#7" class="sec2">2. LEA 取地址</a>
+    <a href="#8" class="sec2">3. 算术逻辑</a>
+    <a href="#9" class="sec">三、栈与函数调用</a>
+    <a href="#10" class="sec2">3.1 最简函数栈帧</a>
+    <a href="#12" class="sec2">3.2 带参数调用</a>
+    <a href="#15" class="sec2">3.3 函数标准头尾</a>
+    <a href="#16" class="sec">四、条件判断</a>
+    <a href="#17" class="sec2">4.1 CMP 比较</a>
+    <a href="#18" class="sec2">4.2 条件跳转</a>
+    <a href="#19" class="sec2">4.3 switch 跳转表</a>
+    <a href="#20" class="sec">五、汇编代码骨架</a>
+    <a href="#21" class="sec">六、栈帧与 PWN</a>
+  </nav>
+</aside>
+
+<div class="main">
+<div class="content">
+    <div class="hero">
+  <h1>汇编语言教程</h1>
+  <p>会 C 语言就会汇编 — 变量、栈、条件跳转</p>
+  <div>
+    <span class="badge">寄存器</span>
+    <span class="badge">栈帧</span>
+    <span class="badge">CMP</span>
+    <span class="badge">条件跳转</span>
+    <span class="badge">函数调用</span>
+  </div>
+</div>
+
+<div class="author-note">
+<strong>写在前面</strong>：本文以 32 位汇编为主，也会混着讲点 64 位（原理一样，只是名字前面多了个 R，如 EAX → RAX）。如果你学过 C 语言，知道指针、变量、函数调用、if-else、switch，那你完全具备了看懂汇编的底色。
+</div>
+
+<div class="toc">
+<h3>目录</h3>
+<a href="#1">一、寄存器：8 个预定义的"变量"</a>
+<a href="#2" class="l2">1. 数据寄存器</a>
+<a href="#3" class="l2">2. 栈相关寄存器</a>
+<a href="#4" class="l2">3. 程序指针</a>
+<a href="#5">二、最常见的指令</a>
+<a href="#6" class="l2">1. MOV 赋值</a>
+<a href="#7" class="l2">2. LEA 取地址</a>
+<a href="#8" class="l2">3. 算术逻辑</a>
+<a href="#9">三、栈与函数调用</a>
+<a href="#10" class="l2">3.1 最简函数栈帧</a>
+<a href="#12" class="l2">3.2 带参数调用</a>
+<a href="#15" class="l2">3.3 函数标准头尾</a>
+<a href="#16">四、条件判断</a>
+<a href="#17" class="l2">4.1 CMP 比较</a>
+<a href="#18" class="l2">4.2 条件跳转</a>
+<a href="#19" class="l2">4.3 switch 跳转表</a>
+<a href="#20">五、汇编代码骨架</a>
+<a href="#21">六、栈帧与 PWN</a>
+</div>
+
+<section class="container mx-auto"><h1 class="h1" data-heading="true" id="0" _msttexthash="246609922" _msthash="42546">逆向与二进制基础｜汇编：变量、栈、条件跳转，会 C 语言就会汇编</h1><blockquote class="blockquote"><p class="p"><font _mstmutation="1" _msttexthash="569831899" _msthash="42547">学过 C 语言再来看汇编，把寄存器当变量，栈还是你熟悉的那个栈， 比较、条件跳转选分支——入门真的很简单。</font><code class="codespan">cmp</code></p></blockquote><p class="p" _msttexthash="385442018" _msthash="42548">很多人一听到“汇编语言”，脑海里浮现的就是满屏的十六进制，还没开始学腿就先软了。</p><p class="p" _msttexthash="326091493" _msthash="42549">不过先别慌。 <strong class="strong" _istranslated="1">汇编不是逆向专家才能看的，是“懂一点点代码的人”都可以随便看的。 </strong></p><p class="p"><font _mstmutation="1" _msttexthash="1356362137" _msthash="42550">如果你学过 C 语言，知道指针、变量、函数调用、、，那你完全具备了看懂汇编的底色。 今天我们不管 CPU 怎么造出来的，不管内存颗粒的物理结构，甚至不用深究寄存器的硬件原理。</font><code class="codespan">if-else</code><code class="codespan">switch</code></p><p class="p"><strong class="strong" _msttexthash="30867135" _msthash="42551">我们只做三件事：</strong></p><ol class="ol"><li class="listitem" _msttexthash="37073023" _msthash="42552">1. 把寄存器当变量用。</li><li class="listitem" _msttexthash="229209370" _msthash="42553">2. 把栈直接当成你 C 语言里那个栈，看它在汇编里怎么长出来的。</li><li class="listitem"><font _mstmutation="1" _msttexthash="145679534" _msthash="42554">3. 把  当成  的条件比较，把条件跳转当成分支选择。</font><code class="codespan">cmp</code><code class="codespan">if</code></li></ol><blockquote class="blockquote"><p class="p"><font _mstmutation="1" _msttexthash="384855185" _msthash="42555">本文以 32 位汇编为主，也会混着讲点 64 位（原理一样，只是名字前面多了个 ，如  → ）。</font><code class="codespan">R</code><code class="codespan">EAX</code><code class="codespan">RAX</code></p></blockquote><hr class="hr hr-dash"><h2 class="h2" data-heading="true" id="1" _msttexthash="70058066" _msthash="42556">一、寄存器：8 个预定义的“变量”</h2><p class="p" _msttexthash="65949299" _msthash="42557">在 C 语言里，你定义变量：</p><pre class="hljs code__pre"><span class="mac-sign" style="padding: 10px 14px 0;"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" width="45px" height="13px" viewBox="0 0 450 130">
     <ellipse cx="50" cy="65" rx="50" ry="52" stroke="rgb(220,60,54)" stroke-width="2" fill="rgb(237,108,96)"></ellipse>
     <ellipse cx="225" cy="65" rx="50" ry="52" stroke="rgb(218,151,33)" stroke-width="2" fill="rgb(247,193,81)"></ellipse>
     <ellipse cx="400" cy="65" rx="50" ry="52" stroke="rgb(27,161,37)" stroke-width="2" fill="rgb(100,200,86)"></ellipse>
@@ -703,6 +357,27 @@ ul {
       }
     </style>
   </section>
-  </div>
+
+</div> <!-- /content -->
+</div> <!-- /main -->
+
+<script>
+const navLinks = document.querySelectorAll('.sidebar nav a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.sidebar nav a[href="#${id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-80px 0px -70% 0px' });
+
+document.querySelectorAll('h1[id], h2[id]').forEach(h => observer.observe(h));
+</script>
+
+<script defer src="vendor/lottie_light.min.js"></script>
+<script defer src="visual-system.js?v=20260930-1"></script>
 </body>
 </html>

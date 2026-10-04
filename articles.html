@@ -8,27 +8,93 @@
   <title>Articles | Null Garden</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=20260911-6">
+  <link rel="stylesheet" href="visual-system.css?v=20260930-5">
+  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="articles-scene.css?v=20260930-5">
+  <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
 </head>
 <body class="page-articles">
   <a class="skip-link" href="#content">跳到正文</a>
   <header class="site-header" id="top">
     <a class="wordmark" href="index.html" aria-label="Null Garden 首页"><span class="wordmark-mark" aria-hidden="true">N//G</span><span>NULL GARDEN</span></a>
     <nav class="site-nav" id="site-nav" aria-label="主导航"><a href="index.html">首页</a><a href="platforms.html">平台</a><a href="articles.html" aria-current="page">文章</a><a href="personal-instruction.html">关于我</a><a href="links.html">友链</a><a href="miku-theme.html">MIKU</a><a href="other.html">其他</a></nav>
-    <div class="header-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button><button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button></div>
+    <div class="header-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button><button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button><button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button></div>
   </header>
 
-  <main class="directory-main" id="content">
-    <section class="directory-hero" aria-labelledby="articles-title"><div class="section-shell"><div class="section-label"><span>02</span> ARTICLES</div><h1 id="articles-title">从一次理解<br>到下一次复现</h1><p>将调试过程、源码阅读和题目复盘写成可检索的路径。文章不只是结论，也保留走到结论的方法。</p></div></section>
-    <section class="band"><div class="section-shell"><div class="directory-grid">
-      <a class="directory-card reveal" href="assembly-tutorial.html"><span class="directory-code">ASM / 01</span><h3>会 C 语言，就能读汇编</h3><p>寄存器、栈帧、条件跳转、调用约定与程序控制流的基础直觉。</p><span class="directory-action">READ LOCAL <b>→</b></span></a>
-      <a class="directory-card reveal" href="frida-hook-tutorial.html"><span class="directory-code">HOOK / 02</span><h3>Frida 动态分析路径</h3><p>Java 层与 Native 层定位、参数追踪与常见 Hook 组织方式。</p><span class="directory-action">READ LOCAL <b>→</b></span></a>
-      <a class="directory-card reveal" href="pwn-tutorial.html"><span class="directory-code">PWN / 03</span><h3>二进制漏洞利用入门</h3><p>从溢出原理、控制流覆盖到 ret2 系列和基础 ROP 的学习路径。</p><span class="directory-action">READ LOCAL <b>→</b></span></a>
-      <a class="directory-card reveal" href="https://god-re.gt.tc/" target="_blank" rel="noreferrer"><span class="directory-code">BLOG / 04</span><h3>独立笔记</h3><p>持续更新的技术记录、实验结果和学习过程。</p><span class="directory-action">OPEN BLOG <b>↗</b></span></a>
-      <a class="directory-card reveal" href="https://www.cnblogs.com/dsc-/p/" target="_blank" rel="noreferrer"><span class="directory-code">ARCHIVE / 05</span><h3>旧文章归档</h3><p>较早期的随笔与文章集合。</p><span class="directory-action">OPEN ARCHIVE <b>↗</b></span></a>
-      <a class="directory-card reveal" href="links.html"><span class="directory-code">INDEX / 06</span><h3>全部链接</h3><p>博客、知识库与相关站点统一放在友链页。</p><span class="directory-action">OPEN LINKS <b>→</b></span></a>
-    </div></div></section>
+  <main class="articles-console" id="content" aria-label="文章目录">
+    <h1 class="articles-sr-only">技术文章</h1>
+    <section class="articles-rig" aria-label="文章工作台">
+      <div class="article-monitor">
+        <div class="article-monitor__head">
+          <div class="article-screen" id="article-screen" role="group" aria-label="文章画面" aria-busy="false" data-scene="start">
+            <div class="article-screen__grain" aria-hidden="true"></div>
+            <div class="article-screen__topline"><span>NULL GARDEN / ARCHIVE</span><span class="article-screen__status" id="article-status">SYSTEM READY</span></div>
+            <div class="article-screen__content" id="article-content" aria-live="polite">
+              <article class="article-scene article-scene--start" data-article-scene="start">
+                <span class="article-scene__index">02 / ARTICLES</span>
+                <h2>从一次理解<br>到下一次复现</h2>
+                <p>将调试过程、源码阅读和题目复盘写成可检索的路径。文章不只是结论，也保留走到结论的方法。</p>
+                <pre class="article-scene__trace" aria-hidden="true">LOAD ARCHIVE&#10;TRACE METHOD&#10;VERIFY RESULT</pre>
+              </article>
+              <article class="article-scene" data-article-scene="assembly" hidden>
+                <span class="article-scene__index">ASM / 01</span>
+                <h2>会 C 语言，<br>就能读汇编</h2>
+                <p>寄存器、栈帧、条件跳转、调用约定与程序控制流的基础直觉。</p>
+                <a class="article-scene__read" href="assembly-tutorial.html">阅读文章 <span aria-hidden="true">↗</span></a>
+                <pre class="article-scene__trace" aria-hidden="true">push rbp&#10;mov rbp, rsp&#10;call understand</pre>
+              </article>
+              <article class="article-scene" data-article-scene="frida" hidden>
+                <span class="article-scene__index">HOOK / 02</span>
+                <h2>Frida<br>动态分析路径</h2>
+                <p>Java 层与 Native 层定位、参数追踪与常见 Hook 组织方式。</p>
+                <a class="article-scene__read" href="frida-hook-tutorial.html">阅读文章 <span aria-hidden="true">↗</span></a>
+                <pre class="article-scene__trace" aria-hidden="true">Java.perform(() =&gt; {&#10;  trace(arguments);&#10;});</pre>
+              </article>
+              <article class="article-scene" data-article-scene="pwn" hidden>
+                <span class="article-scene__index">PWN / 03</span>
+                <h2>二进制漏洞<br>利用入门</h2>
+                <p>从溢出原理、控制流覆盖到 ret2 系列和基础 ROP 的学习路径。</p>
+                <a class="article-scene__read" href="pwn-tutorial.html">阅读文章 <span aria-hidden="true">↗</span></a>
+                <pre class="article-scene__trace" aria-hidden="true">NX       ENABLED&#10;PIE      ENABLED&#10;CONTROL  RECOVERED</pre>
+              </article>
+              <noscript><div class="article-scene__fallback"><a href="assembly-tutorial.html">汇编教程</a><a href="frida-hook-tutorial.html">Frida 教程</a><a href="pwn-tutorial.html">PWN 教程</a></div></noscript>
+            </div>
+            <div class="article-screen__bottomline">
+              <span class="article-screen__counter" id="article-counter">01 / 04</span>
+              <div class="article-screen__steps" aria-label="选择文章画面">
+                <button type="button" class="is-current" data-article-target="start" aria-label="简介" aria-pressed="true" title="简介"></button>
+                <button type="button" data-article-target="assembly" aria-label="汇编教程" aria-pressed="false" title="汇编教程"></button>
+                <button type="button" data-article-target="frida" aria-label="Frida 教程" aria-pressed="false" title="Frida 教程"></button>
+                <button type="button" data-article-target="pwn" aria-label="PWN 教程" aria-pressed="false" title="PWN 教程"></button>
+              </div>
+              <div class="article-screen__actions">
+                <button type="button" id="article-prev" aria-label="上一画面" title="上一画面" disabled><span aria-hidden="true">←</span></button>
+                <button type="button" id="article-next" aria-label="接管下一画面" title="接管下一画面"><span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+            <div class="article-breach" aria-hidden="true"><span class="article-breach__scan"></span><span class="article-breach__split"></span><span class="article-breach__signal"></span><span class="article-breach__reboot"></span></div>
+          </div>
+          <div class="article-monitor__chin"><span>N//G</span><i aria-hidden="true"></i></div>
+        </div>
+        <div class="article-monitor__neck" aria-hidden="true"></div>
+        <div class="article-monitor__foot" aria-hidden="true"></div>
+        <div class="article-keyboard" aria-hidden="true">
+          <div class="article-keyboard__row"><kbd>ESC</kbd><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><kbd>4</kbd><kbd>5</kbd><kbd>6</kbd><kbd>7</kbd><kbd>8</kbd><kbd>9</kbd><kbd>0</kbd><kbd>⌫</kbd></div>
+          <div class="article-keyboard__row"><kbd>TAB</kbd><kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd><kbd>T</kbd><kbd>Y</kbd><kbd>U</kbd><kbd>I</kbd><kbd>O</kbd><kbd>P</kbd></div>
+          <div class="article-keyboard__row"><kbd>CAPS</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><kbd>F</kbd><kbd>G</kbd><kbd>H</kbd><kbd>J</kbd><kbd>K</kbd><kbd>L</kbd><kbd>↵</kbd></div>
+          <div class="article-keyboard__row"><kbd>SHIFT</kbd><kbd>Z</kbd><kbd>X</kbd><kbd>C</kbd><kbd>V</kbd><kbd>B</kbd><kbd>N</kbd><kbd>M</kbd><kbd class="article-keyboard__space">SPACE</kbd></div>
+        </div>
+      </div>
+      <div class="article-tower" aria-hidden="true">
+        <div class="article-tower__top"><span>NG / 01</span><i></i></div>
+        <div class="article-tower__window"><div class="article-tower__fan"><i></i></div><div class="article-tower__fan"><i></i></div><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#cpu"></use></svg><span class="article-tower__circuit"></span></div>
+        <div class="article-tower__base"><span>CORE ACTIVE</span><i></i><i></i><i></i></div>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer"><span>NULL GARDEN / <span id="year">2026</span></span><span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span><a href="#top">TOP ↑</a></footer>
-  <script src="index.js?v=20260911-2"></script>
+  <script src="index.js?v=20261004-1"></script>
+  <script defer src="prism-mode.js?v=20261004-2"></script>
+  <script defer src="articles-scene.js?v=20260930-1"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ const menuButton = document.getElementById('menu-toggle');
 const themeButton = document.getElementById('theme-toggle');
 
 const savedTheme = localStorage.getItem('site-theme');
-if (savedTheme === 'light') root.dataset.theme = 'light';
+if (savedTheme === 'light' || savedTheme === 'prism') root.dataset.theme = savedTheme;
 
 function closeMenu() {
   if (!nav || !menuButton) return;
@@ -24,7 +24,8 @@ nav?.addEventListener('click', (event) => {
 });
 
 themeButton?.addEventListener('click', () => {
-  const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+  const current = root.dataset.theme === 'prism' ? localStorage.getItem('site-theme-return') : root.dataset.theme;
+  const next = current === 'light' ? 'dark' : 'light';
   if (next === 'light') root.dataset.theme = 'light';
   else delete root.dataset.theme;
   localStorage.setItem('site-theme', next);
