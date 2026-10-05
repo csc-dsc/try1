@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-CN" data-accent="cyan">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Hatsune Miku 视觉主题实验：本地影像、动态 SVG、作品画廊与音乐索引。">
+  <meta name="theme-color" content="#061014">
+  <title>MIKU / SIGNAL 39</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="miku-theme.css?v=20261004-4">
+  <link rel="stylesheet" href="visual-system.css?v=20260930-1">
+  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="prism-theme.css?v=20261004-5">
+  <link rel="stylesheet" href="light-theme.css?v=20261004-2">
+  <link rel="stylesheet" href="type-system.css?v=20261005-3">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
+</head>
+<body class="page-miku">
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="miku-header" id="top">
+    <a class="miku-wordmark" href="#hero"><b>39</b><span>MIKU / SIGNAL</span></a>
+    <nav class="miku-nav" id="miku-nav" aria-label="主导航">
+      <a href="index.html">首页</a><a href="platforms.html">平台</a><a href="articles.html">文章</a><a href="personal-instruction.html">关于我</a><a href="links.html">友链</a><a href="miku-theme.html" aria-current="page">MIKU</a><a href="other.html">其他</a>
+    </nav>
+    <div class="miku-tools">
+      <button class="square-button" id="mode-toggle" type="button" aria-label="切换显示模式" title="切换显示模式">◐</button>
+      <button class="square-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button>
+      <button class="square-button miku-menu-button" id="miku-menu" type="button" aria-label="打开导航" aria-controls="miku-nav" aria-expanded="false" title="打开导航">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="miku-hero" id="hero" aria-labelledby="miku-title">
+      <div class="hero-scan" aria-hidden="true"></div>
+      <div class="miku-hero-content">
+        <p class="miku-kicker">VIRTUAL SINGER / VISUAL ARCHIVE / 01</p>
+        <h1 id="miku-title"><span>HATSUNE</span><span>MIKU</span></h1>
+        <p class="miku-lead">声音没有固定形状，所以每一位创作者都能让她重新诞生。</p>
+        <div class="miku-actions">
+          <a class="miku-command primary" href="#signal"><span class="miku-command__label">ENTER SIGNAL</span><span aria-hidden="true">↓</span></a>
+          <a class="miku-command" href="#gallery"><span class="miku-command__label">VIEW ARCHIVE</span><span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="hero-stamp" aria-hidden="true"><span>VOCAL</span><b>39</b><span>FUTURE</span></div>
+      <div class="hero-meta"><span>COLOR / CYAN</span><span>VOICE / SYNTH</span><span>STATUS / FOREVER</span></div>
+    </section>
+
+    <section class="miku-ticker" aria-label="主题关键词">
+      <div><span>THE FIRST SOUND FROM THE FUTURE</span><i>01</i><span>CREATE TOGETHER</span><i>39</i><span>SONGS WITHOUT BORDERS</span><i>∞</i><span aria-hidden="true">THE FIRST SOUND FROM THE FUTURE</span><i aria-hidden="true">01</i><span aria-hidden="true">CREATE TOGETHER</span><i aria-hidden="true">39</i><span aria-hidden="true">SONGS WITHOUT BORDERS</span><i aria-hidden="true">∞</i></div>
+    </section>
+
+    <section class="miku-section archive-section" id="archive" aria-labelledby="archive-title">
+      <div class="miku-shell archive-layout reveal">
+        <div class="archive-side">
+          <div class="miku-section-label"><span>01</span> ARCHIVE</div>
+          <div class="archive-flow" aria-hidden="true"><svg viewBox="0 0 460 170" preserveAspectRatio="none"><defs><linearGradient id="archive-river"><stop offset="0" stop-color="#26b7b0"/><stop offset=".5" stop-color="#8c77d4"/><stop offset="1" stop-color="#e66b99"/></linearGradient></defs><path d="M-35 65 C35 5 100 135 180 67 S330 3 405 75 S495 130 535 70"/><path d="M-40 88 C40 28 110 150 190 90 S330 30 410 92 S500 142 540 90"/><path d="M-30 111 C45 55 120 165 200 110 S340 55 415 113 S505 155 545 113"/></svg></div>
+        </div>
+        <div class="archive-copy">
+          <h2 id="archive-title">一束声音，<br><span>无数种未来。</span></h2>
+          <p>初音未来不只是一套声库，也是一种开放式的共同创作。旋律、绘画、舞台、程序与社区不断为同一个声音赋予新的轮廓。</p>
+        </div>
+        <dl class="archive-stats">
+          <div><dt>2007</dt><dd>软件发行</dd></div>
+          <div><dt>39</dt><dd>标志数字</dd></div>
+          <div><dt>∞</dt><dd>共同创作</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="miku-section signal-section" id="signal" aria-labelledby="signal-title">
+      <div class="miku-shell">
+        <div class="miku-section-heading reveal">
+          <div class="miku-section-label"><span>02</span> SVG SIGNAL</div>
+          <h2 id="signal-title">未来声线</h2>
+          <p>MIKU / VISUAL SYNTHESIZER</p>
+        </div>
+        <div class="signal-layout reveal">
+          <div class="signal-visual">
+            <div class="vector-overlay">
+              <span>MINIMAL VECTOR / CV01</span>
+              <strong>39</strong>
+              <p>THE FIRST SOUND<br>FROM THE FUTURE</p>
+              <a href="https://github.com/zodiacfireworks/art-work-minimal-hatsune-miku" target="_blank" rel="noreferrer">ART BY MARTIN VUELTA / MIT ↗</a>
+            </div>
+            <img class="miku-vector" src="image/miku/minimal-hatsune-miku.svg" alt="Martin Vuelta 创作的极简初音未来矢量插画">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="miku-section motion-section" aria-labelledby="motion-title">
+      <div class="miku-shell motion-layout reveal">
+        <figure class="motion-figure">
+          <img src="image/miku/miku-motion.gif" alt="初音未来蓝色动态插画" loading="lazy">
+          <figcaption>FRAME / 39 / LOOP</figcaption>
+        </figure>
+        <div class="motion-copy">
+          <div class="miku-section-label"><span>03</span> MOTION</div>
+          <h2 id="motion-title">让静止的画面<br>开始呼吸。</h2>
+          <p>青绿并不是唯一的答案。她可以轻盈、冷冽、热烈，也可以成为每个创作者眼里完全不同的光。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="miku-section gallery-section" id="gallery" aria-labelledby="gallery-title">
+      <div class="miku-shell">
+        <div class="miku-section-heading reveal">
+          <div class="miku-section-label"><span>04</span> GALLERY</div>
+          <h2 id="gallery-title">画廊</h2>
+          <p>COLOR / STAGE / SKY / MEMORY</p>
+        </div>
+        <div class="miku-gallery">
+          <figure class="gallery-item gallery-item--feature reveal"><button type="button" data-src="image/miku/gallery-6.jpg" aria-label="预览晴空与海岸插画"><img src="image/miku/gallery-6.jpg" width="1920" height="1080" alt="晴空与海岸插画" loading="lazy"></button><figcaption>01 / BLUE HORIZON</figcaption></figure>
+          <div class="miku-gallery__pair">
+            <figure class="gallery-item reveal"><button type="button" data-src="image/miku/gallery-1.jpg" aria-label="预览彩色舞台上的初音未来"><img src="image/miku/gallery-1.jpg" width="800" height="450" alt="彩色舞台上的初音未来" loading="lazy"></button><figcaption>02 / LOL</figcaption></figure>
+            <figure class="gallery-item reveal"><button type="button" data-src="image/miku/gallery-2.jpg" aria-label="预览初音未来主题插画"><img src="image/miku/gallery-2.jpg" width="800" height="450" alt="初音未来主题插画" loading="lazy"></button><figcaption>03 / MEMORY</figcaption></figure>
+          </div>
+          <figure class="gallery-item gallery-item--feature reveal"><button type="button" data-src="image/miku/gallery-7.jpg" aria-label="预览初音未来主题插画"><img src="image/miku/gallery-7.jpg" width="1920" height="1080" alt="初音未来主题插画" loading="lazy"></button><figcaption>04 / LIGHT</figcaption></figure>
+          <div class="miku-gallery__study">
+            <figure class="gallery-item gallery-item--portrait reveal"><button type="button" data-src="image/miku/gallery-3.jpg" aria-label="预览初音未来竖幅插画"><img src="image/miku/gallery-3.jpg" width="800" height="1131" alt="初音未来彩色竖幅插画" loading="lazy"></button><figcaption>05 / ARTWORK</figcaption></figure>
+            <div class="miku-gallery__study-stack">
+              <figure class="gallery-item reveal"><button type="button" data-src="image/miku/gallery-4.jpg" aria-label="预览魔法未来主题插画"><img src="image/miku/gallery-4.jpg" width="800" height="342" alt="魔法未来主题插画" loading="lazy"></button><figcaption>06 / MAGICAL</figcaption></figure>
+              <figure class="gallery-item reveal"><button type="button" data-src="image/miku/gallery-5.jpg" aria-label="预览初音未来主题插画"><img src="image/miku/gallery-5.jpg" width="800" height="472" alt="初音未来主题插画" loading="lazy"></button><figcaption>07 / VOICE</figcaption></figure>
+            </div>
+          </div>
+          <figure class="gallery-item gallery-item--ending reveal"><button type="button" data-src="image/miku/miku-night-signal.jpg" aria-label="预览初音未来暗色近景"><img src="image/miku/miku-night-signal.jpg" width="960" height="540" alt="初音未来暗色近景肖像" loading="lazy"></button><figcaption>08 / NIGHT SIGNAL</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="miku-section listening-section" aria-labelledby="listening-title">
+      <div class="miku-shell listening-shell">
+        <div class="listening-head reveal">
+          <div><div class="miku-section-label"><span>05</span> SOUND ARCHIVE</div><h2 id="listening-title">聆听</h2></div>
+          <span class="listening-count">03 / TRACKS</span>
+        </div>
+        <ol class="track-list">
+          <li><a class="track-entry reveal" href="https://www.bilibili.com/video/BV1oCzuBHEax" target="_blank" rel="noopener noreferrer"><span class="track-entry__number">01</span><span class="track-entry__name"><strong>World is Mine</strong><em>supercell</em></span><svg class="track-entry__wave" viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true"><path d="M0 36 H38 L48 32 L57 41 L66 21 L75 51 L84 9 L93 63 L102 34 H132 L141 32 L150 40 L159 26 L168 47 L177 17 L186 55 L195 35 H225 L234 32 L243 41 L252 22 L261 50 L270 30 L279 36 H300"/></svg><span class="track-entry__arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="track-entry reveal" href="https://www.bilibili.com/video/BV1LL411z7hd" target="_blank" rel="noopener noreferrer"><span class="track-entry__number">02</span><span class="track-entry__name"><strong>千本桜</strong><em>黒うさP</em></span><svg class="track-entry__wave" viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true"><path d="M0 36 H29 L38 28 L47 44 L56 15 L65 57 L74 8 L83 64 L92 26 L101 46 L110 35 H143 L152 30 L161 42 L170 17 L179 53 L188 12 L197 60 L206 33 H236 L245 26 L254 48 L263 19 L272 55 L281 36 H300"/></svg><span class="track-entry__arrow" aria-hidden="true">↗</span></a></li>
+          <li><a class="track-entry reveal" href="https://www.bilibili.com/video/BV1XE411s7uG" target="_blank" rel="noopener noreferrer"><span class="track-entry__number">03</span><span class="track-entry__name"><strong>Hand in Hand</strong><em>livetune</em></span><svg class="track-entry__wave" viewBox="0 0 300 72" preserveAspectRatio="none" aria-hidden="true"><path d="M0 36 H36 Q45 36 50 28 Q55 18 61 36 Q67 53 73 36 Q80 17 87 36 Q94 54 101 36 H132 Q141 36 147 27 Q153 18 160 36 Q168 54 175 36 Q182 20 189 36 H223 Q231 36 237 29 Q244 22 251 36 Q258 49 265 36 H300"/></svg><span class="track-entry__arrow" aria-hidden="true">↗</span></a></li>
+        </ol>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="lightbox" id="lightbox" aria-label="图片预览">
+    <button id="lightbox-close" type="button" aria-label="关闭图片预览" title="关闭">×</button>
+    <img id="lightbox-image" src="image/miku/gallery-6.jpg" alt="画廊大图预览">
+    <div class="lightbox-controls"><button id="lightbox-prev" type="button" aria-label="上一张" title="上一张">←</button><span id="lightbox-counter" aria-live="polite">01 / 08</span><button id="lightbox-next" type="button" aria-label="下一张" title="下一张">→</button></div>
+  </dialog>
+
+  <footer class="miku-footer">
+    <span>MIKU / SIGNAL 39</span>
+    <span>VECTOR: MARTIN VUELTA / MIT · <span id="miku-year">2026</span></span>
+    <a href="#top">TOP ↑</a>
+  </footer>
+  <script src="miku-theme.js?v=20261004-5"></script>
+  <script defer src="prism-mode.js?v=20261004-2"></script>
+  <script defer src="vendor/lottie_light.min.js"></script>
+  <script defer src="visual-system.js?v=20261005-1"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+:root {
+  --type-heading: STXingkai, "华文行楷", STKaiti, KaiTi, "Kaiti SC", "Songti SC", Georgia, serif;
+  --type-copy: FangSong, STFangsong, "Songti SC", "Noto Serif CJK SC", SimSun, Georgia, serif;
+  --type-accent-a: #71d6bd;
+  --type-accent-b: #eaa9c2;
+  --type-accent-c: #a6d8e8;
+}
+html[data-theme="light"] {
+  --type-accent-a: #226d66;
+  --type-accent-b: #9c4768;
+  --type-accent-c: #426d8a;
+}
+html[data-theme="prism"] {
+  --type-accent-a: #a780d1;
+  --type-accent-b: #d78aae;
+  --type-accent-c: #8fbcd5;
+}
+body.page-tutorial {
+  --type-accent-a: #18594f;
+  --type-accent-b: #834456;
+  --type-accent-c: #375f73;
+}
+html[data-theme="light"] body.page-tutorial {
+  --type-accent-a: #206a60;
+  --type-accent-b: #91445d;
+  --type-accent-c: #416c82;
+}
+html[data-theme="prism"] body.page-tutorial {
+  --type-accent-a: #664280;
+  --type-accent-b: #874267;
+  --type-accent-c: #435f7d;
+}
+
+body :is(h1, h2) { font-family: var(--type-heading) !important; letter-spacing: 0; overflow-wrap: anywhere; text-wrap: balance; }
+body :is(p, li, blockquote, dd) { font-family: var(--type-copy); }
+body :is(.identity-strip dd, .archive-stats dt, .project-main strong, .directory-row strong, .resource-primary strong) {
+  font-family: var(--type-heading);
+  text-shadow: 0 2px 12px color-mix(in srgb, currentColor 24%, transparent);
+}
+body .archive-stats div:nth-child(3n + 1) dt { color: color-mix(in srgb, currentColor 76%, var(--type-accent-a)); }
+body .archive-stats div:nth-child(3n + 2) dt { color: color-mix(in srgb, currentColor 76%, var(--type-accent-b)); }
+body .archive-stats div:nth-child(3n + 3) dt { color: color-mix(in srgb, currentColor 76%, var(--type-accent-c)); }
+
+@keyframes type-ink-flow { to { background-position: 100% 0; } }
+@supports (-webkit-background-clip: text) {
+  body :is(h1, h2):not(:has(> span)):not(:has(code)):not(.articles-sr-only),
+  body .hero h1 .hero-line:last-child,
+  body .archive-scene h2 > span {
+    background-image: linear-gradient(105deg,
+      color-mix(in srgb, currentColor 85%, var(--type-accent-a)),
+      color-mix(in srgb, currentColor 74%, var(--type-accent-b)) 37%,
+      color-mix(in srgb, currentColor 79%, var(--type-accent-c)) 72%,
+      color-mix(in srgb, currentColor 85%, var(--type-accent-a)));
+    background-size: 240% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: type-ink-flow 16s ease-in-out infinite alternate;
+    text-shadow: 0 3px 14px color-mix(in srgb, currentColor 16%, transparent);
+  }
+  body .hero-title-accent { -webkit-text-fill-color: currentColor; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body :is(h1, h2):not(:has(> span)):not(:has(code)):not(.articles-sr-only),
+  body .hero h1 .hero-line:last-child,
+  body .archive-scene h2 > span { animation: none; }
+}
+
+@media (max-width: 700px) {
+  body .hero h1 .hero-line { white-space: normal; }
+}

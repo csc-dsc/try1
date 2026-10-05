@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="一座匿名的安全研究与创作档案馆，记录逆向工程、二进制安全、Android 分析与长期学习。">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Null Garden | Security Notes & Experiments</title>
+  <link rel="icon" href="/try1/assets/favicon-D6ef4Ryn.ico">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
+  <script type="module" crossorigin src="/try1/assets/index-fEFhDZ7J.js"></script>
+  <link rel="modulepreload" crossorigin href="/try1/assets/preload-helper-CdaP5kUi.js">
+  <link rel="modulepreload" crossorigin href="/try1/assets/main-CpibyVqs.js">
+  <link rel="stylesheet" crossorigin href="/try1/assets/preload-helper-B-C3Nk-v.css">
+  <link rel="stylesheet" crossorigin href="/try1/assets/main-CL5G_naE.css">
+  <link rel="stylesheet" crossorigin href="/try1/assets/index-C9C_gSGC.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">跳到正文</a>
+
+  <header class="site-header" id="top">
+    <a class="wordmark" href="index.html" aria-label="Null Garden 首页">
+      <span class="wordmark-mark" aria-hidden="true">N//G</span>
+      <span>NULL GARDEN</span>
+    </a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a href="index.html" aria-current="page">首页</a>
+      <a href="platforms.html">平台</a>
+      <a href="articles.html">文章</a>
+      <a href="personal-instruction.html">关于我</a>
+      <a href="links.html">友链</a>
+      <a href="miku-theme.html">MIKU</a>
+      <a href="other.html">其他</a>
+    </nav>
+    <div class="header-tools">
+      <div class="auto-browse-control">
+        <button class="icon-button auto-browse-toggle" id="auto-browse-toggle" type="button" aria-label="自动浏览" aria-pressed="false" aria-expanded="false" aria-haspopup="menu" aria-controls="auto-browse-menu" title="自动浏览"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></button>
+        <div class="auto-browse-menu" id="auto-browse-menu" role="menu" aria-label="浏览速度" hidden>
+          <div class="auto-browse-speeds">
+            <button type="button" data-browse-level="2" role="menuitemradio" aria-checked="false" tabindex="-1"><span>慢</span></button>
+            <button type="button" data-browse-level="3" role="menuitemradio" aria-checked="false" tabindex="-1"><span>中</span></button>
+            <button type="button" data-browse-level="4" role="menuitemradio" aria-checked="false" tabindex="-1"><span>快</span></button>
+            <button type="button" data-browse-level="5" role="menuitemradio" aria-checked="false" tabindex="-1"><span>较快</span></button>
+          </div>
+        </div>
+      </div>
+      <button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
+      <button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button>
+      <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-noise" aria-hidden="true"></div>
+      <div class="hero-constellation" aria-hidden="true">
+        <div class="hero-constellation__orbit"></div>
+        <div class="hero-orbit-core"><img src="graphics/spider-x86.png" alt=""></div>
+        <div class="hero-orbit-item" data-orbit="0"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#cpu"></use></svg><span>CPU</span></div>
+        <div class="hero-orbit-item" data-orbit="1"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#keyboard"></use></svg><span>KEYBOARD</span></div>
+        <div class="hero-orbit-item" data-orbit="2"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#mouse"></use></svg><span>MOUSE</span></div>
+        <div class="hero-orbit-item" data-orbit="3"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#screwdriver"></use></svg><span>REPAIR</span></div>
+        <div class="hero-orbit-item" data-orbit="4"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#blower"></use></svg><span>CLEAN</span></div>
+        <div class="hero-orbit-item" data-orbit="5"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#solder"></use></svg><span>BUILD</span></div>
+      </div>
+      <div class="hero-content">
+        <p class="kicker">REVERSE / BUILD / DOCUMENT</p>
+        <h1 id="hero-title"><span class="hero-line">把复杂系统</span><span class="hero-line">拆成可理解的<span class="hero-title-accent">光</span></span></h1>
+        <p class="hero-lead">专注逆向工程与二进制安全，也持续探索 Android、AI 安全和更有表达力的网页。</p>
+        <div class="hero-actions">
+          <a class="command primary" href="#work">查看作品 <span aria-hidden="true">↓</span></a>
+          <a class="command" href="personal-instruction.html">阅读档案 <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="hero-index" aria-label="站点摘要">
+        <span><b>01</b> Binary</span>
+        <span><b>02</b> Android</span>
+        <span><b>03</b> Creative web</span>
+      </div>
+    </section>
+
+    <section class="ticker-band" aria-label="关注方向">
+      <div class="ticker-track">
+        <span>REVERSE ENGINEERING</span><i>✦</i><span>ANDROID</span><i>✦</i><span>PWN</span><i>✦</i><span>AI SECURITY</span><i>✦</i><span>CTF</span><i>✦</i><span>VISUAL WEB</span><i>✦</i>
+        <span aria-hidden="true">REVERSE ENGINEERING</span><i aria-hidden="true">✦</i><span aria-hidden="true">ANDROID</span><i aria-hidden="true">✦</i><span aria-hidden="true">PWN</span><i aria-hidden="true">✦</i><span aria-hidden="true">AI SECURITY</span><i aria-hidden="true">✦</i><span aria-hidden="true">CTF</span><i aria-hidden="true">✦</i><span aria-hidden="true">VISUAL WEB</span><i aria-hidden="true">✦</i>
+      </div>
+    </section>
+
+    <div class="screen-breach" aria-hidden="true">
+      <span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span><span class="screen-breach__slat"></span>
+      <span class="screen-breach__scan"></span>
+    </div>
+
+    <section class="band intro-band reveal" aria-labelledby="intro-title">
+      <div class="section-shell intro-layout intro-layout--ambient">
+        <div class="section-label"><span>00</span> FIELD NOTES</div>
+        <div class="intro-copy">
+          <h2 id="intro-title">好奇心先行，证据落地。</h2>
+          <p>从 Web 走向更底层的世界，在静态分析、动态 Hook、算法还原和漏洞利用之间建立完整视角。每一次解题都尽量留下可复现的过程，而不只是答案。</p>
+        </div>
+        <dl class="identity-strip">
+          <div><dt>TYPE</dt><dd>ENTP</dd></div>
+          <div><dt>MODE</dt><dd>Hands-on</dd></div>
+          <div><dt>LOOP</dt><dd>Break → Learn → Write</dd></div>
+        </dl>
+        <div class="terminal-mini" aria-label="学习状态终端">
+          <span class="terminal-prompt" aria-hidden="true">ng@field:~$</span>
+          <span class="terminal-output" id="terminal-output" aria-live="polite"></span><span class="terminal-cursor" aria-hidden="true"></span>
+        </div>
+        <div class="ambient-slot ambient-slot--balisong" data-ambient-model="balisong"></div>
+      </div>
+    </section>
+
+    <div class="shatter-bridge" aria-hidden="true">
+      <span class="shatter-bridge__word">EXPERIMENTS</span>
+      <i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i><i class="shatter-bridge__shard"></i>
+    </div>
+
+    <section class="band work-band" id="work" aria-labelledby="work-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div class="section-label"><span>01</span> SELECTED WORK</div>
+          <h2 id="work-title">正在生长的实验</h2>
+          <p>公开仓库中的工具、内容与小型产品实验。</p>
+        </div>
+        <div class="project-list">
+          <a class="project-row project-row--factory reveal" href="https://github.com/csc-dsc/ctf-challenge-skill" target="_blank" rel="noopener noreferrer">
+            <span class="project-number">01</span>
+            <span class="project-main"><strong>Challenge Factory</strong><small>把出题、验证与交付过程沉淀为可复用工作流</small></span>
+            <span class="project-visual project-visual--factory" aria-hidden="true"><span>DESIGN</span><span>VERIFY</span><span>SHIP</span></span>
+            <span class="project-tags"><em>CTF</em><em>Automation</em></span>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <article class="project-row project-row--poetry reveal">
+            <span class="project-number">02</span>
+            <span class="project-main"><strong>Poetry Lab</strong><small>把文本、生成式 AI 与轻量体验放进同一个实验场</small></span>
+            <span class="project-visual project-visual--poetry" aria-hidden="true"><span>P</span><span>O</span><span>E</span><span>T</span><span>R</span><span>Y</span></span>
+            <span class="project-tags"><em>AI</em><em>Product</em></span>
+            <span class="project-arrow" aria-hidden="true">●</span>
+          </article>
+          <a class="project-row project-row--utility reveal" href="https://github.com/csc-dsc/utilitybox" target="_blank" rel="noopener noreferrer">
+            <span class="project-number">03</span>
+            <span class="project-main"><strong>Utility Box</strong><small>为重复任务打造的小工具集合</small></span>
+            <span class="project-visual project-visual--utility" aria-hidden="true"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#screwdriver"></use></svg><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#blower"></use></svg><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#solder"></use></svg></span>
+            <span class="project-tags"><em>Tools</em><em>Practice</em></span>
+            <span class="project-arrow" aria-hidden="true">↗</span>
+          </a>
+          <a class="project-row project-row--miku reveal accent-project" href="miku-theme.html">
+            <span class="project-number">04</span>
+            <span class="project-main"><strong>Miku Signal</strong><small>以本地影像、SVG 与节拍交互重构的视觉主题页</small></span>
+            <span class="project-visual project-visual--miku" aria-hidden="true"><img src="/try1/assets/gallery-1-D702w0mw.jpg" alt=""><img src="/try1/assets/gallery-1-D702w0mw.jpg" alt=""><img src="/try1/assets/gallery-1-D702w0mw.jpg" alt=""><img class="project-visual__complete" src="/try1/assets/gallery-1-D702w0mw.jpg" alt=""></span>
+            <span class="project-tags"><em>Visual</em><em>Web</em></span>
+            <span class="project-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-bridge" aria-hidden="true">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path class="wave-bridge__fill" d="M0 56L1200 56V120H0Z"></path>
+        <path class="wave-bridge__crest" d="M0 56L1200 56"></path>
+      </svg>
+    </div>
+
+    <section class="band notes-band" id="notes" aria-labelledby="notes-title">
+      <div class="section-shell">
+        <div class="section-heading reveal">
+          <div class="section-label"><span>02</span> DEEP DIVES</div>
+          <h2 id="notes-title">从原理到复现</h2>
+          <p>不是知识点堆叠，而是能跟着做完的学习路径。</p>
+        </div>
+        <div class="note-grid">
+          <a class="note-card note-card--asm reveal" href="assembly-tutorial.html">
+            <span class="note-code">ASM / 01</span>
+            <div class="note-copy"><h3>会 C 语言，就能读汇编</h3><p>寄存器、栈帧、条件跳转与调用约定的直觉式入门。</p></div>
+            <div class="note-visual" aria-hidden="true"><span>C → ASM</span><svg viewBox="0 0 280 80" preserveAspectRatio="none"><path class="note-visual__base" d="M0 42 H42 L58 42 L70 20 L82 60 L96 34 H130 L144 34 L156 51 L168 22 L182 42 H220 L232 31 L245 47 L258 42 H280"/><path class="note-visual__pulse" d="M0 42 H42 L58 42 L70 20 L82 60 L96 34 H130 L144 34 L156 51 L168 22 L182 42 H220 L232 31 L245 47 L258 42 H280"/></svg></div>
+            <span class="note-link">开始阅读 <b aria-hidden="true">→</b></span>
+          </a>
+          <a class="note-card note-card--hook reveal" href="frida-hook-tutorial.html">
+            <span class="note-code">HOOK / 02</span>
+            <div class="note-copy"><h3>Frida 动态分析路径</h3><p>从 Java 层定位到 Native 参数追踪，建立可迁移的 Hook 思路。</p></div>
+            <div class="note-visual" aria-hidden="true"><span>JAVA → NATIVE</span><svg viewBox="0 0 280 80" preserveAspectRatio="none"><path class="note-visual__base" d="M0 48 H55 C82 48 78 18 108 18 H156 C186 18 178 48 207 48 H280"/><path class="note-visual__pulse" d="M0 48 H55 C82 48 78 18 108 18 H156 C186 18 178 48 207 48 H280"/><path class="note-visual__branch" d="M55 48 C80 48 80 67 110 67 H153 C182 67 183 48 207 48"/></svg></div>
+            <span class="note-link">开始阅读 <b aria-hidden="true">→</b></span>
+          </a>
+          <a class="note-card note-card--pwn reveal" href="pwn-tutorial.html">
+            <span class="note-code">PWN / 03</span>
+            <div class="note-copy"><h3>二进制漏洞利用入门</h3><p>以栈与控制流为主线，把保护机制和利用方式串起来。</p></div>
+            <div class="note-visual" aria-hidden="true"><span>STACK → RET</span><svg viewBox="0 0 280 80" preserveAspectRatio="none"><path class="note-visual__base" d="M0 66 H45 V55 H92 V44 H139 V33 H186 V22 H233 V11 H280"/><path class="note-visual__pulse" d="M0 66 H45 V55 H92 V44 H139 V33 H186 V22 H233 V11 H280"/></svg></div>
+            <span class="note-link">开始阅读 <b aria-hidden="true">→</b></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="tear-bridge" aria-hidden="true"><span class="tear-bridge__edge"></span></div>
+
+    <section class="band links-band" aria-labelledby="links-title">
+      <div class="section-shell links-layout reveal">
+        <div>
+          <div class="section-label"><span>03</span> ELSEWHERE</div>
+          <h2 id="links-title">继续向外探索</h2>
+        </div>
+        <div class="outro-composition">
+          <span class="outro-composition__outline" aria-hidden="true">KEEP EXPLORING</span>
+          <a href="https://github.com/csc-dsc" target="_blank" rel="noopener noreferrer">GITHUB / OPEN SOURCE <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>NULL GARDEN / <span id="year">2026</span></span>
+    <span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span>
+    <a href="#top">TOP ↑</a>
+  </footer>
+
+  <script defer src="vendor/lottie_light.min.js"></script>
+  <script defer src="visual-system.js?v=20261005-1"></script>
+</body>
+</html>

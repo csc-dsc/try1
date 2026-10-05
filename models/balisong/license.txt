@@ -1,0 +1,11 @@
+Model Information:
+* title:	Balisong
+* source:	https://sketchfab.com/3d-models/balisong-85f7e55c67974a3585eeed345fbbd972
+* author:	DUCK_ (https://sketchfab.com/DUCK_THE_KILLER)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Balisong" (https://sketchfab.com/3d-models/balisong-85f7e55c67974a3585eeed345fbbd972) by DUCK_ (https://sketchfab.com/DUCK_THE_KILLER) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

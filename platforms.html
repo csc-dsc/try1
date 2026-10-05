@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Null Garden 的学习、研究与创作平台目录。">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Platforms | Null Garden</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="index.css?v=20260911-6">
+  <link rel="stylesheet" href="visual-system.css?v=20260930-5">
+  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="platforms-scene.css?v=20261004-9">
+  <link rel="stylesheet" href="platforms-eye-events.css?v=20261005-1">
+  <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
+  <link rel="stylesheet" href="light-theme.css?v=20261004-2">
+  <link rel="stylesheet" href="type-system.css?v=20261005-3">
+  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
+</head>
+<body class="page-platforms">
+  <a class="skip-link" href="#content">跳到正文</a>
+  <header class="site-header" id="top">
+    <a class="wordmark" href="index.html" aria-label="Null Garden 首页"><span class="wordmark-mark" aria-hidden="true">N//G</span><span>NULL GARDEN</span></a>
+    <nav class="site-nav" id="site-nav" aria-label="主导航">
+      <a href="index.html">首页</a><a href="platforms.html" aria-current="page">平台</a><a href="articles.html">文章</a><a href="personal-instruction.html">关于我</a><a href="links.html">友链</a><a href="miku-theme.html">MIKU</a><a href="other.html">其他</a>
+    </nav>
+    <div class="header-tools"><button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button><button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button><button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button></div>
+  </header>
+
+  <main class="directory-main" id="content">
+    <section class="directory-hero" aria-labelledby="platforms-title"><div class="section-shell"><div class="section-label"><span>01</span> PLATFORMS</div><h1 id="platforms-title">把学习变成<br>可进入的系统</h1><p>代码、教程、靶场、实验环境与复盘记录分别有自己的入口，但共同服务于一条从理解到交付的学习路径。</p></div></section>
+    <section class="platform-flow" aria-label="平台目录">
+      <div class="platform-eye-scene" data-platform-art>
+        <span class="platform-eye-scene__line platform-eye-scene__line--left"></span>
+        <span class="platform-eye-scene__line platform-eye-scene__line--right"></span>
+        <div class="platform-eye-scene__orbit"></div>
+        <svg class="platform-eye" viewBox="0 0 600 350" role="button" tabindex="0" aria-label="触碰眼睛" data-pet-warnings="0">
+          <defs>
+            <clipPath id="platform-eye-opening"><path class="platform-eye__aperture" d="M28 175C90 68 194 30 300 44C406 30 510 68 572 175C510 282 406 320 300 306C194 320 90 282 28 175Z"/></clipPath>
+            <radialGradient id="platform-iris-fill"><stop offset="0" stop-color="#0a2422"/><stop offset=".36" stop-color="#1ba799"/><stop offset=".7" stop-color="#c6ff55"/><stop offset="1" stop-color="#0b4946"/></radialGradient>
+            <linearGradient id="platform-eye-white" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#e4f0e7"/><stop offset="1" stop-color="#8fb0a6"/></linearGradient>
+          </defs>
+          <path class="platform-eye__shadow" d="M28 175C90 68 194 30 300 44C406 30 510 68 572 175C510 282 406 320 300 306C194 320 90 282 28 175Z"/>
+          <g clip-path="url(#platform-eye-opening)">
+            <path d="M0 0H600V350H0Z" fill="url(#platform-eye-white)"/>
+            <path class="platform-eye__veins" d="M70 120C130 130 153 160 185 170M78 222C131 209 152 184 190 178M530 126C476 139 444 157 411 169M527 225C475 208 447 183 410 177"/>
+            <g class="platform-eye__gaze" data-eye-gaze>
+              <circle cx="300" cy="175" r="106" fill="url(#platform-iris-fill)"/>
+              <circle cx="300" cy="175" r="89" fill="none" stroke="#123e3d" stroke-width="13" stroke-dasharray="3 11"/>
+              <circle cx="300" cy="175" r="70" fill="none" stroke="#dbff87" stroke-width="2" opacity=".7"/>
+              <circle cx="300" cy="175" r="51" fill="#061512"/>
+              <circle cx="270" cy="139" r="20" fill="#ffffff" opacity=".84"/>
+              <circle cx="334" cy="208" r="8" fill="#ff9f8c" opacity=".78"/>
+            </g>
+          </g>
+          <path class="platform-eye__rim" d="M28 175C90 68 194 30 300 44C406 30 510 68 572 175C510 282 406 320 300 306C194 320 90 282 28 175Z"/>
+        </svg>
+        <span class="platform-eye-scene__tick platform-eye-scene__tick--one"></span>
+        <span class="platform-eye-scene__tick platform-eye-scene__tick--two"></span>
+      </div>
+
+      <div class="platform-flow__entries">
+        <a class="platform-entry" href="https://github.com/csc-dsc/ctf-challenge-skill" target="_blank" rel="noopener noreferrer"><span class="platform-entry__code">PLATFORM / 01</span><div class="platform-entry__copy"><h2>Challenge Factory</h2><p>面向 Reverse、PWN、Web 的题目设计、验证、Docker 交付与题解沉淀。</p></div><span class="platform-entry__action">OPEN REPOSITORY <b>↗</b></span></a>
+
+        <div class="platform-heart-scene" data-platform-art aria-hidden="true">
+          <svg class="platform-heart-scene__signal" viewBox="0 0 1000 240" preserveAspectRatio="none"><defs><path id="platform-ecg-line" data-ecg-geometry d="M0 120H1000"/></defs><use class="platform-heart-scene__wave" href="#platform-ecg-line"/><use class="platform-heart-scene__scan" href="#platform-ecg-line"/></svg>
+          <svg class="platform-heart" viewBox="0 0 420 390">
+            <defs><linearGradient id="platform-heart-fill" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#d99698"/><stop offset=".5" stop-color="#ad556a"/><stop offset="1" stop-color="#542c43"/></linearGradient></defs>
+            <rect class="platform-heart__hit" x="45" y="35" width="330" height="320"/>
+            <g class="platform-heart__body">
+              <path class="platform-heart__shape" d="M210 342C184 318 81 243 63 181C40 106 79 55 138 55C178 55 199 77 210 100C221 77 242 55 282 55C341 55 380 106 357 181C339 243 236 318 210 342Z"/>
+              <path class="platform-heart__facet" d="M210 102C172 73 122 84 103 129C79 188 154 269 210 314C257 274 328 193 318 136C304 75 247 68 210 102Z"/>
+              <path class="platform-heart__vein" d="M144 99C169 130 180 168 176 220M274 101C246 138 244 176 250 223M126 197C157 193 177 210 190 244M293 197C266 193 242 211 229 252"/>
+              <path class="platform-heart__trace" d="M106 195H159L176 164L196 233L218 183L235 200H313"/>
+              <path class="platform-heart__blood-flow" d="M144 99C169 130 180 168 176 220M274 101C246 138 244 176 250 223"/>
+              <path class="platform-heart__blood-flow" d="M126 197C157 193 177 210 190 244L186 282M293 197C266 193 242 211 229 252L234 287"/>
+            </g>
+            <g transform="translate(160 303)"><path class="platform-heart__drop" style="--drip-distance:65px;--drip-x:-5px;--drip-delay:-.35s" d="M0-6C-6 1-5 6 0 7C5 6 6 1 0-6Z"/></g>
+            <g transform="translate(260 303)"><path class="platform-heart__drop" style="--drip-distance:65px;--drip-x:5px;--drip-delay:-1.2s" d="M0-6C-6 1-5 6 0 7C5 6 6 1 0-6Z"/></g>
+            <g transform="translate(186 324)"><path class="platform-heart__drop" style="--drip-distance:50px;--drip-x:-3px;--drip-delay:-1.75s" d="M0-6C-6 1-5 6 0 7C5 6 6 1 0-6Z"/></g>
+            <g transform="translate(234 324)"><path class="platform-heart__drop" style="--drip-distance:50px;--drip-x:3px;--drip-delay:-.8s" d="M0-6C-6 1-5 6 0 7C5 6 6 1 0-6Z"/></g>
+            <g transform="translate(210 339)"><path class="platform-heart__drop" style="--drip-distance:42px;--drip-delay:-2s" d="M0-6C-6 1-5 6 0 7C5 6 6 1 0-6Z"/></g>
+          </svg>
+          <span class="platform-heart-scene__pin platform-heart-scene__pin--left"></span>
+          <span class="platform-heart-scene__pin platform-heart-scene__pin--right"></span>
+        </div>
+
+        <a class="platform-entry" href="pwn-tutorial.html"><span class="platform-entry__code">PLATFORM / 02</span><div class="platform-entry__copy"><h2>Binary Playground</h2><p>把栈、ROP、保护机制和调试过程组织成可以重复进入的二进制学习场。</p></div><span class="platform-entry__action">OPEN TUTORIAL <b>→</b></span></a>
+        <a class="platform-entry" href="frida-hook-tutorial.html"><span class="platform-entry__code">PLATFORM / 03</span><div class="platform-entry__copy"><h2>Mobile Analysis</h2><p>从 APK、Smali、JNI 到 Frida Hook 与 Native 运行时参数追踪。</p></div><span class="platform-entry__action">OPEN TUTORIAL <b>→</b></span></a>
+
+        <div class="platform-signal-scene" data-platform-art aria-hidden="true">
+          <span class="platform-signal-scene__rail"></span>
+          <svg viewBox="0 0 1000 200" preserveAspectRatio="none"><path class="platform-signal-scene__path platform-signal-scene__path--back" d="M0 100C100 20 150 180 250 100S400 20 500 100S650 180 750 100S900 20 1000 100"/><path class="platform-signal-scene__path platform-signal-scene__path--front" d="M0 100C100 180 150 20 250 100S400 180 500 100S650 20 750 100S900 180 1000 100"/></svg>
+          <span class="platform-signal-scene__cursor"></span>
+        </div>
+
+        <a class="platform-entry" href="https://github.com/csc-dsc/utilitybox" target="_blank" rel="noopener noreferrer"><span class="platform-entry__code">PLATFORM / 04</span><div class="platform-entry__copy"><h2>Utility Box</h2><p>为分析、脚本处理和重复操作制作的小型工具集合。</p></div><span class="platform-entry__action">OPEN REPOSITORY <b>↗</b></span></a>
+        <a class="platform-entry" href="https://github.com/csc-dsc/cyber-range" target="_blank" rel="noopener noreferrer"><span class="platform-entry__code">PLATFORM / 05</span><div class="platform-entry__copy"><h2>Cyber Range</h2><p>用于验证、演练和复盘的安全实验环境方向。</p></div><span class="platform-entry__action">OPEN REPOSITORY <b>↗</b></span></a>
+        <a class="platform-entry" href="links.html#feishu"><span class="platform-entry__code">PLATFORM / 06</span><div class="platform-entry__copy"><h2>Knowledge Base</h2><p>公开博客和飞书笔记的统一索引，方便按主题继续阅读。</p></div><span class="platform-entry__action">OPEN LINKS <b>→</b></span></a>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer"><span>NULL GARDEN / <span id="year">2026</span></span><span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span><a href="#top">TOP ↑</a></footer>
+  <script src="index.js?v=20261004-1"></script>
+  <script defer src="prism-mode.js?v=20261004-2"></script>
+  <script defer src="vendor/lottie_light.min.js"></script>
+  <script defer src="visual-system.js?v=20261005-1"></script>
+  <script defer src="platforms-scene.js?v=20261004-10"></script>
+  <script defer src="platforms-eye-events.js?v=20261004-3"></script>
+</body>
+</html>
