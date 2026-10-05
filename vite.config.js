@@ -34,6 +34,6 @@ export default defineConfig({
   ],
   build: {
     outDir: 'dist',
-    rollupOptions: { input: [resolve(root, 'index.html'), resolve(root, 'personal-instruction.html'), resolve(root, 'other.html')] },
+    rollupOptions: { input: [resolve(root, 'index.html'), resolve(root, 'personal-instruction.html'), resolve(root, 'other.html'), resolve(root, 'hobby-lab.html')] },
   },
 });

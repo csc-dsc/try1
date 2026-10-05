@@ -110,6 +110,7 @@ html[data-theme="light"] .hobby-stage { --stage-accent: #aaff6a; --stage-line: r
 .hobby-stage__choices button:focus-visible,
 .hobby-stage__transport button:focus-visible,
 .hobby-stage__string-buttons button:focus-visible,
+.hobby-stage__sound input:focus-visible { outline: 2px solid var(--stage-accent); outline-offset: 3px; }
 
 @container (max-width: 900px) {
   .hobby-stage,
