@@ -1,5 +1,7 @@
 .platform-eye[role="button"] { cursor: pointer; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
 .platform-eye[role="button"]:focus-visible { outline: 1px solid #8fd9cf; outline-offset: 14px; border-radius: 50%; }
+html[data-theme="light"] body.page-platforms .platform-eye[role="button"]:focus { outline: none; border-radius: 0; }
+html[data-theme="light"] body.page-platforms .platform-eye[role="button"]:focus-visible .platform-eye__rim { stroke-width: 7; filter: drop-shadow(0 0 7px rgba(38, 117, 109, .75)); }
 .platform-eye.is-hurt :is(.platform-eye__aperture, .platform-eye__rim, .platform-eye__shadow) { animation: none !important; }
 .platform-eye.is-hurt .platform-eye__rim { stroke: #ff6575; }
 .platform-eye.is-hurt .platform-eye__veins { opacity: .95; stroke-width: 4; }

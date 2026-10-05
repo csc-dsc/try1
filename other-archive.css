@@ -6,6 +6,8 @@
   width: min(42%, 420px);
   height: 82%;
 }
+.page-other .directory-hero .section-shell { pointer-events: none; }
+.page-other .directory-hero .section-shell > :is(h1, p) { pointer-events: auto; }
 
 .page-other .archive-trail {
   --archive-bg: #101716;

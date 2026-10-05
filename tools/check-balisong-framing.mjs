@@ -3,7 +3,9 @@ import { readFileSync } from 'node:fs';
 import { ModelScene } from '../src/hobby/ModelScene.js';
 
 const css = readFileSync(new URL('../src/ambient/inline-object.css', import.meta.url), 'utf8');
-assert.match(css, /--balisong-zoom:\s*3\s*;/);
+assert.match(css, /--balisong-zoom:\s*1\.5\s*;/);
+assert.match(css, /clip-path:\s*none\s*;/);
+assert.match(css, /@media \(max-width: 1199px\)[\s\S]*--balisong-zoom:\s*1\s*;/);
 
 function measure({ inline, id, parent, canvas, zoom }) {
   const calls = {};
@@ -46,25 +48,25 @@ function measure({ inline, id, parent, canvas, zoom }) {
 }
 
 const desktop = measure({
-  inline: true, id: 'balisong', zoom: 3,
-  parent: { width: 314, height: 157 }, canvas: { left: 0, width: 942, height: 471 },
+  inline: true, id: 'balisong', zoom: 1.5,
+  parent: { width: 350, height: 410 }, canvas: { left: 0, width: 525, height: 615 },
 });
-assert.equal(desktop.scene.displayScale, 3);
-assert.equal(desktop.calls.pixelRatio, 6);
-assert.deepEqual(desktop.calls.size, [314, 157, false]);
-assert.equal(desktop.scene.camera.aspect, 2);
+assert.equal(desktop.scene.displayScale, 1.5);
+assert.equal(desktop.calls.pixelRatio, 3);
+assert.deepEqual(desktop.calls.size, [350, 410, false]);
+assert.equal(desktop.scene.camera.aspect, 350 / 410);
 assert.equal(desktop.calls.modelScale, 6);
 assert.deepEqual(desktop.calls.camera, [0, 0.2, 6.4]);
 assert.equal(desktop.scene.baseYaw, Math.PI / 2);
 assert.equal(desktop.scene.basePitch, 0);
 
 const mobile = measure({
-  inline: true, id: 'balisong', zoom: 3,
-  parent: { width: 343, height: 450 }, canvas: { left: 0, width: 1029, height: 514.5 },
+  inline: true, id: 'balisong', zoom: 1,
+  parent: { width: 343, height: 340 }, canvas: { left: 0, width: 343, height: 340 },
 });
-assert.equal(mobile.calls.pixelRatio, 6);
-assert.deepEqual(mobile.calls.size, [343, 171.5, false]);
-assert.equal(mobile.scene.camera.aspect, 2);
+assert.equal(mobile.calls.pixelRatio, 2);
+assert.deepEqual(mobile.calls.size, [343, 340, false]);
+assert.equal(mobile.scene.camera.aspect, 343 / 340);
 assert.equal(mobile.calls.modelScale, 6);
 assert.equal(mobile.scene.baseYaw, Math.PI / 2);
 assert.equal(mobile.scene.basePitch, 0);
@@ -74,8 +76,8 @@ mobile.scene.onPointerMove({ clientX: 120, clientY: 112 });
 assert.equal(mobile.scene.targetYaw, 0.4);
 assert.ok(Math.abs(mobile.scene.targetPitch - 0.15) < 1e-10);
 mobile.scene.drag = null;
-mobile.scene.onPointerMove({ clientX: 1029 * .75, clientY: 257 });
-assert.ok(mobile.scene.targetYaw > .44 && mobile.scene.targetYaw < .46);
+mobile.scene.onPointerMove({ clientX: 343 * .75, clientY: 170 });
+assert.ok(mobile.scene.targetYaw > .14 && mobile.scene.targetYaw < .16);
 
 const previousDocument = globalThis.document;
 globalThis.document = { hidden: false };
@@ -117,4 +119,4 @@ const standaloneMobile = measure({
 assert.equal(standaloneMobile.scene.baseYaw, 0.25);
 assert.equal(standaloneMobile.scene.basePitch, Math.PI / 2);
 
-console.log('Inline balisong: broadside view, responsive controls, 3x framing; other scenes unchanged');
+console.log('Inline balisong: broadside view, responsive controls, uncropped framing; other scenes unchanged');

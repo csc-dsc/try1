@@ -339,10 +339,20 @@
     document.addEventListener('keydown', (event) => { if (event.key === 'Escape') close(); });
   }
 
+  function backToTop() {
+    document.querySelectorAll('footer a[href="#top"]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        window.scrollTo({ left: 0, top: 0, behavior: 'instant' });
+      });
+    });
+  }
+
   orbitHero();
   directoryMotif();
   scrollScenes();
   cursorField();
   tutorialNavigation();
+  backToTop();
   showLoader();
 })();

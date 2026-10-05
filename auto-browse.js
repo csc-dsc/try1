@@ -128,6 +128,9 @@
   };
   window.addEventListener('pointerdown', manualPointer, { passive: true, capture: true });
   window.addEventListener('touchstart', manualPointer, { passive: true, capture: true });
+  document.addEventListener('click', (event) => {
+    if (event.target?.closest?.('footer a[href="#top"]')) { closeSpeedMenu(); stop(); }
+  }, { capture: true });
   document.addEventListener('keydown', (event) => {
     const withinControls = event.target?.closest?.('.auto-browse-control');
     if (!speedMenu.hidden && withinControls && event.key === 'Tab') {

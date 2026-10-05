@@ -215,6 +215,7 @@ test('Manual keys, wheel, touch, dragging and upward scrollbar changes still can
     f => f.window.fire('wheel', { deltaY: 100 }),
     f => f.window.fire('pointerdown', { target: {} }),
     f => f.window.fire('touchstart', { target: {} }),
+    f => f.document.fire('click', { target: { closest: selector => selector === 'footer a[href="#top"]' ? {} : null } }),
     f => { f.window.scrollY -= 10; f.window.fire('scroll'); },
     f => { f.document.hidden = true; f.document.fire('visibilitychange'); },
     f => f.window.fire('pagehide'),
