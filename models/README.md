@@ -1,5 +1,7 @@
 # Self-hosted hobby models
 
+> Historical acquisition notes. All three models are now mounted on the formal site; see [CURRENT_SITE_HANDOFF.md](../../CURRENT_SITE_HANDOFF.md) for the current runtime and deployment state.
+
 These are working glTF exports obtained through the official Sketchfab download flow. Each directory retains its original `license.txt`, `scene.gltf`, `scene.bin`, and any referenced textures. The unchanged source archives and SHA-256 records are kept separately in `D:/Github/获奖网页/try1重构规划/assets/source-models/`.
 
 | Model | Credit required by the downloaded license | Current animation state |
