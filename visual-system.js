@@ -36,6 +36,7 @@
     const started = performance.now();
     progress.style.transform = 'scaleX(.25)';
 
+    let lottieLoaded = false;
     const lottieReady = new Promise((resolve) => {
       if (!window.lottie) { resolve(); return; }
       try {
@@ -46,7 +47,7 @@
           autoplay: true,
           path: asset('motion/loader-cube.json'),
         });
-        player.addEventListener('DOMLoaded', resolve);
+        player.addEventListener('DOMLoaded', () => { lottieLoaded = true; resolve(); });
         player.addEventListener('data_failed', resolve);
       } catch (_) { resolve(); }
     });
@@ -56,8 +57,9 @@
     const fontsReady = document.fonts?.ready ?? Promise.resolve();
     await Promise.race([Promise.all([lottieReady, windowReady, fontsReady]),
       new Promise((resolve) => setTimeout(resolve, 1800))]);
+    const remaining = Math.max(0, (lottieLoaded ? 3200 : 500) - (performance.now() - started));
+    progress.style.transitionDuration = `${Math.max(250, remaining)}ms`;
     progress.style.transform = 'scaleX(1)';
-    const remaining = Math.max(0, 500 - (performance.now() - started));
     if (remaining) await new Promise((resolve) => setTimeout(resolve, remaining));
     layer.classList.add('is-leaving');
     document.body.classList.remove('visual-loading');
