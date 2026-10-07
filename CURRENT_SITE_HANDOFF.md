@@ -1,10 +1,11 @@
-# Null Garden 网站总结与交接
+# GOD · NULL 网站总结与交接
 
 更新：2026-10-06。适用仓库：`D:\Github\try1`。这是当前实现和发布状态的入口；[REBUILD_HANDOFF.md](./REBUILD_HANDOFF.md) 记录 2026-09-30 阶段的研究与素材来源，不能把其中的旧 HEAD、未上线状态和“模型尚未接入”等结论当成现状。
 
 ## 1. 先看当前事实
 
 - 这是**静态多页站点 + 局部 Vue 2/Three.js/Matter.js 场景**，不是 Vue Router 单页站。保留旧 `.html` URL 与文章锚点。
+- 2026-10-07 按用户最新命名统一：完整昵称为 `GOD · NULL`，视觉标识为 `G//N`，缩写为 `GN`。导航、页脚、加载标记、文章设备、教程署名与历史页显示昵称沿用此命名；GitHub 用户名及现有站点地址保持 `csc-dsc` / `try1`。旧研究记录、分支名、包名和存储键属于既有内部标识，不能据此恢复旧站名。
 - 源码远端：`hello-web` 与 `codex/null-garden-phase-1` 均为 `9f75fec`；当前工作目录在后者，核对时工作树干净。本机的 `hello-web` 分支仍停在 `c4dd86b`，比远端落后 3 个提交；不要把这个本地分支当作最新源码。
 - 构建发布远端：`gh-pages` 为 `4bb012d`。GitHub Pages 配置为 legacy 模式，从 `gh-pages /` 发布，最近一次 Pages 构建状态为 `built`。线上地址：[csc-dsc.github.io/try1](https://csc-dsc.github.io/try1/)。这些提交号是本报告的时间快照，继续工作前重新查状态。
 - `dist/` 是 Vite 生成物，在源码分支被 `.gitignore` 忽略；`node_modules/` 也被忽略。当前**没有** GitHub Actions 自动构建/发布流程。只推送 `hello-web` 不会更新线上，必须重新构建并更新 `gh-pages`。

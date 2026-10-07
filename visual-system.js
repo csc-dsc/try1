@@ -25,7 +25,7 @@
     cube.className = 'visual-loader__cube';
     const mark = document.createElement('div');
     mark.className = 'visual-loader__mark';
-    mark.textContent = 'N//G';
+    mark.textContent = 'G//N';
     const bar = document.createElement('div');
     bar.className = 'visual-loader__bar';
     const progress = document.createElement('span');
@@ -314,7 +314,7 @@
     const home = document.createElement('a');
     home.className = 'tutorial-home';
     home.href = 'articles.html';
-    home.textContent = '← NULL GARDEN / ARTICLES';
+    home.textContent = '← GOD · NULL / ARTICLES';
     logo.append(home);
 
     const toggle = document.createElement('button');
