@@ -9,11 +9,12 @@
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=20260911-6">
   <link rel="stylesheet" href="visual-system.css?v=20260930-5">
-  <link rel="stylesheet" href="site-header.css?v=20261004-4">
+  <link rel="stylesheet" href="site-header.css?v=20261007-3">
   <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
   <link rel="stylesheet" href="light-theme.css?v=20261004-2">
   <link rel="stylesheet" href="type-system.css?v=20261005-3">
-  <script>try{if(localStorage.getItem('site-theme')==='prism')document.documentElement.dataset.theme='prism'}catch(_){}</script>
+  <script>try{(()=>{const t=localStorage.getItem('site-theme');if(t==='light'||t==='prism')document.documentElement.dataset.theme=t;})()}catch(_){}</script>
+  <link rel="stylesheet" href="responsive.css?v=20261007-1">
 </head>
 <body class="page-links">
   <a class="skip-link" href="#content">跳到正文</a>
@@ -32,8 +33,7 @@
           </div>
         </div>
       </div>
-      <button class="icon-button" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">◐</button>
-      <button class="icon-button prism-toggle" id="prism-toggle" type="button" aria-label="开启幻彩模式" aria-pressed="false" title="幻彩模式"><span class="prism-toggle__core" aria-hidden="true"></span></button>
+      <div class="theme-control" id="theme-control"><button class="icon-button theme-cycle" id="theme-toggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-menu" data-theme="dark" aria-label="选择显示模式"><span class="theme-cycle__orb" aria-hidden="true"></span><svg class="theme-cycle__rays" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg></button><div class="theme-menu" id="theme-menu" role="menu" aria-label="显示模式" hidden><button class="theme-option" type="button" role="menuitemradio" data-theme-option="light" aria-checked="false" tabindex="-1"><span class="theme-option__icon" aria-hidden="true">☀︎</span><span>日间</span></button><button class="theme-option" type="button" role="menuitemradio" data-theme-option="dark" aria-checked="false" tabindex="-1"><span class="theme-option__icon" aria-hidden="true">☾</span><span>夜间</span></button><button class="theme-option" type="button" role="menuitemradio" data-theme-option="prism" aria-checked="false" tabindex="-1"><span class="theme-option__icon theme-option__icon--prism" aria-hidden="true"></span><span>幻彩</span></button></div></div>
       <button class="icon-button menu-button" id="menu-toggle" type="button" aria-label="打开导航" aria-controls="site-nav" aria-expanded="false" title="打开导航">☰</button>
     </div>
   </header>
@@ -78,8 +78,8 @@
     </div><p class="contact-note">飞书访问口令，请先通过邮件或 QQ 联系作者。</p></div></div></section>
   </main>
   <footer class="site-footer"><span>GOD · NULL / <span id="year">2026</span></span><span>BUILD IN PUBLIC · KEEP IDENTITY PRIVATE</span><a href="#top">TOP ↑</a></footer>
-  <script src="index.js?v=20261004-1"></script>
-  <script defer src="prism-mode.js?v=20261004-2"></script>
+  <script src="index.js?v=20261007-1"></script>
+  <script defer src="prism-mode.js?v=20261007-4"></script>
   <script defer src="auto-browse.js?v=20261005-1"></script>
   <script defer src="vendor/lottie_light.min.js"></script>
   <script defer src="visual-system.js?v=20261007-1"></script>

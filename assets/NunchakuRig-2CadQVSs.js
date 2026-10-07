@@ -1,4 +1,4 @@
-import{G as ye,M as le,T as Se,a as j,C as ie}from"./ModelScene-DgBeJ6ba.js";import"./preload-helper-CdaP5kUi.js";var ae=typeof globalThis<"u"?globalThis:typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{};function Te(N){return N&&N.__esModule&&Object.prototype.hasOwnProperty.call(N,"default")?N.default:N}var Pe={exports:{}};/*!
+import{G as ye,M as le,T as Se,a as j,C as ie}from"./ModelScene-CIkGFfrh.js";import"./preload-helper-DvIJdOcM.js";var ae=typeof globalThis<"u"?globalThis:typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{};function Te(N){return N&&N.__esModule&&Object.prototype.hasOwnProperty.call(N,"default")?N.default:N}var Pe={exports:{}};/*!
  * matter-js 0.19.0 by @liabru
  * http://brm.io/matter-js/
  * License MIT
