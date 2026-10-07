@@ -1,0 +1,1 @@
+import"./preload-helper-DvIJdOcM.js";import"./main-DEtiHle7.js";import"./auto-browse-D79RiAMh.js";const e=document.querySelector(".notes-band");e&&("IntersectionObserver"in window?new IntersectionObserver(([s])=>{e.classList.toggle("is-active",s.isIntersecting)},{threshold:.04}).observe(e):e.classList.add("is-active"));
