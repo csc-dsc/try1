@@ -7,7 +7,7 @@ const source = readFileSync(new URL(
   process.env.SITE_TEST_BUILD === '1' ? '../dist/auto-browse.js' : '../auto-browse.js',
   import.meta.url,
 ), 'utf8');
-function fixture(page = 'index.html', { top = 0, height = 4800, ready = 'complete', loading = false, hidden = false } = {}) {
+function fixture(page = 'index.html', { top = 0, height = 4800, viewportHeight = 800, ready = 'complete', loading = false, hidden = false } = {}) {
   class Target {
     listeners = new Map();
     addEventListener(type, callback) {
@@ -44,19 +44,19 @@ function fixture(page = 'index.html', { top = 0, height = 4800, ready = 'complet
   document.readyState = ready;
   document.loading = loading;
   document.body = { classList: { contains: name => name === 'visual-loading' && document.loading } };
-  document.scrollingElement = { scrollHeight: height };
+  document.scrollingElement = { scrollHeight: height, clientHeight: viewportHeight };
   document.getElementById = id => ({ 'auto-browse-toggle': button, 'auto-browse-menu': speedMenu })[id] ?? null;
   const window = new Target();
   window.scrollY = top;
   window.scrollTo = ({ top }) => {
-    window.scrollY = Math.round(top);
+    window.scrollY = Math.round(Math.max(0, Math.min(top, document.scrollingElement.scrollHeight - document.scrollingElement.clientHeight)));
     window.fire('scroll');
   };
   const frames = new Map();
   let clock = 0;
   let frameId = 0;
   runInNewContext(source, {
-    document, window, location: { pathname: '/try1/' + page }, innerHeight: 800,
+    document, window, location: { pathname: '/try1/' + page }, innerHeight: viewportHeight,
     performance: { now: () => clock },
     requestAnimationFrame: callback => { frames.set(++frameId, callback); return frameId; },
     cancelAnimationFrame: id => frames.delete(id),
@@ -210,7 +210,7 @@ test('Startup waits for the loader and visibility, and early manual input cancel
   background.stopped();
 });
 
-test('Manual keys, wheel, touch, dragging and upward scrollbar changes still cancel browsing', () => {
+test('Manual keys, wheel, touch and dragging still cancel browsing', () => {
   const actions = [
     ...['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ', 'Escape']
       .map(key => f => f.document.fire('keydown', { key })),
@@ -219,7 +219,6 @@ test('Manual keys, wheel, touch, dragging and upward scrollbar changes still can
     f => f.window.fire('pointerdown', { target: {} }),
     f => f.window.fire('touchstart', { target: {} }),
     f => f.document.fire('click', { target: { closest: selector => selector === 'footer a[href="#top"]' ? {} : null } }),
-    f => { f.window.scrollY -= 10; f.window.fire('scroll'); },
     f => { f.document.hidden = true; f.document.fire('visibilitychange'); },
     f => f.window.fire('pagehide'),
   ];
@@ -282,6 +281,36 @@ test('It stops at the bottom, notices content growth, and avoids jumps after del
   assert.ok(growing.window.scrollY - before <= 9);
   growing.pause();
   growing.stopped();
+});
+
+test('Mobile viewport corrections keep browsing active without jumping backward', () => {
+  const f = fixture('links.html', { height: 1800, viewportHeight: 600 });
+  f.advance(2000);
+  f.window.scrollY -= 24;
+  f.window.fire('scroll');
+  const corrected = f.window.scrollY;
+  f.advance(20);
+  assert.equal(f.active(), true);
+  assert.ok(f.window.scrollY >= corrected && f.window.scrollY <= corrected + 2);
+  f.document.scrollingElement.clientHeight = 700;
+  f.document.scrollingElement.scrollHeight = 2100;
+  f.choose(5);
+  f.advance(15000);
+  assert.equal(f.window.scrollY, 1400);
+  f.stopped();
+});
+
+test('Late content growth near the bottom extends automatic browsing', () => {
+  const f = fixture('index.html', { height: 810 });
+  f.advance(1200);
+  assert.equal(f.active(), true);
+  f.document.scrollingElement.scrollHeight = 1200;
+  f.advance(50);
+  assert.equal(f.active(), true);
+  f.choose(5);
+  f.advance(6500);
+  assert.equal(f.window.scrollY, 400);
+  f.stopped();
 });
 
 test('HTML exposes the selector and its script only on the three requested pages', () => {

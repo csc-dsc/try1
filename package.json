@@ -6,6 +6,8 @@
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
     "check:build": "node tools/check-built-interactions.mjs",
+    "archive:seal": "node tools/seal-history.mjs",
+    "check:archives": "node tools/check-history-archives.mjs",
     "preview": "vite preview --host 127.0.0.1",
     "check:platforms": "node --test tools/check-platforms-interactions.mjs",
     "check:navigation": "node --test tools/check-auto-browse.mjs",

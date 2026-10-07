@@ -18,6 +18,7 @@ const legacy = [
   'prism-theme.css', 'prism-mode.js', 'light-theme.css',
   'miku-theme.css', 'miku-theme.js', 'favicon.ico',
   'image', 'history', 'new HTML',
+  'history/access.css', 'history/access.js',
 ];
 
 export default defineConfig({

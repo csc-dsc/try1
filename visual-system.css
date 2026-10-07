@@ -584,6 +584,7 @@ html[data-theme="light"] .ambient-object__credit { color: #315b55; }
   transition: transform .8s cubic-bezier(.76, 0, .24, 1), opacity .8s ease;
 }
 .visual-loader.is-leaving { transform: translateY(-101%); }
+@media (max-width: 700px) { .visual-loader { transition-duration: .45s; } }
 .visual-loader__cube { width: 116px; height: 116px; filter: sepia(1) saturate(4) hue-rotate(35deg); }
 .visual-loader__mark { font: 900 2.6rem var(--visual-display); color: var(--visual-green); }
 .visual-loader__bar { width: 150px; height: 1px; background: rgba(242, 240, 233, .25); overflow: hidden; }

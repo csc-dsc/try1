@@ -37,35 +37,42 @@
     progress.style.transform = 'scaleX(.25)';
 
     let lottieLoaded = false;
+    let lottieExpired = false;
+    let player = null;
     const lottieReady = new Promise((resolve) => {
-      if (!window.lottie) { resolve(); return; }
-      try {
-        const player = window.lottie.loadAnimation({
-          container: cube,
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: asset('motion/loader-cube.json'),
-        });
-        player.addEventListener('DOMLoaded', () => { lottieLoaded = true; resolve(); });
-        player.addEventListener('data_failed', resolve);
-      } catch (_) { resolve(); }
+      const startAnimation = () => {
+        if (lottieExpired || !layer.isConnected || layer.classList.contains('is-leaving') || !window.lottie) { resolve(); return; }
+        try {
+          player = window.lottie.loadAnimation({
+            container: cube,
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: asset('motion/loader-cube.json'),
+          });
+          player.addEventListener('DOMLoaded', () => { lottieLoaded = true; resolve(); });
+          player.addEventListener('data_failed', resolve);
+        } catch (_) { resolve(); }
+      };
+      if (window.lottie) { startAnimation(); return; }
+      const script = document.createElement('script');
+      script.src = asset('vendor/lottie_light.min.js');
+      script.async = true;
+      script.addEventListener('load', startAnimation, { once: true });
+      script.addEventListener('error', resolve, { once: true });
+      document.head.append(script);
     });
-    const windowReady = document.readyState === 'complete'
-      ? Promise.resolve()
-      : new Promise((resolve) => window.addEventListener('load', resolve, { once: true }));
-    const fontsReady = document.fonts?.ready ?? Promise.resolve();
-    await Promise.race([Promise.all([lottieReady, windowReady, fontsReady]),
-      new Promise((resolve) => setTimeout(resolve, 1800))]);
-    const remaining = Math.max(0, (lottieLoaded ? 3200 : 500) - (performance.now() - started));
-    progress.style.transitionDuration = `${Math.max(250, remaining)}ms`;
+    await Promise.race([lottieReady, new Promise((resolve) => setTimeout(resolve, 650))]);
+    if (!lottieLoaded) { lottieExpired = true; player?.destroy(); player = null; }
+    const remaining = Math.max(0, (lottieLoaded ? 1100 : 750) - (performance.now() - started));
+    progress.style.transitionDuration = `${Math.max(150, remaining)}ms`;
     progress.style.transform = 'scaleX(1)';
     if (remaining) await new Promise((resolve) => setTimeout(resolve, remaining));
     layer.classList.add('is-leaving');
     document.body.classList.remove('visual-loading');
     try { sessionStorage.setItem('null-garden-seen', '1'); } catch (_) { /* Storage may be disabled. */ }
     enterPage();
-    setTimeout(() => layer.remove(), 850);
+    setTimeout(() => { player?.destroy(); layer.remove(); }, 850);
   }
 
   function orbitHero() {

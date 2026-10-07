@@ -1,0 +1,30 @@
+:root { color-scheme: dark; --gate-bg: #081210; --gate-ink: #f0f6ef; --gate-muted: #b4c8bf; --gate-accent: #b9e4d0; --gate-line: #b9e4d038; }
+* { box-sizing: border-box; }
+body.archive-gate { margin: 0; min-height: 100svh; color: var(--gate-ink); background: radial-gradient(ellipse at 72% 20%, #29493850, transparent 48%), var(--gate-bg); font-family: FangSong, STFangsong, SimSun, serif; }
+a { color: inherit; text-decoration: none; }
+.gate-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem clamp(1rem, 4vw, 4rem); border-bottom: 1px solid var(--gate-line); }
+.gate-brand { display: flex; align-items: center; gap: .75rem; font: 700 .7rem/1.4 Consolas, monospace; }
+.gate-brand b { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--gate-accent); border-radius: 50%; color: var(--gate-accent); font-size: .6rem; }
+.gate-return { color: var(--gate-muted); font: 600 .7rem Consolas, monospace; }
+.gate-return:hover { color: var(--gate-ink); }
+.gate-main { display: grid; grid-template-columns: minmax(0, 1fr) 140px; align-items: center; gap: 4rem; width: min(900px, calc(100% - 3rem)); margin: 0 auto; padding: clamp(4rem, 12vh, 8rem) 0 4rem; }
+.gate-label { margin: 0 0 1rem; color: var(--gate-accent); font: 700 .7rem Consolas, monospace; letter-spacing: .12em; }
+h1 { margin: 0 0 1.5rem; font: 700 clamp(2.6rem, 5vw, 4rem)/1.2 STXingkai, KaiTi, STKaiti, serif; }
+.gate-copy { max-width: 34ch; margin: 0 0 2rem; color: var(--gate-muted); font-size: 1.12rem; line-height: 1.9; }
+.gate-form { max-width: 450px; }
+.gate-form label { display: block; margin-bottom: .65rem; color: var(--gate-muted); font-size: .95rem; }
+.gate-form input { width: 100%; min-height: 48px; padding: .75rem .9rem; border: 1px solid var(--gate-line); border-radius: 4px; background: #14221b; color: var(--gate-ink); font: 1rem Consolas, monospace; }
+.gate-form input:focus-visible { outline: 2px solid var(--gate-accent); outline-offset: 3px; }
+.gate-form button { min-height: 44px; margin-top: 1rem; padding: .7rem 1.2rem; border: 1px solid var(--gate-accent); border-radius: 4px; background: transparent; color: var(--gate-accent); font: 700 .8rem Consolas, monospace; cursor: pointer; }
+.gate-form button:is(:hover, :focus-visible) { background: var(--gate-accent); color: var(--gate-bg); }
+.gate-form button:disabled { opacity: .5; cursor: wait; }
+.gate-status { min-height: 3.4em; margin: 1rem 0 0; color: var(--gate-muted); font-size: .94rem; line-height: 1.75; overflow-wrap: anywhere; }
+.gate-bridge { padding: 1rem 0; border-top: 1px solid var(--gate-line); border-bottom: 1px solid var(--gate-line); }
+.gate-bridge input[type="file"] { padding: .6rem; font-size: .82rem; cursor: pointer; }
+.gate-bridge input[type="file"]::file-selector-button { min-height: 30px; margin-right: .75rem; padding: .3rem .65rem; border: 1px solid var(--gate-line); border-radius: 3px; background: var(--gate-bg); color: var(--gate-ink); cursor: pointer; }
+.gate-seal { display: grid; justify-items: center; gap: 1.25rem; padding-block: 2rem; border-top: 1px solid var(--gate-line); border-bottom: 1px solid var(--gate-line); }
+.gate-seal__mark { display: grid; place-items: center; width: 96px; height: 96px; border: 1px solid var(--gate-accent); border-radius: 50%; color: var(--gate-accent); font: 700 1.15rem Consolas, monospace; }
+.gate-seal span { color: var(--gate-muted); font: .65rem/1.8 Consolas, monospace; letter-spacing: .14em; text-align: center; }
+.gate-footer { width: min(900px, calc(100% - 3rem)); margin: 0 auto; padding: 1.5rem 0; border-top: 1px solid var(--gate-line); color: var(--gate-muted); font: .65rem/1.7 Consolas, monospace; }
+[hidden] { display: none !important; }
+@media (max-width: 650px) { .gate-main { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding-top: 3rem; } .gate-seal { grid-template-columns: 64px minmax(0, 1fr); justify-items: start; gap: 1rem; padding-block: 1rem; } .gate-seal__mark { width: 64px; height: 64px; font-size: .85rem; } .gate-seal span { text-align: left; } .gate-return { max-width: 8rem; text-align: right; line-height: 1.7; } .gate-copy { font-size: 1.05rem; } }

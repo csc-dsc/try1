@@ -26,8 +26,9 @@
   let started = 0;
   let previousTime = 0;
   let position = 0;
-  let observedPosition = 0;
-  const bottom = () => Math.max(0, (document.scrollingElement ?? root).scrollHeight - innerHeight);
+  let bottomSince = null;
+  const scroller = () => document.scrollingElement ?? root;
+  const bottom = () => Math.max(0, scroller().scrollHeight - scroller().clientHeight);
   const render = () => {
     button.setAttribute('aria-pressed', String(active));
     const selected = levels[selectedLevel];
@@ -49,6 +50,7 @@
     autoplayPending = false;
     if (!hadWork) return;
     active = false;
+    bottomSince = null;
     if (frame !== null) cancelAnimationFrame(frame);
     frame = null;
     render();
@@ -65,7 +67,11 @@
     currentSpeed = speedFrom + (targetSpeed - speedFrom) * ramp * (2 - ramp);
     position = Math.min(limit, position + currentSpeed * elapsed / 1000);
     window.scrollTo({ top: position, behavior: 'instant' });
-    if (position >= limit) { stop(); return; }
+    if (position >= limit) window.scrollTo({ top: scroller().scrollHeight, behavior: 'instant' });
+    if (bottom() - window.scrollY <= 1) {
+      if (bottomSince === null) bottomSince = now;
+      if (now - bottomSince >= 1200) { stop(); return; }
+    } else bottomSince = null;
     frame = requestAnimationFrame(advance);
   };
   const start = (level) => {
@@ -79,8 +85,9 @@
     active = true;
     targetSpeed = levels[level].speed;
     speedFrom = currentSpeed = 0;
+    bottomSince = null;
     started = previousTime = performance.now();
-    position = observedPosition = window.scrollY;
+    position = window.scrollY;
     render();
     window.scrollTo({ top: position, behavior: 'instant' });
     frame = requestAnimationFrame(advance);
@@ -154,9 +161,7 @@
     }
   }, { capture: true });
   window.addEventListener('scroll', () => {
-    const next = window.scrollY;
-    if (active && next < observedPosition - .5) { closeSpeedMenu(); stop(); }
-    observedPosition = next;
+    if (active && window.scrollY < position - 1) position = window.scrollY;
   }, { passive: true });
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {

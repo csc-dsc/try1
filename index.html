@@ -8,7 +8,7 @@
   <title>GOD · NULL | Security Notes & Experiments</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="index.css?v=20260930-1">
-  <link rel="stylesheet" href="visual-system.css?v=20261005-2">
+  <link rel="stylesheet" href="visual-system.css?v=20261007-2">
   <link rel="stylesheet" href="site-header.css?v=20261007-3">
   <link rel="stylesheet" href="prism-theme.css?v=20261004-3">
   <link rel="stylesheet" href="home-work.css?v=20261004-5">
@@ -57,7 +57,7 @@
       <div class="hero-noise" aria-hidden="true"></div>
       <div class="hero-constellation" aria-hidden="true">
         <div class="hero-constellation__orbit"></div>
-        <div class="hero-orbit-core"><img src="graphics/spider-x86.png" alt=""></div>
+        <div class="hero-orbit-core"><img src="graphics/spider-x86.png" alt="" fetchpriority="high" decoding="async"></div>
         <div class="hero-orbit-item" data-orbit="0"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#cpu"></use></svg><span>CPU</span></div>
         <div class="hero-orbit-item" data-orbit="1"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#keyboard"></use></svg><span>KEYBOARD</span></div>
         <div class="hero-orbit-item" data-orbit="2"><svg viewBox="0 0 180 180"><use href="graphics/hardware.svg#mouse"></use></svg><span>MOUSE</span></div>
@@ -150,7 +150,7 @@
           <a class="project-row project-row--miku reveal accent-project" href="miku-theme.html">
             <span class="project-number">04</span>
             <span class="project-main"><strong>Miku Signal</strong><small>以本地影像、SVG 与节拍交互重构的视觉主题页</small></span>
-            <span class="project-visual project-visual--miku" aria-hidden="true"><img src="image/miku/gallery-1.jpg" alt=""><img src="image/miku/gallery-1.jpg" alt=""><img src="image/miku/gallery-1.jpg" alt=""><img class="project-visual__complete" src="image/miku/gallery-1.jpg" alt=""></span>
+            <span class="project-visual project-visual--miku" aria-hidden="true"><img src="image/miku/gallery-1.jpg" alt="" loading="lazy" decoding="async"><img src="image/miku/gallery-1.jpg" alt="" loading="lazy" decoding="async"><img src="image/miku/gallery-1.jpg" alt="" loading="lazy" decoding="async"><img class="project-visual__complete" src="image/miku/gallery-1.jpg" alt="" loading="lazy" decoding="async"></span>
             <span class="project-tags"><em>Visual</em><em>Web</em></span>
             <span class="project-arrow" aria-hidden="true">→</span>
           </a>
@@ -219,10 +219,9 @@
 
   <script type="module" src="index.js?v=20261007-1"></script>
   <script type="module" src="prism-mode.js?v=20261007-4"></script>
-  <script type="module" src="auto-browse.js?v=20261005-1"></script>
+  <script type="module" src="auto-browse.js?v=20261007-2"></script>
   <script type="module" src="home-notes.js?v=20261004-1"></script>
   <script type="module" src="src/ambient/main.js"></script>
-  <script defer src="vendor/lottie_light.min.js"></script>
-  <script defer src="visual-system.js?v=20261007-1"></script>
+  <script defer src="visual-system.js?v=20261007-2"></script>
 </body>
 </html>
