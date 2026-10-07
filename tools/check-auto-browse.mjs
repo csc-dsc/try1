@@ -3,7 +3,10 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { runInNewContext } from 'node:vm';
 
-const source = readFileSync(new URL('../auto-browse.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL(
+  process.env.SITE_TEST_BUILD === '1' ? '../dist/auto-browse.js' : '../auto-browse.js',
+  import.meta.url,
+), 'utf8');
 function fixture(page = 'index.html', { top = 0, height = 4800, ready = 'complete', loading = false, hidden = false } = {}) {
   class Target {
     listeners = new Map();

@@ -49,12 +49,15 @@
   └─ npm run build (= vite build，使用已安装的依赖)
        ├─ 编译 Vue/Three 的模块入口到 dist/assets/
        ├─ 处理 HTML/CSS/图片引用并使用 base: '/try1/'
+       ├─ 将 19 个旧式 JS/CSS 文件逐个交给 esbuild 压缩，保留原 URL
        └─ 复制 public/* 到 dist/ 根目录
             └─ 将 dist/ 的内容提交到 gh-pages 分支根目录
                  └─ GitHub Pages legacy 模式从 gh-pages / 提供静态文件
 ```
 
 - `npm run dev` 是开发服务器，按请求即时转换源码；`npm run preview` **只展示已有的 `dist/`**，不会自行执行构建。Vite 配置的 `outDir` 是 `dist`，即 distribution（发布成品）。
+- 2026-10-07 已加入统一代码压缩：Vite 模块及复制清单里的 19 个 JS/CSS 文件都使用现有 esbuild；逐文件处理保留传统脚本的全局绑定、中文和许可证注释，生产 sourcemap 关闭。HTML、图片、模型和历史快照继续原样保留，可读源码不被覆盖。此次 19 个文件从 237,757 字节降至 188,942 字节（减少 20.5%）；这是代码压缩，不是加密。
+- 构建后运行 `npm run check:build`，复用平台与自动浏览的 21 项测试来执行 `dist/` 中的压缩脚本；源码测试仍通过原有命令执行。发布时按既有流程将压缩后的 `dist/` 提交到 `gh-pages`，并核对 Pages 构建状态与实际文件内容。
 - `.gitignore` 中 `/dist/` 只阻止在源码分支误提交生成目录，不删除本地文件，也不禁止把 `dist/` 的**内容**另行提交到发布分支。
 - `public/.nojekyll` 会进入 `dist/.nojekyll`。保留它，否则 Pages 的 Jekyll 规则可能忽略 `_plugin-vue2_normalizer-...js` 这类以下划线开头的构建文件。
 - 源码分支负责可维护性，`gh-pages` 只存生成物。当前是**手动部署**：每次改动源码，先测试并构建，再更新 `gh-pages`，最后核对 Pages 最新构建提交和线上 URL。推送 `hello-web` 成功不等于站点已更新。
@@ -87,7 +90,7 @@
 
 1. 先读本文件、用户/仓库 AGENTS.md，再看 `git status`、`git branch -vv` 和 `gh api repos/csc-dsc/try1/pages`。以当前代码与远端提交为准，不从 9 月旧 handoff 推断现状。
 2. 用现有框架做小范围改动：共享视觉在共享 CSS/JS，眼睛/心脏在平台模块，档案轨迹在 `other-archive.*`，Miku 在 `miku-theme.*`，模型在 `src/ambient/` 与 `src/hobby/`。不要重造已有的眼睛、ECG、画廊、自动浏览或 3D 场景。
-3. 不安装依赖的前提下运行 `npm run check:models`、`npm run check:platforms`、`npm run check:navigation`、`npm run check:theme`、`npm run build`、`git diff --check`。构建的非 module 旧脚本和 Three chunk >500 KB 提示曾存在；要区分 warning 与失败，但不能忽略新的 CSS 语法警告。
+3. 不安装依赖的前提下运行 `npm run check:models`、`npm run check:platforms`、`npm run check:navigation`、`npm run check:theme`、`npm run build`、`npm run check:build`、`git diff --check`。构建的非 module 旧脚本和 Three chunk >500 KB 提示曾存在；要区分 warning 与失败，但不能忽略新的 CSS 语法警告。
 4. 浏览器任务遵守用户的硬规则：只通过 `D:\MCP_Servers\browser-harness-conda\Scripts\browser-harness.exe` 附着现有 Edge，不启动新 Edge/标签、Playwright 或 CDP。该 skill 不截图；用 DOM、计算样式、资源状态、交互命中和 canvas 状态核对。修改之后至少检查桌面与可获得的窄屏，未测到的视口如实写明。
 5. 发布前确认 `dist/` 中所有 HTML、`graphics/`、`models/`、`motion/`、`vendor/` 和 `.nojekyll`，并确认构建版入口是 `/try1/assets/...`。源码提交与发布提交是两件事；部署后查 Pages `source`、最近构建的 commit、实际页面与关键资源 HTTP 200，不能只看 `git push` 成功。
 6. 保留模型许可证、署名和现有用户改动；不运行破坏性的 Git 重置，不擅自删除旧快照，也不新建 ZIP 备份。部署使用的本任务临时目录 `D:\AI\tmp\try1-pages-deploy` 在 2026-10-06 仍存在（约 16.2 MB，非线上依赖），递归清理命令曾被工具策略拒绝；不要把它当作源仓库或再次提交，后续清理应遵守本机路径验证与工具权限规则。

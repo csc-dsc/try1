@@ -3,7 +3,10 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { runInNewContext } from 'node:vm';
 
-const source = readFileSync(new URL('../platforms-scene.js', import.meta.url), 'utf8');
+const source = readFileSync(new URL(
+  process.env.SITE_TEST_BUILD === '1' ? '../dist/platforms-scene.js' : '../platforms-scene.js',
+  import.meta.url,
+), 'utf8');
 const rect = (left, top, width, height) => ({ left, top, width, height, right: left + width, bottom: top + height });
 
 function fixture(reducedMotion = false) {
