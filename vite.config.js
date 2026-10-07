@@ -10,7 +10,7 @@ const legacy = [
   'platforms.html', 'articles.html', 'links.html',
   'miku-theme.html', 'assembly-tutorial.html',
   'frida-hook-tutorial.html', 'pwn-tutorial.html', 'hello.html',
-  'index.css', 'index.js', 'visual-system.css', 'visual-system.js', 'tutorial-visual.css', 'type-system.css',
+  'index.css', 'index.js', 'visual-system.css', 'visual-system.js', 'tutorial-visual.css', 'type-system.css', 'responsive.css',
   'articles-scene.css', 'articles-scene.js',
   'platforms-scene.css', 'platforms-scene.js',
   'platforms-eye-events.css', 'platforms-eye-events.js',

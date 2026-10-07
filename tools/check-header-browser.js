@@ -91,7 +91,7 @@
         if (width <= 1040) f.nav.classList.add('is-open');
         const g = f.geometry();
         check(Math.abs(parseFloat(g.height) - (width <= 1040 ? 64 : 68)) < .1, entry.name + ': header height: ' + g.height);
-        check(g.badge.every(value => Math.abs(parseFloat(value) - 38) < .1), entry.name + ': brand badge size');
+        check(g.badge.every(value => Math.abs(parseFloat(value) - (width <= 520 ? 32 : 38)) < .1), entry.name + ': brand badge size');
         check(g.buttons.every(size => size.every(value => Math.abs(parseFloat(value) - 40) < .1)), entry.name + ': toolbar button size');
         check(g.radii.every(radius => radius === '50%'), entry.name + ': toolbar controls must be circular');
         check(f.nav.querySelectorAll('a').length === 7, entry.name + ': all navigation links');
@@ -111,7 +111,7 @@
     }
     for (const page of ['index.html', 'personal-instruction.html', 'links.html']) {
       const f = fixture(page, 375, 812);
-      check(f.controls.nextElementSibling.id === 'theme-toggle', page + ': button must sit before theme control');
+      check(f.controls.nextElementSibling.id === 'theme-control', page + ': button must sit before theme control');
       check(f.button.title.includes('自动浏览') && !f.active() && f.pending.size === 1, page + ': autoplay scheduled after entry');
       f.advance(6000);
       check(f.w.scrollY >= 199 && f.w.scrollY <= 205 && f.active(), page + ': automatic entry scrolling');

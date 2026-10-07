@@ -1,10 +1,5 @@
-const root = document.documentElement;
 const nav = document.getElementById('site-nav');
 const menuButton = document.getElementById('menu-toggle');
-const themeButton = document.getElementById('theme-toggle');
-
-const savedTheme = localStorage.getItem('site-theme');
-if (savedTheme === 'light' || savedTheme === 'prism') root.dataset.theme = savedTheme;
 
 function closeMenu() {
   if (!nav || !menuButton) return;
@@ -21,15 +16,6 @@ menuButton?.addEventListener('click', () => {
 
 nav?.addEventListener('click', (event) => {
   if (event.target.closest('a')) closeMenu();
-});
-
-themeButton?.addEventListener('click', () => {
-  const current = root.dataset.theme === 'prism' ? localStorage.getItem('site-theme-return') : root.dataset.theme;
-  const next = current === 'light' ? 'dark' : 'light';
-  if (next === 'light') root.dataset.theme = 'light';
-  else delete root.dataset.theme;
-  localStorage.setItem('site-theme', next);
-  themeButton.setAttribute('aria-label', next === 'light' ? '切换到深色主题' : '切换到浅色主题');
 });
 
 document.addEventListener('keydown', (event) => {

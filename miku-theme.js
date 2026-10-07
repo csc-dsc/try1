@@ -1,7 +1,5 @@
-const page = document.documentElement;
 const nav = document.getElementById('miku-nav');
 const menu = document.getElementById('miku-menu');
-const mode = document.getElementById('mode-toggle');
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightbox-image');
 const lightboxClose = document.getElementById('lightbox-close');
@@ -25,16 +23,6 @@ menu?.addEventListener('click', () => {
 
 nav?.addEventListener('click', (event) => {
   if (event.target.closest('a')) closeMenu();
-});
-
-const savedMode = localStorage.getItem('miku-mode');
-if (savedMode === 'dark') page.dataset.mode = 'dark';
-
-mode?.addEventListener('click', () => {
-  const next = page.dataset.mode === 'dark' ? 'light' : 'dark';
-  if (next === 'dark') page.dataset.mode = 'dark';
-  else delete page.dataset.mode;
-  localStorage.setItem('miku-mode', next);
 });
 
 function showGalleryImage(index) {

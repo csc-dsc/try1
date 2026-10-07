@@ -12,7 +12,7 @@ for (const asset of ['platforms-scene.js', 'auto-browse.js']) {
 }
 
 const result = spawnSync(process.execPath, [
-  '--test', 'tools/check-platforms-interactions.mjs', 'tools/check-auto-browse.mjs',
+  '--test', 'tools/check-platforms-interactions.mjs', 'tools/check-auto-browse.mjs', 'tools/check-prism-mode.mjs',
 ], {
   cwd: root,
   env: { ...process.env, SITE_TEST_BUILD: '1' },

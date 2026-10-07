@@ -1,13 +1,13 @@
 # GOD · NULL 网站总结与交接
 
-更新：2026-10-06。适用仓库：`D:\Github\try1`。这是当前实现和发布状态的入口；[REBUILD_HANDOFF.md](./REBUILD_HANDOFF.md) 记录 2026-09-30 阶段的研究与素材来源，不能把其中的旧 HEAD、未上线状态和“模型尚未接入”等结论当成现状。
+更新：2026-10-07。适用仓库：`D:\Github\try1`。这是当前实现和发布状态的入口；[REBUILD_HANDOFF.md](./REBUILD_HANDOFF.md) 记录 2026-09-30 阶段的研究与素材来源，不能把其中的旧 HEAD、未上线状态和“模型尚未接入”等结论当成现状。
 
 ## 1. 先看当前事实
 
 - 这是**静态多页站点 + 局部 Vue 2/Three.js/Matter.js 场景**，不是 Vue Router 单页站。保留旧 `.html` URL 与文章锚点。
 - 2026-10-07 按用户最新命名统一：完整昵称为 `GOD · NULL`，视觉标识为 `G//N`，缩写为 `GN`。导航、页脚、加载标记、文章设备、教程署名与历史页显示昵称沿用此命名；GitHub 用户名及现有站点地址保持 `csc-dsc` / `try1`。旧研究记录、分支名、包名和存储键属于既有内部标识，不能据此恢复旧站名。
-- 源码远端：`hello-web` 与 `codex/null-garden-phase-1` 均为 `9f75fec`；当前工作目录在后者，核对时工作树干净。本机的 `hello-web` 分支仍停在 `c4dd86b`，比远端落后 3 个提交；不要把这个本地分支当作最新源码。
-- 构建发布远端：`gh-pages` 为 `4bb012d`。GitHub Pages 配置为 legacy 模式，从 `gh-pages /` 发布，最近一次 Pages 构建状态为 `built`。线上地址：[csc-dsc.github.io/try1](https://csc-dsc.github.io/try1/)。这些提交号是本报告的时间快照，继续工作前重新查状态。
+- 源码远端：`hello-web` 与 `codex/null-garden-phase-1` 保持同步，当前工作目录在后者；用 `git ls-remote origin` 查询最新提交。本机的 `hello-web` 分支仍停在 `c4dd86b`，不要把这个本地分支当作最新源码。
+- 构建发布远端：`gh-pages` 保存最新 `dist/` 成品。GitHub Pages 配置为 legacy 模式，从 `gh-pages /` 发布。线上地址：[csc-dsc.github.io/try1](https://csc-dsc.github.io/try1/)。最新发布提交及构建状态用 `gh api repos/csc-dsc/try1/pages/builds/latest` 核对，历史复盘里的提交号不作为当前状态。
 - `dist/` 是 Vite 生成物，在源码分支被 `.gitignore` 忽略；`node_modules/` 也被忽略。当前**没有** GitHub Actions 自动构建/发布流程。只推送 `hello-web` 不会更新线上，必须重新构建并更新 `gh-pages`。
 - 本机依赖先前已安装。未经用户批准，不运行 `npm install`、`npm ci`、`pip install` 或安装其它软件；不要为了“让 CI 自动化”擅自加安装步骤。先读用户提供的 AGENTS.md 操作约束。
 - `http://127.0.0.1:5174/try1/` 曾用于 `vite preview`，但 2026-10-06 检查时该端口**没有**运行服务。不要把历史预览地址当作当前在线服务。
@@ -20,7 +20,7 @@
 | --- | --- | --- |
 | 整站 | 用层次、遮挡、滚动桥接和有反馈的动效表达安全研究者气质；避免单调矩形卡片、重复悬停、巨大僵硬标题。 | `index.css`、`visual-system.css/js`、各页场景 CSS/JS。导航尺寸与间距统一；深色、日间、紫色模式共存。 |
 | 首页 | 保留主要文案；右上六件镂空硬件环绕，中心是 `spider-x86`，不是个人头像。作品与文章入口要有不同动效。 | `index.html`、`home-work.css`、`home-notes.css/js`。蝴蝶刀是自托管 3D，不要改回 Sketchfab iframe 或可点击的模型外链。当前介绍段文字左、模型独立画布右；刀具缩小且不裁切，窄屏转到文字后。 |
-| 关于我 | 人像照片/线稿有剥离、碎裂和恢复感；头像只放个人页。末段木吉他有拨弦、可选声音和数字键。 | `personal-instruction.html`、`visual-system.css/js`、`src/ambient/`。用户接受现有总体方向，不要把旧头像塞回首页。 |
+| 关于我 | 人像照片/线稿有剥离、碎裂和恢复感；头像只放个人页。技术段标题为“做过的事”，删去熟练度说明。原则段为“让理解经得起验证”，按观察、校验、沉淀、深耕排成编号条目。末段“屏幕之外／也要有风”左右各四字竖排，介绍与十个兴趣标签夹在中间，吉他保留右侧原位。 | `personal-instruction.html`、`profile-sections.css`、`visual-system.css/js`、`src/ambient/`。用户接受现有总体方向，不要把旧头像塞回首页。 |
 | 平台 | 大标题与 1–6 平台入口之间放眼睛、心脏和信号场景，暗底统一。眼睛只要可见就跟随鼠标，距离影响瞳孔靠边程度；自然眨眼；点击后疼痛/警告，三次升级、五次进入全局血色序列。心电图由左端生成并向右流，悬浮渐进加速，经高密峰值逐步变平，移开后连续恢复。 | `platforms.html`、`platforms-scene.css/js`、`platforms-eye-events.css/js`。日间模式点击眼睛的圆角焦点框已改为轮廓发光。不要重写已通过测试的波形运输逻辑。 |
 | 文章/教程 | 文章入口做成显示器、键盘、主机；点击发生不同入侵转场，不靠整页滚动翻段。教程需要可读性，尤其汇编代码的文字/背景对比。 | `articles.html`、`articles-scene.css/js`、`tutorial-visual.css`、三篇教程 HTML。旧内容和锚点应保留。 |
 | 其他/历史 | 档案轨迹随滚动到底且在头像下层；头像光标点击可左右切换，不因悬停自动移动，环状光晕完整。Miku 项目视觉拼合不能在中缝断开。 | `other.html`、`other-archive.css/js`、`home-work.css`。`history/` 是历史快照，不按新版排版批量重写。 |
@@ -35,6 +35,9 @@
 | `index.html`、`personal-instruction.html`、`other.html`、`hobby-lab.html` | Vite 多页入口，构建时处理模块依赖与 Vue 单文件组件。`hobby-lab.html` 是独立预览，不代替正式页面的模型布局。 |
 | `platforms.html`、`articles.html`、`links.html`、`miku-theme.html`、三篇教程、`history/` | 旧式 HTML 页面，`vite.config.js` 的复制插件原样带入 `dist/`；不要无意让 Vite 解析巨大的旧教程 HTML。 |
 | `visual-system.css/js`、`site-header.css`、`type-system.css`、`light-theme.css`、`prism-theme.css` | 共享视觉、页头、字体和主题。样式加载顺序、主题专用选择器和缓存版本号会影响结果。 |
+| `profile-sections.css` | 仅关于我页面的原则条目与末段竖排题字样式；经 Vite 编译，保留既有外层网格和吉他槽位。 |
+| `responsive.css` | 当前页面与历史页的移动端适配；小屏保留站名、页脚与 Miku 作者信息，处理长文本、代码/表格/图解的局部滚动、短屏菜单和模型分离。已加入旧式 CSS 压缩清单，目前共有 20 个 JS/CSS 文件。 |
+| `prism-mode.js`、`site-header.css` 的 `.theme-cycle` | 七个主页面只用一个主题入口：普通点击展开 112px 宽的紧凑下拉菜单，入口不显示小箭头，直接选择日间、夜间、幻彩，选择后收起并显示当前项勾选；按住 Alt 或 Ctrl 点击入口仍反向走一步。主题入口不保留 title 悬停提示。太阳、月牙、渐变圆对应当前状态，支持方向键、Escape、外点关闭，并保留缓存偏好和 Miku 旧模式兼容。`index.js` 与 `miku-theme.js` 不再单独绑定明暗切换。 |
 | `src/ambient/main.js`、`InlineObject.vue`、`inline-object.css` | IntersectionObserver 按需挂载首页蝴蝶刀、个人页吉他和其他页双截棍。离屏或浏览器隐藏时暂停渲染。 |
 | `src/hobby/ModelScene.js`、`NunchakuRig.js`、`HobbyStage.vue` | Three 场景、Matter 双截棍约束、独立器材预览。`ModelScene` 中的 `import.meta.env.BASE_URL` 必须经 Vite 构建，不能把源码直接给浏览器执行。 |
 | `public/graphics/`、`public/models/`、`public/motion/`、`public/vendor/` | Vite 会把 `public/` **内容**复制到 `dist/` 根目录。页面请求的是 `/try1/graphics/...`、`/try1/models/...` 等，不含 `/public/`。 |
@@ -58,7 +61,7 @@
 
 - `npm run dev` 是开发服务器，按请求即时转换源码；`npm run preview` **只展示已有的 `dist/`**，不会自行执行构建。Vite 配置的 `outDir` 是 `dist`，即 distribution（发布成品）。
 - 2026-10-07 已加入统一代码压缩：Vite 模块及复制清单里的 19 个 JS/CSS 文件都使用现有 esbuild；逐文件处理保留传统脚本的全局绑定、中文和许可证注释，生产 sourcemap 关闭。HTML、图片、模型和历史快照继续原样保留，可读源码不被覆盖。此次 19 个文件从 237,757 字节降至 188,942 字节（减少 20.5%）；这是代码压缩，不是加密。
-- 构建后运行 `npm run check:build`，复用平台与自动浏览的 21 项测试来执行 `dist/` 中的压缩脚本；源码测试仍通过原有命令执行。发布时按既有流程将压缩后的 `dist/` 提交到 `gh-pages`，并核对 Pages 构建状态与实际文件内容。
+- 构建后运行 `npm run check:build`，复用平台、自动浏览与主题菜单的 22 项测试来执行 `dist/` 中的压缩脚本；源码测试仍通过原有命令执行。发布时按既有流程将压缩后的 `dist/` 提交到 `gh-pages`，并核对 Pages 构建状态与实际文件内容。
 - `.gitignore` 中 `/dist/` 只阻止在源码分支误提交生成目录，不删除本地文件，也不禁止把 `dist/` 的**内容**另行提交到发布分支。
 - `public/.nojekyll` 会进入 `dist/.nojekyll`。保留它，否则 Pages 的 Jekyll 规则可能忽略 `_plugin-vue2_normalizer-...js` 这类以下划线开头的构建文件。
 - 源码分支负责可维护性，`gh-pages` 只存生成物。当前是**手动部署**：每次改动源码，先测试并构建，再更新 `gh-pages`，最后核对 Pages 最新构建提交和线上 URL。推送 `hello-web` 成功不等于站点已更新。
@@ -74,7 +77,7 @@
 
 **修复：**把 `hobby-lab.html` 加入 Vite 输入，修复其相对模块路径及 `stage.css` 的悬空选择器；加入 `.nojekyll`；构建后将 `dist/` 内容发布到独立 `gh-pages` 分支，把 Pages 来源切到该分支并请求构建。`hello-web` 源码未被构建产物覆盖。
 
-**验收：**Pages 最近一次构建指向 `4bb012d` 且为 `built`；线上首页改为加载 `/try1/assets/index-...js`，不再加载原始 `src/ambient/main.js`。15 个 HTML 与 `dist/` 一致；100 个发布文件均可访问（一次连接中断单独重试为 200）。现有 Edge 中蜘蛛图、关于我线稿/照片/Ghidra 图均成功解码，Lottie 已加载，蝴蝶刀和双截棍场景达到 `is-ready`。吉他在后台 Edge 中未做实际动画验收，不能因懒挂载未发生就判为故障。
+**当次验收（历史记录）：**Pages 构建指向 `4bb012d` 且为 `built`；线上首页改为加载 `/try1/assets/index-...js`，不再加载原始 `src/ambient/main.js`。15 个 HTML 与 `dist/` 一致；100 个发布文件均可访问（一次连接中断单独重试为 200）。现有 Edge 中蜘蛛图、关于我线稿/照片/Ghidra 图均成功解码，Lottie 已加载，蝴蝶刀和双截棍场景达到 `is-ready`。吉他在后台 Edge 中未做实际动画验收，不能因懒挂载未发生就判为故障。
 
 ## 6. 其它值得记住的故障与做法
 
@@ -97,6 +100,10 @@
 6. 保留模型许可证、署名和现有用户改动；不运行破坏性的 Git 重置，不擅自删除旧快照，也不新建 ZIP 备份。部署使用的本任务临时目录 `D:\AI\tmp\try1-pages-deploy` 在 2026-10-06 仍存在（约 16.2 MB，非线上依赖），递归清理命令曾被工具策略拒绝；不要把它当作源仓库或再次提交，后续清理应遵守本机路径验证与工具权限规则。
 
 ## 8. 尚未自动化或未完全验收
+
+- 2026-10-07 关于我文案与排版的新修改已完成本地预览；用户先要求本地检查，随后明确指示“直接上传吧”，已授权将这批改动发布。当前可用预览为 `http://127.0.0.1:5174/try1/personal-instruction.html`，服务运行状态仍需核对。320/375/768/1024/1280 宽度和三种主题已做 DOM 布局、分隔与文字对比度检查；吉他槽位与修改前相同，加载后的桌面画布宽 343.75px、高约 251.2px，外层网格内偏移约为 x=836.22px、y=95.99px。模型、声音、键盘与拨弦代码未改。后台浏览器的动画状态不作为可见逐帧验收。
+
+- 2026-10-07 同批本地修改新增：透明 `public/graphics/ghidra.png` 替代日间模式下有黑底的 JPEG，来源为本机 Ghidra 官方发行包，同目录保留许可证。13 个页面已在 320/375/430/768/1024/1440 宽度检查，正文数量一致且没有横向溢出；菜单、文章四个状态、画廊与教程目录/局部滚动已检查。七个主页面的单按钮三态主题另在 320×480、375×812、844×390、1440×900 检查，切换和短屏文字裁切检查通过。这里是 Edge 中的布局与交互验证，不能替代手机真机触摸验收。用户已于 2026-10-07 明确授权上传这批改动，按既有源码分支与 `gh-pages` 流程发布。
 
 - **自动发布未配置。** 未来可在用户明确同意依赖安装/CI 步骤后建立 GitHub Actions，从源码构建并部署；此前每次仍需手动更新 `gh-pages`。
 - 吉他在可见 Edge 中的声音、键盘与拨弦；移动端真实触摸、320/375/768 视口；减弱动态与长时间性能仍值得再验收。现有静态测试与 HTTP 200 不能代替这些交互测试。
