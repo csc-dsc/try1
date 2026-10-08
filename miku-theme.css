@@ -41,7 +41,10 @@ img { display: block; max-width: 100%; }
 .square-button:hover, .square-button:focus-visible { color: #051012; background: var(--accent); border-color: var(--accent); }
 .miku-menu-button { display: none; }
 
-.miku-hero { --hero-shift-x: 0px; --hero-shift-y: 0px; position: relative; isolation: isolate; height: min(820px, calc(100svh - 118px)); min-height: 540px; margin-top: 72px; display: flex; align-items: flex-end; overflow: hidden; color: #fff; background: #060c17 url("image/miku/miku-hero.jpg") center 40% / cover no-repeat; border-bottom: 1px solid rgba(255,255,255,.18); }
+.miku-hero { --hero-shift-x: 0px; --hero-shift-y: 0px; position: relative; isolation: isolate; height: min(820px, calc(100svh - 118px)); min-height: 540px; margin-top: 72px; display: flex; align-items: flex-end; overflow: hidden; color: #fff; background: #060c17; border-bottom: 1px solid rgba(255,255,255,.18); }
+.miku-hero__image { position: absolute; z-index: -2; inset: 0; width: 100%; height: 100%; max-width: none; object-fit: cover; object-position: center 40%; pointer-events: none; transition: opacity .5s ease; }
+.miku-media-enhanced .miku-hero__image { opacity: 0; }
+.miku-media-enhanced .miku-hero.is-image-ready .miku-hero__image { opacity: 1; }
 .miku-hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(4,8,18,.94) 0%, rgba(4,8,18,.72) 40%, rgba(4,8,18,.08) 76%), linear-gradient(0deg, rgba(4,8,18,.92), transparent 55%); }
 .miku-hero::after { content: "01"; position: absolute; right: 5%; top: 10%; z-index: -1; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,.28); font: 400 8rem/1 var(--display); }
 .hero-scan { position: absolute; inset: 0; pointer-events: none; opacity: .2; background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.04) 3px 4px); animation: miku-scan-drift 12s linear infinite paused; }
@@ -157,7 +160,9 @@ html[data-mode="dark"] .archive-stats div:hover dt { color: #c9b5f0; }
 .motion-figure figcaption { margin-top: .65rem; color: var(--muted); font: 600 .62rem var(--mono); }
 .motion-copy p { max-width: 520px; color: var(--muted); line-height: 1.8; }
 
-.gallery-section { background: #f2eee7; color: #0d1518; }
+.gallery-section { --gallery-placeholder: #dfe8e6; background: #f2eee7; color: #0d1518; }
+html[data-mode="dark"] .gallery-section { --gallery-placeholder: #1b292c; }
+html[data-theme="prism"] .gallery-section { --gallery-placeholder: #352841; }
 .miku-gallery { display: grid; gap: 2.6rem; }
 .miku-gallery__pair, .miku-gallery__study { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
 .miku-gallery__study { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
@@ -165,9 +170,11 @@ html[data-mode="dark"] .archive-stats div:hover dt { color: #c9b5f0; }
 .gallery-item { width: 100%; min-width: 0; margin: 0; }
 .gallery-item--feature { width: min(100%, 1080px); margin-inline: auto; }
 .gallery-item--ending { width: min(100%, 960px); margin-inline: auto; }
-.gallery-item button { display: block; width: 100%; padding: 0; border: 0; border-radius: 0; background: transparent; text-align: left; cursor: zoom-in; }
+.gallery-item button { display: block; width: 100%; padding: 0; border: 0; border-radius: 0; background: var(--gallery-placeholder); text-align: left; cursor: zoom-in; }
 .gallery-item button:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.gallery-item img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; filter: saturate(.9) contrast(1.02); transition: filter .45s ease; }
+.gallery-item img { width: 100%; height: auto; object-fit: contain; background: var(--gallery-placeholder); filter: saturate(.9) contrast(1.02); transition: filter .45s ease, opacity .45s ease; }
+.miku-media-enhanced .gallery-item img { opacity: 0; }
+.miku-media-enhanced .gallery-item img.is-loaded { opacity: 1; }
 .gallery-item button:is(:hover, :focus-visible) img { filter: saturate(1.08) contrast(1.02); }
 .gallery-item.reveal { clip-path: inset(0 0 12% 0); transition: opacity .8s ease, transform .8s ease, clip-path .8s ease; transition-delay: var(--gallery-delay, 0ms); }
 .gallery-item.reveal.is-visible { clip-path: inset(0); }
@@ -221,7 +228,8 @@ html[data-mode="dark"] .archive-stats div:hover dt { color: #c9b5f0; }
   .miku-nav.is-open { display: grid; }
   .miku-nav a { padding: .85rem 0; border-bottom: 1px solid rgba(255,255,255,.16); }
   .miku-menu-button { display: block; }
-  .miku-hero { margin-top: 64px; height: calc(100svh - 116px); min-height: 590px; background-position: 58% center; }
+  .miku-hero { margin-top: 64px; height: calc(100svh - 116px); min-height: 590px; }
+  .miku-hero__image { object-position: 58% center; }
   .miku-hero::before { background: linear-gradient(0deg, rgba(4,8,18,.98) 8%, rgba(4,8,18,.8) 52%, rgba(4,8,18,.14) 100%); }
   .miku-hero-content { padding-bottom: 7rem; }
   .miku-hero h1 span:first-child { font-size: 4rem; }
@@ -249,7 +257,7 @@ html[data-mode="dark"] .archive-stats div:hover dt { color: #c9b5f0; }
 
 @media (max-width: 540px) {
   .miku-wordmark span { display: none; }
-  .miku-hero { background-position: 56% top; background-size: auto 64%; }
+  .miku-hero__image { height: 64%; object-position: 56% top; }
   .miku-hero::before { background: linear-gradient(0deg, rgba(4,8,18,1) 14%, rgba(4,8,18,.88) 55%, rgba(4,8,18,.16) 100%); }
   .miku-kicker { font-size: .62rem; }
   .miku-hero h1 span:first-child { font-size: 2.55rem; }
@@ -270,7 +278,7 @@ html[data-mode="dark"] .archive-stats div:hover dt { color: #c9b5f0; }
   .vector-overlay { position: static; width: 100%; min-height: 220px; padding: 1.25rem; background: #071114; }
   .vector-overlay strong { margin-top: 1.2rem; font-size: 6rem; }
   .vector-overlay p { margin: .7rem 0 1.2rem; font-size: 2rem; }
-  .gallery-item img { width: 100%; height: auto; aspect-ratio: auto; }
+  .gallery-item img { width: 100%; height: auto; }
   .listening-head h2 { font-size: 3.5rem; }
   .track-entry { min-height: 130px; padding: 1rem .2rem; }
   .track-entry__name strong { font-size: 1.5rem; }

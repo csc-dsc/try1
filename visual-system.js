@@ -15,7 +15,9 @@
   async function showLoader() {
     let seen = false;
     try { seen = sessionStorage.getItem('null-garden-seen') === '1'; } catch (_) { /* Storage may be disabled. */ }
-    if (seen || reducedMotion) { enterPage(); return; }
+    const criticalImage = document.querySelector('[data-loader-critical]');
+    if ((seen || reducedMotion) && !criticalImage) { enterPage(); return; }
+    const useLottie = !seen && !reducedMotion;
 
     const layer = document.createElement('div');
     layer.className = 'visual-loader';
@@ -30,7 +32,8 @@
     bar.className = 'visual-loader__bar';
     const progress = document.createElement('span');
     bar.append(progress);
-    layer.append(cube, mark, bar);
+    layer.append(mark, bar);
+    if (useLottie) layer.prepend(cube);
     document.body.append(layer);
     document.body.classList.add('visual-loading');
     const started = performance.now();
@@ -40,6 +43,7 @@
     let lottieExpired = false;
     let player = null;
     const lottieReady = new Promise((resolve) => {
+      if (!useLottie) { resolve(); return; }
       const startAnimation = () => {
         if (lottieExpired || !layer.isConnected || layer.classList.contains('is-leaving') || !window.lottie) { resolve(); return; }
         try {
@@ -62,9 +66,20 @@
       script.addEventListener('error', resolve, { once: true });
       document.head.append(script);
     });
-    await Promise.race([lottieReady, new Promise((resolve) => setTimeout(resolve, 650))]);
+    const criticalReady = criticalImage
+      ? (criticalImage.decode?.() ?? new Promise((resolve) => {
+        if (criticalImage.complete) resolve();
+        else {
+          criticalImage.addEventListener('load', resolve, { once: true });
+          criticalImage.addEventListener('error', resolve, { once: true });
+        }
+      })).catch(() => {})
+      : null;
+    await Promise.race([criticalReady ?? lottieReady,
+      new Promise((resolve) => setTimeout(resolve, criticalImage ? 2500 : 650))]);
     if (!lottieLoaded) { lottieExpired = true; player?.destroy(); player = null; }
-    const remaining = Math.max(0, (lottieLoaded ? 1100 : 750) - (performance.now() - started));
+    const minimum = criticalImage ? (useLottie ? 1100 : 250) : (lottieLoaded ? 1100 : 750);
+    const remaining = Math.max(0, minimum - (performance.now() - started));
     progress.style.transitionDuration = `${Math.max(150, remaining)}ms`;
     progress.style.transform = 'scaleX(1)';
     if (remaining) await new Promise((resolve) => setTimeout(resolve, remaining));

@@ -7,7 +7,48 @@ const lightboxPrevious = document.getElementById('lightbox-prev');
 const lightboxNext = document.getElementById('lightbox-next');
 const lightboxCounter = document.getElementById('lightbox-counter');
 const galleryButtons = [...document.querySelectorAll('.gallery-item button[data-src]')];
+const hero = document.querySelector('.miku-hero');
+const heroImage = hero?.querySelector('.miku-hero__image');
 let currentImage = 0;
+
+if (heroImage) {
+  const revealHero = () => hero.classList.add('is-image-ready');
+  if (heroImage.complete) revealHero();
+  else {
+    heroImage.addEventListener('load', revealHero, { once: true });
+    heroImage.addEventListener('error', revealHero, { once: true });
+  }
+}
+
+document.querySelectorAll('.miku-vector, .motion-figure img').forEach((image) => {
+  image.fetchPriority = 'low';
+  image.loading = 'eager';
+});
+
+const galleryImages = galleryButtons.map((button) => button.querySelector('img')).filter(Boolean);
+galleryImages.forEach((image) => {
+  const width = Number(image.getAttribute('width'));
+  const height = Number(image.getAttribute('height'));
+  if (width && height) image.style.aspectRatio = `${width} / ${height}`;
+  const reveal = () => image.classList.add('is-loaded');
+  if (image.complete) reveal();
+  else {
+    image.addEventListener('load', reveal, { once: true });
+    image.addEventListener('error', reveal, { once: true });
+  }
+  image.fetchPriority = 'low';
+});
+if ('IntersectionObserver' in window) {
+  const preloadGallery = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.loading = 'eager';
+      preloadGallery.unobserve(entry.target);
+    });
+  }, { rootMargin: '1200px 0px' });
+  galleryImages.forEach((image) => preloadGallery.observe(image));
+} else galleryImages.forEach((image) => { image.loading = 'eager'; });
+document.documentElement.classList.add('miku-media-enhanced');
 
 function closeMenu() {
   nav?.classList.remove('is-open');
@@ -101,7 +142,6 @@ if ('IntersectionObserver' in window) {
   motionSections.forEach(section => section.classList.add('is-active'));
 }
 
-const hero = document.querySelector('.miku-hero');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 if (hero && !reducedMotion) {
   if (window.matchMedia('(pointer: fine)').matches) {
